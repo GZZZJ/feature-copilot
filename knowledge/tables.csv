@@ -1,0 +1,4 @@
+table_id,table_name,cn_name,description,category,grain,update_frequency,owner_team,applicable_scene,population,derive_type,logic_ref,status,synced_at
+tbl_fixture_customer,fixture_customer_wide,示例客户宽表,仅用于 MVP 验证的合成客户特征宽表,customer,customer_snapshot,daily,fixture_data_team,fixture_credit|fixture_marketing,fixture_customer,sql,logic/sql/fixture_customer_features.sql,active,2026-07-15
+tbl_fixture_account,fixture_account_wide,示例账户宽表,仅用于 MVP 验证的合成账户特征宽表,account,account_snapshot,daily,fixture_data_team,fixture_credit,fixture_customer,sql,logic/sql/fixture_account_features.sql,active,2026-07-15
+tbl_fixture_pboc,fixture_pboc_wide,示例报文宽表,仅用于 MVP 验证的合成报文特征宽表,pboc,customer_snapshot,monthly,fixture_risk_team,fixture_credit,fixture_customer,python,logic/python/fixture_pboc_features.py,active,2026-07-15

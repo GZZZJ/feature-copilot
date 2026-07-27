@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "feature-copilot"
+version = "0.1.0"
+description = "Deterministic feature knowledge-base query MVP"
+requires-python = ">=3.9"
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+web = ["Flask>=3.1,<4", "waitress>=3,<4"]
+
+[project.scripts]
+feature-copilot = "feature_copilot.cli:main"
+feature-copilot-web = "feature_copilot_web:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.package-data]
+feature_copilot_web = ["templates/*.html", "static/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

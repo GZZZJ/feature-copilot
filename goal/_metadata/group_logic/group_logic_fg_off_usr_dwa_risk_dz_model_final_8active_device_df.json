@@ -1,0 +1,23 @@
+{
+  "code": 10000,
+  "data": {
+    "groupCode": "fg.off.usr.dwa_risk_dz_model_final_8active_device_df",
+    "lastModifier": "沈喜望",
+    "latest": true,
+    "logicContent": "SELECT\n    o.${s_topic_field} as uid,\n    o.${s_mdl_dte_field} as sample_mdl_dte,\n    o.uid,\n    o.mdl_dte,\n    o.ds,\n    o.act_dvc_os_typ_90d,\n    o.act_dvc_os_typ_7d,\n    o.act_dvc_os_typ_30d,\n    o.act_dvc_os_typ_1d,\n    o.act_dvc_os_typ_14d,\n    o.act_dvc_90d,\n    o.act_dvc_7d,\n    o.act_dvc_30d,\n    o.act_dvc_1d,\n    o.act_dvc_14d\nFROM (\n        SELECT\n            s.${s_topic_field},\n            s.${s_mdl_dte_field},\n            f.uid,\n            f.mdl_dte,\n            f.ds,\n            f.act_dvc_os_typ_90d,\n            f.act_dvc_os_typ_7d,\n            f.act_dvc_os_typ_30d,\n            f.act_dvc_os_typ_1d,\n            f.act_dvc_os_typ_14d,\n            f.act_dvc_90d,\n            f.act_dvc_7d,\n            f.act_dvc_30d,\n            f.act_dvc_1d,\n            f.act_dvc_14d,\n            row_number() over(partition by s.${s_topic_field} order by f.ds desc) as rn\n        FROM ${sample_table} s\n        LEFT JOIN (\n                    SELECT\n                        *\n                    FROM\n                        dwa_risk.dwa_risk_dz_model_final_8active_device_df\n                    WHERE\n                        to_date(to_date(ds,'yyyyMMdd')) >= ${min_ds}\n                    AND\n                        ds <= ${max_ds}\n                    ) f\n        ON\n            s.${s_topic_field} = f.uid\n        AND\n            datediff(to_date(s.${s_mdl_dte_field}),to_date(f.ds ,'yyyyMMdd')) = 0\n    ) o  WHERE rn=1;\n",
+    "logicVersion": 5,
+    "modifyTime": 1733817603000,
+    "paramInfo": {
+      "sample_table": "sample_table_dev",
+      "max_ds": "max_ds_dev",
+      "s_mdl_dte_field": "s_mdl_dte_field_dev",
+      "min_ds": "min_ds_dev",
+      "s_topic_field": "s_topic_field_dev"
+    },
+    "resultList": [],
+    "retainNodeTags": [],
+    "security": false
+  },
+  "message": "请求成功",
+  "success": true
+}

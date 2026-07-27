@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "rules": [
+    {
+      "reason_code": "nuggets_cross_feature",
+      "reason_label": "掘金穿越特征",
+      "usage_status": "invalid",
+      "usage_label": "失效",
+      "message": "该特征属于掘金计划挖掘出的穿越特征，已失效，请勿使用。",
+      "source_ref": "用户提供：掘金穿越 (4).txt",
+      "selectors": [
+        {
+          "group_code": "fg.off.usr.dwa_risk_dz_model_30light_cross_heavy_inner_behaviour_df",
+          "expected_feature_count": 326
+        }
+      ]
+    },
+    {
+      "reason_code": "interest_or_guarantee_fee",
+      "reason_label": "利息费/担保费类特征",
+      "usage_status": "not_recommended",
+      "usage_label": "不推荐使用",
+      "message": "该特征属于需要剔除的利息费、担保费类特征，不推荐使用。",
+      "source_ref": "用户提供：息费担保剔除 (4).txt",
+      "selectors": [
+        {
+          "group_code": "fg.off.usr.dwa_risk_dz_model_final_26_lending_costs_detail_df",
+          "expected_feature_count": 244
+        }
+      ]
+    },
+    {
+      "reason_code": "psi_unstable",
+      "reason_label": "PSI不稳定",
+      "usage_status": "not_recommended",
+      "usage_label": "不推荐使用",
+      "message": "该特征 PSI 不稳定，不推荐使用。",
+      "source_ref": "用户提供：PSI不稳定特征清单",
+      "selectors": [
+        {"feature_column_name": "same_loan_price18_24_is_90d_balance_rate", "allow_unmatched": true},
+        {"feature_column_name": "same_loan_price18_is_90d_balance_rate", "allow_unmatched": true},
+        {"feature_column_name": "same_loan_price24_is_60d_balance_rate", "allow_unmatched": true},
+        {"feature_column_name": "same_loan_price24_is_90d_org_unique_rate", "allow_unmatched": true},
+        {"feature_column_name": "same_loan_price18_is_180d_balance_std", "allow_unmatched": true}
+      ]
+    }
+  ]
+}

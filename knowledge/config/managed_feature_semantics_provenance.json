@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "pilot_code": "overdue-days-v1",
+  "active_snapshot_sha256": "92e89bd98113289692a79fc001e490df65c982c6a9fee0ada9e8873e054c66de",
+  "recorded_at": "2026-07-20T23:20:00+08:00",
+  "generation_method": "model_authored_rule_assisted",
+  "runtime_model_calls": false,
+  "offline_batch_contract": {
+    "supported_batch_size_min": 40,
+    "supported_batch_size_max": 50,
+    "candidate_and_result_schema_version": 2,
+    "historical_batch_artifacts_retained": false
+  },
+  "provenance_statement_zh": "一期标签由模型代理分析存量特征、编写可重放专题规则并进行多轮独立抽检与SQL整改形成。早期逐批模型输出未留存，因此不得声称仓库内存在可复现的五批原始模型结果；当前脚本只负责离线导出、合并、校验和审计，不在索引构建或查询时调用模型。",
+  "evidence_refs": [
+    "scripts/manage_semantic_tags.py",
+    "knowledge/config/managed_feature_semantics_v1_d2f8786b.json.gz.b64",
+    "knowledge/config/managed_feature_semantics_review_v1_d2f8786b.json",
+    "knowledge/config/managed_feature_semantics_v2_5cbd2bba.json.gz.b64",
+    "knowledge/config/managed_feature_semantics_review_v2_5cbd2bba.json",
+    "knowledge/config/managed_feature_semantics_review.json"
+  ]
+}

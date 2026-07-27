@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "standard_schemas": [
+    "ods_pdw_loan",
+    "cdmx",
+    "dwt",
+    "dwa",
+    "dbus",
+    "dp_ods_credit_sec_views",
+    "dwa_risk_model",
+    "pdw_manual"
+  ],
+  "excluded_schemas": [
+    "dwa_risk"
+  ],
+  "table_metadata": {}
+}

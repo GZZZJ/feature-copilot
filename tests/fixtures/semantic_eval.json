@@ -1,0 +1,4722 @@
+{
+  "schema_version": 1,
+  "evaluation_name": "中文逾期天数语义检索评测",
+  "scope_note": "仅依据四份 goal/package_*/*_all_features.json 原始快照建立，不读取语义预标配置；relevance=3精确、2强相关、1弱相关、0不相关。120 条是分层抽样金标，不是全库穷举相关性标注。",
+  "source_snapshots": [
+    {
+      "path": "goal/package_3_br/3_br_all_features.json",
+      "sha256": "d45f2a62f196e94e21f758a0735a4f46102185eb8aa54be4a9615f86648d9474",
+      "row_count": 6261
+    },
+    {
+      "path": "goal/package_4_nuggets/4_nuggets_all_features.json",
+      "sha256": "b64b2e01dc69f4f64343f0c4964e943451fd713180ff56b553edd77dcadde5e7",
+      "row_count": 4076
+    },
+    {
+      "path": "goal/package_5_04tnd/5_04tnd_all_features.json",
+      "sha256": "36994f278108bfdbe6af3307b5e7ed183075cace1a93fbc1d9f0409fa907c1cd",
+      "row_count": 240
+    },
+    {
+      "path": "goal/package_7_02inner/7_02inner_all_features.json",
+      "sha256": "60e0d0fd4ccc6eba820002ad98e83636f4b8200866b98e2cf5771b51b4b207a8",
+      "row_count": 13125
+    }
+  ],
+  "candidate_counts": {
+    "total": 120,
+    "overdue": 60,
+    "hard_negative": 30,
+    "robustness": 30
+  },
+  "query_counts": {
+    "total": 36,
+    "direct": 6,
+    "related": 6,
+    "synonym": 6,
+    "compound": 6,
+    "ambiguous": 6,
+    "no_result": 6
+  },
+  "release_gate": {
+    "contract": "模拟 LLM 自由组合多轮 FeatureService.search 调用；按 calls 顺序对全库原始结果去重合并并直接计分。120 条抽样金标只用于 relevance 判定，未标注的全库结果保留原排位并在 P@20/nDCG 中按 0 分计，因此两者是保守下界；Recall@50 是抽样金标召回，不代表全库穷举召回；污染率仅统计全库 Top20 中已标注的硬负例，同样是下界。",
+    "retrieval_limit_per_call": 1000,
+    "question_suite": {
+      "query_source": "lexical_diagnostics",
+      "coverage_contract": "36 条中文问题全部进入发布门禁；先用题干中的关键词 AND 做高精度查询，无结果时才按最长词组逐一放宽并在首个非空结果停止；无结果类不放宽。该策略是可重放的 Skill 代表路径，不要求复杂问题必须单次 AND 命中。",
+      "fallback_limit": 50,
+      "threshold_rationale": {
+        "direct": "直接指标是一期核心能力，要求几乎每问 Top20 命中，且排序和宏平均召回都较高。",
+        "related": "相关特征金标更宽，允许单问召回不完整，但要求每问稳定命中且类别平均过半。",
+        "synonym": "同义词是中文语义优化的直接验证，不要求全部别名一期覆盖，但至少四类问法应有 Top20 命中。",
+        "compound": "复合约束允许回答不完整，但不能因单次 AND 过窄而整体失败，因此采用放宽路径后的类别宏平均。",
+        "ambiguous": "歧义问题重点是给出可继续核验的候选，要求多数问法 Top20 有命中，不对 nDCG 设门禁以避免将未消歧的排序当作唯一正解。",
+        "no_result": "无结果问题不做宽松放宽，最多允许六问中零到一问出现全库假阳性。"
+      },
+      "category_thresholds": {
+        "direct": {
+          "sampled_query_hit_rate_at_20": 0.95,
+          "macro_sampled_gold_recall_at_50": 0.55,
+          "macro_ndcg_at_20_lower_bound": 0.8
+        },
+        "related": {
+          "sampled_query_hit_rate_at_20": 0.95,
+          "macro_sampled_gold_recall_at_50": 0.55,
+          "macro_ndcg_at_20_lower_bound": 0.6
+        },
+        "synonym": {
+          "sampled_query_hit_rate_at_20": 0.67,
+          "macro_sampled_gold_recall_at_50": 0.35,
+          "macro_ndcg_at_20_lower_bound": 0.4
+        },
+        "compound": {
+          "sampled_query_hit_rate_at_20": 0.95,
+          "macro_sampled_gold_recall_at_50": 0.45,
+          "macro_ndcg_at_20_lower_bound": 0.6
+        },
+        "ambiguous": {
+          "sampled_query_hit_rate_at_20": 0.67,
+          "macro_sampled_gold_recall_at_50": 0.35
+        },
+        "no_result": {
+          "raw_nonempty_rate": 0.1
+        }
+      },
+      "global_thresholds": {
+        "known_hard_negative_pollution_at_20_lower_bound": 0.1
+      }
+    },
+    "scenarios": [
+      {
+        "id": "direct_overdue_days",
+        "calls": [
+          {
+            "keywords": [],
+            "tags": [
+              "metric.overdue_days"
+            ],
+            "metric_scope": "primary"
+          },
+          {
+            "keywords": [],
+            "tags": [
+              "metric.continuous_overdue_days"
+            ],
+            "metric_scope": "primary"
+          }
+        ],
+        "gold_selector": {
+          "bucket": "overdue",
+          "subtypes": [
+            "overdue_days"
+          ],
+          "minimum_global_relevance": 3,
+          "expected_count": 24
+        },
+        "graded_relevance": "candidate.relevance",
+        "thresholds": {
+          "p_at_20_lower_bound": 0.9,
+          "sampled_gold_recall_at_50": 0.95,
+          "known_hard_negative_pollution_at_20_lower_bound": 0.1
+        }
+      },
+      {
+        "id": "broad_related",
+        "calls": [
+          {
+            "keywords": [],
+            "tags": [
+              "metric.overdue_days"
+            ],
+            "metric_scope": "primary"
+          },
+          {
+            "keywords": [],
+            "tags": [
+              "metric.continuous_overdue_days"
+            ],
+            "metric_scope": "primary"
+          },
+          {
+            "keywords": [],
+            "tags": [
+              "metric.overdue_days"
+            ],
+            "metric_scope": "related"
+          },
+          {
+            "keywords": [
+              "ovd"
+            ],
+            "tags": [],
+            "metric_scope": "any",
+            "purpose": "标签未覆盖时使用技术缩写兜底"
+          }
+        ],
+        "gold_selector": {
+          "bucket": "overdue",
+          "minimum_global_relevance": 2,
+          "expected_count": 48
+        },
+        "low_relevance_selector": {
+          "global_relevance": 1
+        },
+        "graded_relevance": "candidate.relevance",
+        "thresholds": {
+          "sampled_gold_recall_at_50": 0.85,
+          "ndcg_at_20_lower_bound": 0.85,
+          "known_hard_negative_pollution_at_20_lower_bound": 0.1
+        }
+      }
+    ]
+  },
+  "candidates": {
+    "ftr.off.usr.dwa_risk_dz_model_30light_cross_heavy_inner_behaviour_df.heavy_d360_max_fail_prc_amt_divide_light_d360_max_ovd_repay_amt": {
+      "bucket": "robustness",
+      "subtype": "robust_cross_overdue",
+      "relation": "related",
+      "relevance": 1,
+      "expected_dimensions": [
+        "轻资产",
+        "重资产",
+        "窗口:360天",
+        "聚合:最大"
+      ],
+      "rationale": "含轻重资产逾期本金交叉，相关但非天数。",
+      "source_packages": [
+        "package_4_nuggets"
+      ],
+      "feature_column_name": "heavy_d360_max_fail_prc_amt_divide_light_d360_max_ovd_repay_amt",
+      "feature_name": "近360天重资产最大借款失败本金/近360天轻资产最大逾期还款本金",
+      "group_name": "轻重资产CROSS特征宽表"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_30light_cross_heavy_inner_behaviour_df.heavy_d720_max_fail_prc_amt_divide_light_d720_max_ovd_repay_amt": {
+      "bucket": "robustness",
+      "subtype": "robust_cross_overdue",
+      "relation": "related",
+      "relevance": 1,
+      "expected_dimensions": [
+        "轻资产",
+        "重资产",
+        "窗口:720天",
+        "聚合:最大"
+      ],
+      "rationale": "含轻重资产逾期本金交叉，相关但非天数。",
+      "source_packages": [
+        "package_4_nuggets"
+      ],
+      "feature_column_name": "heavy_d720_max_fail_prc_amt_divide_light_d720_max_ovd_repay_amt",
+      "feature_name": "近720天重资产最大借款失败本金/近720天轻资产最大逾期还款本金",
+      "group_name": "轻重资产CROSS特征宽表"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_30light_cross_heavy_inner_behaviour_df.heavy_d720_sum_faqi_prc_amt_divide_light_d720_sum_ovd_repay_amt": {
+      "bucket": "robustness",
+      "subtype": "robust_cross_overdue",
+      "relation": "related",
+      "relevance": 1,
+      "expected_dimensions": [
+        "轻资产",
+        "重资产",
+        "窗口:720天",
+        "聚合:总和"
+      ],
+      "rationale": "含轻重资产逾期本金交叉，相关但非天数。",
+      "source_packages": [
+        "package_4_nuggets"
+      ],
+      "feature_column_name": "heavy_d720_sum_faqi_prc_amt_divide_light_d720_sum_ovd_repay_amt",
+      "feature_name": "近720天重资产借款发起本金总和/近720天轻资产逾期还款本金总和",
+      "group_name": "轻重资产CROSS特征宽表"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_30light_cross_heavy_inner_behaviour_df.heavy_d90_max_fail_prc_amt_divide_light_d90_max_ovd_repay_amt": {
+      "bucket": "robustness",
+      "subtype": "robust_cross_overdue",
+      "relation": "related",
+      "relevance": 1,
+      "expected_dimensions": [
+        "轻资产",
+        "窗口:90天",
+        "聚合:最大"
+      ],
+      "rationale": "含轻重资产逾期本金交叉，相关但非天数。",
+      "source_packages": [
+        "package_4_nuggets"
+      ],
+      "feature_column_name": "heavy_d90_max_fail_prc_amt_divide_light_d90_max_ovd_repay_amt",
+      "feature_name": "近90天重轻资产最大借款失败本金/近90天轻资产最大逾期还款本金",
+      "group_name": "轻重资产CROSS特征宽表"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_30light_cross_heavy_inner_behaviour_df.heavy_d90_sum_fail_prc_amt_divide_light_d90_sum_ovd_repay_amt": {
+      "bucket": "robustness",
+      "subtype": "robust_cross_overdue",
+      "relation": "related",
+      "relevance": 1,
+      "expected_dimensions": [
+        "轻资产",
+        "重资产",
+        "窗口:90天",
+        "聚合:总和"
+      ],
+      "rationale": "含轻重资产逾期本金交叉，相关但非天数。",
+      "source_packages": [
+        "package_4_nuggets"
+      ],
+      "feature_column_name": "heavy_d90_sum_fail_prc_amt_divide_light_d90_sum_ovd_repay_amt",
+      "feature_name": "近90天重资产借款失败本金总和/近90天轻资产逾期还款本金总和",
+      "group_name": "轻重资产CROSS特征宽表"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_continue_ovd_days_df.max_ctn_ovd_day": {
+      "bucket": "overdue",
+      "subtype": "overdue_days",
+      "relation": "direct",
+      "relevance": 3,
+      "expected_dimensions": [
+        "逾期天数",
+        "连续逾期",
+        "聚合:最大"
+      ],
+      "rationale": "名称直接度量逾期持续天数。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "max_ctn_ovd_day",
+      "feature_name": "历史最大连续逾期天数",
+      "group_name": "历史逾期"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_continue_ovd_days_df.min_ctn_ovd_day": {
+      "bucket": "overdue",
+      "subtype": "overdue_days",
+      "relation": "direct",
+      "relevance": 3,
+      "expected_dimensions": [
+        "逾期天数",
+        "连续逾期",
+        "聚合:最小"
+      ],
+      "rationale": "名称直接度量逾期持续天数。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "min_ctn_ovd_day",
+      "feature_name": "历史最小连续逾期天数",
+      "group_name": "历史逾期"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_derived_df.stg_pln_sum_rep_prc_12m_his_ovd_0d_pls_3d_afn_pk_rto": {
+      "bucket": "overdue",
+      "subtype": "repayment_lateness_band",
+      "relation": "direct",
+      "relevance": 2,
+      "expected_dimensions": [
+        "还款延迟区间",
+        "阈值:3天",
+        "窗口:12个月"
+      ],
+      "rationale": "以实还日相对应还日的天数区间表达晚还。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "stg_pln_sum_rep_prc_12m_his_ovd_0d_pls_3d_afn_pk_rto",
+      "feature_name": "近12个月实还时间距应还日1-3天_下午批扣的实还本金金额占近12个月实还本金金额的比例",
+      "group_name": "还款能力衍生特征"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_derived_df.stg_pln_sum_rep_prc_12m_his_ovd_0d_pls_3d_mrn_pk_rto": {
+      "bucket": "overdue",
+      "subtype": "repayment_lateness_band",
+      "relation": "direct",
+      "relevance": 2,
+      "expected_dimensions": [
+        "还款延迟区间",
+        "阈值:3天",
+        "窗口:12个月"
+      ],
+      "rationale": "以实还日相对应还日的天数区间表达晚还。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "stg_pln_sum_rep_prc_12m_his_ovd_0d_pls_3d_mrn_pk_rto",
+      "feature_name": "近12个月实还时间距应还日1-3天_上午批扣的实还本金金额占近12个月实还本金金额的比例",
+      "group_name": "还款能力衍生特征"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_derived_df.stg_pln_sum_rep_prc_12m_his_ovd_0d_pls_3d_zd_rto": {
+      "bucket": "overdue",
+      "subtype": "repayment_lateness_band",
+      "relation": "direct",
+      "relevance": 2,
+      "expected_dimensions": [
+        "还款延迟区间",
+        "阈值:3天",
+        "窗口:12个月"
+      ],
+      "rationale": "以实还日相对应还日的天数区间表达晚还。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "stg_pln_sum_rep_prc_12m_his_ovd_0d_pls_3d_zd_rto",
+      "feature_name": "近12个月实还时间距应还日1-3天_主动还款的实还本金金额占近12个月实还本金金额的比例",
+      "group_name": "还款能力衍生特征"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_derived_df.stg_pln_sum_rep_prc_12m_his_ovd_14d_pls_30d_afn_pk_rto": {
+      "bucket": "overdue",
+      "subtype": "repayment_lateness_band",
+      "relation": "direct",
+      "relevance": 2,
+      "expected_dimensions": [
+        "还款延迟区间",
+        "窗口:12个月"
+      ],
+      "rationale": "以实还日相对应还日的天数区间表达晚还。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "stg_pln_sum_rep_prc_12m_his_ovd_14d_pls_30d_afn_pk_rto",
+      "feature_name": "近12个月实还时间距应还日15天-1个月_下午批扣的实还本金金额占近12个月实还本金金额的比例",
+      "group_name": "还款能力衍生特征"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_derived_df.stg_pln_sum_rep_prc_12m_his_ovd_14d_pls_30d_mrn_pk_rto": {
+      "bucket": "overdue",
+      "subtype": "repayment_lateness_band",
+      "relation": "direct",
+      "relevance": 2,
+      "expected_dimensions": [
+        "还款延迟区间",
+        "窗口:12个月"
+      ],
+      "rationale": "以实还日相对应还日的天数区间表达晚还。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "stg_pln_sum_rep_prc_12m_his_ovd_14d_pls_30d_mrn_pk_rto",
+      "feature_name": "近12个月实还时间距应还日15天-1个月_上午批扣的实还本金金额占近12个月实还本金金额的比例",
+      "group_name": "还款能力衍生特征"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_derived_df.stg_pln_sum_rep_prc_12m_his_ovd_14d_pls_30d_zd_rto": {
+      "bucket": "overdue",
+      "subtype": "repayment_lateness_band",
+      "relation": "direct",
+      "relevance": 2,
+      "expected_dimensions": [
+        "还款延迟区间",
+        "窗口:12个月"
+      ],
+      "rationale": "以实还日相对应还日的天数区间表达晚还。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "stg_pln_sum_rep_prc_12m_his_ovd_14d_pls_30d_zd_rto",
+      "feature_name": "近12个月实还时间距应还日15天-1个月_主动还款的实还本金金额占近12个月实还本金金额的比例",
+      "group_name": "还款能力衍生特征"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_derived_df.stg_pln_sum_rep_prc_12m_his_ovd_3d_pls_7d_afn_pk_rto": {
+      "bucket": "overdue",
+      "subtype": "repayment_lateness_band",
+      "relation": "direct",
+      "relevance": 2,
+      "expected_dimensions": [
+        "还款延迟区间",
+        "阈值:7天",
+        "窗口:12个月"
+      ],
+      "rationale": "以实还日相对应还日的天数区间表达晚还。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "stg_pln_sum_rep_prc_12m_his_ovd_3d_pls_7d_afn_pk_rto",
+      "feature_name": "近12个月实还时间距应还日4-7天_下午批扣的实还本金金额占近12个月实还本金金额的比例",
+      "group_name": "还款能力衍生特征"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_derived_df.stg_pln_sum_rep_prc_12m_his_ovd_3d_pls_7d_mrn_pk_rto": {
+      "bucket": "overdue",
+      "subtype": "repayment_lateness_band",
+      "relation": "direct",
+      "relevance": 2,
+      "expected_dimensions": [
+        "还款延迟区间",
+        "阈值:7天",
+        "窗口:12个月"
+      ],
+      "rationale": "以实还日相对应还日的天数区间表达晚还。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "stg_pln_sum_rep_prc_12m_his_ovd_3d_pls_7d_mrn_pk_rto",
+      "feature_name": "近12个月实还时间距应还日4-7天_上午批扣的实还本金金额占近12个月实还本金金额的比例",
+      "group_name": "还款能力衍生特征"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_derived_df.stg_pln_cnt_ovd_14d_pls_rep_12m_rto": {
+      "bucket": "overdue",
+      "subtype": "overdue_threshold",
+      "relation": "direct",
+      "relevance": 2,
+      "expected_dimensions": [
+        "分期计划数",
+        "阈值:14天",
+        "窗口:12个月"
+      ],
+      "rationale": "以明确天数阈值切分逾期计划或金额。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "stg_pln_cnt_ovd_14d_pls_rep_12m_rto",
+      "feature_name": "逾期>14天的分期计划数（近12个月应还分期计划）占近12个月应还的比例",
+      "group_name": "还款压力衍生特征组"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_derived_df.stg_pln_sum_prc_amt_ovd_7d_pls_rep_3m_rto_his": {
+      "bucket": "overdue",
+      "subtype": "overdue_threshold",
+      "relation": "direct",
+      "relevance": 2,
+      "expected_dimensions": [
+        "应还本金",
+        "阈值:7天",
+        "窗口:3个月"
+      ],
+      "rationale": "以明确天数阈值切分逾期计划或金额。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "stg_pln_sum_prc_amt_ovd_7d_pls_rep_3m_rto_his",
+      "feature_name": "逾期>7天的应还本金金额（近3个月应还分期计划）占历史逾期>7天的比例",
+      "group_name": "还款压力衍生特征组"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_derived_jqh_df.stg_pln_cnt_ovd_14d_pls_rep_bjq_12m_rto": {
+      "bucket": "overdue",
+      "subtype": "overdue_threshold",
+      "relation": "direct",
+      "relevance": 2,
+      "expected_dimensions": [
+        "分期计划数",
+        "阈值:14天"
+      ],
+      "rationale": "以明确天数阈值切分逾期计划或金额。",
+      "source_packages": [
+        "package_4_nuggets"
+      ],
+      "feature_column_name": "stg_pln_cnt_ovd_14d_pls_rep_bjq_12m_rto",
+      "feature_name": "逾期>14天的分期计划数（所有订单结清前12个月应还分期计划）占所有订单结清前12个月应还的比例",
+      "group_name": "结清户还款信息表3窗口期12个月"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_derived_jqh_df.stg_pln_cnt_ovd_3d_pls_rep_bjq_12m_rto": {
+      "bucket": "overdue",
+      "subtype": "overdue_threshold",
+      "relation": "direct",
+      "relevance": 2,
+      "expected_dimensions": [
+        "分期计划数",
+        "阈值:3天"
+      ],
+      "rationale": "以明确天数阈值切分逾期计划或金额。",
+      "source_packages": [
+        "package_4_nuggets"
+      ],
+      "feature_column_name": "stg_pln_cnt_ovd_3d_pls_rep_bjq_12m_rto",
+      "feature_name": "逾期>3天的分期计划数（所有订单结清前12个月应还分期计划）占所有订单结清前12个月应还的比例",
+      "group_name": "结清户还款信息表3窗口期12个月"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_derived_jqh_df.stg_pln_cnt_ovd_7d_pls_rep_bjq_12m_rto": {
+      "bucket": "overdue",
+      "subtype": "overdue_threshold",
+      "relation": "direct",
+      "relevance": 2,
+      "expected_dimensions": [
+        "分期计划数",
+        "阈值:7天"
+      ],
+      "rationale": "以明确天数阈值切分逾期计划或金额。",
+      "source_packages": [
+        "package_4_nuggets"
+      ],
+      "feature_column_name": "stg_pln_cnt_ovd_7d_pls_rep_bjq_12m_rto",
+      "feature_name": "逾期>7天的分期计划数（所有订单结清前12个月应还分期计划）占所有订单结清前12个月应还的比例",
+      "group_name": "结清户还款信息表3窗口期12个月"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_derived_jqh_df.stg_pln_sum_prc_amt_ovd_14d_pls_rep_bjq_12m_rto": {
+      "bucket": "overdue",
+      "subtype": "overdue_threshold",
+      "relation": "direct",
+      "relevance": 2,
+      "expected_dimensions": [
+        "应还本金",
+        "阈值:14天"
+      ],
+      "rationale": "以明确天数阈值切分逾期计划或金额。",
+      "source_packages": [
+        "package_4_nuggets"
+      ],
+      "feature_column_name": "stg_pln_sum_prc_amt_ovd_14d_pls_rep_bjq_12m_rto",
+      "feature_name": "逾期>14天的应还本金金额（所有订单结清前12个月应还分期计划）占所有订单结清前12个月应还的比例",
+      "group_name": "结清户还款信息表3窗口期12个月"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_derived_jqh_df.stg_pln_sum_prc_amt_ovd_3d_pls_rep_bjq_12m_rto": {
+      "bucket": "overdue",
+      "subtype": "overdue_threshold",
+      "relation": "direct",
+      "relevance": 2,
+      "expected_dimensions": [
+        "应还本金",
+        "阈值:3天"
+      ],
+      "rationale": "以明确天数阈值切分逾期计划或金额。",
+      "source_packages": [
+        "package_4_nuggets"
+      ],
+      "feature_column_name": "stg_pln_sum_prc_amt_ovd_3d_pls_rep_bjq_12m_rto",
+      "feature_name": "逾期>3天的应还本金金额（所有订单结清前12个月应还分期计划）占所有订单结清前12个月应还的比例",
+      "group_name": "结清户还款信息表3窗口期12个月"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_derived_jqh_df.stg_pln_sum_prc_amt_ovd_7d_pls_rep_bjq_12m_rto": {
+      "bucket": "overdue",
+      "subtype": "overdue_threshold",
+      "relation": "direct",
+      "relevance": 2,
+      "expected_dimensions": [
+        "应还本金",
+        "阈值:7天"
+      ],
+      "rationale": "以明确天数阈值切分逾期计划或金额。",
+      "source_packages": [
+        "package_4_nuggets"
+      ],
+      "feature_column_name": "stg_pln_sum_prc_amt_ovd_7d_pls_rep_bjq_12m_rto",
+      "feature_name": "逾期>7天的应还本金金额（所有订单结清前12个月应还分期计划）占所有订单结清前12个月应还的比例",
+      "group_name": "结清户还款信息表3窗口期12个月"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.max_ddf_rep_tim_dte_adv_fst_ord": {
+      "bucket": "hard_negative",
+      "subtype": "hard_advance_repay_days",
+      "relation": "hard_negative",
+      "relevance": 0,
+      "expected_dimensions": [
+        "提前还款天数",
+        "聚合:最大"
+      ],
+      "rationale": "度量提前还款而非逾期。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "max_ddf_rep_tim_dte_adv_fst_ord",
+      "feature_name": "最大提前还款天数（首次成功动支订单）（历史所有提前还款）",
+      "group_name": "还款压力特征组"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.max_ddf_rep_tim_dte_ovd_pls_cur_ord": {
+      "bucket": "overdue",
+      "subtype": "overdue_days",
+      "relation": "direct",
+      "relevance": 3,
+      "expected_dimensions": [
+        "逾期天数",
+        "聚合:最大"
+      ],
+      "rationale": "名称直接度量逾期持续天数。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "max_ddf_rep_tim_dte_ovd_pls_cur_ord",
+      "feature_name": "历史最大逾期天数（当前成功动支订单）",
+      "group_name": "还款压力特征组"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.max_ddf_rep_tim_dte_ovd_pls_fst_ord": {
+      "bucket": "overdue",
+      "subtype": "overdue_days",
+      "relation": "direct",
+      "relevance": 3,
+      "expected_dimensions": [
+        "逾期天数",
+        "聚合:最大"
+      ],
+      "rationale": "名称直接度量逾期持续天数。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "max_ddf_rep_tim_dte_ovd_pls_fst_ord",
+      "feature_name": "历史最大逾期天数（首次成功动支订单）",
+      "group_name": "还款压力特征组"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.max_ddf_rep_tim_dte_ovd_pls_rep_12m": {
+      "bucket": "overdue",
+      "subtype": "overdue_days",
+      "relation": "direct",
+      "relevance": 3,
+      "expected_dimensions": [
+        "逾期天数",
+        "窗口:12个月",
+        "聚合:最大"
+      ],
+      "rationale": "名称直接度量逾期持续天数。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "max_ddf_rep_tim_dte_ovd_pls_rep_12m",
+      "feature_name": "最大逾期天数（近12个月应还分期计划）",
+      "group_name": "还款压力特征组"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.max_ddf_rep_tim_dte_ovd_pls_rep_3m": {
+      "bucket": "overdue",
+      "subtype": "overdue_days",
+      "relation": "direct",
+      "relevance": 3,
+      "expected_dimensions": [
+        "逾期天数",
+        "窗口:3个月",
+        "聚合:最大"
+      ],
+      "rationale": "名称直接度量逾期持续天数。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "max_ddf_rep_tim_dte_ovd_pls_rep_3m",
+      "feature_name": "最大逾期天数（近3个月应还分期计划）",
+      "group_name": "还款压力特征组"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.max_ddf_rep_tim_dte_ovd_pls_rep_6m": {
+      "bucket": "overdue",
+      "subtype": "overdue_days",
+      "relation": "direct",
+      "relevance": 3,
+      "expected_dimensions": [
+        "逾期天数",
+        "窗口:6个月",
+        "聚合:最大"
+      ],
+      "rationale": "名称直接度量逾期持续天数。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "max_ddf_rep_tim_dte_ovd_pls_rep_6m",
+      "feature_name": "最大逾期天数（近6个月应还分期计划）",
+      "group_name": "还款压力特征组"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_ddf_mdl_rep_dte_ovd_pls": {
+      "bucket": "overdue",
+      "subtype": "overdue_recency",
+      "relation": "direct",
+      "relevance": 2,
+      "expected_dimensions": [
+        "最近逾期间隔"
+      ],
+      "rationale": "度量最近一次逾期距观察时点的天数。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "min_ddf_mdl_rep_dte_ovd_pls",
+      "feature_name": "最近一次逾期时间距评分日间隔（天）",
+      "group_name": "还款压力特征组"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_ddf_rep_tim_dte_adv_cur_ord": {
+      "bucket": "hard_negative",
+      "subtype": "hard_advance_repay_days",
+      "relation": "hard_negative",
+      "relevance": 0,
+      "expected_dimensions": [
+        "提前还款天数",
+        "聚合:最小"
+      ],
+      "rationale": "度量提前还款而非逾期。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "min_ddf_rep_tim_dte_adv_cur_ord",
+      "feature_name": "最小提前还款天数（当前成功动支订单）（历史所有提前还款）",
+      "group_name": "还款压力特征组"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_ddf_rep_tim_dte_adv_fst_ord": {
+      "bucket": "hard_negative",
+      "subtype": "hard_advance_repay_days",
+      "relation": "hard_negative",
+      "relevance": 0,
+      "expected_dimensions": [
+        "提前还款天数",
+        "聚合:最小"
+      ],
+      "rationale": "度量提前还款而非逾期。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "min_ddf_rep_tim_dte_adv_fst_ord",
+      "feature_name": "最小提前还款天数（首次成功动支订单）（历史所有提前还款）",
+      "group_name": "还款压力特征组"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_ddf_rep_tim_dte_ovd_pls_fst_ord": {
+      "bucket": "overdue",
+      "subtype": "overdue_days",
+      "relation": "direct",
+      "relevance": 3,
+      "expected_dimensions": [
+        "逾期天数",
+        "聚合:最小"
+      ],
+      "rationale": "名称直接度量逾期持续天数。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "min_ddf_rep_tim_dte_ovd_pls_fst_ord",
+      "feature_name": "历史最小逾期天数（首次成功动支订单）",
+      "group_name": "还款压力特征组"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_ddf_rep_tim_dte_ovd_pls_rep_12m": {
+      "bucket": "overdue",
+      "subtype": "overdue_days",
+      "relation": "direct",
+      "relevance": 3,
+      "expected_dimensions": [
+        "逾期天数",
+        "窗口:12个月",
+        "聚合:最小"
+      ],
+      "rationale": "名称直接度量逾期持续天数。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "min_ddf_rep_tim_dte_ovd_pls_rep_12m",
+      "feature_name": "最小逾期天数（近12个月应还分期计划）",
+      "group_name": "还款压力特征组"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_ddf_rep_tim_dte_ovd_pls_rep_1m": {
+      "bucket": "overdue",
+      "subtype": "overdue_days",
+      "relation": "direct",
+      "relevance": 3,
+      "expected_dimensions": [
+        "逾期天数",
+        "窗口:1个月",
+        "聚合:最小"
+      ],
+      "rationale": "名称直接度量逾期持续天数。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "min_ddf_rep_tim_dte_ovd_pls_rep_1m",
+      "feature_name": "最小逾期天数（近1个月应还分期计划）",
+      "group_name": "还款压力特征组"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_ddf_rep_tim_dte_ovd_pls_rep_3m": {
+      "bucket": "overdue",
+      "subtype": "overdue_days",
+      "relation": "direct",
+      "relevance": 3,
+      "expected_dimensions": [
+        "逾期天数",
+        "窗口:3个月",
+        "聚合:最小"
+      ],
+      "rationale": "名称直接度量逾期持续天数。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "min_ddf_rep_tim_dte_ovd_pls_rep_3m",
+      "feature_name": "最小逾期天数（近3个月应还分期计划）",
+      "group_name": "还款压力特征组"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_ddf_rep_tim_dte_ovd_pls_rep_6m": {
+      "bucket": "overdue",
+      "subtype": "overdue_days",
+      "relation": "direct",
+      "relevance": 3,
+      "expected_dimensions": [
+        "逾期天数",
+        "窗口:6个月",
+        "聚合:最小"
+      ],
+      "rationale": "名称直接度量逾期持续天数。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "min_ddf_rep_tim_dte_ovd_pls_rep_6m",
+      "feature_name": "最小逾期天数（近6个月应还分期计划）",
+      "group_name": "还款压力特征组"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_fst_ddf_mdl_rep_dte_ovd_pls": {
+      "bucket": "overdue",
+      "subtype": "overdue_recency",
+      "relation": "direct",
+      "relevance": 2,
+      "expected_dimensions": [
+        "最近逾期间隔"
+      ],
+      "rationale": "度量最近一次逾期距观察时点的天数。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "min_fst_ddf_mdl_rep_dte_ovd_pls",
+      "feature_name": "最近一次逾期时间距评分日间隔（天）（首期逾期）",
+      "group_name": "还款压力特征组"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.stg_pln_cnt_ovd_3d_pls_rep_6m": {
+      "bucket": "overdue",
+      "subtype": "overdue_threshold",
+      "relation": "direct",
+      "relevance": 2,
+      "expected_dimensions": [
+        "分期计划数",
+        "阈值:3天",
+        "窗口:6个月"
+      ],
+      "rationale": "以明确天数阈值切分逾期计划或金额。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "stg_pln_cnt_ovd_3d_pls_rep_6m",
+      "feature_name": "逾期>3天的分期计划数（近6个月应还分期计划）",
+      "group_name": "还款压力特征组"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.stg_pln_cnt_ovd_7d_pls_rep_6m": {
+      "bucket": "overdue",
+      "subtype": "overdue_threshold",
+      "relation": "direct",
+      "relevance": 2,
+      "expected_dimensions": [
+        "分期计划数",
+        "阈值:7天",
+        "窗口:6个月"
+      ],
+      "rationale": "以明确天数阈值切分逾期计划或金额。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "stg_pln_cnt_ovd_7d_pls_rep_6m",
+      "feature_name": "逾期>7天的分期计划数（近6个月应还分期计划）",
+      "group_name": "还款压力特征组"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.stg_pln_sum_prc_amt_ovd_14d_pls_rep_6m": {
+      "bucket": "overdue",
+      "subtype": "overdue_threshold",
+      "relation": "direct",
+      "relevance": 2,
+      "expected_dimensions": [
+        "应还本金",
+        "阈值:14天",
+        "窗口:6个月"
+      ],
+      "rationale": "以明确天数阈值切分逾期计划或金额。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "stg_pln_sum_prc_amt_ovd_14d_pls_rep_6m",
+      "feature_name": "逾期>14天的应还本金金额（近6个月应还分期计划）",
+      "group_name": "还款压力特征组"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.stg_pln_sum_prc_amt_ovd_3d_pls_rep_1m": {
+      "bucket": "overdue",
+      "subtype": "overdue_threshold",
+      "relation": "direct",
+      "relevance": 2,
+      "expected_dimensions": [
+        "应还本金",
+        "阈值:3天",
+        "窗口:1个月"
+      ],
+      "rationale": "以明确天数阈值切分逾期计划或金额。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "stg_pln_sum_prc_amt_ovd_3d_pls_rep_1m",
+      "feature_name": "逾期>3天的应还本金金额（近1个月应还分期计划）",
+      "group_name": "还款压力特征组"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.max_ddf_rep_tim_dte_ovd_pls_fst_ord_bjq_12m": {
+      "bucket": "overdue",
+      "subtype": "overdue_days",
+      "relation": "direct",
+      "relevance": 3,
+      "expected_dimensions": [
+        "逾期天数",
+        "聚合:最大"
+      ],
+      "rationale": "名称直接度量逾期持续天数。",
+      "source_packages": [
+        "package_4_nuggets"
+      ],
+      "feature_column_name": "max_ddf_rep_tim_dte_ovd_pls_fst_ord_bjq_12m",
+      "feature_name": "所有订单结清前12个月最大逾期天数（首次成功动支订单）",
+      "group_name": "结清户还款信息表1窗口期12个月"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.max_ddf_rep_tim_dte_ovd_pls_rep_bjq_12m": {
+      "bucket": "overdue",
+      "subtype": "overdue_days",
+      "relation": "direct",
+      "relevance": 3,
+      "expected_dimensions": [
+        "逾期天数",
+        "聚合:最大"
+      ],
+      "rationale": "名称直接度量逾期持续天数。",
+      "source_packages": [
+        "package_4_nuggets"
+      ],
+      "feature_column_name": "max_ddf_rep_tim_dte_ovd_pls_rep_bjq_12m",
+      "feature_name": "最大逾期天数（所有订单结清前12个月应还分期计划）",
+      "group_name": "结清户还款信息表1窗口期12个月"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.min_ddf_mdl_rep_dte_ovd_pls_bjq": {
+      "bucket": "overdue",
+      "subtype": "overdue_recency",
+      "relation": "direct",
+      "relevance": 2,
+      "expected_dimensions": [
+        "最近逾期间隔"
+      ],
+      "rationale": "度量最近一次逾期距观察时点的天数。",
+      "source_packages": [
+        "package_4_nuggets"
+      ],
+      "feature_column_name": "min_ddf_mdl_rep_dte_ovd_pls_bjq",
+      "feature_name": "最近一次逾期时间距结清日间隔（天）",
+      "group_name": "结清户还款信息表1窗口期12个月"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.min_ddf_rep_tim_dte_ovd_pls_fst_ord_bjq_12m": {
+      "bucket": "overdue",
+      "subtype": "overdue_days",
+      "relation": "direct",
+      "relevance": 3,
+      "expected_dimensions": [
+        "逾期天数",
+        "聚合:最小"
+      ],
+      "rationale": "名称直接度量逾期持续天数。",
+      "source_packages": [
+        "package_4_nuggets"
+      ],
+      "feature_column_name": "min_ddf_rep_tim_dte_ovd_pls_fst_ord_bjq_12m",
+      "feature_name": "所有订单结清前12个月最小逾期天数（首次成功动支订单）",
+      "group_name": "结清户还款信息表1窗口期12个月"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.min_ddf_rep_tim_dte_ovd_pls_rep_bjq_12m": {
+      "bucket": "overdue",
+      "subtype": "overdue_days",
+      "relation": "direct",
+      "relevance": 3,
+      "expected_dimensions": [
+        "逾期天数",
+        "聚合:最小"
+      ],
+      "rationale": "名称直接度量逾期持续天数。",
+      "source_packages": [
+        "package_4_nuggets"
+      ],
+      "feature_column_name": "min_ddf_rep_tim_dte_ovd_pls_rep_bjq_12m",
+      "feature_name": "最小逾期天数（所有订单结清前12个月应还分期计划）",
+      "group_name": "结清户还款信息表1窗口期12个月"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.min_fst_ddf_mdl_rep_dte_ovd_pls_bjq": {
+      "bucket": "overdue",
+      "subtype": "overdue_recency",
+      "relation": "direct",
+      "relevance": 2,
+      "expected_dimensions": [
+        "最近逾期间隔"
+      ],
+      "rationale": "度量最近一次逾期距观察时点的天数。",
+      "source_packages": [
+        "package_4_nuggets"
+      ],
+      "feature_column_name": "min_fst_ddf_mdl_rep_dte_ovd_pls_bjq",
+      "feature_name": "最近一次逾期时间距结清日间隔（天）（首期逾期）",
+      "group_name": "结清户还款信息表1窗口期12个月"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12payment_info_df.payment_balancenotenough_day_1m": {
+      "bucket": "hard_negative",
+      "subtype": "hard_payment_failure_days",
+      "relation": "hard_negative",
+      "relevance": 0,
+      "expected_dimensions": [
+        "扣款失败天数",
+        "窗口:1个月"
+      ],
+      "rationale": "扣款失败日数不等于逾期天数。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "payment_balancenotenough_day_1m",
+      "feature_name": "近1个月扣款余额不足的扣款失败天数",
+      "group_name": "还款特征组"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12payment_info_df.payment_balancenotenough_day_3m": {
+      "bucket": "hard_negative",
+      "subtype": "hard_payment_failure_days",
+      "relation": "hard_negative",
+      "relevance": 0,
+      "expected_dimensions": [
+        "扣款失败天数",
+        "窗口:3个月"
+      ],
+      "rationale": "扣款失败日数不等于逾期天数。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "payment_balancenotenough_day_3m",
+      "feature_name": "近3个月扣款余额不足的扣款失败天数",
+      "group_name": "还款特征组"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12payment_info_df.payment_balancenotenough_day_6m": {
+      "bucket": "hard_negative",
+      "subtype": "hard_payment_failure_days",
+      "relation": "hard_negative",
+      "relevance": 0,
+      "expected_dimensions": [
+        "扣款失败天数",
+        "窗口:6个月"
+      ],
+      "rationale": "扣款失败日数不等于逾期天数。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "payment_balancenotenough_day_6m",
+      "feature_name": "近6个月扣款余额不足的扣款失败天数",
+      "group_name": "还款特征组"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_12payment_info_df.payment_balancenotenough_day_rate_1m": {
+      "bucket": "hard_negative",
+      "subtype": "hard_payment_failure_days",
+      "relation": "hard_negative",
+      "relevance": 0,
+      "expected_dimensions": [
+        "扣款失败天数",
+        "窗口:1个月"
+      ],
+      "rationale": "扣款失败日数不等于逾期天数。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "payment_balancenotenough_day_rate_1m",
+      "feature_name": "近1个月扣款余额不足的扣款失败天数/近1个月扣款天数",
+      "group_name": "还款特征组"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_14ftr_rep_pressure_df.stg_pln_cnt_ovd_ftr_rep": {
+      "bucket": "overdue",
+      "subtype": "current_overdue",
+      "relation": "related",
+      "relevance": 1,
+      "expected_dimensions": [
+        "当前未结逾期",
+        "分期计划数"
+      ],
+      "rationale": "描述评分时点尚未结清的逾期。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "stg_pln_cnt_ovd_ftr_rep",
+      "feature_name": "截止评分日仍逾期的分期计划数（历史应还分期计划）",
+      "group_name": "贷中特征计算宽表"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_14ftr_rep_pressure_df.stg_pln_cnt_ovd_ftr_rep_cur_ord": {
+      "bucket": "overdue",
+      "subtype": "current_overdue",
+      "relation": "related",
+      "relevance": 1,
+      "expected_dimensions": [
+        "当前未结逾期"
+      ],
+      "rationale": "描述评分时点尚未结清的逾期。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "stg_pln_cnt_ovd_ftr_rep_cur_ord",
+      "feature_name": "未来应还_当前逾期应还分期数当前订单",
+      "group_name": "贷中特征计算宽表"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_14ftr_rep_pressure_df.stg_pln_cnt_ovd_ftr_rep_fst_ord": {
+      "bucket": "overdue",
+      "subtype": "current_overdue",
+      "relation": "related",
+      "relevance": 1,
+      "expected_dimensions": [
+        "当前未结逾期",
+        "分期计划数"
+      ],
+      "rationale": "描述评分时点尚未结清的逾期。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "stg_pln_cnt_ovd_ftr_rep_fst_ord",
+      "feature_name": "截止评分日仍逾期的分期计划数（历史应还分期计划）（首次成功动支订单）",
+      "group_name": "贷中特征计算宽表"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_14ftr_rep_pressure_df.stg_pln_min_prc_amt_ovd_ftr_rep": {
+      "bucket": "overdue",
+      "subtype": "current_overdue",
+      "relation": "related",
+      "relevance": 1,
+      "expected_dimensions": [
+        "当前未结逾期",
+        "应还本金",
+        "聚合:最小"
+      ],
+      "rationale": "描述评分时点尚未结清的逾期。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "stg_pln_min_prc_amt_ovd_ftr_rep",
+      "feature_name": "截止评分日仍逾期的最小应还本金金额（历史应还分期计划）",
+      "group_name": "贷中特征计算宽表"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_stg_ever_avg_overdue_days_30d": {
+      "bucket": "overdue",
+      "subtype": "overdue_days",
+      "relation": "direct",
+      "relevance": 3,
+      "expected_dimensions": [
+        "逾期天数",
+        "聚合:平均"
+      ],
+      "rationale": "名称直接度量逾期持续天数。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "cnt_stg_ever_avg_overdue_days_30d",
+      "feature_name": "cnt_曾逾期平均逾期天数_30d",
+      "group_name": "贷中-风险模型计算阶段订单信息"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_stg_ever_avg_overdue_days_30d_60d": {
+      "bucket": "overdue",
+      "subtype": "overdue_days",
+      "relation": "direct",
+      "relevance": 3,
+      "expected_dimensions": [
+        "逾期天数",
+        "聚合:平均"
+      ],
+      "rationale": "名称直接度量逾期持续天数。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "cnt_stg_ever_avg_overdue_days_30d_60d",
+      "feature_name": "cnt_曾逾期平均逾期天数_30d_60d",
+      "group_name": "贷中-风险模型计算阶段订单信息"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_stg_ever_avg_overdue_days_30d_90d": {
+      "bucket": "overdue",
+      "subtype": "overdue_days",
+      "relation": "direct",
+      "relevance": 3,
+      "expected_dimensions": [
+        "逾期天数",
+        "聚合:平均"
+      ],
+      "rationale": "名称直接度量逾期持续天数。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "cnt_stg_ever_avg_overdue_days_30d_90d",
+      "feature_name": "cnt_曾逾期平均逾期天数_30d_90d",
+      "group_name": "贷中-风险模型计算阶段订单信息"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_stg_ever_max_overdue_days_30d": {
+      "bucket": "overdue",
+      "subtype": "overdue_days",
+      "relation": "direct",
+      "relevance": 3,
+      "expected_dimensions": [
+        "逾期天数",
+        "聚合:最大"
+      ],
+      "rationale": "名称直接度量逾期持续天数。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "cnt_stg_ever_max_overdue_days_30d",
+      "feature_name": "cnt_曾逾期最大逾期天数_30d",
+      "group_name": "贷中-风险模型计算阶段订单信息"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_stg_ever_max_overdue_days_30d_60d": {
+      "bucket": "overdue",
+      "subtype": "overdue_days",
+      "relation": "direct",
+      "relevance": 3,
+      "expected_dimensions": [
+        "逾期天数",
+        "聚合:最大"
+      ],
+      "rationale": "名称直接度量逾期持续天数。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "cnt_stg_ever_max_overdue_days_30d_60d",
+      "feature_name": "cnt_曾逾期最大逾期天数_30d_60d",
+      "group_name": "贷中-风险模型计算阶段订单信息"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_stg_ever_max_overdue_days_30d_90d": {
+      "bucket": "overdue",
+      "subtype": "overdue_days",
+      "relation": "direct",
+      "relevance": 3,
+      "expected_dimensions": [
+        "逾期天数",
+        "聚合:最大"
+      ],
+      "rationale": "名称直接度量逾期持续天数。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "cnt_stg_ever_max_overdue_days_30d_90d",
+      "feature_name": "cnt_曾逾期最大逾期天数_30d_90d",
+      "group_name": "贷中-风险模型计算阶段订单信息"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.mdt_lst_30d_60d_stg_ever_avg_overdue_days_rte": {
+      "bucket": "overdue",
+      "subtype": "overdue_days",
+      "relation": "direct",
+      "relevance": 3,
+      "expected_dimensions": [
+        "逾期天数",
+        "窗口:30天",
+        "聚合:平均"
+      ],
+      "rationale": "名称直接度量逾期持续天数。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "mdt_lst_30d_60d_stg_ever_avg_overdue_days_rte",
+      "feature_name": "最近30天和60天平均逾期天数\t",
+      "group_name": "贷中-风险模型计算阶段订单信息"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.mdt_lst_30d_60d_stg_ever_max_overdue_days_rte": {
+      "bucket": "overdue",
+      "subtype": "overdue_days",
+      "relation": "direct",
+      "relevance": 3,
+      "expected_dimensions": [
+        "逾期天数",
+        "窗口:30天"
+      ],
+      "rationale": "名称直接度量逾期持续天数。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "mdt_lst_30d_60d_stg_ever_max_overdue_days_rte",
+      "feature_name": "最近30天和60天的阶段历史最长逾期天数和逾期率",
+      "group_name": "贷中-风险模型计算阶段订单信息"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_22pip_heavy_cross_info_df.avg_amt_recent_days_120": {
+      "bucket": "robustness",
+      "subtype": "robust_inner_english",
+      "relation": "robustness",
+      "relevance": 0,
+      "expected_dimensions": [],
+      "rationale": "纯英文复杂行为名，用于英文鲁棒性测试。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "avg_amt_recent_days_120",
+      "feature_name": "avg_amt_recent_days_120",
+      "group_name": "轻重资产变量v1"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_22pip_heavy_cross_info_df.avg_amt_recent_days_180": {
+      "bucket": "robustness",
+      "subtype": "robust_inner_english",
+      "relation": "robustness",
+      "relevance": 0,
+      "expected_dimensions": [],
+      "rationale": "纯英文复杂行为名，用于英文鲁棒性测试。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "avg_amt_recent_days_180",
+      "feature_name": "avg_amt_recent_days_180",
+      "group_name": "轻重资产变量v1"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_22pip_heavy_cross_info_df.avg_amt_recent_days_540": {
+      "bucket": "robustness",
+      "subtype": "robust_inner_english",
+      "relation": "robustness",
+      "relevance": 0,
+      "expected_dimensions": [],
+      "rationale": "纯英文复杂行为名，用于英文鲁棒性测试。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "avg_amt_recent_days_540",
+      "feature_name": "avg_amt_recent_days_540",
+      "group_name": "轻重资产变量v1"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_22pip_heavy_cross_info_df.avg_day_diff_event_result_0_event_type_loan": {
+      "bucket": "robustness",
+      "subtype": "robust_inner_english",
+      "relation": "robustness",
+      "relevance": 0,
+      "expected_dimensions": [],
+      "rationale": "纯英文复杂行为名，用于英文鲁棒性测试。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "avg_day_diff_event_result_0_event_type_loan",
+      "feature_name": "avg_day_diff_event_result_0_event_type_loan",
+      "group_name": "轻重资产变量v1"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_22pip_heavy_cross_info_df.avg_day_diff_event_result_1_event_type_loan": {
+      "bucket": "robustness",
+      "subtype": "robust_inner_english",
+      "relation": "robustness",
+      "relevance": 0,
+      "expected_dimensions": [],
+      "rationale": "纯英文复杂行为名，用于英文鲁棒性测试。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "avg_day_diff_event_result_1_event_type_loan",
+      "feature_name": "avg_day_diff_event_result_1_event_type_loan",
+      "group_name": "轻重资产变量v1"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_22pip_heavy_cross_info_df.avg_day_diff_shift1_event_type_repay_all": {
+      "bucket": "robustness",
+      "subtype": "robust_inner_english",
+      "relation": "robustness",
+      "relevance": 0,
+      "expected_dimensions": [],
+      "rationale": "纯英文复杂行为名，用于英文鲁棒性测试。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "avg_day_diff_shift1_event_type_repay_all",
+      "feature_name": "avg_day_diff_shift1_event_type_repay_all",
+      "group_name": "轻重资产变量v1"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_22pip_heavy_cross_info_df.avg_day_diff_type_light_all": {
+      "bucket": "robustness",
+      "subtype": "robust_inner_english",
+      "relation": "robustness",
+      "relevance": 0,
+      "expected_dimensions": [],
+      "rationale": "纯英文复杂行为名，用于英文鲁棒性测试。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "avg_day_diff_type_light_all",
+      "feature_name": "avg_day_diff_type_light_all",
+      "group_name": "轻重资产变量v1"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_22pip_heavy_cross_info_df.cnt_channel_hb_uid_recent_days_180": {
+      "bucket": "robustness",
+      "subtype": "robust_inner_english",
+      "relation": "robustness",
+      "relevance": 0,
+      "expected_dimensions": [],
+      "rationale": "纯英文复杂行为名，用于英文鲁棒性测试。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "cnt_channel_hb_uid_recent_days_180",
+      "feature_name": "cnt_channel_hb_uid_recent_days_180",
+      "group_name": "轻重资产变量v1"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_22pip_heavy_cross_info_df.cnt_channel_hb_uid_recent_days_540": {
+      "bucket": "robustness",
+      "subtype": "robust_inner_english",
+      "relation": "robustness",
+      "relevance": 0,
+      "expected_dimensions": [],
+      "rationale": "纯英文复杂行为名，用于英文鲁棒性测试。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "cnt_channel_hb_uid_recent_days_540",
+      "feature_name": "cnt_channel_hb_uid_recent_days_540",
+      "group_name": "轻重资产变量v1"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_22pip_heavy_cross_info_df.cnt_event_result_0_uid_recent_days_540": {
+      "bucket": "robustness",
+      "subtype": "robust_inner_english",
+      "relation": "robustness",
+      "relevance": 0,
+      "expected_dimensions": [],
+      "rationale": "纯英文复杂行为名，用于英文鲁棒性测试。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "cnt_event_result_0_uid_recent_days_540",
+      "feature_name": "cnt_event_result_0_uid_recent_days_540",
+      "group_name": "轻重资产变量v1"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_26_lending_costs_detail_df.d360_schedule_pay_penalty_sum": {
+      "bucket": "overdue",
+      "subtype": "overdue_penalty",
+      "relation": "related",
+      "relevance": 1,
+      "expected_dimensions": [
+        "逾期罚息",
+        "窗口:360天",
+        "聚合:总和"
+      ],
+      "rationale": "罚息是逾期后果而非逾期天数。",
+      "source_packages": [
+        "package_4_nuggets"
+      ],
+      "feature_column_name": "d360_schedule_pay_penalty_sum",
+      "feature_name": "近360天_各期逾期还款罚息_总和",
+      "group_name": "掘金计划-内部行为升级-信贷费用明细"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_26_lending_costs_detail_df.d90_schedule_pay_penalty_sum": {
+      "bucket": "overdue",
+      "subtype": "overdue_penalty",
+      "relation": "related",
+      "relevance": 1,
+      "expected_dimensions": [
+        "逾期罚息",
+        "窗口:90天",
+        "聚合:总和"
+      ],
+      "rationale": "罚息是逾期后果而非逾期天数。",
+      "source_packages": [
+        "package_4_nuggets"
+      ],
+      "feature_column_name": "d90_schedule_pay_penalty_sum",
+      "feature_name": "近90天_各期逾期还款罚息_总和",
+      "group_name": "掘金计划-内部行为升级-信贷费用明细"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_26_lending_costs_detail_df.d90_schedule_pay_penalty_sum_divide_d90_principal_sum": {
+      "bucket": "overdue",
+      "subtype": "overdue_penalty",
+      "relation": "related",
+      "relevance": 1,
+      "expected_dimensions": [
+        "逾期罚息",
+        "窗口:90天",
+        "聚合:总和"
+      ],
+      "rationale": "罚息是逾期后果而非逾期天数。",
+      "source_packages": [
+        "package_4_nuggets"
+      ],
+      "feature_column_name": "d90_schedule_pay_penalty_sum_divide_d90_principal_sum",
+      "feature_name": "近90天_各期逾期还款罚息_总和/近90天_各期逾期还款分期的本金_总和",
+      "group_name": "掘金计划-内部行为升级-信贷费用明细"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_26_lending_costs_detail_df.his_schedule_pay_penalty_max": {
+      "bucket": "overdue",
+      "subtype": "overdue_penalty",
+      "relation": "related",
+      "relevance": 1,
+      "expected_dimensions": [
+        "逾期罚息",
+        "聚合:最大"
+      ],
+      "rationale": "罚息是逾期后果而非逾期天数。",
+      "source_packages": [
+        "package_4_nuggets"
+      ],
+      "feature_column_name": "his_schedule_pay_penalty_max",
+      "feature_name": "历史至今_各期逾期还款罚息_最大值",
+      "group_name": "掘金计划-内部行为升级-信贷费用明细"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_his_rep_trend_time_series_df.12thord_con_late_repay_max": {
+      "bucket": "overdue",
+      "subtype": "continuous_overdue_repayment",
+      "relation": "related",
+      "relevance": 1,
+      "expected_dimensions": [
+        "连续逾期",
+        "聚合:最大",
+        "聚合:次数"
+      ],
+      "rationale": "连续逾期次数相关但不是天数值。",
+      "source_packages": [
+        "package_4_nuggets"
+      ],
+      "feature_column_name": "12thord_con_late_repay_max",
+      "feature_name": "近12笔订单连续逾期还款的最大次数",
+      "group_name": "贷中应还金额时间序列变量"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_his_rep_trend_time_series_df.18thord_con_late_repay_max": {
+      "bucket": "overdue",
+      "subtype": "continuous_overdue_repayment",
+      "relation": "related",
+      "relevance": 1,
+      "expected_dimensions": [
+        "连续逾期",
+        "聚合:最大",
+        "聚合:次数"
+      ],
+      "rationale": "连续逾期次数相关但不是天数值。",
+      "source_packages": [
+        "package_4_nuggets"
+      ],
+      "feature_column_name": "18thord_con_late_repay_max",
+      "feature_name": "近18笔订单连续逾期还款的最大次数",
+      "group_name": "贷中应还金额时间序列变量"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_his_rep_trend_time_series_df.24thord_con_late_repay_max": {
+      "bucket": "overdue",
+      "subtype": "continuous_overdue_repayment",
+      "relation": "related",
+      "relevance": 1,
+      "expected_dimensions": [
+        "连续逾期",
+        "聚合:最大",
+        "聚合:次数"
+      ],
+      "rationale": "连续逾期次数相关但不是天数值。",
+      "source_packages": [
+        "package_4_nuggets"
+      ],
+      "feature_column_name": "24thord_con_late_repay_max",
+      "feature_name": "近24笔订单连续逾期还款的最大次数",
+      "group_name": "贷中应还金额时间序列变量"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_final_his_rep_trend_time_series_df.6thord_con_late_repay_max": {
+      "bucket": "overdue",
+      "subtype": "continuous_overdue_repayment",
+      "relation": "related",
+      "relevance": 1,
+      "expected_dimensions": [
+        "连续逾期",
+        "聚合:最大",
+        "聚合:次数"
+      ],
+      "rationale": "连续逾期次数相关但不是天数值。",
+      "source_packages": [
+        "package_4_nuggets"
+      ],
+      "feature_column_name": "6thord_con_late_repay_max",
+      "feature_name": "近6笔订单连续逾期还款的最大次数",
+      "group_name": "贷中应还金额时间序列变量"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_light_trans_inner_cross_behaviour_df.his_settle_loan_diff_days_max": {
+      "bucket": "hard_negative",
+      "subtype": "hard_loan_repay_days",
+      "relation": "hard_negative",
+      "relevance": 0,
+      "expected_dimensions": [
+        "借还间隔天数",
+        "聚合:最大"
+      ],
+      "rationale": "天数指借还间隔，与逾期无关。",
+      "source_packages": [
+        "package_4_nuggets"
+      ],
+      "feature_column_name": "his_settle_loan_diff_days_max",
+      "feature_name": "历史至今_的借还间隔天数_最大值",
+      "group_name": "掘金3.0轻资产衍生特征2.3还款行为部分特征表"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_light_trans_inner_cross_behaviour_df.recent_12m_settle_loan_diff_days_max": {
+      "bucket": "hard_negative",
+      "subtype": "hard_loan_repay_days",
+      "relation": "hard_negative",
+      "relevance": 0,
+      "expected_dimensions": [
+        "借还间隔天数",
+        "窗口:12个月",
+        "聚合:最大"
+      ],
+      "rationale": "天数指借还间隔，与逾期无关。",
+      "source_packages": [
+        "package_4_nuggets"
+      ],
+      "feature_column_name": "recent_12m_settle_loan_diff_days_max",
+      "feature_name": "近12个月_的借还间隔天数_最大值",
+      "group_name": "掘金3.0轻资产衍生特征2.3还款行为部分特征表"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_light_trans_inner_cross_behaviour_df.recent_12m_settle_loan_diff_days_min": {
+      "bucket": "hard_negative",
+      "subtype": "hard_loan_repay_days",
+      "relation": "hard_negative",
+      "relevance": 0,
+      "expected_dimensions": [
+        "借还间隔天数",
+        "窗口:12个月",
+        "聚合:最小"
+      ],
+      "rationale": "天数指借还间隔，与逾期无关。",
+      "source_packages": [
+        "package_4_nuggets"
+      ],
+      "feature_column_name": "recent_12m_settle_loan_diff_days_min",
+      "feature_name": "近12个月_的借还间隔天数_最小值",
+      "group_name": "掘金3.0轻资产衍生特征2.3还款行为部分特征表"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_light_trans_inner_cross_behaviour_df.recent_1m_settle_loan_diff_days_avg": {
+      "bucket": "hard_negative",
+      "subtype": "hard_loan_repay_days",
+      "relation": "hard_negative",
+      "relevance": 0,
+      "expected_dimensions": [
+        "借还间隔天数",
+        "窗口:1个月"
+      ],
+      "rationale": "天数指借还间隔，与逾期无关。",
+      "source_packages": [
+        "package_4_nuggets"
+      ],
+      "feature_column_name": "recent_1m_settle_loan_diff_days_avg",
+      "feature_name": "近1个月_的借还间隔天数_均值",
+      "group_name": "掘金3.0轻资产衍生特征2.3还款行为部分特征表"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_light_trans_inner_cross_behaviour_df.recent_1m_settle_loan_diff_days_max": {
+      "bucket": "hard_negative",
+      "subtype": "hard_loan_repay_days",
+      "relation": "hard_negative",
+      "relevance": 0,
+      "expected_dimensions": [
+        "借还间隔天数",
+        "窗口:1个月",
+        "聚合:最大"
+      ],
+      "rationale": "天数指借还间隔，与逾期无关。",
+      "source_packages": [
+        "package_4_nuggets"
+      ],
+      "feature_column_name": "recent_1m_settle_loan_diff_days_max",
+      "feature_name": "近1个月_的借还间隔天数_最大值",
+      "group_name": "掘金3.0轻资产衍生特征2.3还款行为部分特征表"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_light_trans_inner_cross_behaviour_df.recent_1m_settle_loan_diff_days_min": {
+      "bucket": "hard_negative",
+      "subtype": "hard_loan_repay_days",
+      "relation": "hard_negative",
+      "relevance": 0,
+      "expected_dimensions": [
+        "借还间隔天数",
+        "窗口:1个月",
+        "聚合:最小"
+      ],
+      "rationale": "天数指借还间隔，与逾期无关。",
+      "source_packages": [
+        "package_4_nuggets"
+      ],
+      "feature_column_name": "recent_1m_settle_loan_diff_days_min",
+      "feature_name": "近1个月_的借还间隔天数_最小值",
+      "group_name": "掘金3.0轻资产衍生特征2.3还款行为部分特征表"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_light_trans_inner_cross_behaviour_df.recent_24m_settle_loan_diff_days_min": {
+      "bucket": "hard_negative",
+      "subtype": "hard_loan_repay_days",
+      "relation": "hard_negative",
+      "relevance": 0,
+      "expected_dimensions": [
+        "借还间隔天数",
+        "窗口:24个月",
+        "聚合:最小"
+      ],
+      "rationale": "天数指借还间隔，与逾期无关。",
+      "source_packages": [
+        "package_4_nuggets"
+      ],
+      "feature_column_name": "recent_24m_settle_loan_diff_days_min",
+      "feature_name": "近24个月_的借还间隔天数_最小值",
+      "group_name": "掘金3.0轻资产衍生特征2.3还款行为部分特征表"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_light_trans_inner_cross_behaviour_df.recent_36m_settle_loan_diff_days_avg": {
+      "bucket": "hard_negative",
+      "subtype": "hard_loan_repay_days",
+      "relation": "hard_negative",
+      "relevance": 0,
+      "expected_dimensions": [
+        "借还间隔天数",
+        "窗口:36个月"
+      ],
+      "rationale": "天数指借还间隔，与逾期无关。",
+      "source_packages": [
+        "package_4_nuggets"
+      ],
+      "feature_column_name": "recent_36m_settle_loan_diff_days_avg",
+      "feature_name": "近36个月_的借还间隔天数_均值",
+      "group_name": "掘金3.0轻资产衍生特征2.3还款行为部分特征表"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_light_trans_inner_cross_behaviour_df.recent_36m_settle_loan_diff_days_max": {
+      "bucket": "hard_negative",
+      "subtype": "hard_loan_repay_days",
+      "relation": "hard_negative",
+      "relevance": 0,
+      "expected_dimensions": [
+        "借还间隔天数",
+        "窗口:36个月",
+        "聚合:最大"
+      ],
+      "rationale": "天数指借还间隔，与逾期无关。",
+      "source_packages": [
+        "package_4_nuggets"
+      ],
+      "feature_column_name": "recent_36m_settle_loan_diff_days_max",
+      "feature_name": "近36个月_的借还间隔天数_最大值",
+      "group_name": "掘金3.0轻资产衍生特征2.3还款行为部分特征表"
+    },
+    "ftr.off.usr.dwa_risk_dz_model_light_trans_inner_cross_behaviour_df.recent_36m_settle_loan_diff_days_min": {
+      "bucket": "hard_negative",
+      "subtype": "hard_loan_repay_days",
+      "relation": "hard_negative",
+      "relevance": 0,
+      "expected_dimensions": [
+        "借还间隔天数",
+        "窗口:36个月",
+        "聚合:最小"
+      ],
+      "rationale": "天数指借还间隔，与逾期无关。",
+      "source_packages": [
+        "package_4_nuggets"
+      ],
+      "feature_column_name": "recent_36m_settle_loan_diff_days_min",
+      "feature_name": "近36个月_的借还间隔天数_最小值",
+      "group_name": "掘金3.0轻资产衍生特征2.3还款行为部分特征表"
+    },
+    "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_12m_dif_6m": {
+      "bucket": "robustness",
+      "subtype": "robust_tnd_english",
+      "relation": "robustness",
+      "relevance": 0,
+      "expected_dimensions": [],
+      "rationale": "纯英文同盾衍生名，快照无法确认逾期语义。",
+      "source_packages": [
+        "package_5_04tnd"
+      ],
+      "feature_column_name": "tnd_rsk_itm_12m_dif_6m",
+      "feature_name": "tnd_rsk_itm_12m_dif_6m",
+      "group_name": "贷中同盾保镖多头_特征表"
+    },
+    "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_1m_dif_7d": {
+      "bucket": "robustness",
+      "subtype": "robust_tnd_english",
+      "relation": "robustness",
+      "relevance": 0,
+      "expected_dimensions": [],
+      "rationale": "纯英文同盾衍生名，快照无法确认逾期语义。",
+      "source_packages": [
+        "package_5_04tnd"
+      ],
+      "feature_column_name": "tnd_rsk_itm_1m_dif_7d",
+      "feature_name": "tnd_rsk_itm_1m_dif_7d",
+      "group_name": "贷中同盾保镖多头_特征表"
+    },
+    "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_1m_div_12m": {
+      "bucket": "robustness",
+      "subtype": "robust_tnd_english",
+      "relation": "robustness",
+      "relevance": 0,
+      "expected_dimensions": [],
+      "rationale": "纯英文同盾衍生名，快照无法确认逾期语义。",
+      "source_packages": [
+        "package_5_04tnd"
+      ],
+      "feature_column_name": "tnd_rsk_itm_1m_div_12m",
+      "feature_name": "tnd_rsk_itm_1m_div_12m",
+      "group_name": "贷中同盾保镖多头_特征表"
+    },
+    "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_1m_div_3m": {
+      "bucket": "robustness",
+      "subtype": "robust_tnd_english",
+      "relation": "robustness",
+      "relevance": 0,
+      "expected_dimensions": [],
+      "rationale": "纯英文同盾衍生名，快照无法确认逾期语义。",
+      "source_packages": [
+        "package_5_04tnd"
+      ],
+      "feature_column_name": "tnd_rsk_itm_1m_div_3m",
+      "feature_name": "tnd_rsk_itm_1m_div_3m",
+      "group_name": "贷中同盾保镖多头_特征表"
+    },
+    "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_1m_div_6m": {
+      "bucket": "robustness",
+      "subtype": "robust_tnd_english",
+      "relation": "robustness",
+      "relevance": 0,
+      "expected_dimensions": [],
+      "rationale": "纯英文同盾衍生名，快照无法确认逾期语义。",
+      "source_packages": [
+        "package_5_04tnd"
+      ],
+      "feature_column_name": "tnd_rsk_itm_1m_div_6m",
+      "feature_name": "tnd_rsk_itm_1m_div_6m",
+      "group_name": "贷中同盾保镖多头_特征表"
+    },
+    "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_3m_dif_1m": {
+      "bucket": "robustness",
+      "subtype": "robust_tnd_english",
+      "relation": "robustness",
+      "relevance": 0,
+      "expected_dimensions": [],
+      "rationale": "纯英文同盾衍生名，快照无法确认逾期语义。",
+      "source_packages": [
+        "package_5_04tnd"
+      ],
+      "feature_column_name": "tnd_rsk_itm_3m_dif_1m",
+      "feature_name": "tnd_rsk_itm_3m_dif_1m",
+      "group_name": "贷中同盾保镖多头_特征表"
+    },
+    "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_3m_div_12m": {
+      "bucket": "robustness",
+      "subtype": "robust_tnd_english",
+      "relation": "robustness",
+      "relevance": 0,
+      "expected_dimensions": [],
+      "rationale": "纯英文同盾衍生名，快照无法确认逾期语义。",
+      "source_packages": [
+        "package_5_04tnd"
+      ],
+      "feature_column_name": "tnd_rsk_itm_3m_div_12m",
+      "feature_name": "tnd_rsk_itm_3m_div_12m",
+      "group_name": "贷中同盾保镖多头_特征表"
+    },
+    "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_6m_dif_3m": {
+      "bucket": "robustness",
+      "subtype": "robust_tnd_english",
+      "relation": "robustness",
+      "relevance": 0,
+      "expected_dimensions": [],
+      "rationale": "纯英文同盾衍生名，快照无法确认逾期语义。",
+      "source_packages": [
+        "package_5_04tnd"
+      ],
+      "feature_column_name": "tnd_rsk_itm_6m_dif_3m",
+      "feature_name": "tnd_rsk_itm_6m_dif_3m",
+      "group_name": "贷中同盾保镖多头_特征表"
+    },
+    "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_6m_div_12m": {
+      "bucket": "robustness",
+      "subtype": "robust_tnd_english",
+      "relation": "robustness",
+      "relevance": 0,
+      "expected_dimensions": [],
+      "rationale": "纯英文同盾衍生名，快照无法确认逾期语义。",
+      "source_packages": [
+        "package_5_04tnd"
+      ],
+      "feature_column_name": "tnd_rsk_itm_6m_div_12m",
+      "feature_name": "tnd_rsk_itm_6m_div_12m",
+      "group_name": "贷中同盾保镖多头_特征表"
+    },
+    "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_7d_div_1m": {
+      "bucket": "robustness",
+      "subtype": "robust_tnd_english",
+      "relation": "robustness",
+      "relevance": 0,
+      "expected_dimensions": [],
+      "rationale": "纯英文同盾衍生名，快照无法确认逾期语义。",
+      "source_packages": [
+        "package_5_04tnd"
+      ],
+      "feature_column_name": "tnd_rsk_itm_7d_div_1m",
+      "feature_name": "tnd_rsk_itm_7d_div_1m",
+      "group_name": "贷中同盾保镖多头_特征表"
+    },
+    "ftr.off.usr.pdm_risk_dz_br_horizontal_multi_report_feature_sequential_rct_12mon_lst_final_di.als_d15_id_bank_orgnum_bank_nbank_rto_rct_12mon_lst_dec_rto": {
+      "bucket": "robustness",
+      "subtype": "robust_br_derived",
+      "relation": "robustness",
+      "relevance": 0,
+      "expected_dimensions": [
+        "窗口:15天",
+        "聚合:总和",
+        "聚合:占比",
+        "聚合:次数"
+      ],
+      "rationale": "复杂比例趋势衍生，与逾期天数无关。",
+      "source_packages": [
+        "package_3_br"
+      ],
+      "feature_column_name": "als_d15_id_bank_orgnum_bank_nbank_rto_rct_12mon_lst_dec_rto",
+      "feature_name": "近15天银行机构占非银+银行机构申请机构数总和的比例_近12月每月最近一次下降次数占比",
+      "group_name": "百融四期趋势变量-横向_多报文_趋势衍生_近12月每月最近一次"
+    },
+    "ftr.off.usr.pdm_risk_dz_br_horizontal_multi_report_feature_sequential_rct_12mon_lst_final_di.als_d15_id_bank_orgnum_bank_nbank_rto_rct_12mon_lst_dec_seq_cnt": {
+      "bucket": "robustness",
+      "subtype": "robust_br_derived",
+      "relation": "robustness",
+      "relevance": 0,
+      "expected_dimensions": [
+        "窗口:15天",
+        "聚合:最大",
+        "聚合:总和",
+        "聚合:次数"
+      ],
+      "rationale": "复杂比例趋势衍生，与逾期天数无关。",
+      "source_packages": [
+        "package_3_br"
+      ],
+      "feature_column_name": "als_d15_id_bank_orgnum_bank_nbank_rto_rct_12mon_lst_dec_seq_cnt",
+      "feature_name": "近15天银行机构占非银+银行机构申请机构数总和的比例_近12月每月最近一次连续下降最大次数",
+      "group_name": "百融四期趋势变量-横向_多报文_趋势衍生_近12月每月最近一次"
+    },
+    "ftr.off.usr.pdm_risk_dz_br_horizontal_multi_report_feature_sequential_rct_12mon_lst_final_di.als_d15_id_bank_orgnum_org_typ_rto_rct_12mon_lst_dec_rto": {
+      "bucket": "robustness",
+      "subtype": "robust_br_derived",
+      "relation": "robustness",
+      "relevance": 0,
+      "expected_dimensions": [
+        "窗口:15天",
+        "聚合:总和",
+        "聚合:占比",
+        "聚合:次数"
+      ],
+      "rationale": "复杂比例趋势衍生，与逾期天数无关。",
+      "source_packages": [
+        "package_3_br"
+      ],
+      "feature_column_name": "als_d15_id_bank_orgnum_org_typ_rto_rct_12mon_lst_dec_rto",
+      "feature_name": "近15天银行机构占所有机构类型申请机构数总和的比例_近12月每月最近一次下降次数占比",
+      "group_name": "百融四期趋势变量-横向_多报文_趋势衍生_近12月每月最近一次"
+    },
+    "ftr.off.usr.pdm_risk_dz_br_horizontal_multi_report_feature_sequential_rct_12mon_lst_final_di.als_d15_id_bank_orgnum_org_typ_rto_rct_12mon_lst_dec_seq_cnt": {
+      "bucket": "robustness",
+      "subtype": "robust_br_derived",
+      "relation": "robustness",
+      "relevance": 0,
+      "expected_dimensions": [
+        "窗口:15天",
+        "聚合:最大",
+        "聚合:总和",
+        "聚合:次数"
+      ],
+      "rationale": "复杂比例趋势衍生，与逾期天数无关。",
+      "source_packages": [
+        "package_3_br"
+      ],
+      "feature_column_name": "als_d15_id_bank_orgnum_org_typ_rto_rct_12mon_lst_dec_seq_cnt",
+      "feature_name": "近15天银行机构占所有机构类型申请机构数总和的比例_近12月每月最近一次连续下降最大次数",
+      "group_name": "百融四期趋势变量-横向_多报文_趋势衍生_近12月每月最近一次"
+    },
+    "ftr.off.usr.pdm_risk_dz_br_horizontal_multi_report_feature_sequential_rct_12mon_lst_final_di.als_d15_id_bank_orgnum_org_typ_rto_rct_12mon_lst_inc_rto": {
+      "bucket": "robustness",
+      "subtype": "robust_br_derived",
+      "relation": "robustness",
+      "relevance": 0,
+      "expected_dimensions": [
+        "窗口:15天",
+        "聚合:总和",
+        "聚合:占比",
+        "聚合:次数"
+      ],
+      "rationale": "复杂比例趋势衍生，与逾期天数无关。",
+      "source_packages": [
+        "package_3_br"
+      ],
+      "feature_column_name": "als_d15_id_bank_orgnum_org_typ_rto_rct_12mon_lst_inc_rto",
+      "feature_name": "近15天银行机构占所有机构类型申请机构数总和的比例_近12月每月最近一次上升次数占比",
+      "group_name": "百融四期趋势变量-横向_多报文_趋势衍生_近12月每月最近一次"
+    },
+    "ftr.off.usr.pdm_risk_dz_br_max_multi_report_feature_final_di.als_lst_nbank_inteday_max_rct_12mon_avg": {
+      "bucket": "hard_negative",
+      "subtype": "hard_application_days",
+      "relation": "hard_negative",
+      "relevance": 0,
+      "expected_dimensions": [
+        "申请间隔天数",
+        "聚合:平均"
+      ],
+      "rationale": "天数指申请间隔，与逾期无关。",
+      "source_packages": [
+        "package_3_br"
+      ],
+      "feature_column_name": "als_lst_nbank_inteday_max_rct_12mon_avg",
+      "feature_name": "距最近在非银行机构申请的间隔天数(身份证和手机号查询取max)_12个月内平均值",
+      "group_name": "百融四期_多头max_多报文_基础衍生"
+    },
+    "ftr.off.usr.pdm_risk_dz_br_max_multi_report_feature_final_di.als_lst_nbank_inteday_max_rct_12mon_lst_max": {
+      "bucket": "hard_negative",
+      "subtype": "hard_application_days",
+      "relation": "hard_negative",
+      "relevance": 0,
+      "expected_dimensions": [
+        "申请间隔天数",
+        "窗口:12月",
+        "聚合:最大"
+      ],
+      "rationale": "天数指申请间隔，与逾期无关。",
+      "source_packages": [
+        "package_3_br"
+      ],
+      "feature_column_name": "als_lst_nbank_inteday_max_rct_12mon_lst_max",
+      "feature_name": "距最近在非银行机构申请的间隔天数(身份证和手机号查询取max)_近12月每月最近一次最大值",
+      "group_name": "百融四期_多头max_多报文_基础衍生"
+    },
+    "ftr.off.usr.pdm_risk_dz_br_max_multi_report_feature_final_di.als_lst_nbank_inteday_max_rct_12mon_max": {
+      "bucket": "hard_negative",
+      "subtype": "hard_application_days",
+      "relation": "hard_negative",
+      "relevance": 0,
+      "expected_dimensions": [
+        "申请间隔天数",
+        "聚合:最大"
+      ],
+      "rationale": "天数指申请间隔，与逾期无关。",
+      "source_packages": [
+        "package_3_br"
+      ],
+      "feature_column_name": "als_lst_nbank_inteday_max_rct_12mon_max",
+      "feature_name": "距最近在非银行机构申请的间隔天数(身份证和手机号查询取max)_12个月内最大值",
+      "group_name": "百融四期_多头max_多报文_基础衍生"
+    },
+    "ftr.off.usr.pdm_risk_dz_br_max_multi_report_feature_final_di.als_lst_nbank_inteday_max_rct_12mon_min": {
+      "bucket": "hard_negative",
+      "subtype": "hard_application_days",
+      "relation": "hard_negative",
+      "relevance": 0,
+      "expected_dimensions": [
+        "申请间隔天数",
+        "聚合:最小"
+      ],
+      "rationale": "天数指申请间隔，与逾期无关。",
+      "source_packages": [
+        "package_3_br"
+      ],
+      "feature_column_name": "als_lst_nbank_inteday_max_rct_12mon_min",
+      "feature_name": "距最近在非银行机构申请的间隔天数(身份证和手机号查询取max)_12个月内最小值",
+      "group_name": "百融四期_多头max_多报文_基础衍生"
+    },
+    "ftr.off.usr.pdm_risk_dz_br_max_multi_report_feature_final_di.als_lst_nbank_inteday_max_rct_12mon_stddev": {
+      "bucket": "hard_negative",
+      "subtype": "hard_application_days",
+      "relation": "hard_negative",
+      "relevance": 0,
+      "expected_dimensions": [
+        "申请间隔天数"
+      ],
+      "rationale": "天数指申请间隔，与逾期无关。",
+      "source_packages": [
+        "package_3_br"
+      ],
+      "feature_column_name": "als_lst_nbank_inteday_max_rct_12mon_stddev",
+      "feature_name": "距最近在非银行机构申请的间隔天数(身份证和手机号查询取max)_12个月内标准差",
+      "group_name": "百融四期_多头max_多报文_基础衍生"
+    },
+    "ftr.off.usr.pdm_risk_dz_br_max_multi_report_feature_final_di.als_lst_nbank_inteday_max_rct_12tme_avg": {
+      "bucket": "hard_negative",
+      "subtype": "hard_application_days",
+      "relation": "hard_negative",
+      "relevance": 0,
+      "expected_dimensions": [
+        "申请间隔天数",
+        "聚合:平均"
+      ],
+      "rationale": "天数指申请间隔，与逾期无关。",
+      "source_packages": [
+        "package_3_br"
+      ],
+      "feature_column_name": "als_lst_nbank_inteday_max_rct_12tme_avg",
+      "feature_name": "距最近在非银行机构申请的间隔天数(身份证和手机号查询取max)_最近12份平均值",
+      "group_name": "百融四期_多头max_多报文_基础衍生"
+    },
+    "ftr.off.usr.pdm_risk_dz_br_max_multi_report_feature_final_di.als_lst_nbank_inteday_max_rct_12tme_min": {
+      "bucket": "hard_negative",
+      "subtype": "hard_application_days",
+      "relation": "hard_negative",
+      "relevance": 0,
+      "expected_dimensions": [
+        "申请间隔天数",
+        "聚合:最小"
+      ],
+      "rationale": "天数指申请间隔，与逾期无关。",
+      "source_packages": [
+        "package_3_br"
+      ],
+      "feature_column_name": "als_lst_nbank_inteday_max_rct_12tme_min",
+      "feature_name": "距最近在非银行机构申请的间隔天数(身份证和手机号查询取max)_最近12份最小值",
+      "group_name": "百融四期_多头max_多报文_基础衍生"
+    },
+    "ftr.off.usr.pdm_risk_dz_br_max_multi_report_feature_final_di.als_lst_nbank_inteday_max_rct_12tme_stddev": {
+      "bucket": "hard_negative",
+      "subtype": "hard_application_days",
+      "relation": "hard_negative",
+      "relevance": 0,
+      "expected_dimensions": [
+        "申请间隔天数"
+      ],
+      "rationale": "天数指申请间隔，与逾期无关。",
+      "source_packages": [
+        "package_3_br"
+      ],
+      "feature_column_name": "als_lst_nbank_inteday_max_rct_12tme_stddev",
+      "feature_name": "距最近在非银行机构申请的间隔天数(身份证和手机号查询取max)_最近12份标准差",
+      "group_name": "百融四期_多头max_多报文_基础衍生"
+    },
+    "ftr.off.usr.pdm_risk_dz_br_max_multi_report_feature_rct_12mon_lst_sequential_final_di.als_lst_nbank_inteday_max_rct_12mon_lst_dec_rto": {
+      "bucket": "hard_negative",
+      "subtype": "hard_application_days",
+      "relation": "hard_negative",
+      "relevance": 0,
+      "expected_dimensions": [
+        "申请间隔天数",
+        "窗口:12月",
+        "聚合:占比",
+        "聚合:次数"
+      ],
+      "rationale": "天数指申请间隔，与逾期无关。",
+      "source_packages": [
+        "package_3_br"
+      ],
+      "feature_column_name": "als_lst_nbank_inteday_max_rct_12mon_lst_dec_rto",
+      "feature_name": "距最近在非银行机构申请的间隔天数(身份证和手机号查询取max)_近12月每月最近一次下降次数占比",
+      "group_name": "百融四期_多头max_多报文_趋势衍生_近12月每月最近一次"
+    },
+    "ftr.off.usr.pdm_risk_dz_br_max_multi_report_feature_rct_12mon_lst_sequential_final_di.als_lst_nbank_inteday_max_rct_12mon_lst_dec_seq_cnt": {
+      "bucket": "hard_negative",
+      "subtype": "hard_application_days",
+      "relation": "hard_negative",
+      "relevance": 0,
+      "expected_dimensions": [
+        "申请间隔天数",
+        "窗口:12月",
+        "聚合:最大",
+        "聚合:次数"
+      ],
+      "rationale": "天数指申请间隔，与逾期无关。",
+      "source_packages": [
+        "package_3_br"
+      ],
+      "feature_column_name": "als_lst_nbank_inteday_max_rct_12mon_lst_dec_seq_cnt",
+      "feature_name": "距最近在非银行机构申请的间隔天数(身份证和手机号查询取max)_近12月每月最近一次连续下降最大次数",
+      "group_name": "百融四期_多头max_多报文_趋势衍生_近12月每月最近一次"
+    },
+    "ftr.off.usr.pdm_risk_dz_model_final_order_info_df.d15_suc_ord_days_cnt": {
+      "bucket": "hard_negative",
+      "subtype": "hard_trade_days",
+      "relation": "hard_negative",
+      "relevance": 0,
+      "expected_dimensions": [
+        "成功交易天数",
+        "窗口:15天"
+      ],
+      "rationale": "度量成功交易活跃日而非逾期。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "d15_suc_ord_days_cnt",
+      "feature_name": "近15天_成功交易天数(去重)",
+      "group_name": "历史借款"
+    },
+    "ftr.off.usr.pdm_risk_dz_model_final_order_info_df.d15_suc_ord_days_cnt_all": {
+      "bucket": "hard_negative",
+      "subtype": "hard_trade_days",
+      "relation": "hard_negative",
+      "relevance": 0,
+      "expected_dimensions": [
+        "成功交易天数",
+        "窗口:15天"
+      ],
+      "rationale": "度量成功交易活跃日而非逾期。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "d15_suc_ord_days_cnt_all",
+      "feature_name": "近15天_成功交易天数(去重)（所有业务类型口径统计）",
+      "group_name": "历史借款"
+    },
+    "ftr.off.usr.pdm_risk_dz_model_final_order_info_df.d180_suc_ord_days_cnt": {
+      "bucket": "hard_negative",
+      "subtype": "hard_trade_days",
+      "relation": "hard_negative",
+      "relevance": 0,
+      "expected_dimensions": [
+        "成功交易天数",
+        "窗口:180天"
+      ],
+      "rationale": "度量成功交易活跃日而非逾期。",
+      "source_packages": [
+        "package_7_02inner"
+      ],
+      "feature_column_name": "d180_suc_ord_days_cnt",
+      "feature_name": "近180天_成功交易天数(去重)",
+      "group_name": "历史借款"
+    }
+  },
+  "lexical_diagnostics": [
+    {
+      "id": "D01",
+      "category": "direct",
+      "question": "查找历史最大连续逾期天数",
+      "search_terms": [
+        "历史最大连续逾期天数"
+      ],
+      "expected_dimensions": [
+        "历史",
+        "连续",
+        "最大"
+      ],
+      "judgments": {
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_continue_ovd_days_df.max_ctn_ovd_day": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "连续逾期",
+            "聚合:最大"
+          ],
+          "rationale": "完全一致。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.max_ddf_rep_tim_dte_ovd_pls_cur_ord": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最大"
+          ],
+          "rationale": "缺少连续限定。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.max_ddf_rep_tim_dte_ovd_pls_fst_ord": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最大"
+          ],
+          "rationale": "缺少连续限定。"
+        }
+      }
+    },
+    {
+      "id": "D02",
+      "category": "direct",
+      "question": "近6个月应还计划最大逾期天数",
+      "search_terms": [
+        "近6个月",
+        "最大逾期天数"
+      ],
+      "expected_dimensions": [
+        "近6个月",
+        "最大"
+      ],
+      "judgments": {
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.max_ddf_rep_tim_dte_ovd_pls_rep_6m": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "窗口:6个月",
+            "聚合:最大"
+          ],
+          "rationale": "窗口和聚合一致。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_ddf_rep_tim_dte_ovd_pls_rep_6m": {
+          "relevance": 1,
+          "expected_dimensions": [
+            "逾期天数",
+            "窗口:6个月",
+            "聚合:最小"
+          ],
+          "rationale": "聚合相反。"
+        }
+      }
+    },
+    {
+      "id": "D03",
+      "category": "direct",
+      "question": "近12个月最小逾期天数",
+      "search_terms": [
+        "近12个月",
+        "最小逾期天数"
+      ],
+      "expected_dimensions": [
+        "近12个月",
+        "最小"
+      ],
+      "judgments": {
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.max_ddf_rep_tim_dte_ovd_pls_rep_12m": {
+          "relevance": 1,
+          "expected_dimensions": [
+            "逾期天数",
+            "窗口:12个月",
+            "聚合:最大"
+          ],
+          "rationale": "聚合相反。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_ddf_rep_tim_dte_ovd_pls_rep_12m": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "窗口:12个月",
+            "聚合:最小"
+          ],
+          "rationale": "窗口和聚合一致。"
+        }
+      }
+    },
+    {
+      "id": "D04",
+      "category": "direct",
+      "question": "最近一次逾期距评分日多少天",
+      "search_terms": [
+        "最近一次逾期时间",
+        "评分日",
+        "间隔"
+      ],
+      "expected_dimensions": [
+        "最近逾期间隔",
+        "评分日"
+      ],
+      "judgments": {
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_ddf_mdl_rep_dte_ovd_pls": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "最近逾期间隔"
+          ],
+          "rationale": "时点一致。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_fst_ddf_mdl_rep_dte_ovd_pls": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "最近逾期间隔"
+          ],
+          "rationale": "多首期限定。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.min_ddf_mdl_rep_dte_ovd_pls_bjq": {
+          "relevance": 1,
+          "expected_dimensions": [
+            "最近逾期间隔"
+          ],
+          "rationale": "参照时点不同。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.min_fst_ddf_mdl_rep_dte_ovd_pls_bjq": {
+          "relevance": 1,
+          "expected_dimensions": [
+            "最近逾期间隔"
+          ],
+          "rationale": "参照时点不同。"
+        }
+      }
+    },
+    {
+      "id": "D05",
+      "category": "direct",
+      "question": "所有订单结清前12个月最大逾期天数",
+      "search_terms": [
+        "结清前12个月",
+        "最大逾期天数"
+      ],
+      "expected_dimensions": [
+        "结清前12个月",
+        "最大"
+      ],
+      "judgments": {
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.max_ddf_rep_tim_dte_ovd_pls_fst_ord_bjq_12m": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最大"
+          ],
+          "rationale": "多首次订单限定。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.max_ddf_rep_tim_dte_ovd_pls_rep_bjq_12m": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最大"
+          ],
+          "rationale": "完全一致。"
+        }
+      }
+    },
+    {
+      "id": "D06",
+      "category": "direct",
+      "question": "最近30天平均逾期天数",
+      "search_terms": [
+        "平均逾期天数",
+        "30d"
+      ],
+      "expected_dimensions": [
+        "30天",
+        "平均"
+      ],
+      "judgments": {
+        "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_stg_ever_avg_overdue_days_30d": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:平均"
+          ],
+          "rationale": "完全一致。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_stg_ever_avg_overdue_days_30d_60d": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:平均"
+          ],
+          "rationale": "含额外对比窗口。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_stg_ever_avg_overdue_days_30d_90d": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:平均"
+          ],
+          "rationale": "含额外对比窗口。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_stg_ever_max_overdue_days_30d": {
+          "relevance": 1,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最大"
+          ],
+          "rationale": "聚合不同。"
+        }
+      }
+    },
+    {
+      "id": "R01",
+      "category": "related",
+      "question": "截止评分日仍逾期的分期计划数",
+      "search_terms": [
+        "评分日",
+        "仍逾期",
+        "分期计划数"
+      ],
+      "expected_dimensions": [
+        "当前未结逾期",
+        "计划数"
+      ],
+      "judgments": {
+        "ftr.off.usr.dwa_risk_dz_model_final_14ftr_rep_pressure_df.stg_pln_cnt_ovd_ftr_rep": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "当前未结逾期",
+            "分期计划数"
+          ],
+          "rationale": "完全一致。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_14ftr_rep_pressure_df.stg_pln_cnt_ovd_ftr_rep_cur_ord": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "当前未结逾期"
+          ],
+          "rationale": "当前订单近义口径。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_14ftr_rep_pressure_df.stg_pln_cnt_ovd_ftr_rep_fst_ord": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "当前未结逾期",
+            "分期计划数"
+          ],
+          "rationale": "多首次订单限定。"
+        }
+      }
+    },
+    {
+      "id": "R02",
+      "category": "related",
+      "question": "近90天逾期还款罚息总和",
+      "search_terms": [
+        "近90天",
+        "逾期还款罚息",
+        "总和"
+      ],
+      "expected_dimensions": [
+        "近90天",
+        "罚息",
+        "总和"
+      ],
+      "judgments": {
+        "ftr.off.usr.dwa_risk_dz_model_final_26_lending_costs_detail_df.d360_schedule_pay_penalty_sum": {
+          "relevance": 1,
+          "expected_dimensions": [
+            "逾期罚息",
+            "窗口:360天",
+            "聚合:总和"
+          ],
+          "rationale": "窗口不同。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_26_lending_costs_detail_df.d90_schedule_pay_penalty_sum": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期罚息",
+            "窗口:90天",
+            "聚合:总和"
+          ],
+          "rationale": "完全一致。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_26_lending_costs_detail_df.d90_schedule_pay_penalty_sum_divide_d90_principal_sum": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "逾期罚息",
+            "窗口:90天",
+            "聚合:总和"
+          ],
+          "rationale": "结果为比值。"
+        }
+      }
+    },
+    {
+      "id": "R03",
+      "category": "related",
+      "question": "近12笔订单连续逾期还款最大次数",
+      "search_terms": [
+        "近12笔订单",
+        "连续逾期还款",
+        "最大次数"
+      ],
+      "expected_dimensions": [
+        "12笔订单",
+        "连续逾期"
+      ],
+      "judgments": {
+        "ftr.off.usr.dwa_risk_dz_model_final_his_rep_trend_time_series_df.12thord_con_late_repay_max": {
+          "relevance": 1,
+          "expected_dimensions": [
+            "连续逾期",
+            "聚合:最大",
+            "聚合:次数"
+          ],
+          "rationale": "同指标不同窗口。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_his_rep_trend_time_series_df.18thord_con_late_repay_max": {
+          "relevance": 1,
+          "expected_dimensions": [
+            "连续逾期",
+            "聚合:最大",
+            "聚合:次数"
+          ],
+          "rationale": "同指标不同窗口。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_his_rep_trend_time_series_df.24thord_con_late_repay_max": {
+          "relevance": 1,
+          "expected_dimensions": [
+            "连续逾期",
+            "聚合:最大",
+            "聚合:次数"
+          ],
+          "rationale": "同指标不同窗口。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_his_rep_trend_time_series_df.6thord_con_late_repay_max": {
+          "relevance": 1,
+          "expected_dimensions": [
+            "连续逾期",
+            "聚合:最大",
+            "聚合:次数"
+          ],
+          "rationale": "同指标不同窗口。"
+        }
+      }
+    },
+    {
+      "id": "R04",
+      "category": "related",
+      "question": "近6个月逾期超过7天的分期计划数",
+      "search_terms": [
+        "近6个月",
+        "逾期>7天",
+        "分期计划数"
+      ],
+      "expected_dimensions": [
+        "近6个月",
+        "阈值:7天"
+      ],
+      "judgments": {
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_derived_jqh_df.stg_pln_cnt_ovd_7d_pls_rep_bjq_12m_rto": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "分期计划数",
+            "阈值:7天"
+          ],
+          "rationale": "窗口或派生口径不同。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.stg_pln_cnt_ovd_7d_pls_rep_6m": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "分期计划数",
+            "阈值:7天",
+            "窗口:6个月"
+          ],
+          "rationale": "窗口或派生口径不同。"
+        }
+      }
+    },
+    {
+      "id": "R05",
+      "category": "related",
+      "question": "近12个月晚还1到3天的实还本金占比",
+      "search_terms": [
+        "近12个月",
+        "实还时间距应还日1-3天",
+        "比例"
+      ],
+      "expected_dimensions": [
+        "近12个月",
+        "1-3天",
+        "本金占比"
+      ],
+      "judgments": {
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_derived_df.stg_pln_sum_rep_prc_12m_his_ovd_0d_pls_3d_afn_pk_rto": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "还款延迟区间",
+            "阈值:3天",
+            "窗口:12个月"
+          ],
+          "rationale": "延迟区间一致。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_derived_df.stg_pln_sum_rep_prc_12m_his_ovd_0d_pls_3d_mrn_pk_rto": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "还款延迟区间",
+            "阈值:3天",
+            "窗口:12个月"
+          ],
+          "rationale": "延迟区间一致。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_derived_df.stg_pln_sum_rep_prc_12m_his_ovd_0d_pls_3d_zd_rto": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "还款延迟区间",
+            "阈值:3天",
+            "窗口:12个月"
+          ],
+          "rationale": "延迟区间一致。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_derived_df.stg_pln_sum_rep_prc_12m_his_ovd_3d_pls_7d_afn_pk_rto": {
+          "relevance": 1,
+          "expected_dimensions": [
+            "还款延迟区间",
+            "阈值:7天",
+            "窗口:12个月"
+          ],
+          "rationale": "区间不同。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_derived_df.stg_pln_sum_rep_prc_12m_his_ovd_3d_pls_7d_mrn_pk_rto": {
+          "relevance": 1,
+          "expected_dimensions": [
+            "还款延迟区间",
+            "阈值:7天",
+            "窗口:12个月"
+          ],
+          "rationale": "区间不同。"
+        }
+      }
+    },
+    {
+      "id": "R06",
+      "category": "related",
+      "question": "轻重资产交叉的逾期还款本金特征",
+      "search_terms": [
+        "轻资产",
+        "逾期还款本金"
+      ],
+      "expected_dimensions": [
+        "轻重资产",
+        "逾期本金"
+      ],
+      "judgments": {
+        "ftr.off.usr.dwa_risk_dz_model_30light_cross_heavy_inner_behaviour_df.heavy_d360_max_fail_prc_amt_divide_light_d360_max_ovd_repay_amt": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "轻资产",
+            "重资产",
+            "窗口:360天",
+            "聚合:最大"
+          ],
+          "rationale": "均为目标交叉衍生。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_30light_cross_heavy_inner_behaviour_df.heavy_d720_max_fail_prc_amt_divide_light_d720_max_ovd_repay_amt": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "轻资产",
+            "重资产",
+            "窗口:720天",
+            "聚合:最大"
+          ],
+          "rationale": "均为目标交叉衍生。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_30light_cross_heavy_inner_behaviour_df.heavy_d720_sum_faqi_prc_amt_divide_light_d720_sum_ovd_repay_amt": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "轻资产",
+            "重资产",
+            "窗口:720天",
+            "聚合:总和"
+          ],
+          "rationale": "均为目标交叉衍生。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_30light_cross_heavy_inner_behaviour_df.heavy_d90_max_fail_prc_amt_divide_light_d90_max_ovd_repay_amt": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "轻资产",
+            "窗口:90天",
+            "聚合:最大"
+          ],
+          "rationale": "均为目标交叉衍生。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_30light_cross_heavy_inner_behaviour_df.heavy_d90_sum_fail_prc_amt_divide_light_d90_sum_ovd_repay_amt": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "轻资产",
+            "重资产",
+            "窗口:90天",
+            "聚合:总和"
+          ],
+          "rationale": "均为目标交叉衍生。"
+        }
+      }
+    },
+    {
+      "id": "S01",
+      "category": "synonym",
+      "question": "晚还一到三天的本金占比",
+      "search_terms": [
+        "晚还",
+        "一到三天",
+        "本金占比"
+      ],
+      "expected_dimensions": [
+        "逾期",
+        "1-3天"
+      ],
+      "judgments": {
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_derived_df.stg_pln_sum_rep_prc_12m_his_ovd_0d_pls_3d_afn_pk_rto": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "还款延迟区间",
+            "阈值:3天",
+            "窗口:12个月"
+          ],
+          "rationale": "晚还映射实还日晚于应还日。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_derived_df.stg_pln_sum_rep_prc_12m_his_ovd_0d_pls_3d_mrn_pk_rto": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "还款延迟区间",
+            "阈值:3天",
+            "窗口:12个月"
+          ],
+          "rationale": "晚还映射实还日晚于应还日。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_derived_df.stg_pln_sum_rep_prc_12m_his_ovd_0d_pls_3d_zd_rto": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "还款延迟区间",
+            "阈值:3天",
+            "窗口:12个月"
+          ],
+          "rationale": "晚还映射实还日晚于应还日。"
+        }
+      }
+    },
+    {
+      "id": "S02",
+      "category": "synonym",
+      "question": "拖欠超过两周的应还金额",
+      "search_terms": [
+        "拖欠",
+        "超过两周",
+        "应还金额"
+      ],
+      "expected_dimensions": [
+        "逾期",
+        "14天",
+        "应还本金"
+      ],
+      "judgments": {
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_derived_df.stg_pln_cnt_ovd_14d_pls_rep_12m_rto": {
+          "relevance": 1,
+          "expected_dimensions": [
+            "分期计划数",
+            "阈值:14天",
+            "窗口:12个月"
+          ],
+          "rationale": "阈值一致但指标不同。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_derived_jqh_df.stg_pln_cnt_ovd_14d_pls_rep_bjq_12m_rto": {
+          "relevance": 1,
+          "expected_dimensions": [
+            "分期计划数",
+            "阈值:14天"
+          ],
+          "rationale": "阈值一致但指标不同。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_derived_jqh_df.stg_pln_sum_prc_amt_ovd_14d_pls_rep_bjq_12m_rto": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "应还本金",
+            "阈值:14天"
+          ],
+          "rationale": "两周映射14天。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.stg_pln_sum_prc_amt_ovd_14d_pls_rep_6m": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "应还本金",
+            "阈值:14天",
+            "窗口:6个月"
+          ],
+          "rationale": "两周映射14天。"
+        }
+      }
+    },
+    {
+      "id": "S03",
+      "category": "synonym",
+      "question": "DPD 最大值特征",
+      "search_terms": [
+        "DPD",
+        "最大值"
+      ],
+      "expected_dimensions": [
+        "逾期天数",
+        "最大"
+      ],
+      "judgments": {
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_continue_ovd_days_df.max_ctn_ovd_day": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "连续逾期",
+            "聚合:最大"
+          ],
+          "rationale": "连续口径的最大DPD。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.max_ddf_rep_tim_dte_ovd_pls_cur_ord": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最大"
+          ],
+          "rationale": "DPD映射逾期天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.max_ddf_rep_tim_dte_ovd_pls_fst_ord": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最大"
+          ],
+          "rationale": "DPD映射逾期天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.max_ddf_rep_tim_dte_ovd_pls_rep_12m": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "窗口:12个月",
+            "聚合:最大"
+          ],
+          "rationale": "DPD映射逾期天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.max_ddf_rep_tim_dte_ovd_pls_rep_3m": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "窗口:3个月",
+            "聚合:最大"
+          ],
+          "rationale": "DPD映射逾期天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.max_ddf_rep_tim_dte_ovd_pls_rep_6m": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "窗口:6个月",
+            "聚合:最大"
+          ],
+          "rationale": "DPD映射逾期天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.max_ddf_rep_tim_dte_ovd_pls_fst_ord_bjq_12m": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最大"
+          ],
+          "rationale": "DPD映射逾期天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.max_ddf_rep_tim_dte_ovd_pls_rep_bjq_12m": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最大"
+          ],
+          "rationale": "DPD映射逾期天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_stg_ever_max_overdue_days_30d": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最大"
+          ],
+          "rationale": "DPD映射逾期天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_stg_ever_max_overdue_days_30d_60d": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最大"
+          ],
+          "rationale": "DPD映射逾期天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_stg_ever_max_overdue_days_30d_90d": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最大"
+          ],
+          "rationale": "DPD映射逾期天数。"
+        }
+      }
+    },
+    {
+      "id": "S04",
+      "category": "synonym",
+      "question": "还款延迟了多少天",
+      "search_terms": [
+        "还款延迟",
+        "多少天"
+      ],
+      "expected_dimensions": [
+        "逾期天数"
+      ],
+      "judgments": {
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_continue_ovd_days_df.max_ctn_ovd_day": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "连续逾期",
+            "聚合:最大"
+          ],
+          "rationale": "延迟天数等价于逾期天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_continue_ovd_days_df.min_ctn_ovd_day": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "连续逾期",
+            "聚合:最小"
+          ],
+          "rationale": "延迟天数等价于逾期天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.max_ddf_rep_tim_dte_ovd_pls_cur_ord": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最大"
+          ],
+          "rationale": "延迟天数等价于逾期天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.max_ddf_rep_tim_dte_ovd_pls_fst_ord": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最大"
+          ],
+          "rationale": "延迟天数等价于逾期天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.max_ddf_rep_tim_dte_ovd_pls_rep_12m": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "窗口:12个月",
+            "聚合:最大"
+          ],
+          "rationale": "延迟天数等价于逾期天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.max_ddf_rep_tim_dte_ovd_pls_rep_3m": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "窗口:3个月",
+            "聚合:最大"
+          ],
+          "rationale": "延迟天数等价于逾期天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.max_ddf_rep_tim_dte_ovd_pls_rep_6m": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "窗口:6个月",
+            "聚合:最大"
+          ],
+          "rationale": "延迟天数等价于逾期天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_ddf_mdl_rep_dte_ovd_pls": {
+          "relevance": 1,
+          "expected_dimensions": [
+            "最近逾期间隔"
+          ],
+          "rationale": "是逾期后的间隔。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_ddf_rep_tim_dte_ovd_pls_fst_ord": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最小"
+          ],
+          "rationale": "延迟天数等价于逾期天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_ddf_rep_tim_dte_ovd_pls_rep_12m": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "窗口:12个月",
+            "聚合:最小"
+          ],
+          "rationale": "延迟天数等价于逾期天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_ddf_rep_tim_dte_ovd_pls_rep_1m": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "窗口:1个月",
+            "聚合:最小"
+          ],
+          "rationale": "延迟天数等价于逾期天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_ddf_rep_tim_dte_ovd_pls_rep_3m": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "窗口:3个月",
+            "聚合:最小"
+          ],
+          "rationale": "延迟天数等价于逾期天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_ddf_rep_tim_dte_ovd_pls_rep_6m": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "窗口:6个月",
+            "聚合:最小"
+          ],
+          "rationale": "延迟天数等价于逾期天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_fst_ddf_mdl_rep_dte_ovd_pls": {
+          "relevance": 1,
+          "expected_dimensions": [
+            "最近逾期间隔"
+          ],
+          "rationale": "是逾期后的间隔。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.max_ddf_rep_tim_dte_ovd_pls_fst_ord_bjq_12m": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最大"
+          ],
+          "rationale": "延迟天数等价于逾期天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.max_ddf_rep_tim_dte_ovd_pls_rep_bjq_12m": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最大"
+          ],
+          "rationale": "延迟天数等价于逾期天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.min_ddf_mdl_rep_dte_ovd_pls_bjq": {
+          "relevance": 1,
+          "expected_dimensions": [
+            "最近逾期间隔"
+          ],
+          "rationale": "是逾期后的间隔。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.min_ddf_rep_tim_dte_ovd_pls_fst_ord_bjq_12m": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最小"
+          ],
+          "rationale": "延迟天数等价于逾期天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.min_ddf_rep_tim_dte_ovd_pls_rep_bjq_12m": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最小"
+          ],
+          "rationale": "延迟天数等价于逾期天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.min_fst_ddf_mdl_rep_dte_ovd_pls_bjq": {
+          "relevance": 1,
+          "expected_dimensions": [
+            "最近逾期间隔"
+          ],
+          "rationale": "是逾期后的间隔。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_stg_ever_avg_overdue_days_30d": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:平均"
+          ],
+          "rationale": "延迟天数等价于逾期天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_stg_ever_avg_overdue_days_30d_60d": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:平均"
+          ],
+          "rationale": "延迟天数等价于逾期天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_stg_ever_avg_overdue_days_30d_90d": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:平均"
+          ],
+          "rationale": "延迟天数等价于逾期天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_stg_ever_max_overdue_days_30d": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最大"
+          ],
+          "rationale": "延迟天数等价于逾期天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_stg_ever_max_overdue_days_30d_60d": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最大"
+          ],
+          "rationale": "延迟天数等价于逾期天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_stg_ever_max_overdue_days_30d_90d": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最大"
+          ],
+          "rationale": "延迟天数等价于逾期天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.mdt_lst_30d_60d_stg_ever_avg_overdue_days_rte": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "窗口:30天",
+            "聚合:平均"
+          ],
+          "rationale": "延迟天数等价于逾期天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.mdt_lst_30d_60d_stg_ever_max_overdue_days_rte": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "窗口:30天"
+          ],
+          "rationale": "延迟天数等价于逾期天数。"
+        }
+      }
+    },
+    {
+      "id": "S05",
+      "category": "synonym",
+      "question": "超期未还的最小应还本金",
+      "search_terms": [
+        "超期未还",
+        "最小应还本金"
+      ],
+      "expected_dimensions": [
+        "当前未结逾期",
+        "最小本金"
+      ],
+      "judgments": {
+        "ftr.off.usr.dwa_risk_dz_model_final_14ftr_rep_pressure_df.stg_pln_cnt_ovd_ftr_rep": {
+          "relevance": 1,
+          "expected_dimensions": [
+            "当前未结逾期",
+            "分期计划数"
+          ],
+          "rationale": "状态相同但指标不同。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_14ftr_rep_pressure_df.stg_pln_cnt_ovd_ftr_rep_cur_ord": {
+          "relevance": 1,
+          "expected_dimensions": [
+            "当前未结逾期"
+          ],
+          "rationale": "状态相同但指标不同。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_14ftr_rep_pressure_df.stg_pln_cnt_ovd_ftr_rep_fst_ord": {
+          "relevance": 1,
+          "expected_dimensions": [
+            "当前未结逾期",
+            "分期计划数"
+          ],
+          "rationale": "状态相同但指标不同。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_14ftr_rep_pressure_df.stg_pln_min_prc_amt_ovd_ftr_rep": {
+          "relevance": 1,
+          "expected_dimensions": [
+            "当前未结逾期",
+            "应还本金",
+            "聚合:最小"
+          ],
+          "rationale": "状态相同但指标不同。"
+        }
+      }
+    },
+    {
+      "id": "S06",
+      "category": "synonym",
+      "question": "晚还四到七天的本金占比",
+      "search_terms": [
+        "晚还",
+        "四到七天",
+        "本金占比"
+      ],
+      "expected_dimensions": [
+        "逾期",
+        "4-7天"
+      ],
+      "judgments": {
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_derived_df.stg_pln_sum_rep_prc_12m_his_ovd_3d_pls_7d_afn_pk_rto": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "还款延迟区间",
+            "阈值:7天",
+            "窗口:12个月"
+          ],
+          "rationale": "同义词和区间一致。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_derived_df.stg_pln_sum_rep_prc_12m_his_ovd_3d_pls_7d_mrn_pk_rto": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "还款延迟区间",
+            "阈值:7天",
+            "窗口:12个月"
+          ],
+          "rationale": "同义词和区间一致。"
+        }
+      }
+    },
+    {
+      "id": "C01",
+      "category": "compound",
+      "question": "近6个月应还计划的最大逾期天数，不要最小值",
+      "search_terms": [
+        "近6个月",
+        "最大逾期天数",
+        "应还分期计划"
+      ],
+      "expected_dimensions": [
+        "近6个月",
+        "最大",
+        "排除最小"
+      ],
+      "judgments": {
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.max_ddf_rep_tim_dte_ovd_pls_rep_6m": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "窗口:6个月",
+            "聚合:最大"
+          ],
+          "rationale": "满足全部条件。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_ddf_rep_tim_dte_ovd_pls_rep_6m": {
+          "relevance": 0,
+          "expected_dimensions": [
+            "逾期天数",
+            "窗口:6个月",
+            "聚合:最小"
+          ],
+          "rationale": "违反排除条件。"
+        }
+      }
+    },
+    {
+      "id": "C02",
+      "category": "compound",
+      "question": "首次成功动支订单在评分日仍逾期的计划数",
+      "search_terms": [
+        "首次成功动支订单",
+        "评分日",
+        "仍逾期",
+        "分期计划数"
+      ],
+      "expected_dimensions": [
+        "首次订单",
+        "当前逾期"
+      ],
+      "judgments": {
+        "ftr.off.usr.dwa_risk_dz_model_final_14ftr_rep_pressure_df.stg_pln_cnt_ovd_ftr_rep": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "当前未结逾期",
+            "分期计划数"
+          ],
+          "rationale": "缺首次订单限定。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_14ftr_rep_pressure_df.stg_pln_cnt_ovd_ftr_rep_fst_ord": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "当前未结逾期",
+            "分期计划数"
+          ],
+          "rationale": "满足全部条件。"
+        }
+      }
+    },
+    {
+      "id": "C03",
+      "category": "compound",
+      "question": "结清前12个月逾期超过14天的计划数占比",
+      "search_terms": [
+        "结清前12个月",
+        "逾期>14天",
+        "分期计划数",
+        "比例"
+      ],
+      "expected_dimensions": [
+        "结清前12个月",
+        "14天",
+        "计划数",
+        "占比"
+      ],
+      "judgments": {
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_derived_jqh_df.stg_pln_cnt_ovd_14d_pls_rep_bjq_12m_rto": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "分期计划数",
+            "阈值:14天"
+          ],
+          "rationale": "满足全部条件。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_derived_jqh_df.stg_pln_sum_prc_amt_ovd_14d_pls_rep_bjq_12m_rto": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "应还本金",
+            "阈值:14天"
+          ],
+          "rationale": "指标为金额占比。"
+        }
+      }
+    },
+    {
+      "id": "C04",
+      "category": "compound",
+      "question": "近12个月晚还15天到1个月且主动还款的本金比例",
+      "search_terms": [
+        "近12个月",
+        "15天-1个月",
+        "主动还款",
+        "实还本金金额",
+        "比例"
+      ],
+      "expected_dimensions": [
+        "近12个月",
+        "15天-1个月",
+        "主动还款"
+      ],
+      "judgments": {
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_derived_df.stg_pln_sum_rep_prc_12m_his_ovd_14d_pls_30d_afn_pk_rto": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "还款延迟区间",
+            "窗口:12个月"
+          ],
+          "rationale": "区间一致但还款方式可能不同。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_derived_df.stg_pln_sum_rep_prc_12m_his_ovd_14d_pls_30d_mrn_pk_rto": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "还款延迟区间",
+            "窗口:12个月"
+          ],
+          "rationale": "区间一致但还款方式可能不同。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_derived_df.stg_pln_sum_rep_prc_12m_his_ovd_14d_pls_30d_zd_rto": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "还款延迟区间",
+            "窗口:12个月"
+          ],
+          "rationale": "区间一致但还款方式可能不同。"
+        }
+      }
+    },
+    {
+      "id": "C05",
+      "category": "compound",
+      "question": "近90天逾期罚息总和除以逾期本金总和",
+      "search_terms": [
+        "近90天",
+        "逾期还款罚息",
+        "本金",
+        "总和"
+      ],
+      "expected_dimensions": [
+        "近90天",
+        "罚息本金比"
+      ],
+      "judgments": {
+        "ftr.off.usr.dwa_risk_dz_model_final_26_lending_costs_detail_df.d90_schedule_pay_penalty_sum": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "逾期罚息",
+            "窗口:90天",
+            "聚合:总和"
+          ],
+          "rationale": "缺少比值。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_26_lending_costs_detail_df.d90_schedule_pay_penalty_sum_divide_d90_principal_sum": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期罚息",
+            "窗口:90天",
+            "聚合:总和"
+          ],
+          "rationale": "完全一致。"
+        }
+      }
+    },
+    {
+      "id": "C06",
+      "category": "compound",
+      "question": "近360天重资产失败本金除以轻资产最大逾期还款本金",
+      "search_terms": [
+        "近360天",
+        "重资产",
+        "轻资产",
+        "最大逾期还款本金"
+      ],
+      "expected_dimensions": [
+        "近360天",
+        "轻重资产",
+        "比值"
+      ],
+      "judgments": {
+        "ftr.off.usr.dwa_risk_dz_model_30light_cross_heavy_inner_behaviour_df.heavy_d360_max_fail_prc_amt_divide_light_d360_max_ovd_repay_amt": {
+          "relevance": 1,
+          "expected_dimensions": [
+            "轻资产",
+            "重资产",
+            "窗口:360天",
+            "聚合:最大"
+          ],
+          "rationale": "同类交叉但窗口不同。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_30light_cross_heavy_inner_behaviour_df.heavy_d720_max_fail_prc_amt_divide_light_d720_max_ovd_repay_amt": {
+          "relevance": 1,
+          "expected_dimensions": [
+            "轻资产",
+            "重资产",
+            "窗口:720天",
+            "聚合:最大"
+          ],
+          "rationale": "同类交叉但窗口不同。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_30light_cross_heavy_inner_behaviour_df.heavy_d720_sum_faqi_prc_amt_divide_light_d720_sum_ovd_repay_amt": {
+          "relevance": 1,
+          "expected_dimensions": [
+            "轻资产",
+            "重资产",
+            "窗口:720天",
+            "聚合:总和"
+          ],
+          "rationale": "同类交叉但窗口不同。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_30light_cross_heavy_inner_behaviour_df.heavy_d90_max_fail_prc_amt_divide_light_d90_max_ovd_repay_amt": {
+          "relevance": 1,
+          "expected_dimensions": [
+            "轻资产",
+            "窗口:90天",
+            "聚合:最大"
+          ],
+          "rationale": "同类交叉但窗口不同。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_30light_cross_heavy_inner_behaviour_df.heavy_d90_sum_fail_prc_amt_divide_light_d90_sum_ovd_repay_amt": {
+          "relevance": 1,
+          "expected_dimensions": [
+            "轻资产",
+            "重资产",
+            "窗口:90天",
+            "聚合:总和"
+          ],
+          "rationale": "同类交叉但窗口不同。"
+        }
+      }
+    },
+    {
+      "id": "A01",
+      "category": "ambiguous",
+      "question": "逾期天数",
+      "search_terms": [
+        "逾期天数"
+      ],
+      "expected_dimensions": [
+        "逾期天数"
+      ],
+      "judgments": {
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_continue_ovd_days_df.max_ctn_ovd_day": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "连续逾期",
+            "聚合:最大"
+          ],
+          "rationale": "直接指标。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_continue_ovd_days_df.min_ctn_ovd_day": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "连续逾期",
+            "聚合:最小"
+          ],
+          "rationale": "直接指标。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_derived_df.stg_pln_cnt_ovd_14d_pls_rep_12m_rto": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "分期计划数",
+            "阈值:14天",
+            "窗口:12个月"
+          ],
+          "rationale": "强相关阈值口径。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_derived_df.stg_pln_sum_prc_amt_ovd_7d_pls_rep_3m_rto_his": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "应还本金",
+            "阈值:7天",
+            "窗口:3个月"
+          ],
+          "rationale": "强相关阈值口径。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_derived_jqh_df.stg_pln_cnt_ovd_14d_pls_rep_bjq_12m_rto": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "分期计划数",
+            "阈值:14天"
+          ],
+          "rationale": "强相关阈值口径。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_derived_jqh_df.stg_pln_cnt_ovd_3d_pls_rep_bjq_12m_rto": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "分期计划数",
+            "阈值:3天"
+          ],
+          "rationale": "强相关阈值口径。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_derived_jqh_df.stg_pln_cnt_ovd_7d_pls_rep_bjq_12m_rto": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "分期计划数",
+            "阈值:7天"
+          ],
+          "rationale": "强相关阈值口径。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_derived_jqh_df.stg_pln_sum_prc_amt_ovd_14d_pls_rep_bjq_12m_rto": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "应还本金",
+            "阈值:14天"
+          ],
+          "rationale": "强相关阈值口径。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_derived_jqh_df.stg_pln_sum_prc_amt_ovd_3d_pls_rep_bjq_12m_rto": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "应还本金",
+            "阈值:3天"
+          ],
+          "rationale": "强相关阈值口径。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_derived_jqh_df.stg_pln_sum_prc_amt_ovd_7d_pls_rep_bjq_12m_rto": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "应还本金",
+            "阈值:7天"
+          ],
+          "rationale": "强相关阈值口径。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.max_ddf_rep_tim_dte_ovd_pls_cur_ord": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最大"
+          ],
+          "rationale": "直接指标。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.max_ddf_rep_tim_dte_ovd_pls_fst_ord": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最大"
+          ],
+          "rationale": "直接指标。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.max_ddf_rep_tim_dte_ovd_pls_rep_12m": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "窗口:12个月",
+            "聚合:最大"
+          ],
+          "rationale": "直接指标。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.max_ddf_rep_tim_dte_ovd_pls_rep_3m": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "窗口:3个月",
+            "聚合:最大"
+          ],
+          "rationale": "直接指标。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.max_ddf_rep_tim_dte_ovd_pls_rep_6m": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "窗口:6个月",
+            "聚合:最大"
+          ],
+          "rationale": "直接指标。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_ddf_mdl_rep_dte_ovd_pls": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "最近逾期间隔"
+          ],
+          "rationale": "强相关具体口径。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_ddf_rep_tim_dte_ovd_pls_fst_ord": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最小"
+          ],
+          "rationale": "直接指标。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_ddf_rep_tim_dte_ovd_pls_rep_12m": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "窗口:12个月",
+            "聚合:最小"
+          ],
+          "rationale": "直接指标。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_ddf_rep_tim_dte_ovd_pls_rep_1m": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "窗口:1个月",
+            "聚合:最小"
+          ],
+          "rationale": "直接指标。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_ddf_rep_tim_dte_ovd_pls_rep_3m": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "窗口:3个月",
+            "聚合:最小"
+          ],
+          "rationale": "直接指标。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_ddf_rep_tim_dte_ovd_pls_rep_6m": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "窗口:6个月",
+            "聚合:最小"
+          ],
+          "rationale": "直接指标。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_fst_ddf_mdl_rep_dte_ovd_pls": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "最近逾期间隔"
+          ],
+          "rationale": "强相关具体口径。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.stg_pln_cnt_ovd_3d_pls_rep_6m": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "分期计划数",
+            "阈值:3天",
+            "窗口:6个月"
+          ],
+          "rationale": "强相关阈值口径。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.stg_pln_cnt_ovd_7d_pls_rep_6m": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "分期计划数",
+            "阈值:7天",
+            "窗口:6个月"
+          ],
+          "rationale": "强相关阈值口径。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.stg_pln_sum_prc_amt_ovd_14d_pls_rep_6m": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "应还本金",
+            "阈值:14天",
+            "窗口:6个月"
+          ],
+          "rationale": "强相关阈值口径。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.stg_pln_sum_prc_amt_ovd_3d_pls_rep_1m": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "应还本金",
+            "阈值:3天",
+            "窗口:1个月"
+          ],
+          "rationale": "强相关阈值口径。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.max_ddf_rep_tim_dte_ovd_pls_fst_ord_bjq_12m": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最大"
+          ],
+          "rationale": "直接指标。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.max_ddf_rep_tim_dte_ovd_pls_rep_bjq_12m": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最大"
+          ],
+          "rationale": "直接指标。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.min_ddf_mdl_rep_dte_ovd_pls_bjq": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "最近逾期间隔"
+          ],
+          "rationale": "强相关具体口径。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.min_ddf_rep_tim_dte_ovd_pls_fst_ord_bjq_12m": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最小"
+          ],
+          "rationale": "直接指标。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.min_ddf_rep_tim_dte_ovd_pls_rep_bjq_12m": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最小"
+          ],
+          "rationale": "直接指标。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.min_fst_ddf_mdl_rep_dte_ovd_pls_bjq": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "最近逾期间隔"
+          ],
+          "rationale": "强相关具体口径。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_stg_ever_avg_overdue_days_30d": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:平均"
+          ],
+          "rationale": "直接指标。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_stg_ever_avg_overdue_days_30d_60d": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:平均"
+          ],
+          "rationale": "直接指标。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_stg_ever_avg_overdue_days_30d_90d": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:平均"
+          ],
+          "rationale": "直接指标。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_stg_ever_max_overdue_days_30d": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最大"
+          ],
+          "rationale": "直接指标。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_stg_ever_max_overdue_days_30d_60d": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最大"
+          ],
+          "rationale": "直接指标。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_stg_ever_max_overdue_days_30d_90d": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最大"
+          ],
+          "rationale": "直接指标。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.mdt_lst_30d_60d_stg_ever_avg_overdue_days_rte": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "窗口:30天",
+            "聚合:平均"
+          ],
+          "rationale": "直接指标。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.mdt_lst_30d_60d_stg_ever_max_overdue_days_rte": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "逾期天数",
+            "窗口:30天"
+          ],
+          "rationale": "直接指标。"
+        }
+      }
+    },
+    {
+      "id": "A02",
+      "category": "ambiguous",
+      "question": "最近逾期",
+      "search_terms": [
+        "最近",
+        "逾期"
+      ],
+      "expected_dimensions": [
+        "逾期",
+        "最近"
+      ],
+      "judgments": {
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_ddf_mdl_rep_dte_ovd_pls": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "最近逾期间隔"
+          ],
+          "rationale": "直接描述最近一次。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_fst_ddf_mdl_rep_dte_ovd_pls": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "最近逾期间隔"
+          ],
+          "rationale": "直接描述最近一次。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.min_ddf_mdl_rep_dte_ovd_pls_bjq": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "最近逾期间隔"
+          ],
+          "rationale": "直接描述最近一次。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.min_fst_ddf_mdl_rep_dte_ovd_pls_bjq": {
+          "relevance": 3,
+          "expected_dimensions": [
+            "最近逾期间隔"
+          ],
+          "rationale": "直接描述最近一次。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_14ftr_rep_pressure_df.stg_pln_cnt_ovd_ftr_rep": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "当前未结逾期",
+            "分期计划数"
+          ],
+          "rationale": "也可能指当前状态。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_14ftr_rep_pressure_df.stg_pln_cnt_ovd_ftr_rep_cur_ord": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "当前未结逾期"
+          ],
+          "rationale": "也可能指当前状态。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_14ftr_rep_pressure_df.stg_pln_cnt_ovd_ftr_rep_fst_ord": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "当前未结逾期",
+            "分期计划数"
+          ],
+          "rationale": "也可能指当前状态。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_14ftr_rep_pressure_df.stg_pln_min_prc_amt_ovd_ftr_rep": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "当前未结逾期",
+            "应还本金",
+            "聚合:最小"
+          ],
+          "rationale": "也可能指当前状态。"
+        },
+        "ftr.off.usr.pdm_risk_dz_br_max_multi_report_feature_final_di.als_lst_nbank_inteday_max_rct_12mon_avg": {
+          "relevance": 0,
+          "expected_dimensions": [
+            "申请间隔天数",
+            "聚合:平均"
+          ],
+          "rationale": "含最近但不含逾期语义。"
+        },
+        "ftr.off.usr.pdm_risk_dz_br_max_multi_report_feature_final_di.als_lst_nbank_inteday_max_rct_12mon_lst_max": {
+          "relevance": 0,
+          "expected_dimensions": [
+            "申请间隔天数",
+            "窗口:12月",
+            "聚合:最大"
+          ],
+          "rationale": "含最近但不含逾期语义。"
+        },
+        "ftr.off.usr.pdm_risk_dz_br_max_multi_report_feature_final_di.als_lst_nbank_inteday_max_rct_12mon_max": {
+          "relevance": 0,
+          "expected_dimensions": [
+            "申请间隔天数",
+            "聚合:最大"
+          ],
+          "rationale": "含最近但不含逾期语义。"
+        },
+        "ftr.off.usr.pdm_risk_dz_br_max_multi_report_feature_final_di.als_lst_nbank_inteday_max_rct_12mon_min": {
+          "relevance": 0,
+          "expected_dimensions": [
+            "申请间隔天数",
+            "聚合:最小"
+          ],
+          "rationale": "含最近但不含逾期语义。"
+        },
+        "ftr.off.usr.pdm_risk_dz_br_max_multi_report_feature_final_di.als_lst_nbank_inteday_max_rct_12mon_stddev": {
+          "relevance": 0,
+          "expected_dimensions": [
+            "申请间隔天数"
+          ],
+          "rationale": "含最近但不含逾期语义。"
+        },
+        "ftr.off.usr.pdm_risk_dz_br_max_multi_report_feature_final_di.als_lst_nbank_inteday_max_rct_12tme_avg": {
+          "relevance": 0,
+          "expected_dimensions": [
+            "申请间隔天数",
+            "聚合:平均"
+          ],
+          "rationale": "含最近但不含逾期语义。"
+        },
+        "ftr.off.usr.pdm_risk_dz_br_max_multi_report_feature_final_di.als_lst_nbank_inteday_max_rct_12tme_min": {
+          "relevance": 0,
+          "expected_dimensions": [
+            "申请间隔天数",
+            "聚合:最小"
+          ],
+          "rationale": "含最近但不含逾期语义。"
+        },
+        "ftr.off.usr.pdm_risk_dz_br_max_multi_report_feature_final_di.als_lst_nbank_inteday_max_rct_12tme_stddev": {
+          "relevance": 0,
+          "expected_dimensions": [
+            "申请间隔天数"
+          ],
+          "rationale": "含最近但不含逾期语义。"
+        },
+        "ftr.off.usr.pdm_risk_dz_br_max_multi_report_feature_rct_12mon_lst_sequential_final_di.als_lst_nbank_inteday_max_rct_12mon_lst_dec_rto": {
+          "relevance": 0,
+          "expected_dimensions": [
+            "申请间隔天数",
+            "窗口:12月",
+            "聚合:占比",
+            "聚合:次数"
+          ],
+          "rationale": "含最近但不含逾期语义。"
+        },
+        "ftr.off.usr.pdm_risk_dz_br_max_multi_report_feature_rct_12mon_lst_sequential_final_di.als_lst_nbank_inteday_max_rct_12mon_lst_dec_seq_cnt": {
+          "relevance": 0,
+          "expected_dimensions": [
+            "申请间隔天数",
+            "窗口:12月",
+            "聚合:最大",
+            "聚合:次数"
+          ],
+          "rationale": "含最近但不含逾期语义。"
+        }
+      }
+    },
+    {
+      "id": "A03",
+      "category": "ambiguous",
+      "question": "还款天数",
+      "search_terms": [
+        "还款",
+        "天数"
+      ],
+      "expected_dimensions": [
+        "还款",
+        "天数"
+      ],
+      "judgments": {
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_continue_ovd_days_df.max_ctn_ovd_day": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "逾期天数",
+            "连续逾期",
+            "聚合:最大"
+          ],
+          "rationale": "可解释为还款延迟天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_continue_ovd_days_df.min_ctn_ovd_day": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "逾期天数",
+            "连续逾期",
+            "聚合:最小"
+          ],
+          "rationale": "可解释为还款延迟天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_derived_df.stg_pln_sum_rep_prc_12m_his_ovd_0d_pls_3d_afn_pk_rto": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "还款延迟区间",
+            "阈值:3天",
+            "窗口:12个月"
+          ],
+          "rationale": "可解释为还款延迟区间。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_derived_df.stg_pln_sum_rep_prc_12m_his_ovd_0d_pls_3d_mrn_pk_rto": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "还款延迟区间",
+            "阈值:3天",
+            "窗口:12个月"
+          ],
+          "rationale": "可解释为还款延迟区间。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_derived_df.stg_pln_sum_rep_prc_12m_his_ovd_0d_pls_3d_zd_rto": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "还款延迟区间",
+            "阈值:3天",
+            "窗口:12个月"
+          ],
+          "rationale": "可解释为还款延迟区间。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_derived_df.stg_pln_sum_rep_prc_12m_his_ovd_14d_pls_30d_afn_pk_rto": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "还款延迟区间",
+            "窗口:12个月"
+          ],
+          "rationale": "可解释为还款延迟区间。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_derived_df.stg_pln_sum_rep_prc_12m_his_ovd_14d_pls_30d_mrn_pk_rto": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "还款延迟区间",
+            "窗口:12个月"
+          ],
+          "rationale": "可解释为还款延迟区间。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_derived_df.stg_pln_sum_rep_prc_12m_his_ovd_14d_pls_30d_zd_rto": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "还款延迟区间",
+            "窗口:12个月"
+          ],
+          "rationale": "可解释为还款延迟区间。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_derived_df.stg_pln_sum_rep_prc_12m_his_ovd_3d_pls_7d_afn_pk_rto": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "还款延迟区间",
+            "阈值:7天",
+            "窗口:12个月"
+          ],
+          "rationale": "可解释为还款延迟区间。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_derived_df.stg_pln_sum_rep_prc_12m_his_ovd_3d_pls_7d_mrn_pk_rto": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "还款延迟区间",
+            "阈值:7天",
+            "窗口:12个月"
+          ],
+          "rationale": "可解释为还款延迟区间。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.max_ddf_rep_tim_dte_adv_fst_ord": {
+          "relevance": 0,
+          "expected_dimensions": [
+            "提前还款天数",
+            "聚合:最大"
+          ],
+          "rationale": "提前还款非逾期。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.max_ddf_rep_tim_dte_ovd_pls_cur_ord": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最大"
+          ],
+          "rationale": "可解释为还款延迟天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.max_ddf_rep_tim_dte_ovd_pls_fst_ord": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最大"
+          ],
+          "rationale": "可解释为还款延迟天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.max_ddf_rep_tim_dte_ovd_pls_rep_12m": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "逾期天数",
+            "窗口:12个月",
+            "聚合:最大"
+          ],
+          "rationale": "可解释为还款延迟天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.max_ddf_rep_tim_dte_ovd_pls_rep_3m": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "逾期天数",
+            "窗口:3个月",
+            "聚合:最大"
+          ],
+          "rationale": "可解释为还款延迟天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.max_ddf_rep_tim_dte_ovd_pls_rep_6m": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "逾期天数",
+            "窗口:6个月",
+            "聚合:最大"
+          ],
+          "rationale": "可解释为还款延迟天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_ddf_rep_tim_dte_adv_cur_ord": {
+          "relevance": 0,
+          "expected_dimensions": [
+            "提前还款天数",
+            "聚合:最小"
+          ],
+          "rationale": "提前还款非逾期。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_ddf_rep_tim_dte_adv_fst_ord": {
+          "relevance": 0,
+          "expected_dimensions": [
+            "提前还款天数",
+            "聚合:最小"
+          ],
+          "rationale": "提前还款非逾期。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_ddf_rep_tim_dte_ovd_pls_fst_ord": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最小"
+          ],
+          "rationale": "可解释为还款延迟天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_ddf_rep_tim_dte_ovd_pls_rep_12m": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "逾期天数",
+            "窗口:12个月",
+            "聚合:最小"
+          ],
+          "rationale": "可解释为还款延迟天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_ddf_rep_tim_dte_ovd_pls_rep_1m": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "逾期天数",
+            "窗口:1个月",
+            "聚合:最小"
+          ],
+          "rationale": "可解释为还款延迟天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_ddf_rep_tim_dte_ovd_pls_rep_3m": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "逾期天数",
+            "窗口:3个月",
+            "聚合:最小"
+          ],
+          "rationale": "可解释为还款延迟天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_ddf_rep_tim_dte_ovd_pls_rep_6m": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "逾期天数",
+            "窗口:6个月",
+            "聚合:最小"
+          ],
+          "rationale": "可解释为还款延迟天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.max_ddf_rep_tim_dte_ovd_pls_fst_ord_bjq_12m": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最大"
+          ],
+          "rationale": "可解释为还款延迟天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.max_ddf_rep_tim_dte_ovd_pls_rep_bjq_12m": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最大"
+          ],
+          "rationale": "可解释为还款延迟天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.min_ddf_rep_tim_dte_ovd_pls_fst_ord_bjq_12m": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最小"
+          ],
+          "rationale": "可解释为还款延迟天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.min_ddf_rep_tim_dte_ovd_pls_rep_bjq_12m": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最小"
+          ],
+          "rationale": "可解释为还款延迟天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_stg_ever_avg_overdue_days_30d": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:平均"
+          ],
+          "rationale": "可解释为还款延迟天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_stg_ever_avg_overdue_days_30d_60d": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:平均"
+          ],
+          "rationale": "可解释为还款延迟天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_stg_ever_avg_overdue_days_30d_90d": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:平均"
+          ],
+          "rationale": "可解释为还款延迟天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_stg_ever_max_overdue_days_30d": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最大"
+          ],
+          "rationale": "可解释为还款延迟天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_stg_ever_max_overdue_days_30d_60d": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最大"
+          ],
+          "rationale": "可解释为还款延迟天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_stg_ever_max_overdue_days_30d_90d": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最大"
+          ],
+          "rationale": "可解释为还款延迟天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.mdt_lst_30d_60d_stg_ever_avg_overdue_days_rte": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "逾期天数",
+            "窗口:30天",
+            "聚合:平均"
+          ],
+          "rationale": "可解释为还款延迟天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.mdt_lst_30d_60d_stg_ever_max_overdue_days_rte": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "逾期天数",
+            "窗口:30天"
+          ],
+          "rationale": "可解释为还款延迟天数。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_light_trans_inner_cross_behaviour_df.his_settle_loan_diff_days_max": {
+          "relevance": 0,
+          "expected_dimensions": [
+            "借还间隔天数",
+            "聚合:最大"
+          ],
+          "rationale": "借还间隔非逾期。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_light_trans_inner_cross_behaviour_df.recent_12m_settle_loan_diff_days_max": {
+          "relevance": 0,
+          "expected_dimensions": [
+            "借还间隔天数",
+            "窗口:12个月",
+            "聚合:最大"
+          ],
+          "rationale": "借还间隔非逾期。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_light_trans_inner_cross_behaviour_df.recent_12m_settle_loan_diff_days_min": {
+          "relevance": 0,
+          "expected_dimensions": [
+            "借还间隔天数",
+            "窗口:12个月",
+            "聚合:最小"
+          ],
+          "rationale": "借还间隔非逾期。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_light_trans_inner_cross_behaviour_df.recent_1m_settle_loan_diff_days_avg": {
+          "relevance": 0,
+          "expected_dimensions": [
+            "借还间隔天数",
+            "窗口:1个月"
+          ],
+          "rationale": "借还间隔非逾期。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_light_trans_inner_cross_behaviour_df.recent_1m_settle_loan_diff_days_max": {
+          "relevance": 0,
+          "expected_dimensions": [
+            "借还间隔天数",
+            "窗口:1个月",
+            "聚合:最大"
+          ],
+          "rationale": "借还间隔非逾期。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_light_trans_inner_cross_behaviour_df.recent_1m_settle_loan_diff_days_min": {
+          "relevance": 0,
+          "expected_dimensions": [
+            "借还间隔天数",
+            "窗口:1个月",
+            "聚合:最小"
+          ],
+          "rationale": "借还间隔非逾期。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_light_trans_inner_cross_behaviour_df.recent_24m_settle_loan_diff_days_min": {
+          "relevance": 0,
+          "expected_dimensions": [
+            "借还间隔天数",
+            "窗口:24个月",
+            "聚合:最小"
+          ],
+          "rationale": "借还间隔非逾期。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_light_trans_inner_cross_behaviour_df.recent_36m_settle_loan_diff_days_avg": {
+          "relevance": 0,
+          "expected_dimensions": [
+            "借还间隔天数",
+            "窗口:36个月"
+          ],
+          "rationale": "借还间隔非逾期。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_light_trans_inner_cross_behaviour_df.recent_36m_settle_loan_diff_days_max": {
+          "relevance": 0,
+          "expected_dimensions": [
+            "借还间隔天数",
+            "窗口:36个月",
+            "聚合:最大"
+          ],
+          "rationale": "借还间隔非逾期。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_light_trans_inner_cross_behaviour_df.recent_36m_settle_loan_diff_days_min": {
+          "relevance": 0,
+          "expected_dimensions": [
+            "借还间隔天数",
+            "窗口:36个月",
+            "聚合:最小"
+          ],
+          "rationale": "借还间隔非逾期。"
+        }
+      }
+    },
+    {
+      "id": "A04",
+      "category": "ambiguous",
+      "question": "超过7天的记录",
+      "search_terms": [
+        "7天"
+      ],
+      "expected_dimensions": [
+        "阈值:7天"
+      ],
+      "judgments": {
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_derived_df.stg_pln_sum_prc_amt_ovd_7d_pls_rep_3m_rto_his": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "应还本金",
+            "阈值:7天",
+            "窗口:3个月"
+          ],
+          "rationale": "主题下解释为逾期阈值。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_derived_jqh_df.stg_pln_cnt_ovd_7d_pls_rep_bjq_12m_rto": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "分期计划数",
+            "阈值:7天"
+          ],
+          "rationale": "主题下解释为逾期阈值。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_derived_jqh_df.stg_pln_sum_prc_amt_ovd_7d_pls_rep_bjq_12m_rto": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "应还本金",
+            "阈值:7天"
+          ],
+          "rationale": "主题下解释为逾期阈值。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.stg_pln_cnt_ovd_7d_pls_rep_6m": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "分期计划数",
+            "阈值:7天",
+            "窗口:6个月"
+          ],
+          "rationale": "主题下解释为逾期阈值。"
+        }
+      }
+    },
+    {
+      "id": "A05",
+      "category": "ambiguous",
+      "question": "最大天数",
+      "search_terms": [
+        "最大",
+        "天数"
+      ],
+      "expected_dimensions": [
+        "最大",
+        "天数"
+      ],
+      "judgments": {
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.max_ddf_rep_tim_dte_adv_fst_ord": {
+          "relevance": 0,
+          "expected_dimensions": [
+            "提前还款天数",
+            "聚合:最大"
+          ],
+          "rationale": "聚合单位相同但非逾期。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.max_ddf_rep_tim_dte_ovd_pls_cur_ord": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最大"
+          ],
+          "rationale": "主题下合理解释。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.max_ddf_rep_tim_dte_ovd_pls_fst_ord": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最大"
+          ],
+          "rationale": "主题下合理解释。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.max_ddf_rep_tim_dte_ovd_pls_rep_12m": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "逾期天数",
+            "窗口:12个月",
+            "聚合:最大"
+          ],
+          "rationale": "主题下合理解释。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.max_ddf_rep_tim_dte_ovd_pls_rep_3m": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "逾期天数",
+            "窗口:3个月",
+            "聚合:最大"
+          ],
+          "rationale": "主题下合理解释。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.max_ddf_rep_tim_dte_ovd_pls_rep_6m": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "逾期天数",
+            "窗口:6个月",
+            "聚合:最大"
+          ],
+          "rationale": "主题下合理解释。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.max_ddf_rep_tim_dte_ovd_pls_fst_ord_bjq_12m": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最大"
+          ],
+          "rationale": "主题下合理解释。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.max_ddf_rep_tim_dte_ovd_pls_rep_bjq_12m": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最大"
+          ],
+          "rationale": "主题下合理解释。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_stg_ever_max_overdue_days_30d": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最大"
+          ],
+          "rationale": "主题下合理解释。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_stg_ever_max_overdue_days_30d_60d": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最大"
+          ],
+          "rationale": "主题下合理解释。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_stg_ever_max_overdue_days_30d_90d": {
+          "relevance": 2,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最大"
+          ],
+          "rationale": "主题下合理解释。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_light_trans_inner_cross_behaviour_df.his_settle_loan_diff_days_max": {
+          "relevance": 0,
+          "expected_dimensions": [
+            "借还间隔天数",
+            "聚合:最大"
+          ],
+          "rationale": "聚合单位相同但非逾期。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_light_trans_inner_cross_behaviour_df.recent_12m_settle_loan_diff_days_max": {
+          "relevance": 0,
+          "expected_dimensions": [
+            "借还间隔天数",
+            "窗口:12个月",
+            "聚合:最大"
+          ],
+          "rationale": "聚合单位相同但非逾期。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_light_trans_inner_cross_behaviour_df.recent_1m_settle_loan_diff_days_max": {
+          "relevance": 0,
+          "expected_dimensions": [
+            "借还间隔天数",
+            "窗口:1个月",
+            "聚合:最大"
+          ],
+          "rationale": "聚合单位相同但非逾期。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_light_trans_inner_cross_behaviour_df.recent_36m_settle_loan_diff_days_max": {
+          "relevance": 0,
+          "expected_dimensions": [
+            "借还间隔天数",
+            "窗口:36个月",
+            "聚合:最大"
+          ],
+          "rationale": "聚合单位相同但非逾期。"
+        },
+        "ftr.off.usr.pdm_risk_dz_br_max_multi_report_feature_final_di.als_lst_nbank_inteday_max_rct_12mon_lst_max": {
+          "relevance": 0,
+          "expected_dimensions": [
+            "申请间隔天数",
+            "窗口:12月",
+            "聚合:最大"
+          ],
+          "rationale": "聚合单位相同但非逾期。"
+        },
+        "ftr.off.usr.pdm_risk_dz_br_max_multi_report_feature_final_di.als_lst_nbank_inteday_max_rct_12mon_max": {
+          "relevance": 0,
+          "expected_dimensions": [
+            "申请间隔天数",
+            "聚合:最大"
+          ],
+          "rationale": "聚合单位相同但非逾期。"
+        },
+        "ftr.off.usr.pdm_risk_dz_br_max_multi_report_feature_rct_12mon_lst_sequential_final_di.als_lst_nbank_inteday_max_rct_12mon_lst_dec_seq_cnt": {
+          "relevance": 0,
+          "expected_dimensions": [
+            "申请间隔天数",
+            "窗口:12月",
+            "聚合:最大",
+            "聚合:次数"
+          ],
+          "rationale": "聚合单位相同但非逾期。"
+        }
+      }
+    },
+    {
+      "id": "A06",
+      "category": "ambiguous",
+      "question": "30天",
+      "search_terms": [
+        "30天"
+      ],
+      "expected_dimensions": [
+        "30天"
+      ],
+      "judgments": {
+        "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_stg_ever_avg_overdue_days_30d": {
+          "relevance": 1,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:平均"
+          ],
+          "rationale": "仅窗口匹配。"
+        },
+        "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_stg_ever_max_overdue_days_30d": {
+          "relevance": 1,
+          "expected_dimensions": [
+            "逾期天数",
+            "聚合:最大"
+          ],
+          "rationale": "仅窗口匹配。"
+        }
+      }
+    },
+    {
+      "id": "N01",
+      "category": "no_result",
+      "question": "公积金断缴逾期天数",
+      "search_terms": [
+        "公积金",
+        "断缴",
+        "逾期天数"
+      ],
+      "expected_dimensions": [],
+      "judgments": {}
+    },
+    {
+      "id": "N02",
+      "category": "no_result",
+      "question": "信用卡账单逾期天数",
+      "search_terms": [
+        "信用卡",
+        "账单",
+        "逾期天数"
+      ],
+      "expected_dimensions": [],
+      "judgments": {}
+    },
+    {
+      "id": "N03",
+      "category": "no_result",
+      "question": "车贷逾期五年天数",
+      "search_terms": [
+        "车贷",
+        "五年",
+        "逾期天数"
+      ],
+      "expected_dimensions": [],
+      "judgments": {}
+    },
+    {
+      "id": "N04",
+      "category": "no_result",
+      "question": "身份证有效期剩余天数",
+      "search_terms": [
+        "身份证有效期",
+        "剩余天数"
+      ],
+      "expected_dimensions": [],
+      "judgments": {}
+    },
+    {
+      "id": "N05",
+      "category": "no_result",
+      "question": "物流签收超时天数",
+      "search_terms": [
+        "物流",
+        "签收",
+        "超时天数"
+      ],
+      "expected_dimensions": [],
+      "judgments": {}
+    },
+    {
+      "id": "N06",
+      "category": "no_result",
+      "question": "连续逾期一百八十天的订单",
+      "search_terms": [
+        "连续逾期",
+        "一百八十天",
+        "订单"
+      ],
+      "expected_dimensions": [],
+      "judgments": {}
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "packages": [
+    {
+      "name": "package_3_br",
+      "feature_category": "贷中百融变量特征包",
+      "business_stage": "in_loan",
+      "feature_file": "goal/package_3_br/3_br_all_features.json",
+      "expected_feature_count": 6261
+    },
+    {
+      "name": "package_4_nuggets",
+      "feature_category": "贷中掘金特征包",
+      "business_stage": "in_loan",
+      "feature_file": "goal/package_4_nuggets/4_nuggets_all_features.json",
+      "expected_feature_count": 4076
+    },
+    {
+      "name": "package_5_04tnd",
+      "feature_category": "贷中同盾特征包",
+      "business_stage": "in_loan",
+      "feature_file": "goal/package_5_04tnd/5_04tnd_all_features.json",
+      "expected_feature_count": 240
+    },
+    {
+      "name": "package_7_02inner",
+      "feature_category": "贷中内部变量特征包",
+      "business_stage": "in_loan",
+      "feature_file": "goal/package_7_02inner/7_02inner_all_features.json",
+      "expected_feature_count": 13125
+    }
+  ],
+  "group_logic_directory": "goal/_metadata/group_logic",
+  "dp_logic_directory": "goal/dp_table_logic",
+  "standard_warehouse_config": "knowledge/config/standard_warehouse_tables.json",
+  "managed_feature_taxonomy_config": "knowledge/config/managed_feature_taxonomy.json",
+  "managed_feature_semantics_config": "knowledge/config/managed_feature_semantics_full.json",
+  "managed_feature_usage_governance_config": "knowledge/config/managed_feature_usage_governance.json"
+}

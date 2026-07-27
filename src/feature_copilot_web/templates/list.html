@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>特征目录 · Feature Copilot</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <script defer src="{{ url_for('static', filename='app.js') }}"></script>
+</head>
+<body data-page="list">
+  <a class="skip-link" href="#main-content">跳到主要内容</a>
+
+  <header class="app-header">
+    <a class="brand" href="/features" aria-label="Feature Copilot 特征目录首页">
+      <span class="brand-mark" aria-hidden="true">F</span>
+      <span class="brand-copy">
+        <strong>FEATURE COPILOT</strong>
+        <span>特征目录</span>
+      </span>
+    </a>
+    <div class="runtime-status" aria-label="运行环境">
+      <span class="status-light" aria-hidden="true"></span>
+      <span>本机 · 只读</span>
+    </div>
+  </header>
+
+  <div id="stale-banner" class="system-banner" role="status" hidden>
+    <span class="system-banner-icon" aria-hidden="true">!</span>
+    <span id="stale-banner-text">索引构建异常，当前展示最近一次可用数据。</span>
+  </div>
+
+  <main id="main-content" class="page-shell" tabindex="-1">
+    <section class="page-intro" aria-labelledby="page-title">
+      <p class="eyebrow">FEATURE REGISTRY</p>
+      <h1 id="page-title">特征目录</h1>
+      <p>按 Key、名称或特征分类定位受控特征，并查看元数据与三层加工血缘。</p>
+
+      <div class="stat-tiles">
+        <div class="stat-tile">
+          <span id="result-total" class="stat-value">—</span>
+          <span class="stat-label">匹配记录</span>
+          <span class="stat-hint">当前查询条件下的特征总数</span>
+        </div>
+        <div class="stat-tile">
+          <span id="index-status-tile" class="stat-value">…</span>
+          <span class="stat-label">索引状态</span>
+          <span class="stat-hint">托管索引的健康度</span>
+        </div>
+        <div class="stat-tile">
+          <span class="stat-value">只读</span>
+          <span class="stat-label">数据口径</span>
+          <span class="stat-hint">来自受控事实源 · 本机访问</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel search-panel" aria-labelledby="search-title">
+      <div class="panel-heading compact-heading">
+        <div>
+          <span class="section-index" aria-hidden="true">01</span>
+          <h2 id="search-title">查询条件</h2>
+        </div>
+        <p>所有已填写条件均按 <strong>AND</strong> 组合；业务小类与加工特征组相互独立。</p>
+      </div>
+
+      <form id="search-form" class="search-form" role="search" novalidate>
+        <div class="field-group">
+          <label for="feature-key">特征 Key</label>
+          <input id="feature-key" name="feature_key" type="search" autocomplete="off"
+                 placeholder="例如 ftr.off.usr..." spellcheck="false">
+          <span class="field-hint" aria-hidden="true"></span>
+        </div>
+        <div class="field-group">
+          <label for="feature-name">特征名</label>
+          <input id="feature-name" name="feature_name" type="search" autocomplete="off"
+                 placeholder="输入中文或英文名称">
+          <span class="field-hint" aria-hidden="true"></span>
+        </div>
+        <div class="field-group">
+          <label for="feature-category">特征大类</label>
+          <select id="feature-category" name="feature_category" aria-describedby="category-help">
+            <option value="">全部大类</option>
+          </select>
+          <span id="category-help" class="field-hint">单选</span>
+        </div>
+        <div class="field-group">
+          <label for="feature-subcategory">特征小类</label>
+          <select id="feature-subcategory" name="business_subcategory" disabled aria-describedby="subcategory-help">
+            <option value="">请先选择特征大类</option>
+          </select>
+          <span id="subcategory-help" class="field-hint">单选</span>
+        </div>
+        <div class="field-group">
+          <label for="feature-group">加工特征组</label>
+          <select id="feature-group" name="feature_group" disabled aria-describedby="feature-group-help">
+            <option value="">请先选择特征大类</option>
+          </select>
+          <span id="feature-group-help" class="field-hint">单选 · 加工与血缘归属</span>
+        </div>
+        <div class="form-actions">
+          <button id="reset-button" class="button button-secondary" type="button">重置</button>
+          <button class="button button-primary" type="submit">查询</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="panel registry-panel" aria-labelledby="registry-title">
+      <div class="panel-heading registry-heading">
+        <div>
+          <span class="section-index" aria-hidden="true">02</span>
+          <h2 id="registry-title">特征清单</h2>
+        </div>
+        <p id="result-summary" class="result-summary" aria-live="polite">准备加载索引…</p>
+      </div>
+
+      <div id="list-loading" class="state-block loading-state" role="status">
+        <span class="loader" aria-hidden="true"></span>
+        <div><strong>正在查询受控索引</strong><span>读取当前分页数据…</span></div>
+      </div>
+
+      <div id="list-error" class="state-block error-state" role="alert" hidden>
+        <span class="state-symbol" aria-hidden="true">!</span>
+        <div><strong>查询失败</strong><span id="list-error-message">暂时无法访问特征索引。</span></div>
+        <button id="retry-button" class="button button-secondary" type="button">重新加载</button>
+      </div>
+
+      <div id="list-empty" class="state-block empty-state" hidden>
+        <span class="state-symbol" aria-hidden="true">—</span>
+        <div><strong>没有匹配的特征</strong><span>请调整查询条件；所有条件需要同时满足。</span></div>
+      </div>
+
+      <div id="table-region" class="table-region" hidden>
+        <table>
+          <caption class="sr-only">受控特征查询结果</caption>
+          <thead>
+            <tr>
+              <th scope="col">特征 Key</th>
+              <th scope="col">特征名</th>
+              <th scope="col">特征大类</th>
+              <th scope="col">特征小类</th>
+              <th scope="col">加工特征组</th>
+              <th scope="col">来源表</th>
+              <th scope="col" class="action-column">操作</th>
+            </tr>
+          </thead>
+          <tbody id="feature-table-body"></tbody>
+        </table>
+      </div>
+
+      <nav id="pagination" class="pagination" aria-label="结果分页" hidden>
+        <div class="page-size-control">
+          <label for="page-size">每页</label>
+          <select id="page-size" name="page_size">
+            <option value="20">20</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+          </select>
+          <span>条</span>
+        </div>
+        <div class="page-controls">
+          <button id="previous-page" class="page-button" type="button">上一页</button>
+          <span id="page-indicator" class="page-indicator">第 1 / 1 页</span>
+          <button id="next-page" class="page-button" type="button">下一页</button>
+        </div>
+      </nav>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <span>FEATURE COPILOT / CONTROL SURFACE</span>
+    <span>数据只读 · 本机访问</span>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.DS_Store
+
+# Local search index; regenerated from the tracked source data.
+knowledge/*.sqlite
+knowledge/*.sqlite-*
+knowledge/*.sqlite.lock
+
+build/*.sqlite
+build/*.sqlite-*
+build/*.manifest.json
+build/import-report.json
+build/import-rejects.csv

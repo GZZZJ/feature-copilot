@@ -1,0 +1,2215 @@
+-- feature-copilot:node-begin ordinal=0
+-- table_name: dwa_risk_dz_model_final_rep_apply_summary_4
+-- node_id: n_4039794389787082752
+-- task_name: dwa_risk_dz_model_final_rep_apply_summary_4
+-- owner_name: 周志华
+-- source_json: goal/dp_table_logic/dwa_risk_first_upstream/dwa_risk_dz_model_final_rep_apply_summary_4.json
+-- source_json_sha256: 23b29918c69a8be93f76589368c814b16cc48940c32ce3be764bb1db3b81797a
+-- upstream_table: dwa_risk.dwa_risk_dz_model_final_rep_apply_summary_4_tmp1
+-- upstream_table: dwa_risk.dwa_risk_dz_model_final_rep_apply_summary_4_tmp3
+-- upstream_table: dwa_risk.dwa_risk_f_repay_apply_stage_plan_detail
+-- upstream_table: dwa_risk.dwa_risk_dz_model_final_rep_apply_summary_4_tmp
+-- upstream_table: dwa_risk.dwa_risk_dz_model_final_rep_apply_summary_4_tmp2
+
+--MaxCompute_SQL
+--********************************************************************--
+--所属主题: 数据属于哪个数据域或业务场景下---如交易域、运营数据报表
+--功能描述: 数据记录的描述，如数据是什么、统计粒度等
+--创建者: 任俊峰
+--创建日期: 2022-09-22 15:35:54
+--修改日期	修改人	修改内容
+--yyyymmdd	name	comment
+--********************************************************************--
+create table if not exists ${dwa_risk}.dwa_risk_dz_model_final_rep_apply_summary_4(
+uid  string  comment '客户号',
+mdl_dte  string  comment '模型评分日',
+m1_stg_pln_rep_apl_cnt_max double comment '近1个月单期计划中扣款次数_max',
+m1_stg_pln_rep_apl_cnt_min double comment '近1个月单期计划中扣款次数_min',
+m1_stg_pln_rep_apl_cnt_avg double comment '近1个月单期计划中扣款次数_avg',
+m1_stg_pln_rep_apl_cnt_sum double comment '近1个月单期计划中扣款次数_sum',
+m1_stg_pln_manual_rep_apl_cnt_max double comment '近1个月单期计划中用户主动还款_扣款次数_max',
+m1_stg_pln_manual_rep_apl_cnt_min double comment '近1个月单期计划中用户主动还款_扣款次数_min',
+m1_stg_pln_manual_rep_apl_cnt_avg double comment '近1个月单期计划中用户主动还款_扣款次数_avg',
+m1_stg_pln_manual_rep_apl_cnt_sum double comment '近1个月单期计划中用户主动还款_扣款次数_sum',
+m1_stg_pln_ao_offline_rep_apl_cnt_max double comment '近1个月单期计划中(数禾对公)线下还款_扣款次数_max',
+m1_stg_pln_ao_offline_rep_apl_cnt_min double comment '近1个月单期计划中(数禾对公)线下还款_扣款次数_min',
+m1_stg_pln_ao_offline_rep_apl_cnt_avg double comment '近1个月单期计划中(数禾对公)线下还款_扣款次数_avg',
+m1_stg_pln_ao_offline_rep_apl_cnt_sum double comment '近1个月单期计划中(数禾对公)线下还款_扣款次数_sum',
+m1_stg_pln_manual_deduct_rep_apl_cnt_max double comment '近1个月单期计划中人工扣款_扣款次数_max',
+m1_stg_pln_manual_deduct_rep_apl_cnt_min double comment '近1个月单期计划中人工扣款_扣款次数_min',
+m1_stg_pln_manual_deduct_rep_apl_cnt_avg double comment '近1个月单期计划中人工扣款_扣款次数_avg',
+m1_stg_pln_manual_deduct_rep_apl_cnt_sum double comment '近1个月单期计划中人工扣款_扣款次数_sum',
+m1_stg_pln_normal_batch_rep_apl_cnt_max double comment '近1个月单期计划中常规批扣_扣款次数_max',
+m1_stg_pln_normal_batch_rep_apl_cnt_min double comment '近1个月单期计划中常规批扣_扣款次数_min',
+m1_stg_pln_normal_batch_rep_apl_cnt_avg double comment '近1个月单期计划中常规批扣_扣款次数_avg',
+m1_stg_pln_normal_batch_rep_apl_cnt_sum double comment '近1个月单期计划中常规批扣_扣款次数_sum',
+m1_stg_pln_add_bathch_rep_apl_cnt_max double comment '近1个月单期计划中逾期批扣_扣款次数_max',
+m1_stg_pln_add_bathch_rep_apl_cnt_min double comment '近1个月单期计划中逾期批扣_扣款次数_min',
+m1_stg_pln_add_bathch_rep_apl_cnt_avg double comment '近1个月单期计划中逾期批扣_扣款次数_avg',
+m1_stg_pln_add_bathch_rep_apl_cnt_sum double comment '近1个月单期计划中逾期批扣_扣款次数_sum',
+m1_stg_pln_rep_apl_suc_cnt_max double comment '近1个月单期计划中扣款成功次数_max',
+m1_stg_pln_rep_apl_suc_cnt_min double comment '近1个月单期计划中扣款成功次数_min',
+m1_stg_pln_rep_apl_suc_cnt_avg double comment '近1个月单期计划中扣款成功次数_avg',
+m1_stg_pln_rep_apl_suc_cnt_sum double comment '近1个月单期计划中扣款成功次数_sum',
+m1_stg_pln_manual_rep_apl_suc_cnt_max double comment '近1个月单期计划中用户主动还款_扣款成功次数_max',
+m1_stg_pln_manual_rep_apl_suc_cnt_min double comment '近1个月单期计划中用户主动还款_扣款成功次数_min',
+m1_stg_pln_manual_rep_apl_suc_cnt_avg double comment '近1个月单期计划中用户主动还款_扣款成功次数_avg',
+m1_stg_pln_manual_rep_apl_suc_cnt_sum double comment '近1个月单期计划中用户主动还款_扣款成功次数_sum',
+m1_stg_pln_ao_offline_rep_apl_suc_cnt_max double comment '近1个月单期计划中(数禾对公)线下还款_扣款成功次数_max',
+m1_stg_pln_ao_offline_rep_apl_suc_cnt_min double comment '近1个月单期计划中(数禾对公)线下还款_扣款成功次数_min',
+m1_stg_pln_ao_offline_rep_apl_suc_cnt_avg double comment '近1个月单期计划中(数禾对公)线下还款_扣款成功次数_avg',
+m1_stg_pln_ao_offline_rep_apl_suc_cnt_sum double comment '近1个月单期计划中(数禾对公)线下还款_扣款成功次数_sum',
+m1_stg_pln_manual_deduct_rep_apl_suc_cnt_max double comment '近1个月单期计划中人工扣款_扣款成功次数_max',
+m1_stg_pln_manual_deduct_rep_apl_suc_cnt_min double comment '近1个月单期计划中人工扣款_扣款成功次数_min',
+m1_stg_pln_manual_deduct_rep_apl_suc_cnt_avg double comment '近1个月单期计划中人工扣款_扣款成功次数_avg',
+m1_stg_pln_manual_deduct_rep_apl_suc_cnt_sum double comment '近1个月单期计划中人工扣款_扣款成功次数_sum',
+m1_stg_pln_normal_batch_rep_apl_suc_cnt_max double comment '近1个月单期计划中常规批扣_扣款成功次数_max',
+m1_stg_pln_normal_batch_rep_apl_suc_cnt_min double comment '近1个月单期计划中常规批扣_扣款成功次数_min',
+m1_stg_pln_normal_batch_rep_apl_suc_cnt_avg double comment '近1个月单期计划中常规批扣_扣款成功次数_avg',
+m1_stg_pln_normal_batch_rep_apl_suc_cnt_sum double comment '近1个月单期计划中常规批扣_扣款成功次数_sum',
+m1_stg_pln_add_bathch_rep_apl_suc_cnt_max double comment '近1个月单期计划中逾期批扣_扣款成功次数_max',
+m1_stg_pln_add_bathch_rep_apl_suc_cnt_min double comment '近1个月单期计划中逾期批扣_扣款成功次数_min',
+m1_stg_pln_add_bathch_rep_apl_suc_cnt_avg double comment '近1个月单期计划中逾期批扣_扣款成功次数_avg',
+m1_stg_pln_add_bathch_rep_apl_suc_cnt_sum double comment '近1个月单期计划中逾期批扣_扣款成功次数_sum',
+m1_stg_pln_rep_apl_fal_cnt_max double comment '近1个月单期计划中扣款失败次数_max',
+m1_stg_pln_rep_apl_fal_cnt_min double comment '近1个月单期计划中扣款失败次数_min',
+m1_stg_pln_rep_apl_fal_cnt_avg double comment '近1个月单期计划中扣款失败次数_avg',
+m1_stg_pln_rep_apl_fal_cnt_sum double comment '近1个月单期计划中扣款失败次数_sum',
+m1_stg_pln_manual_rep_apl_fal_cnt_max double comment '近1个月单期计划中用户主动还款_扣款失败次数_max',
+m1_stg_pln_manual_rep_apl_fal_cnt_min double comment '近1个月单期计划中用户主动还款_扣款失败次数_min',
+m1_stg_pln_manual_rep_apl_fal_cnt_avg double comment '近1个月单期计划中用户主动还款_扣款失败次数_avg',
+m1_stg_pln_manual_rep_apl_fal_cnt_sum double comment '近1个月单期计划中用户主动还款_扣款失败次数_sum',
+m1_stg_pln_ao_offline_rep_apl_fal_cnt_max double comment '近1个月单期计划中(数禾对公)线下还款_扣款失败次数_max',
+m1_stg_pln_ao_offline_rep_apl_fal_cnt_min double comment '近1个月单期计划中(数禾对公)线下还款_扣款失败次数_min',
+m1_stg_pln_ao_offline_rep_apl_fal_cnt_avg double comment '近1个月单期计划中(数禾对公)线下还款_扣款失败次数_avg',
+m1_stg_pln_ao_offline_rep_apl_fal_cnt_sum double comment '近1个月单期计划中(数禾对公)线下还款_扣款失败次数_sum',
+m1_stg_pln_manual_deduct_rep_apl_fal_cnt_max double comment '近1个月单期计划中人工扣款_扣款失败次数_max',
+m1_stg_pln_manual_deduct_rep_apl_fal_cnt_min double comment '近1个月单期计划中人工扣款_扣款失败次数_min',
+m1_stg_pln_manual_deduct_rep_apl_fal_cnt_avg double comment '近1个月单期计划中人工扣款_扣款失败次数_avg',
+m1_stg_pln_manual_deduct_rep_apl_fal_cnt_sum double comment '近1个月单期计划中人工扣款_扣款失败次数_sum',
+m1_stg_pln_normal_batch_rep_apl_fal_cnt_max double comment '近1个月单期计划中常规批扣_扣款失败次数_max',
+m1_stg_pln_normal_batch_rep_apl_fal_cnt_min double comment '近1个月单期计划中常规批扣_扣款失败次数_min',
+m1_stg_pln_normal_batch_rep_apl_fal_cnt_avg double comment '近1个月单期计划中常规批扣_扣款失败次数_avg',
+m1_stg_pln_normal_batch_rep_apl_fal_cnt_sum double comment '近1个月单期计划中常规批扣_扣款失败次数_sum',
+m1_stg_pln_add_bathch_rep_apl_fal_cnt_max double comment '近1个月单期计划中逾期批扣_扣款失败次数_max',
+m1_stg_pln_add_bathch_rep_apl_fal_cnt_min double comment '近1个月单期计划中逾期批扣_扣款失败次数_min',
+m1_stg_pln_add_bathch_rep_apl_fal_cnt_avg double comment '近1个月单期计划中逾期批扣_扣款失败次数_avg',
+m1_stg_pln_add_bathch_rep_apl_fal_cnt_sum double comment '近1个月单期计划中逾期批扣_扣款失败次数_sum',
+m1_stg_pln_rep_apl_cnt_d0_max double comment '近1个月单期计划中扣款次数_D0还款_max',
+m1_stg_pln_rep_apl_cnt_d0_min double comment '近1个月单期计划中扣款次数_D0还款_min',
+m1_stg_pln_rep_apl_cnt_d0_avg double comment '近1个月单期计划中扣款次数_D0还款_avg',
+m1_stg_pln_rep_apl_cnt_d0_sum double comment '近1个月单期计划中扣款次数_D0还款_sum',
+m1_stg_pln_rep_apl_cnt_adv_max double comment '近1个月单期计划中扣款次数_提前还款_max',
+m1_stg_pln_rep_apl_cnt_adv_min double comment '近1个月单期计划中扣款次数_提前还款_min',
+m1_stg_pln_rep_apl_cnt_adv_avg double comment '近1个月单期计划中扣款次数_提前还款_avg',
+m1_stg_pln_rep_apl_cnt_adv_sum double comment '近1个月单期计划中扣款次数_提前还款_sum',
+m1_stg_pln_rep_apl_cnt_ovd_1d_3d_max double comment '近1个月单期计划中扣款次数_历史逾期1-3天_max',
+m1_stg_pln_rep_apl_cnt_ovd_1d_3d_min double comment '近1个月单期计划中扣款次数_历史逾期1-3天_min',
+m1_stg_pln_rep_apl_cnt_ovd_1d_3d_avg double comment '近1个月单期计划中扣款次数_历史逾期1-3天_avg',
+m1_stg_pln_rep_apl_cnt_ovd_1d_3d_sum double comment '近1个月单期计划中扣款次数_历史逾期1-3天_sum',
+m1_stg_pln_rep_apl_cnt_his_ovd_max double comment '近1个月单期计划中扣款次数_历史逾期_max',
+m1_stg_pln_rep_apl_cnt_his_ovd_min double comment '近1个月单期计划中扣款次数_历史逾期_min',
+m1_stg_pln_rep_apl_cnt_his_ovd_avg double comment '近1个月单期计划中扣款次数_历史逾期_avg',
+m1_stg_pln_rep_apl_cnt_his_ovd_sum double comment '近1个月单期计划中扣款次数_历史逾期_sum',
+m1_stg_pln_rep_apl_cnt_equal_1_manual_cnt double comment '近1个月单期计划中扣款次数等于1_用户主动还款_cnt',
+m1_stg_pln_rep_apl_cnt_equal_1_normal_batch_cnt double comment '近1个月单期计划中扣款次数等于1次_常规批扣的次数',
+m1_stg_pln_rep_apl_cnt_equal_1_ao_offline_cnt double comment '近1个月单期计划中扣款次数等于1_(数禾对公)线下还款_cnt',
+m1_stg_pln_rep_apl_cnt_equal_1_manual_deduct_cnt double comment '近1个月单期计划中扣款次数等于1_人工扣款_cnt',
+m1_stg_pln_rep_apl_cnt_equal_1_d0_cnt double comment '近1个月单期计划中扣款次数等于1次_D0还款的次数',
+m1_stg_pln_rep_apl_cnt_equal_1_adv_cnt double comment '近1个月单期计划中扣款次数等于1_提前还款_cnt',
+m1_stg_pln_rep_apl_cnt_less_4_cnt double comment '近1个月单期计划中扣款次数小于4次的次数',
+m1_stg_pln_rep_apl_cnt_equal_1_stg_amt_max double comment '近1个月单期计划中扣款次数等于1_分期金额_max',
+m1_stg_pln_rep_apl_cnt_equal_1_stg_amt_min double comment '近1个月单期计划中扣款次数等于1_分期金额_min',
+m1_stg_pln_rep_apl_cnt_equal_1_stg_amt_avg double comment '近1个月单期计划中扣款次数等于1_分期金额_avg',
+m1_stg_pln_rep_apl_cnt_equal_1_stg_amt_sum double comment '近1个月单期计划中扣款次数等于1_分期金额_sum',
+m1_stg_pln_rep_apl_cnt_less_4_stg_amt_max double comment '近1个月单期计划中扣款次数小于4次_分期金额_max',
+m1_stg_pln_rep_apl_cnt_less_4_stg_amt_min double comment '近1个月单期计划中扣款次数小于4次_分期金额_min',
+m1_stg_pln_rep_apl_cnt_less_4_stg_amt_avg double comment '近1个月单期计划中扣款次数小于4次_分期金额_avg',
+m1_stg_pln_rep_apl_cnt_less_4_stg_amt_sum double comment '近1个月单期计划中扣款次数小于4次_分期金额_sum',
+m1_stg_pln_rep_apl_cnt_mor_4_stg_amt_max double comment '近1个月单期计划中扣款次数大于4次_分期金额_max',
+m1_stg_pln_rep_apl_cnt_mor_4_stg_amt_min double comment '近1个月单期计划中扣款次数大于4次_分期金额_min',
+m1_stg_pln_rep_apl_cnt_mor_4_stg_amt_avg double comment '近1个月单期计划中扣款次数大于4次_分期金额_avg',
+m1_stg_pln_rep_apl_cnt_mor_4_stg_amt_sum double comment '近1个月单期计划中扣款次数大于4次_分期金额_sum',
+m1_stg_pln_normal_batch_rep_apl_cnt_less_2_stg_amt_max double comment '近1个月单期计划中常规批扣_扣款次数小于2次_分期金额_max',
+m1_stg_pln_normal_batch_rep_apl_cnt_less_2_stg_amt_min double comment '近1个月单期计划中常规批扣_扣款次数小于2次_分期金额_min',
+m1_stg_pln_normal_batch_rep_apl_cnt_less_2_stg_amt_avg double comment '近1个月单期计划中常规批扣_扣款次数小于2次_分期金额_avg',
+m1_stg_pln_normal_batch_rep_apl_cnt_less_2_stg_amt_sum double comment '近1个月单期计划中常规批扣_扣款次数小于2次_分期金额_sum',
+m1_stg_pln_normal_batch_rep_apl_cnt_mor_2_stg_amt_max double comment '近1个月单期计划中常规批扣_扣款次数大于2次_分期金额_max',
+m1_stg_pln_normal_batch_rep_apl_cnt_mor_2_stg_amt_min double comment '近1个月单期计划中常规批扣_扣款次数大于2次_分期金额_min',
+m1_stg_pln_normal_batch_rep_apl_cnt_mor_2_stg_amt_avg double comment '近1个月单期计划中常规批扣_扣款次数大于2次_分期金额_avg',
+m1_stg_pln_normal_batch_rep_apl_cnt_mor_2_stg_amt_sum double comment '近1个月单期计划中常规批扣_扣款次数大于2次_分期金额_sum',
+m1_stg_pln_rep_apl_cnt_equal_1_manual_rep_apl_amt_max double comment '近1个月单期计划中扣款次数等于1_用户主动还款_扣款金额_max',
+m1_stg_pln_rep_apl_cnt_equal_1_manual_rep_apl_amt_min double comment '近1个月单期计划中扣款次数等于1_用户主动还款_扣款金额_min',
+m1_stg_pln_rep_apl_cnt_equal_1_manual_rep_apl_amt_avg double comment '近1个月单期计划中扣款次数等于1_用户主动还款_扣款金额_avg',
+m1_stg_pln_rep_apl_cnt_equal_1_manual_rep_apl_amt_sum double comment '近1个月单期计划中扣款次数等于1_用户主动还款_扣款金额_sum',
+m1_stg_pln_rep_apl_fal_cnt_mor_1_rep_apl_amt_max double comment '近1个月单期计划中扣款失败次数大于1次_扣款金额_max',
+m1_stg_pln_rep_apl_fal_cnt_mor_1_rep_apl_amt_min double comment '近1个月单期计划中扣款失败次数大于1次_扣款金额_min',
+m1_stg_pln_rep_apl_fal_cnt_mor_1_rep_apl_amt_avg double comment '近1个月单期计划中扣款失败次数大于1次_扣款金额_avg',
+m1_stg_pln_rep_apl_fal_cnt_mor_1_rep_apl_amt_sum double comment '近1个月单期计划中扣款失败次数大于1次_扣款金额_sum',
+m1_stg_pln_rep_apl_fal_cnt_mor_3_rep_apl_amt_max double comment '近1个月单期计划中扣款失败次数大于3次_扣款金额_max',
+m1_stg_pln_rep_apl_fal_cnt_mor_3_rep_apl_amt_min double comment '近1个月单期计划中扣款失败次数大于3次_扣款金额_min',
+m1_stg_pln_rep_apl_fal_cnt_mor_3_rep_apl_amt_avg double comment '近1个月单期计划中扣款失败次数大于3次_扣款金额_avg',
+m1_stg_pln_rep_apl_fal_cnt_mor_3_rep_apl_amt_sum double comment '近1个月单期计划中扣款失败次数大于3次_扣款金额_sum',
+m1_stg_pln_rep_apl_amt_d0_max double comment '近1个月单期计划中扣款金额_D0还款_max',
+m1_stg_pln_rep_apl_amt_d0_min double comment '近1个月单期计划中扣款金额_D0还款_min',
+m1_stg_pln_rep_apl_amt_d0_avg double comment '近1个月单期计划中扣款金额_D0还款_avg',
+m1_stg_pln_rep_apl_amt_d0_sum double comment '近1个月单期计划中扣款金额_D0还款_sum',
+m1_stg_pln_rep_apl_amt_adv_max double comment '近1个月单期计划中扣款金额_提前还款_max',
+m1_stg_pln_rep_apl_amt_adv_min double comment '近1个月单期计划中扣款金额_提前还款_min',
+m1_stg_pln_rep_apl_amt_adv_avg double comment '近1个月单期计划中扣款金额_提前还款_avg',
+m1_stg_pln_rep_apl_amt_adv_sum double comment '近1个月单期计划中扣款金额_提前还款_sum',
+m1_stg_pln_rep_apl_amt_ovd_1d_3d_max double comment '近1个月单期计划中扣款金额_历史逾期1-3天_max',
+m1_stg_pln_rep_apl_amt_ovd_1d_3d_min double comment '近1个月单期计划中扣款金额_历史逾期1-3天_min',
+m1_stg_pln_rep_apl_amt_ovd_1d_3d_avg double comment '近1个月单期计划中扣款金额_历史逾期1-3天_avg',
+m1_stg_pln_rep_apl_amt_ovd_1d_3d_sum double comment '近1个月单期计划中扣款金额_历史逾期1-3天_sum',
+m1_stg_pln_rep_apl_amt_his_ovd_max double comment '近1个月单期计划中扣款金额_历史逾期_max',
+m1_stg_pln_rep_apl_amt_his_ovd_min double comment '近1个月单期计划中扣款金额_历史逾期_min',
+m1_stg_pln_rep_apl_amt_his_ovd_avg double comment '近1个月单期计划中扣款金额_历史逾期_avg',
+m1_stg_pln_rep_apl_amt_his_ovd_sum double comment '近1个月单期计划中扣款金额_历史逾期_sum',
+m3_stg_pln_rep_apl_cnt_max double comment '近3个月单期计划中扣款次数_max',
+m3_stg_pln_rep_apl_cnt_min double comment '近3个月单期计划中扣款次数_min',
+m3_stg_pln_rep_apl_cnt_avg double comment '近3个月单期计划中扣款次数_avg',
+m3_stg_pln_rep_apl_cnt_sum double comment '近3个月单期计划中扣款次数_sum',
+m3_stg_pln_manual_rep_apl_cnt_max double comment '近3个月单期计划中用户主动还款_扣款次数_max',
+m3_stg_pln_manual_rep_apl_cnt_min double comment '近3个月单期计划中用户主动还款_扣款次数_min',
+m3_stg_pln_manual_rep_apl_cnt_avg double comment '近3个月单期计划中用户主动还款_扣款次数_avg',
+m3_stg_pln_manual_rep_apl_cnt_sum double comment '近3个月单期计划中用户主动还款_扣款次数_sum',
+m3_stg_pln_ao_offline_rep_apl_cnt_max double comment '近3个月单期计划中(数禾对公)线下还款_扣款次数_max',
+m3_stg_pln_ao_offline_rep_apl_cnt_min double comment '近3个月单期计划中(数禾对公)线下还款_扣款次数_min',
+m3_stg_pln_ao_offline_rep_apl_cnt_avg double comment '近3个月单期计划中(数禾对公)线下还款_扣款次数_avg',
+m3_stg_pln_ao_offline_rep_apl_cnt_sum double comment '近3个月单期计划中(数禾对公)线下还款_扣款次数_sum',
+m3_stg_pln_manual_deduct_rep_apl_cnt_max double comment '近3个月单期计划中人工扣款_扣款次数_max',
+m3_stg_pln_manual_deduct_rep_apl_cnt_min double comment '近3个月单期计划中人工扣款_扣款次数_min',
+m3_stg_pln_manual_deduct_rep_apl_cnt_avg double comment '近3个月单期计划中人工扣款_扣款次数_avg',
+m3_stg_pln_manual_deduct_rep_apl_cnt_sum double comment '近3个月单期计划中人工扣款_扣款次数_sum',
+m3_stg_pln_normal_batch_rep_apl_cnt_max double comment '近3个月单期计划中常规批扣_扣款次数_max',
+m3_stg_pln_normal_batch_rep_apl_cnt_min double comment '近3个月单期计划中常规批扣_扣款次数_min',
+m3_stg_pln_normal_batch_rep_apl_cnt_avg double comment '近3个月单期计划中常规批扣_扣款次数_avg',
+m3_stg_pln_normal_batch_rep_apl_cnt_sum double comment '近3个月单期计划中常规批扣_扣款次数_sum',
+m3_stg_pln_add_bathch_rep_apl_cnt_max double comment '近3个月单期计划中逾期批扣_扣款次数_max',
+m3_stg_pln_add_bathch_rep_apl_cnt_min double comment '近3个月单期计划中逾期批扣_扣款次数_min',
+m3_stg_pln_add_bathch_rep_apl_cnt_avg double comment '近3个月单期计划中逾期批扣_扣款次数_avg',
+m3_stg_pln_add_bathch_rep_apl_cnt_sum double comment '近3个月单期计划中逾期批扣_扣款次数_sum',
+m3_stg_pln_rep_apl_suc_cnt_max double comment '近3个月单期计划中扣款成功次数_max',
+m3_stg_pln_rep_apl_suc_cnt_min double comment '近3个月单期计划中扣款成功次数_min',
+m3_stg_pln_rep_apl_suc_cnt_avg double comment '近3个月单期计划中扣款成功次数_avg',
+m3_stg_pln_rep_apl_suc_cnt_sum double comment '近3个月单期计划中扣款成功次数_sum',
+m3_stg_pln_manual_rep_apl_suc_cnt_max double comment '近3个月单期计划中用户主动还款_扣款成功次数_max',
+m3_stg_pln_manual_rep_apl_suc_cnt_min double comment '近3个月单期计划中用户主动还款_扣款成功次数_min',
+m3_stg_pln_manual_rep_apl_suc_cnt_avg double comment '近3个月单期计划中用户主动还款_扣款成功次数_avg',
+m3_stg_pln_manual_rep_apl_suc_cnt_sum double comment '近3个月单期计划中用户主动还款_扣款成功次数_sum',
+m3_stg_pln_ao_offline_rep_apl_suc_cnt_max double comment '近3个月单期计划中(数禾对公)线下还款_扣款成功次数_max',
+m3_stg_pln_ao_offline_rep_apl_suc_cnt_min double comment '近3个月单期计划中(数禾对公)线下还款_扣款成功次数_min',
+m3_stg_pln_ao_offline_rep_apl_suc_cnt_avg double comment '近3个月单期计划中(数禾对公)线下还款_扣款成功次数_avg',
+m3_stg_pln_ao_offline_rep_apl_suc_cnt_sum double comment '近3个月单期计划中(数禾对公)线下还款_扣款成功次数_sum',
+m3_stg_pln_manual_deduct_rep_apl_suc_cnt_max double comment '近3个月单期计划中人工扣款_扣款成功次数_max',
+m3_stg_pln_manual_deduct_rep_apl_suc_cnt_min double comment '近3个月单期计划中人工扣款_扣款成功次数_min',
+m3_stg_pln_manual_deduct_rep_apl_suc_cnt_avg double comment '近3个月单期计划中人工扣款_扣款成功次数_avg',
+m3_stg_pln_manual_deduct_rep_apl_suc_cnt_sum double comment '近3个月单期计划中人工扣款_扣款成功次数_sum',
+m3_stg_pln_normal_batch_rep_apl_suc_cnt_max double comment '近3个月单期计划中常规批扣_扣款成功次数_max',
+m3_stg_pln_normal_batch_rep_apl_suc_cnt_min double comment '近3个月单期计划中常规批扣_扣款成功次数_min',
+m3_stg_pln_normal_batch_rep_apl_suc_cnt_avg double comment '近3个月单期计划中常规批扣_扣款成功次数_avg',
+m3_stg_pln_normal_batch_rep_apl_suc_cnt_sum double comment '近3个月单期计划中常规批扣_扣款成功次数_sum',
+m3_stg_pln_add_bathch_rep_apl_suc_cnt_max double comment '近3个月单期计划中逾期批扣_扣款成功次数_max',
+m3_stg_pln_add_bathch_rep_apl_suc_cnt_min double comment '近3个月单期计划中逾期批扣_扣款成功次数_min',
+m3_stg_pln_add_bathch_rep_apl_suc_cnt_avg double comment '近3个月单期计划中逾期批扣_扣款成功次数_avg',
+m3_stg_pln_add_bathch_rep_apl_suc_cnt_sum double comment '近3个月单期计划中逾期批扣_扣款成功次数_sum',
+m3_stg_pln_rep_apl_fal_cnt_max double comment '近3个月单期计划中扣款失败次数_max',
+m3_stg_pln_rep_apl_fal_cnt_min double comment '近3个月单期计划中扣款失败次数_min',
+m3_stg_pln_rep_apl_fal_cnt_avg double comment '近3个月单期计划中扣款失败次数_avg',
+m3_stg_pln_rep_apl_fal_cnt_sum double comment '近3个月单期计划中扣款失败次数_sum',
+m3_stg_pln_manual_rep_apl_fal_cnt_max double comment '近3个月单期计划中用户主动还款_扣款失败次数_max',
+m3_stg_pln_manual_rep_apl_fal_cnt_min double comment '近3个月单期计划中用户主动还款_扣款失败次数_min',
+m3_stg_pln_manual_rep_apl_fal_cnt_avg double comment '近3个月单期计划中用户主动还款_扣款失败次数_avg',
+m3_stg_pln_manual_rep_apl_fal_cnt_sum double comment '近3个月单期计划中用户主动还款_扣款失败次数_sum',
+m3_stg_pln_ao_offline_rep_apl_fal_cnt_max double comment '近3个月单期计划中(数禾对公)线下还款_扣款失败次数_max',
+m3_stg_pln_ao_offline_rep_apl_fal_cnt_min double comment '近3个月单期计划中(数禾对公)线下还款_扣款失败次数_min',
+m3_stg_pln_ao_offline_rep_apl_fal_cnt_avg double comment '近3个月单期计划中(数禾对公)线下还款_扣款失败次数_avg',
+m3_stg_pln_ao_offline_rep_apl_fal_cnt_sum double comment '近3个月单期计划中(数禾对公)线下还款_扣款失败次数_sum',
+m3_stg_pln_manual_deduct_rep_apl_fal_cnt_max double comment '近3个月单期计划中人工扣款_扣款失败次数_max',
+m3_stg_pln_manual_deduct_rep_apl_fal_cnt_min double comment '近3个月单期计划中人工扣款_扣款失败次数_min',
+m3_stg_pln_manual_deduct_rep_apl_fal_cnt_avg double comment '近3个月单期计划中人工扣款_扣款失败次数_avg',
+m3_stg_pln_manual_deduct_rep_apl_fal_cnt_sum double comment '近3个月单期计划中人工扣款_扣款失败次数_sum',
+m3_stg_pln_normal_batch_rep_apl_fal_cnt_max double comment '近3个月单期计划中常规批扣_扣款失败次数_max',
+m3_stg_pln_normal_batch_rep_apl_fal_cnt_min double comment '近3个月单期计划中常规批扣_扣款失败次数_min',
+m3_stg_pln_normal_batch_rep_apl_fal_cnt_avg double comment '近3个月单期计划中常规批扣_扣款失败次数_avg',
+m3_stg_pln_normal_batch_rep_apl_fal_cnt_sum double comment '近3个月单期计划中常规批扣_扣款失败次数_sum',
+m3_stg_pln_add_bathch_rep_apl_fal_cnt_max double comment '近3个月单期计划中逾期批扣_扣款失败次数_max',
+m3_stg_pln_add_bathch_rep_apl_fal_cnt_min double comment '近3个月单期计划中逾期批扣_扣款失败次数_min',
+m3_stg_pln_add_bathch_rep_apl_fal_cnt_avg double comment '近3个月单期计划中逾期批扣_扣款失败次数_avg',
+m3_stg_pln_add_bathch_rep_apl_fal_cnt_sum double comment '近3个月单期计划中逾期批扣_扣款失败次数_sum',
+m3_stg_pln_rep_apl_cnt_d0_max double comment '近3个月单期计划中扣款次数_D0还款_max',
+m3_stg_pln_rep_apl_cnt_d0_min double comment '近3个月单期计划中扣款次数_D0还款_min',
+m3_stg_pln_rep_apl_cnt_d0_avg double comment '近3个月单期计划中扣款次数_D0还款_avg',
+m3_stg_pln_rep_apl_cnt_d0_sum double comment '近3个月单期计划中扣款次数_D0还款_sum',
+m3_stg_pln_rep_apl_cnt_adv_max double comment '近3个月单期计划中扣款次数_提前还款_max',
+m3_stg_pln_rep_apl_cnt_adv_min double comment '近3个月单期计划中扣款次数_提前还款_min',
+m3_stg_pln_rep_apl_cnt_adv_avg double comment '近3个月单期计划中扣款次数_提前还款_avg',
+m3_stg_pln_rep_apl_cnt_adv_sum double comment '近3个月单期计划中扣款次数_提前还款_sum',
+m3_stg_pln_rep_apl_cnt_ovd_1d_3d_max double comment '近3个月单期计划中扣款次数_历史逾期1-3天_max',
+m3_stg_pln_rep_apl_cnt_ovd_1d_3d_min double comment '近3个月单期计划中扣款次数_历史逾期1-3天_min',
+m3_stg_pln_rep_apl_cnt_ovd_1d_3d_avg double comment '近3个月单期计划中扣款次数_历史逾期1-3天_avg',
+m3_stg_pln_rep_apl_cnt_ovd_1d_3d_sum double comment '近3个月单期计划中扣款次数_历史逾期1-3天_sum',
+m3_stg_pln_rep_apl_cnt_his_ovd_max double comment '近3个月单期计划中扣款次数_历史逾期_max',
+m3_stg_pln_rep_apl_cnt_his_ovd_min double comment '近3个月单期计划中扣款次数_历史逾期_min',
+m3_stg_pln_rep_apl_cnt_his_ovd_avg double comment '近3个月单期计划中扣款次数_历史逾期_avg',
+m3_stg_pln_rep_apl_cnt_his_ovd_sum double comment '近3个月单期计划中扣款次数_历史逾期_sum',
+m3_stg_pln_rep_apl_cnt_equal_1_manual_cnt double comment '近3个月单期计划中扣款次数等于1次_用户主动还款的次数',
+m3_stg_pln_rep_apl_cnt_equal_1_normal_batch_cnt double comment '近3个月单期计划中扣款次数等于1次_常规批扣的次数',
+m3_stg_pln_rep_apl_cnt_equal_1_ao_offline_cnt double comment '近3个月单期计划中扣款次数等于1_(数禾对公)线下还款_cnt',
+m3_stg_pln_rep_apl_cnt_equal_1_manual_deduct_cnt double comment '近3个月单期计划中扣款次数等于1_人工扣款_cnt',
+m3_stg_pln_rep_apl_cnt_equal_1_d0_cnt double comment '近3个月单期计划中扣款次数等于1次_D0还款的次数',
+m3_stg_pln_rep_apl_cnt_equal_1_adv_cnt double comment '近3个月单期计划中扣款次数等于1次_提前还款的次数',
+m3_stg_pln_rep_apl_cnt_less_4_cnt double comment '近3个月单期计划中扣款次数小于4次的次数',
+m3_stg_pln_rep_apl_cnt_equal_1_stg_amt_max double comment '近3个月单期计划中扣款次数等于1_分期金额_max',
+m3_stg_pln_rep_apl_cnt_equal_1_stg_amt_min double comment '近3个月单期计划中扣款次数等于1_分期金额_min',
+m3_stg_pln_rep_apl_cnt_equal_1_stg_amt_avg double comment '近3个月单期计划中扣款次数等于1_分期金额_avg',
+m3_stg_pln_rep_apl_cnt_equal_1_stg_amt_sum double comment '近3个月单期计划中扣款次数等于1_分期金额_sum',
+m3_stg_pln_rep_apl_cnt_less_4_stg_amt_max double comment '近3个月单期计划中扣款次数小于4次_分期金额_max',
+m3_stg_pln_rep_apl_cnt_less_4_stg_amt_min double comment '近3个月单期计划中扣款次数小于4次_分期金额_min',
+m3_stg_pln_rep_apl_cnt_less_4_stg_amt_avg double comment '近3个月单期计划中扣款次数小于4次_分期金额_avg',
+m3_stg_pln_rep_apl_cnt_less_4_stg_amt_sum double comment '近3个月单期计划中扣款次数小于4次_分期金额_sum',
+m3_stg_pln_rep_apl_cnt_mor_4_stg_amt_max double comment '近3个月单期计划中扣款次数大于4次_分期金额_max',
+m3_stg_pln_rep_apl_cnt_mor_4_stg_amt_min double comment '近3个月单期计划中扣款次数大于4次_分期金额_min',
+m3_stg_pln_rep_apl_cnt_mor_4_stg_amt_avg double comment '近3个月单期计划中扣款次数大于4次_分期金额_avg',
+m3_stg_pln_rep_apl_cnt_mor_4_stg_amt_sum double comment '近3个月单期计划中扣款次数大于4次_分期金额_sum',
+m3_stg_pln_normal_batch_rep_apl_cnt_less_2_stg_amt_max double comment '近3个月单期计划中常规批扣_扣款次数小于2次_分期金额_max',
+m3_stg_pln_normal_batch_rep_apl_cnt_less_2_stg_amt_min double comment '近3个月单期计划中常规批扣_扣款次数小于2次_分期金额_min',
+m3_stg_pln_normal_batch_rep_apl_cnt_less_2_stg_amt_avg double comment '近3个月单期计划中常规批扣_扣款次数小于2次_分期金额_avg',
+m3_stg_pln_normal_batch_rep_apl_cnt_less_2_stg_amt_sum double comment '近3个月单期计划中常规批扣_扣款次数小于2次_分期金额_sum',
+m3_stg_pln_normal_batch_rep_apl_cnt_mor_2_stg_amt_max double comment '近3个月单期计划中常规批扣_扣款次数大于2次_分期金额_max',
+m3_stg_pln_normal_batch_rep_apl_cnt_mor_2_stg_amt_min double comment '近3个月单期计划中常规批扣_扣款次数大于2次_分期金额_min',
+m3_stg_pln_normal_batch_rep_apl_cnt_mor_2_stg_amt_avg double comment '近3个月单期计划中常规批扣_扣款次数大于2次_分期金额_avg',
+m3_stg_pln_normal_batch_rep_apl_cnt_mor_2_stg_amt_sum double comment '近3个月单期计划中常规批扣_扣款次数大于2次_分期金额_sum',
+m3_stg_pln_rep_apl_cnt_equal_1_manual_rep_apl_amt_max double comment '近3个月单期计划中扣款次数等于1_用户主动还款_扣款金额_max',
+m3_stg_pln_rep_apl_cnt_equal_1_manual_rep_apl_amt_min double comment '近3个月单期计划中扣款次数等于1_用户主动还款_扣款金额_min',
+m3_stg_pln_rep_apl_cnt_equal_1_manual_rep_apl_amt_avg double comment '近3个月单期计划中扣款次数等于1_用户主动还款_扣款金额_avg',
+m3_stg_pln_rep_apl_cnt_equal_1_manual_rep_apl_amt_sum double comment '近3个月单期计划中扣款次数等于1_用户主动还款_扣款金额_sum',
+m3_stg_pln_rep_apl_fal_cnt_mor_1_rep_apl_amt_max double comment '近3个月单期计划中扣款失败次数大于1次_扣款金额_max',
+m3_stg_pln_rep_apl_fal_cnt_mor_1_rep_apl_amt_min double comment '近3个月单期计划中扣款失败次数大于1次_扣款金额_min',
+m3_stg_pln_rep_apl_fal_cnt_mor_1_rep_apl_amt_avg double comment '近3个月单期计划中扣款失败次数大于1次_扣款金额_avg',
+m3_stg_pln_rep_apl_fal_cnt_mor_1_rep_apl_amt_sum double comment '近3个月单期计划中扣款失败次数大于1次_扣款金额_sum',
+m3_stg_pln_rep_apl_fal_cnt_mor_3_rep_apl_amt_max double comment '近3个月单期计划中扣款失败次数大于3次_扣款金额_max',
+m3_stg_pln_rep_apl_fal_cnt_mor_3_rep_apl_amt_min double comment '近3个月单期计划中扣款失败次数大于3次_扣款金额_min',
+m3_stg_pln_rep_apl_fal_cnt_mor_3_rep_apl_amt_avg double comment '近3个月单期计划中扣款失败次数大于3次_扣款金额_avg',
+m3_stg_pln_rep_apl_fal_cnt_mor_3_rep_apl_amt_sum double comment '近3个月单期计划中扣款失败次数大于3次_扣款金额_sum',
+m3_stg_pln_rep_apl_amt_d0_max double comment '近3个月单期计划中扣款金额_D0还款_max',
+m3_stg_pln_rep_apl_amt_d0_min double comment '近3个月单期计划中扣款金额_D0还款_min',
+m3_stg_pln_rep_apl_amt_d0_avg double comment '近3个月单期计划中扣款金额_D0还款_avg',
+m3_stg_pln_rep_apl_amt_d0_sum double comment '近3个月单期计划中扣款金额_D0还款_sum',
+m3_stg_pln_rep_apl_amt_adv_max double comment '近3个月单期计划中扣款金额_提前还款_max',
+m3_stg_pln_rep_apl_amt_adv_min double comment '近3个月单期计划中扣款金额_提前还款_min',
+m3_stg_pln_rep_apl_amt_adv_avg double comment '近3个月单期计划中扣款金额_提前还款_avg',
+m3_stg_pln_rep_apl_amt_adv_sum double comment '近3个月单期计划中扣款金额_提前还款_sum',
+m3_stg_pln_rep_apl_amt_ovd_1d_3d_max double comment '近3个月单期计划中扣款金额_历史逾期1-3天_max',
+m3_stg_pln_rep_apl_amt_ovd_1d_3d_min double comment '近3个月单期计划中扣款金额_历史逾期1-3天_min',
+m3_stg_pln_rep_apl_amt_ovd_1d_3d_avg double comment '近3个月单期计划中扣款金额_历史逾期1-3天_avg',
+m3_stg_pln_rep_apl_amt_ovd_1d_3d_sum double comment '近3个月单期计划中扣款金额_历史逾期1-3天_sum',
+m3_stg_pln_rep_apl_amt_his_ovd_max double comment '近3个月单期计划中扣款金额_历史逾期_max',
+m3_stg_pln_rep_apl_amt_his_ovd_min double comment '近3个月单期计划中扣款金额_历史逾期_min',
+m3_stg_pln_rep_apl_amt_his_ovd_avg double comment '近3个月单期计划中扣款金额_历史逾期_avg',
+m3_stg_pln_rep_apl_amt_his_ovd_sum double comment '近3个月单期计划中扣款金额_历史逾期_sum',
+m6_stg_pln_rep_apl_cnt_max double comment '近6个月单期计划中扣款次数_max',
+m6_stg_pln_rep_apl_cnt_min double comment '近6个月单期计划中扣款次数_min',
+m6_stg_pln_rep_apl_cnt_avg double comment '近6个月单期计划中扣款次数_avg',
+m6_stg_pln_rep_apl_cnt_sum double comment '近6个月单期计划中扣款次数_sum',
+m6_stg_pln_manual_rep_apl_cnt_max double comment '近6个月单期计划中用户主动还款_扣款次数_max',
+m6_stg_pln_manual_rep_apl_cnt_min double comment '近6个月单期计划中用户主动还款_扣款次数_min',
+m6_stg_pln_manual_rep_apl_cnt_avg double comment '近6个月单期计划中用户主动还款_扣款次数_avg',
+m6_stg_pln_manual_rep_apl_cnt_sum double comment '近6个月单期计划中用户主动还款_扣款次数_sum',
+m6_stg_pln_ao_offline_rep_apl_cnt_max double comment '近6个月单期计划中(数禾对公)线下还款_扣款次数_max',
+m6_stg_pln_ao_offline_rep_apl_cnt_min double comment '近6个月单期计划中(数禾对公)线下还款_扣款次数_min',
+m6_stg_pln_ao_offline_rep_apl_cnt_avg double comment '近6个月单期计划中(数禾对公)线下还款_扣款次数_avg',
+m6_stg_pln_ao_offline_rep_apl_cnt_sum double comment '近6个月单期计划中(数禾对公)线下还款_扣款次数_sum',
+m6_stg_pln_manual_deduct_rep_apl_cnt_max double comment '近6个月单期计划中人工扣款_扣款次数_max',
+m6_stg_pln_manual_deduct_rep_apl_cnt_min double comment '近6个月单期计划中人工扣款_扣款次数_min',
+m6_stg_pln_manual_deduct_rep_apl_cnt_avg double comment '近6个月单期计划中人工扣款_扣款次数_avg',
+m6_stg_pln_manual_deduct_rep_apl_cnt_sum double comment '近6个月单期计划中人工扣款_扣款次数_sum',
+m6_stg_pln_normal_batch_rep_apl_cnt_max double comment '近6个月单期计划中常规批扣_扣款次数_max',
+m6_stg_pln_normal_batch_rep_apl_cnt_min double comment '近6个月单期计划中常规批扣_扣款次数_min',
+m6_stg_pln_normal_batch_rep_apl_cnt_avg double comment '近6个月单期计划中常规批扣_扣款次数_avg',
+m6_stg_pln_normal_batch_rep_apl_cnt_sum double comment '近6个月单期计划中常规批扣_扣款次数_sum',
+m6_stg_pln_add_bathch_rep_apl_cnt_max double comment '近6个月单期计划中逾期批扣_扣款次数_max',
+m6_stg_pln_add_bathch_rep_apl_cnt_min double comment '近6个月单期计划中逾期批扣_扣款次数_min',
+m6_stg_pln_add_bathch_rep_apl_cnt_avg double comment '近6个月单期计划中逾期批扣_扣款次数_avg',
+m6_stg_pln_add_bathch_rep_apl_cnt_sum double comment '近6个月单期计划中逾期批扣_扣款次数_sum',
+m6_stg_pln_rep_apl_suc_cnt_max double comment '近6个月单期计划中扣款成功次数_max',
+m6_stg_pln_rep_apl_suc_cnt_min double comment '近6个月单期计划中扣款成功次数_min',
+m6_stg_pln_rep_apl_suc_cnt_avg double comment '近6个月单期计划中扣款成功次数_avg',
+m6_stg_pln_rep_apl_suc_cnt_sum double comment '近6个月单期计划中扣款成功次数_sum',
+m6_stg_pln_manual_rep_apl_suc_cnt_max double comment '近6个月单期计划中用户主动还款_扣款成功次数_max',
+m6_stg_pln_manual_rep_apl_suc_cnt_min double comment '近6个月单期计划中用户主动还款_扣款成功次数_min',
+m6_stg_pln_manual_rep_apl_suc_cnt_avg double comment '近6个月单期计划中用户主动还款_扣款成功次数_avg',
+m6_stg_pln_manual_rep_apl_suc_cnt_sum double comment '近6个月单期计划中用户主动还款_扣款成功次数_sum',
+m6_stg_pln_ao_offline_rep_apl_suc_cnt_max double comment '近6个月单期计划中(数禾对公)线下还款_扣款成功次数_max',
+m6_stg_pln_ao_offline_rep_apl_suc_cnt_min double comment '近6个月单期计划中(数禾对公)线下还款_扣款成功次数_min',
+m6_stg_pln_ao_offline_rep_apl_suc_cnt_avg double comment '近6个月单期计划中(数禾对公)线下还款_扣款成功次数_avg',
+m6_stg_pln_ao_offline_rep_apl_suc_cnt_sum double comment '近6个月单期计划中(数禾对公)线下还款_扣款成功次数_sum',
+m6_stg_pln_manual_deduct_rep_apl_suc_cnt_max double comment '近6个月单期计划中人工扣款_扣款成功次数_max',
+m6_stg_pln_manual_deduct_rep_apl_suc_cnt_min double comment '近6个月单期计划中人工扣款_扣款成功次数_min',
+m6_stg_pln_manual_deduct_rep_apl_suc_cnt_avg double comment '近6个月单期计划中人工扣款_扣款成功次数_avg',
+m6_stg_pln_manual_deduct_rep_apl_suc_cnt_sum double comment '近6个月单期计划中人工扣款_扣款成功次数_sum',
+m6_stg_pln_normal_batch_rep_apl_suc_cnt_max double comment '近6个月单期计划中常规批扣_扣款成功次数_max',
+m6_stg_pln_normal_batch_rep_apl_suc_cnt_min double comment '近6个月单期计划中常规批扣_扣款成功次数_min',
+m6_stg_pln_normal_batch_rep_apl_suc_cnt_avg double comment '近6个月单期计划中常规批扣_扣款成功次数_avg',
+m6_stg_pln_normal_batch_rep_apl_suc_cnt_sum double comment '近6个月单期计划中常规批扣_扣款成功次数_sum',
+m6_stg_pln_add_bathch_rep_apl_suc_cnt_max double comment '近6个月单期计划中逾期批扣_扣款成功次数_max',
+m6_stg_pln_add_bathch_rep_apl_suc_cnt_min double comment '近6个月单期计划中逾期批扣_扣款成功次数_min',
+m6_stg_pln_add_bathch_rep_apl_suc_cnt_avg double comment '近6个月单期计划中逾期批扣_扣款成功次数_avg',
+m6_stg_pln_add_bathch_rep_apl_suc_cnt_sum double comment '近6个月单期计划中逾期批扣_扣款成功次数_sum',
+m6_stg_pln_rep_apl_fal_cnt_max double comment '近6个月单期计划中扣款失败次数_max',
+m6_stg_pln_rep_apl_fal_cnt_min double comment '近6个月单期计划中扣款失败次数_min',
+m6_stg_pln_rep_apl_fal_cnt_avg double comment '近6个月单期计划中扣款失败次数_avg',
+m6_stg_pln_rep_apl_fal_cnt_sum double comment '近6个月单期计划中扣款失败次数_sum',
+m6_stg_pln_manual_rep_apl_fal_cnt_max double comment '近6个月单期计划中用户主动还款_扣款失败次数_max',
+m6_stg_pln_manual_rep_apl_fal_cnt_min double comment '近6个月单期计划中用户主动还款_扣款失败次数_min',
+m6_stg_pln_manual_rep_apl_fal_cnt_avg double comment '近6个月单期计划中用户主动还款_扣款失败次数_avg',
+m6_stg_pln_manual_rep_apl_fal_cnt_sum double comment '近6个月单期计划中用户主动还款_扣款失败次数_sum',
+m6_stg_pln_ao_offline_rep_apl_fal_cnt_max double comment '近6个月单期计划中(数禾对公)线下还款_扣款失败次数_max',
+m6_stg_pln_ao_offline_rep_apl_fal_cnt_min double comment '近6个月单期计划中(数禾对公)线下还款_扣款失败次数_min',
+m6_stg_pln_ao_offline_rep_apl_fal_cnt_avg double comment '近6个月单期计划中(数禾对公)线下还款_扣款失败次数_avg',
+m6_stg_pln_ao_offline_rep_apl_fal_cnt_sum double comment '近6个月单期计划中(数禾对公)线下还款_扣款失败次数_sum',
+m6_stg_pln_manual_deduct_rep_apl_fal_cnt_max double comment '近6个月单期计划中人工扣款_扣款失败次数_max',
+m6_stg_pln_manual_deduct_rep_apl_fal_cnt_min double comment '近6个月单期计划中人工扣款_扣款失败次数_min',
+m6_stg_pln_manual_deduct_rep_apl_fal_cnt_avg double comment '近6个月单期计划中人工扣款_扣款失败次数_avg',
+m6_stg_pln_manual_deduct_rep_apl_fal_cnt_sum double comment '近6个月单期计划中人工扣款_扣款失败次数_sum',
+m6_stg_pln_normal_batch_rep_apl_fal_cnt_max double comment '近6个月单期计划中常规批扣_扣款失败次数_max',
+m6_stg_pln_normal_batch_rep_apl_fal_cnt_min double comment '近6个月单期计划中常规批扣_扣款失败次数_min',
+m6_stg_pln_normal_batch_rep_apl_fal_cnt_avg double comment '近6个月单期计划中常规批扣_扣款失败次数_avg',
+m6_stg_pln_normal_batch_rep_apl_fal_cnt_sum double comment '近6个月单期计划中常规批扣_扣款失败次数_sum',
+m6_stg_pln_add_bathch_rep_apl_fal_cnt_max double comment '近6个月单期计划中逾期批扣_扣款失败次数_max',
+m6_stg_pln_add_bathch_rep_apl_fal_cnt_min double comment '近6个月单期计划中逾期批扣_扣款失败次数_min',
+m6_stg_pln_add_bathch_rep_apl_fal_cnt_avg double comment '近6个月单期计划中逾期批扣_扣款失败次数_avg',
+m6_stg_pln_add_bathch_rep_apl_fal_cnt_sum double comment '近6个月单期计划中逾期批扣_扣款失败次数_sum',
+m6_stg_pln_rep_apl_cnt_d0_max double comment '近6个月单期计划中扣款次数_D0还款_max',
+m6_stg_pln_rep_apl_cnt_d0_min double comment '近6个月单期计划中扣款次数_D0还款_min',
+m6_stg_pln_rep_apl_cnt_d0_avg double comment '近6个月单期计划中扣款次数_D0还款_avg',
+m6_stg_pln_rep_apl_cnt_d0_sum double comment '近6个月单期计划中扣款次数_D0还款_sum',
+m6_stg_pln_rep_apl_cnt_adv_max double comment '近6个月单期计划中扣款次数_提前还款_max',
+m6_stg_pln_rep_apl_cnt_adv_min double comment '近6个月单期计划中扣款次数_提前还款_min',
+m6_stg_pln_rep_apl_cnt_adv_avg double comment '近6个月单期计划中扣款次数_提前还款_avg',
+m6_stg_pln_rep_apl_cnt_adv_sum double comment '近6个月单期计划中扣款次数_提前还款_sum',
+m6_stg_pln_rep_apl_cnt_ovd_1d_3d_max double comment '近6个月单期计划中扣款次数_历史逾期1-3天_max',
+m6_stg_pln_rep_apl_cnt_ovd_1d_3d_min double comment '近6个月单期计划中扣款次数_历史逾期1-3天_min',
+m6_stg_pln_rep_apl_cnt_ovd_1d_3d_avg double comment '近6个月单期计划中扣款次数_历史逾期1-3天_avg',
+m6_stg_pln_rep_apl_cnt_ovd_1d_3d_sum double comment '近6个月单期计划中扣款次数_历史逾期1-3天_sum',
+m6_stg_pln_rep_apl_cnt_his_ovd_max double comment '近6个月单期计划中扣款次数_历史逾期_max',
+m6_stg_pln_rep_apl_cnt_his_ovd_min double comment '近6个月单期计划中扣款次数_历史逾期_min',
+m6_stg_pln_rep_apl_cnt_his_ovd_avg double comment '近6个月单期计划中扣款次数_历史逾期_avg',
+m6_stg_pln_rep_apl_cnt_his_ovd_sum double comment '近6个月单期计划中扣款次数_历史逾期_sum',
+m6_stg_pln_rep_apl_cnt_equal_1_manual_cnt double comment '近6个月单期计划中扣款次数等于1次_用户主动还款的次数',
+m6_stg_pln_rep_apl_cnt_equal_1_normal_batch_cnt double comment '近6个月单期计划中扣款次数等于1_常规批扣_cnt',
+m6_stg_pln_rep_apl_cnt_equal_1_ao_offline_cnt double comment '近6个月单期计划中扣款次数等于1_(数禾对公)线下还款_cnt',
+m6_stg_pln_rep_apl_cnt_equal_1_manual_deduct_cnt double comment '近6个月单期计划中扣款次数等于1_人工扣款_cnt',
+m6_stg_pln_rep_apl_cnt_equal_1_d0_cnt double comment '近6个月单期计划中扣款次数等于1_D0还款_cnt',
+m6_stg_pln_rep_apl_cnt_equal_1_adv_cnt double comment '近6个月单期计划中扣款次数等于1次_提前还款的次数',
+m6_stg_pln_rep_apl_cnt_less_4_cnt double comment '近6个月单期计划中扣款次数小于4次的次数',
+m6_stg_pln_rep_apl_cnt_equal_1_stg_amt_max double comment '近6个月单期计划中扣款次数等于1_分期金额_max',
+m6_stg_pln_rep_apl_cnt_equal_1_stg_amt_min double comment '近6个月单期计划中扣款次数等于1_分期金额_min',
+m6_stg_pln_rep_apl_cnt_equal_1_stg_amt_avg double comment '近6个月单期计划中扣款次数等于1_分期金额_avg',
+m6_stg_pln_rep_apl_cnt_equal_1_stg_amt_sum double comment '近6个月单期计划中扣款次数等于1_分期金额_sum',
+m6_stg_pln_rep_apl_cnt_less_4_stg_amt_max double comment '近6个月单期计划中扣款次数小于4次_分期金额_max',
+m6_stg_pln_rep_apl_cnt_less_4_stg_amt_min double comment '近6个月单期计划中扣款次数小于4次_分期金额_min',
+m6_stg_pln_rep_apl_cnt_less_4_stg_amt_avg double comment '近6个月单期计划中扣款次数小于4次_分期金额_avg',
+m6_stg_pln_rep_apl_cnt_less_4_stg_amt_sum double comment '近6个月单期计划中扣款次数小于4次_分期金额_sum',
+m6_stg_pln_rep_apl_cnt_mor_4_stg_amt_max double comment '近6个月单期计划中扣款次数大于4次_计划还款金额_max',
+m6_stg_pln_rep_apl_cnt_mor_4_stg_amt_min double comment '近6个月单期计划中扣款次数大于4次_计划还款金额_min',
+m6_stg_pln_rep_apl_cnt_mor_4_stg_amt_avg double comment '近6个月单期计划中扣款次数大于4次_计划还款金额_avg',
+m6_stg_pln_rep_apl_cnt_mor_4_stg_amt_sum double comment '近6个月单期计划中扣款次数大于4次_计划还款金额_sum',
+m6_stg_pln_normal_batch_rep_apl_cnt_less_2_stg_amt_max double comment '近6个月单期计划中常规批扣_扣款次数小于2次_分期金额_max',
+m6_stg_pln_normal_batch_rep_apl_cnt_less_2_stg_amt_min double comment '近6个月单期计划中常规批扣_扣款次数小于2次_分期金额_min',
+m6_stg_pln_normal_batch_rep_apl_cnt_less_2_stg_amt_avg double comment '近6个月单期计划中常规批扣_扣款次数小于2次_分期金额_avg',
+m6_stg_pln_normal_batch_rep_apl_cnt_less_2_stg_amt_sum double comment '近6个月单期计划中常规批扣_扣款次数小于2次_分期金额_sum',
+m6_stg_pln_normal_batch_rep_apl_cnt_mor_2_stg_amt_max double comment '近6个月单期计划中常规批扣_扣款次数大于2次_计划还款金额_max',
+m6_stg_pln_normal_batch_rep_apl_cnt_mor_2_stg_amt_min double comment '近6个月单期计划中常规批扣_扣款次数大于2次_计划还款金额_min',
+m6_stg_pln_normal_batch_rep_apl_cnt_mor_2_stg_amt_avg double comment '近6个月单期计划中常规批扣_扣款次数大于2次_计划还款金额_avg',
+m6_stg_pln_normal_batch_rep_apl_cnt_mor_2_stg_amt_sum double comment '近6个月单期计划中常规批扣_扣款次数大于2次_计划还款金额_sum',
+m6_stg_pln_rep_apl_cnt_equal_1_manual_rep_apl_amt_max double comment '近6个月单期计划中扣款次数等于1_用户主动还款_扣款金额_max',
+m6_stg_pln_rep_apl_cnt_equal_1_manual_rep_apl_amt_min double comment '近6个月单期计划中扣款次数等于1_用户主动还款_扣款金额_min',
+m6_stg_pln_rep_apl_cnt_equal_1_manual_rep_apl_amt_avg double comment '近6个月单期计划中扣款次数等于1_用户主动还款_扣款金额_avg',
+m6_stg_pln_rep_apl_cnt_equal_1_manual_rep_apl_amt_sum double comment '近6个月单期计划中扣款次数等于1_用户主动还款_扣款金额_sum',
+m6_stg_pln_rep_apl_fal_cnt_mor_1_rep_apl_amt_max double comment '近6个月单期计划中扣款失败次数大于1次_扣款金额_max',
+m6_stg_pln_rep_apl_fal_cnt_mor_1_rep_apl_amt_min double comment '近6个月单期计划中扣款失败次数大于1次_扣款金额_min',
+m6_stg_pln_rep_apl_fal_cnt_mor_1_rep_apl_amt_avg double comment '近6个月单期计划中扣款失败次数大于1次_扣款金额_avg',
+m6_stg_pln_rep_apl_fal_cnt_mor_1_rep_apl_amt_sum double comment '近6个月单期计划中扣款失败次数大于1次_扣款金额_sum',
+m6_stg_pln_rep_apl_fal_cnt_mor_3_rep_apl_amt_max double comment '近6个月单期计划中扣款失败次数大于3次_扣款金额_max',
+m6_stg_pln_rep_apl_fal_cnt_mor_3_rep_apl_amt_min double comment '近6个月单期计划中扣款失败次数大于3次_扣款金额_min',
+m6_stg_pln_rep_apl_fal_cnt_mor_3_rep_apl_amt_avg double comment '近6个月单期计划中扣款失败次数大于3次_扣款金额_avg',
+m6_stg_pln_rep_apl_fal_cnt_mor_3_rep_apl_amt_sum double comment '近6个月单期计划中扣款失败次数大于3次_扣款金额_sum',
+m6_stg_pln_rep_apl_amt_d0_max double comment '近6个月单期计划中扣款金额_D0还款_max',
+m6_stg_pln_rep_apl_amt_d0_min double comment '近6个月单期计划中扣款金额_D0还款_min',
+m6_stg_pln_rep_apl_amt_d0_avg double comment '近6个月单期计划中扣款金额_D0还款_avg',
+m6_stg_pln_rep_apl_amt_d0_sum double comment '近6个月单期计划中扣款金额_D0还款_sum',
+m6_stg_pln_rep_apl_amt_adv_max double comment '近6个月单期计划中扣款金额_提前还款_max',
+m6_stg_pln_rep_apl_amt_adv_min double comment '近6个月单期计划中扣款金额_提前还款_min',
+m6_stg_pln_rep_apl_amt_adv_avg double comment '近6个月单期计划中扣款金额_提前还款_avg',
+m6_stg_pln_rep_apl_amt_adv_sum double comment '近6个月单期计划中扣款金额_提前还款_sum',
+m6_stg_pln_rep_apl_amt_ovd_1d_3d_max double comment '近6个月单期计划中扣款金额_历史逾期1-3天_max',
+m6_stg_pln_rep_apl_amt_ovd_1d_3d_min double comment '近6个月单期计划中扣款金额_历史逾期1-3天_min',
+m6_stg_pln_rep_apl_amt_ovd_1d_3d_avg double comment '近6个月单期计划中扣款金额_历史逾期1-3天_avg',
+m6_stg_pln_rep_apl_amt_ovd_1d_3d_sum double comment '近6个月单期计划中扣款金额_历史逾期1-3天_sum',
+m6_stg_pln_rep_apl_amt_his_ovd_max double comment '近6个月单期计划中扣款金额_历史逾期_max',
+m6_stg_pln_rep_apl_amt_his_ovd_min double comment '近6个月单期计划中扣款金额_历史逾期_min',
+m6_stg_pln_rep_apl_amt_his_ovd_avg double comment '近6个月单期计划中扣款金额_历史逾期_avg',
+m6_stg_pln_rep_apl_amt_his_ovd_sum double comment '近6个月单期计划中扣款金额_历史逾期_sum',
+m1_stg_pln_rep_apl_cnt_equal_1_cnt double comment '近1个月单期计划中扣款次数等于1次的次数',
+m1_stg_pln_rep_apl_cnt_equal_2_cnt double comment '近1个月单期计划中扣款次数_等于2次',
+m1_stg_pln_rep_apl_cnt_mor_2_cnt double comment '近1个月单期计划中扣款次数_大于2次',
+m1_stg_pln_rep_apl_cnt_mor_4_cnt double comment '近1个月单期计划中扣款次数大于4次的次数',
+m1_stg_pln_manual_rep_apl_cnt_mor_0_cnt double comment '近1个月单期计划中用户主动还款_扣款次数_大于0次',
+m1_stg_pln_normal_batch_rep_apl_cnt_mor_0_cnt double comment '近1个月单期计划中常规批扣_扣款次数_大于0次',
+m1_stg_pln_ao_offline_rep_apl_cnt_mor_0_cnt double comment '近1个月单期计划中(数禾对公)线下还款_扣款次数_大于0次',
+m1_stg_pln_manual_deduct_rep_apl_cnt_equal_1_cnt double comment '近1个月单期计划中人工扣款_扣款次数_等于1次',
+m1_stg_pln_normal_batch_rep_apl_cnt_equal_2_cnt double comment '近1个月单期计划中常规批扣_扣款次数_等于2次',
+m1_stg_pln_normal_batch_rep_apl_cnt_mor_2_cnt double comment '近1个月单期计划中常规批扣_扣款次数_大于2次',
+m1_stg_pln_normal_batch_rep_apl_cnt_mor_4_cnt double comment '近1个月单期计划中常规批扣_扣款次数_大于4次',
+m1_stg_pln_rep_apl_fal_cnt_equal_0_cnt double comment '近1个月单期计划中扣款失败次数_等于0次',
+m1_stg_pln_rep_apl_fal_cnt_equal_1_cnt double comment '近1个月单期计划中扣款失败次数_等于1次',
+m1_stg_pln_rep_apl_fal_cnt_equal_2_cnt double comment '近1个月单期计划中扣款失败次数_等于2次',
+m1_stg_pln_rep_apl_fal_cnt_mor_2_cnt double comment '近1个月单期计划中扣款失败次数_大于2次',
+m1_stg_pln_rep_apl_fal_cnt_mor_4_cnt double comment '近1个月单期计划中扣款失败次数_大于4次',
+m1_stg_pln_normal_batch_rep_apl_fal_cnt_equal_0_cnt double comment '近1个月单期计划中常规批扣_扣款失败次数_等于0次',
+m1_stg_pln_normal_batch_rep_apl_fal_cnt_equal_1_cnt double comment '近1个月单期计划中常规批扣_扣款失败次数_等于1次',
+m1_stg_pln_normal_batch_rep_apl_fal_cnt_equal_2_cnt double comment '近1个月单期计划中常规批扣_扣款失败次数_等于2次',
+m1_stg_pln_normal_batch_rep_apl_fal_cnt_mor_2_cnt double comment '近1个月单期计划中常规批扣_扣款失败次数_大于2次',
+m1_stg_pln_normal_batch_rep_apl_fal_cnt_mor_4_cnt double comment '近1个月单期计划中常规批扣_扣款失败次数_大于4次',
+m1_stg_pln_d0_rep_apl_cnt_equal_1_cnt double comment '近1个月D0还款分期计划_扣款次数_等于1次',
+m1_stg_pln_d0_rep_apl_cnt_equal_2_cnt double comment '近1个月D0还款分期计划_扣款次数_等于2次',
+m1_stg_pln_d0_rep_apl_cnt_mor_2_cnt double comment '近1个月D0还款分期计划_扣款次数_大于2次',
+m1_stg_pln_d0_rep_apl_cnt_mor_4_cnt double comment '近1个月D0还款分期计划_扣款次数_大于4次',
+m1_stg_pln_d0_manual_rep_apl_cnt_mor_0_cnt double comment '近1个月D0还款分期计划_用户主动还款_扣款次数_大于0次',
+m1_stg_pln_d0_normal_batch_rep_apl_cnt_mor_0_cnt double comment '近1个月D0还款分期计划_常规批扣_扣款次数_大于0次',
+m1_stg_pln_d0_ao_offline_rep_apl_cnt_mor_0_cnt double comment '近1个月D0还款分期计划_(数禾对公)线下还款_扣款次数_大于0次',
+m1_stg_pln_d0_manual_deduct_rep_apl_cnt_equal_1_cnt double comment '近1个月D0还款分期计划_人工扣款_扣款次数_等于1次',
+m1_stg_pln_d0_normal_batch_rep_apl_cnt_equal_2_cnt double comment '近1个月D0还款分期计划_常规批扣_扣款次数_等于2次',
+m1_stg_pln_d0_normal_batch_rep_apl_cnt_mor_2_cnt double comment '近1个月D0还款分期计划_常规批扣_扣款次数_大于2次',
+m1_stg_pln_d0_normal_batch_rep_apl_cnt_mor_4_cnt double comment '近1个月D0还款分期计划_常规批扣_扣款次数_大于4次',
+m1_stg_pln_d0_rep_apl_fal_cnt_equal_0_cnt double comment '近1个月D0还款分期计划_扣款失败次数_等于0次',
+m1_stg_pln_d0_rep_apl_fal_cnt_equal_1_cnt double comment '近1个月D0还款分期计划_扣款失败次数_等于1次',
+m1_stg_pln_d0_rep_apl_fal_cnt_equal_2_cnt double comment '近1个月D0还款分期计划_扣款失败次数_等于2次',
+m1_stg_pln_d0_rep_apl_fal_cnt_mor_4_cnt double comment '近1个月D0还款分期计划_扣款失败次数_大于4次',
+m1_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_0_cnt double comment '近1个月D0还款分期计划_常规批扣_扣款失败次数_等于0次',
+m1_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_1_cnt double comment '近1个月D0还款分期计划_常规批扣_扣款失败次数_等于1次',
+m1_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_2_cnt double comment '近1个月D0还款分期计划_常规批扣_扣款失败次数_等于2次',
+m1_stg_pln_d0_normal_batch_rep_apl_fal_cnt_mor_4_cnt double comment '近1个月D0还款分期计划_常规批扣_扣款失败次数_大于4次',
+m3_stg_pln_rep_apl_cnt_equal_1_cnt double comment '近3个月单期计划中扣款次数等于1次的次数',
+m3_stg_pln_rep_apl_cnt_equal_2_cnt double comment '近3个月单期计划中扣款次数_等于2次',
+m3_stg_pln_rep_apl_cnt_mor_2_cnt double comment '近3个月单期计划中扣款次数_大于2次',
+m3_stg_pln_rep_apl_cnt_mor_4_cnt double comment '近3个月单期计划中扣款次数大于4次的次数',
+m3_stg_pln_manual_rep_apl_cnt_mor_0_cnt double comment '近3个月单期计划中用户主动还款_扣款次数_大于0次',
+m3_stg_pln_normal_batch_rep_apl_cnt_mor_0_cnt double comment '近3个月单期计划中常规批扣_扣款次数_大于0次',
+m3_stg_pln_ao_offline_rep_apl_cnt_mor_0_cnt double comment '近3个月单期计划中(数禾对公)线下还款_扣款次数_大于0次',
+m3_stg_pln_manual_deduct_rep_apl_cnt_equal_1_cnt double comment '近3个月单期计划中人工扣款_扣款次数_等于1次',
+m3_stg_pln_normal_batch_rep_apl_cnt_equal_2_cnt double comment '近3个月单期计划中常规批扣_扣款次数_等于2次',
+m3_stg_pln_normal_batch_rep_apl_cnt_mor_2_cnt double comment '近3个月单期计划中常规批扣_扣款次数_大于2次',
+m3_stg_pln_normal_batch_rep_apl_cnt_mor_4_cnt double comment '近3个月单期计划中常规批扣_扣款次数_大于4次',
+m3_stg_pln_rep_apl_fal_cnt_equal_0_cnt double comment '近3个月单期计划中扣款失败次数_等于0次',
+m3_stg_pln_rep_apl_fal_cnt_equal_1_cnt double comment '近3个月单期计划中扣款失败次数_等于1次',
+m3_stg_pln_rep_apl_fal_cnt_equal_2_cnt double comment '近3个月单期计划中扣款失败次数_等于2次',
+m3_stg_pln_rep_apl_fal_cnt_mor_2_cnt double comment '近3个月单期计划中扣款失败次数_大于2次',
+m3_stg_pln_rep_apl_fal_cnt_mor_4_cnt double comment '近3个月单期计划中扣款失败次数_大于4次',
+m3_stg_pln_normal_batch_rep_apl_fal_cnt_equal_0_cnt double comment '近3个月单期计划中常规批扣_扣款失败次数_等于0次',
+m3_stg_pln_normal_batch_rep_apl_fal_cnt_equal_1_cnt double comment '近3个月单期计划中常规批扣_扣款失败次数_等于1次',
+m3_stg_pln_normal_batch_rep_apl_fal_cnt_equal_2_cnt double comment '近3个月单期计划中常规批扣_扣款失败次数_等于2次',
+m3_stg_pln_normal_batch_rep_apl_fal_cnt_mor_2_cnt double comment '近3个月单期计划中常规批扣_扣款失败次数_大于2次',
+m3_stg_pln_normal_batch_rep_apl_fal_cnt_mor_4_cnt double comment '近3个月单期计划中常规批扣_扣款失败次数_大于4次',
+m3_stg_pln_d0_rep_apl_cnt_equal_1_cnt double comment '近3个月D0还款分期计划_扣款次数_等于1次',
+m3_stg_pln_d0_rep_apl_cnt_equal_2_cnt double comment '近3个月D0还款分期计划_扣款次数_等于2次',
+m3_stg_pln_d0_rep_apl_cnt_mor_2_cnt double comment '近3个月D0还款分期计划_扣款次数_大于2次',
+m3_stg_pln_d0_rep_apl_cnt_mor_4_cnt double comment '近3个月D0还款分期计划_扣款次数_大于4次',
+m3_stg_pln_d0_manual_rep_apl_cnt_mor_0_cnt double comment '近3个月D0还款分期计划_用户主动还款_扣款次数_大于0次',
+m3_stg_pln_d0_normal_batch_rep_apl_cnt_mor_0_cnt double comment '近3个月D0还款分期计划_常规批扣_扣款次数_大于0次',
+m3_stg_pln_d0_ao_offline_rep_apl_cnt_mor_0_cnt double comment '近3个月D0还款分期计划_(数禾对公)线下还款_扣款次数_大于0次',
+m3_stg_pln_d0_manual_deduct_rep_apl_cnt_equal_1_cnt double comment '近3个月D0还款分期计划_人工扣款_扣款次数_等于1次',
+m3_stg_pln_d0_normal_batch_rep_apl_cnt_equal_2_cnt double comment '近3个月D0还款分期计划_常规批扣_扣款次数_等于2次',
+m3_stg_pln_d0_normal_batch_rep_apl_cnt_mor_2_cnt double comment '近3个月D0还款分期计划_常规批扣_扣款次数_大于2次',
+m3_stg_pln_d0_normal_batch_rep_apl_cnt_mor_4_cnt double comment '近3个月D0还款分期计划_常规批扣_扣款次数_大于4次',
+m3_stg_pln_d0_rep_apl_fal_cnt_equal_0_cnt double comment '近3个月D0还款分期计划_扣款失败次数_等于0次',
+m3_stg_pln_d0_rep_apl_fal_cnt_equal_1_cnt double comment '近3个月D0还款分期计划_扣款失败次数_等于1次',
+m3_stg_pln_d0_rep_apl_fal_cnt_equal_2_cnt double comment '近3个月D0还款分期计划_扣款失败次数_等于2次',
+m3_stg_pln_d0_rep_apl_fal_cnt_mor_4_cnt double comment '近3个月D0还款分期计划_扣款失败次数_大于4次',
+m3_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_0_cnt double comment '近3个月D0还款分期计划_常规批扣_扣款失败次数_等于0次',
+m3_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_1_cnt double comment '近3个月D0还款分期计划_常规批扣_扣款失败次数_等于1次',
+m3_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_2_cnt double comment '近3个月D0还款分期计划_常规批扣_扣款失败次数_等于2次',
+m3_stg_pln_d0_normal_batch_rep_apl_fal_cnt_mor_4_cnt double comment '近3个月D0还款分期计划_常规批扣_扣款失败次数_大于4次',
+m6_stg_pln_rep_apl_cnt_equal_1_cnt double comment '近6个月单期计划中扣款次数等于1次的次数',
+m6_stg_pln_rep_apl_cnt_equal_2_cnt double comment '近6个月单期计划中扣款次数_等于2次',
+m6_stg_pln_rep_apl_cnt_mor_2_cnt double comment '近6个月单期计划中扣款次数_大于2次',
+m6_stg_pln_rep_apl_cnt_mor_4_cnt double comment '近6个月单期计划中扣款次数大于4次的次数',
+m6_stg_pln_manual_rep_apl_cnt_mor_0_cnt double comment '近6个月单期计划中用户主动还款_扣款次数_大于0次',
+m6_stg_pln_normal_batch_rep_apl_cnt_mor_0_cnt double comment '近6个月单期计划中常规批扣_扣款次数_大于0次',
+m6_stg_pln_ao_offline_rep_apl_cnt_mor_0_cnt double comment '近6个月单期计划中(数禾对公)线下还款_扣款次数_大于0次',
+m6_stg_pln_manual_deduct_rep_apl_cnt_equal_1_cnt double comment '近6个月单期计划中人工扣款_扣款次数_等于1次',
+m6_stg_pln_normal_batch_rep_apl_cnt_equal_2_cnt double comment '近6个月单期计划中常规批扣_扣款次数_等于2次',
+m6_stg_pln_normal_batch_rep_apl_cnt_mor_2_cnt double comment '近6个月单期计划中常规批扣_扣款次数_大于2次',
+m6_stg_pln_normal_batch_rep_apl_cnt_mor_4_cnt double comment '近6个月单期计划中常规批扣_扣款次数_大于4次',
+m6_stg_pln_rep_apl_fal_cnt_equal_0_cnt double comment '近6个月单期计划中扣款失败次数_等于0次',
+m6_stg_pln_rep_apl_fal_cnt_equal_1_cnt double comment '近6个月单期计划中扣款失败次数_等于1次',
+m6_stg_pln_rep_apl_fal_cnt_equal_2_cnt double comment '近6个月单期计划中扣款失败次数_等于2次',
+m6_stg_pln_rep_apl_fal_cnt_mor_2_cnt double comment '近6个月单期计划中扣款失败次数_大于2次',
+m6_stg_pln_rep_apl_fal_cnt_mor_4_cnt double comment '近6个月单期计划中扣款失败次数_大于4次',
+m6_stg_pln_normal_batch_rep_apl_fal_cnt_equal_0_cnt double comment '近6个月单期计划中常规批扣_扣款失败次数_等于0次',
+m6_stg_pln_normal_batch_rep_apl_fal_cnt_equal_1_cnt double comment '近6个月单期计划中常规批扣_扣款失败次数_等于1次',
+m6_stg_pln_normal_batch_rep_apl_fal_cnt_equal_2_cnt double comment '近6个月单期计划中常规批扣_扣款失败次数_等于2次',
+m6_stg_pln_normal_batch_rep_apl_fal_cnt_mor_2_cnt double comment '近6个月单期计划中常规批扣_扣款失败次数_大于2次',
+m6_stg_pln_normal_batch_rep_apl_fal_cnt_mor_4_cnt double comment '近6个月单期计划中常规批扣_扣款失败次数_大于4次',
+m6_stg_pln_d0_rep_apl_cnt_equal_1_cnt double comment '近6个月D0还款分期计划_扣款次数_等于1次',
+m6_stg_pln_d0_rep_apl_cnt_equal_2_cnt double comment '近6个月D0还款分期计划_扣款次数_等于2次',
+m6_stg_pln_d0_rep_apl_cnt_mor_2_cnt double comment '近6个月D0还款分期计划_扣款次数_大于2次',
+m6_stg_pln_d0_rep_apl_cnt_mor_4_cnt double comment '近6个月D0还款分期计划_扣款次数_大于4次',
+m6_stg_pln_d0_manual_rep_apl_cnt_mor_0_cnt double comment '近6个月D0还款分期计划_用户主动还款_扣款次数_大于0次',
+m6_stg_pln_d0_normal_batch_rep_apl_cnt_mor_0_cnt double comment '近6个月D0还款分期计划_常规批扣_扣款次数_大于0次',
+m6_stg_pln_d0_ao_offline_rep_apl_cnt_mor_0_cnt double comment '近6个月D0还款分期计划_(数禾对公)线下还款_扣款次数_大于0次',
+m6_stg_pln_d0_manual_deduct_rep_apl_cnt_equal_1_cnt double comment '近6个月D0还款分期计划_人工扣款_扣款次数_等于1次',
+m6_stg_pln_d0_normal_batch_rep_apl_cnt_equal_2_cnt double comment '近6个月D0还款分期计划_常规批扣_扣款次数_等于2次',
+m6_stg_pln_d0_normal_batch_rep_apl_cnt_mor_2_cnt double comment '近6个月D0还款分期计划_常规批扣_扣款次数_大于2次',
+m6_stg_pln_d0_normal_batch_rep_apl_cnt_mor_4_cnt double comment '近6个月D0还款分期计划_常规批扣_扣款次数_大于4次',
+m6_stg_pln_d0_rep_apl_fal_cnt_equal_0_cnt double comment '近6个月D0还款分期计划_扣款失败次数_等于0次',
+m6_stg_pln_d0_rep_apl_fal_cnt_equal_1_cnt double comment '近6个月D0还款分期计划_扣款失败次数_等于1次',
+m6_stg_pln_d0_rep_apl_fal_cnt_equal_2_cnt double comment '近6个月D0还款分期计划_扣款失败次数_等于2次',
+m6_stg_pln_d0_rep_apl_fal_cnt_mor_4_cnt double comment '近6个月D0还款分期计划_扣款失败次数_大于4次',
+m6_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_0_cnt double comment '近6个月D0还款分期计划_常规批扣_扣款失败次数_等于0次',
+m6_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_1_cnt double comment '近6个月D0还款分期计划_常规批扣_扣款失败次数_等于1次',
+m6_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_2_cnt double comment '近6个月D0还款分期计划_常规批扣_扣款失败次数_等于2次',
+m6_stg_pln_d0_normal_batch_rep_apl_fal_cnt_mor_4_cnt double comment '近6个月D0还款分期计划_常规批扣_扣款失败次数_大于4次',
+m1_stg_pln_rep_apl_cnt_equal_1_cnt_rat double comment '近1个月单期计划中扣款次数_等于1次占比',
+m1_stg_pln_rep_apl_cnt_equal_2_cnt_rat double comment '近1个月单期计划中扣款次数_等于2次占比',
+m1_stg_pln_rep_apl_cnt_mor_2_cnt_rat double comment '近1个月单期计划中扣款次数_大于2次占比',
+m1_stg_pln_rep_apl_cnt_mor_4_cnt_rat double comment '近1个月单期计划中扣款次数_大于4次占比',
+m1_stg_pln_manual_rep_apl_cnt_mor_0_cnt_rat double comment '近1个月单期计划中用户主动还款_扣款次数_大于0次占比',
+m1_stg_pln_normal_batch_rep_apl_cnt_mor_0_cnt_rat double comment '近1个月单期计划中常规批扣_扣款次数_大于0次占比',
+m1_stg_pln_ao_offline_rep_apl_cnt_mor_0_cnt_rat double comment '近1个月单期计划中(数禾对公)线下还款_扣款次数_大于0次占比',
+m1_stg_pln_manual_deduct_rep_apl_cnt_equal_1_cnt_rat double comment '近1个月单期计划中人工扣款_扣款次数_等于1次占比',
+m1_stg_pln_normal_batch_rep_apl_cnt_equal_2_cnt_rat double comment '近1个月单期计划中常规批扣_扣款次数_等于2次占比',
+m1_stg_pln_normal_batch_rep_apl_cnt_mor_2_cnt_rat double comment '近1个月单期计划中常规批扣_扣款次数_大于2次占比',
+m1_stg_pln_normal_batch_rep_apl_cnt_mor_4_cnt_rat double comment '近1个月单期计划中常规批扣_扣款次数_大于4次占比',
+m1_stg_pln_rep_apl_fal_cnt_equal_0_cnt_rat double comment '近1个月单期计划中扣款失败次数_等于0次占比',
+m1_stg_pln_rep_apl_fal_cnt_equal_1_cnt_rat double comment '近1个月单期计划中扣款失败次数_等于1次占比',
+m1_stg_pln_rep_apl_fal_cnt_equal_2_cnt_rat double comment '近1个月单期计划中扣款失败次数_等于2次占比',
+m1_stg_pln_rep_apl_fal_cnt_mor_2_cnt_rat double comment '近1个月单期计划中扣款失败次数_大于2次占比',
+m1_stg_pln_rep_apl_fal_cnt_mor_4_cnt_rat double comment '近1个月单期计划中扣款失败次数_大于4次占比',
+m1_stg_pln_normal_batch_rep_apl_fal_cnt_equal_0_cnt_rat double comment '近1个月单期计划中常规批扣_扣款失败次数_等于0次占比',
+m1_stg_pln_normal_batch_rep_apl_fal_cnt_equal_1_cnt_rat double comment '近1个月单期计划中常规批扣_扣款失败次数_等于1次占比',
+m1_stg_pln_normal_batch_rep_apl_fal_cnt_equal_2_cnt_rat double comment '近1个月单期计划中常规批扣_扣款失败次数_等于2次占比',
+m1_stg_pln_normal_batch_rep_apl_fal_cnt_mor_2_cnt_rat double comment '近1个月单期计划中常规批扣_扣款失败次数_大于2次占比',
+m1_stg_pln_normal_batch_rep_apl_fal_cnt_mor_4_cnt_rat double comment '近1个月单期计划中常规批扣_扣款失败次数_大于4次占比',
+m1_stg_pln_d0_rep_apl_cnt_equal_1_cnt_rat double comment '近1个月D0还款分期计划_扣款次数_等于1次占比',
+m1_stg_pln_d0_rep_apl_cnt_equal_2_cnt_rat double comment '近1个月D0还款分期计划_扣款次数_等于2次占比',
+m1_stg_pln_d0_rep_apl_cnt_mor_2_cnt_rat double comment '近1个月D0还款分期计划_扣款次数_大于2次占比',
+m1_stg_pln_d0_rep_apl_cnt_mor_4_cnt_rat double comment '近1个月D0还款分期计划_扣款次数_大于4次占比',
+m1_stg_pln_d0_manual_rep_apl_cnt_mor_0_cnt_rat double comment '近1个月D0还款分期计划_用户主动还款_扣款次数_大于0次占比',
+m1_stg_pln_d0_normal_batch_rep_apl_cnt_mor_0_cnt_rat double comment '近1个月D0还款分期计划_常规批扣_扣款次数_大于0次占比',
+m1_stg_pln_d0_ao_offline_rep_apl_cnt_mor_0_cnt_rat double comment '近1个月D0还款分期计划_(数禾对公)线下还款_扣款次数_大于0次占比',
+m1_stg_pln_d0_manual_deduct_rep_apl_cnt_equal_1_cnt_rat double comment '近1个月D0还款分期计划_人工扣款_扣款次数_等于1次占比',
+m1_stg_pln_d0_normal_batch_rep_apl_cnt_equal_2_cnt_rat double comment '近1个月D0还款分期计划_常规批扣_扣款次数_等于2次占比',
+m1_stg_pln_d0_normal_batch_rep_apl_cnt_mor_2_cnt_rat double comment '近1个月D0还款分期计划_常规批扣_扣款次数_大于2次占比',
+m1_stg_pln_d0_normal_batch_rep_apl_cnt_mor_4_cnt_rat double comment '近1个月D0还款分期计划_常规批扣_扣款次数_大于4次占比',
+m1_stg_pln_d0_rep_apl_fal_cnt_equal_0_cnt_rat double comment '近1个月D0还款分期计划_扣款失败次数_等于0次占比',
+m1_stg_pln_d0_rep_apl_fal_cnt_equal_1_cnt_rat double comment '近1个月D0还款分期计划_扣款失败次数_等于1次占比',
+m1_stg_pln_d0_rep_apl_fal_cnt_equal_2_cnt_rat double comment '近1个月D0还款分期计划_扣款失败次数_等于2次占比',
+m1_stg_pln_d0_rep_apl_fal_cnt_mor_4_cnt_rat double comment '近1个月D0还款分期计划_扣款失败次数_大于4次占比',
+m1_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_0_cnt_rat double comment '近1个月D0还款分期计划_常规批扣_扣款失败次数_等于0次占比',
+m1_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_1_cnt_rat double comment '近1个月D0还款分期计划_常规批扣_扣款失败次数_等于1次占比',
+m1_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_2_cnt_rat double comment '近1个月D0还款分期计划_常规批扣_扣款失败次数_等于2次占比',
+m1_stg_pln_d0_normal_batch_rep_apl_fal_cnt_mor_4_cnt_rat double comment '近1个月D0还款分期计划_常规批扣_扣款失败次数_大于4次占比',
+m3_stg_pln_rep_apl_cnt_equal_1_cnt_rat double comment '近3个月单期计划中扣款次数_等于1次占比',
+m3_stg_pln_rep_apl_cnt_equal_2_cnt_rat double comment '近3个月单期计划中扣款次数_等于2次占比',
+m3_stg_pln_rep_apl_cnt_mor_2_cnt_rat double comment '近3个月单期计划中扣款次数_大于2次占比',
+m3_stg_pln_rep_apl_cnt_mor_4_cnt_rat double comment '近3个月单期计划中扣款次数_大于4次占比',
+m3_stg_pln_manual_rep_apl_cnt_mor_0_cnt_rat double comment '近3个月单期计划中用户主动还款_扣款次数_大于0次占比',
+m3_stg_pln_normal_batch_rep_apl_cnt_mor_0_cnt_rat double comment '近3个月单期计划中常规批扣_扣款次数_大于0次占比',
+m3_stg_pln_ao_offline_rep_apl_cnt_mor_0_cnt_rat double comment '近3个月单期计划中(数禾对公)线下还款_扣款次数_大于0次占比',
+m3_stg_pln_manual_deduct_rep_apl_cnt_equal_1_cnt_rat double comment '近3个月单期计划中人工扣款_扣款次数_等于1次占比',
+m3_stg_pln_normal_batch_rep_apl_cnt_equal_2_cnt_rat double comment '近3个月单期计划中常规批扣_扣款次数_等于2次占比',
+m3_stg_pln_normal_batch_rep_apl_cnt_mor_2_cnt_rat double comment '近3个月单期计划中常规批扣_扣款次数_大于2次占比',
+m3_stg_pln_normal_batch_rep_apl_cnt_mor_4_cnt_rat double comment '近3个月单期计划中常规批扣_扣款次数_大于4次占比',
+m3_stg_pln_rep_apl_fal_cnt_equal_0_cnt_rat double comment '近3个月单期计划中扣款失败次数_等于0次占比',
+m3_stg_pln_rep_apl_fal_cnt_equal_1_cnt_rat double comment '近3个月单期计划中扣款失败次数_等于1次占比',
+m3_stg_pln_rep_apl_fal_cnt_equal_2_cnt_rat double comment '近3个月单期计划中扣款失败次数_等于2次占比',
+m3_stg_pln_rep_apl_fal_cnt_mor_2_cnt_rat double comment '近3个月单期计划中扣款失败次数_大于2次占比',
+m3_stg_pln_rep_apl_fal_cnt_mor_4_cnt_rat double comment '近3个月单期计划中扣款失败次数_大于4次占比',
+m3_stg_pln_normal_batch_rep_apl_fal_cnt_equal_0_cnt_rat double comment '近3个月单期计划中常规批扣_扣款失败次数_等于0次占比',
+m3_stg_pln_normal_batch_rep_apl_fal_cnt_equal_1_cnt_rat double comment '近3个月单期计划中常规批扣_扣款失败次数_等于1次占比',
+m3_stg_pln_normal_batch_rep_apl_fal_cnt_equal_2_cnt_rat double comment '近3个月单期计划中常规批扣_扣款失败次数_等于2次占比',
+m3_stg_pln_normal_batch_rep_apl_fal_cnt_mor_2_cnt_rat double comment '近3个月单期计划中常规批扣_扣款失败次数_大于2次占比',
+m3_stg_pln_normal_batch_rep_apl_fal_cnt_mor_4_cnt_rat double comment '近3个月单期计划中常规批扣_扣款失败次数_大于4次占比',
+m3_stg_pln_d0_rep_apl_cnt_equal_1_cnt_rat double comment '近3个月D0还款分期计划_扣款次数_等于1次占比',
+m3_stg_pln_d0_rep_apl_cnt_equal_2_cnt_rat double comment '近3个月D0还款分期计划_扣款次数_等于2次占比',
+m3_stg_pln_d0_rep_apl_cnt_mor_2_cnt_rat double comment '近3个月D0还款分期计划_扣款次数_大于2次占比',
+m3_stg_pln_d0_rep_apl_cnt_mor_4_cnt_rat double comment '近3个月D0还款分期计划_扣款次数_大于4次占比',
+m3_stg_pln_d0_manual_rep_apl_cnt_mor_0_cnt_rat double comment '近3个月D0还款分期计划_用户主动还款_扣款次数_大于0次占比',
+m3_stg_pln_d0_normal_batch_rep_apl_cnt_mor_0_cnt_rat double comment '近3个月D0还款分期计划_常规批扣_扣款次数_大于0次占比',
+m3_stg_pln_d0_ao_offline_rep_apl_cnt_mor_0_cnt_rat double comment '近3个月D0还款分期计划_(数禾对公)线下还款_扣款次数_大于0次占比',
+m3_stg_pln_d0_manual_deduct_rep_apl_cnt_equal_1_cnt_rat double comment '近3个月D0还款分期计划_人工扣款_扣款次数_等于1次占比',
+m3_stg_pln_d0_normal_batch_rep_apl_cnt_equal_2_cnt_rat double comment '近3个月D0还款分期计划_常规批扣_扣款次数_等于2次占比',
+m3_stg_pln_d0_normal_batch_rep_apl_cnt_mor_2_cnt_rat double comment '近3个月D0还款分期计划_常规批扣_扣款次数_大于2次占比',
+m3_stg_pln_d0_normal_batch_rep_apl_cnt_mor_4_cnt_rat double comment '近3个月D0还款分期计划_常规批扣_扣款次数_大于4次占比',
+m3_stg_pln_d0_rep_apl_fal_cnt_equal_0_cnt_rat double comment '近3个月D0还款分期计划_扣款失败次数_等于0次占比',
+m3_stg_pln_d0_rep_apl_fal_cnt_equal_1_cnt_rat double comment '近3个月D0还款分期计划_扣款失败次数_等于1次占比',
+m3_stg_pln_d0_rep_apl_fal_cnt_equal_2_cnt_rat double comment '近3个月D0还款分期计划_扣款失败次数_等于2次占比',
+m3_stg_pln_d0_rep_apl_fal_cnt_mor_4_cnt_rat double comment '近3个月D0还款分期计划_扣款失败次数_大于4次占比',
+m3_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_0_cnt_rat double comment '近3个月D0还款分期计划_常规批扣_扣款失败次数_等于0次占比',
+m3_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_1_cnt_rat double comment '近3个月D0还款分期计划_常规批扣_扣款失败次数_等于1次占比',
+m3_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_2_cnt_rat double comment '近3个月D0还款分期计划_常规批扣_扣款失败次数_等于2次占比',
+m3_stg_pln_d0_normal_batch_rep_apl_fal_cnt_mor_4_cnt_rat double comment '近3个月D0还款分期计划_常规批扣_扣款失败次数_大于4次占比',
+m6_stg_pln_rep_apl_cnt_equal_1_cnt_rat double comment '近6个月单期计划中扣款次数_等于1次占比',
+m6_stg_pln_rep_apl_cnt_equal_2_cnt_rat double comment '近6个月单期计划中扣款次数_等于2次占比',
+m6_stg_pln_rep_apl_cnt_mor_2_cnt_rat double comment '近6个月单期计划中扣款次数_大于2次占比',
+m6_stg_pln_rep_apl_cnt_mor_4_cnt_rat double comment '近6个月单期计划中扣款次数_大于4次占比',
+m6_stg_pln_manual_rep_apl_cnt_mor_0_cnt_rat double comment '近6个月单期计划中用户主动还款_扣款次数_大于0次占比',
+m6_stg_pln_normal_batch_rep_apl_cnt_mor_0_cnt_rat double comment '近6个月单期计划中常规批扣_扣款次数_大于0次占比',
+m6_stg_pln_ao_offline_rep_apl_cnt_mor_0_cnt_rat double comment '近6个月单期计划中(数禾对公)线下还款_扣款次数_大于0次占比',
+m6_stg_pln_manual_deduct_rep_apl_cnt_equal_1_cnt_rat double comment '近6个月单期计划中人工扣款_扣款次数_等于1次占比',
+m6_stg_pln_normal_batch_rep_apl_cnt_equal_2_cnt_rat double comment '近6个月单期计划中常规批扣_扣款次数_等于2次占比',
+m6_stg_pln_normal_batch_rep_apl_cnt_mor_2_cnt_rat double comment '近6个月单期计划中常规批扣_扣款次数_大于2次占比',
+m6_stg_pln_normal_batch_rep_apl_cnt_mor_4_cnt_rat double comment '近6个月单期计划中常规批扣_扣款次数_大于4次占比',
+m6_stg_pln_rep_apl_fal_cnt_equal_0_cnt_rat double comment '近6个月单期计划中扣款失败次数_等于0次占比',
+m6_stg_pln_rep_apl_fal_cnt_equal_1_cnt_rat double comment '近6个月单期计划中扣款失败次数_等于1次占比',
+m6_stg_pln_rep_apl_fal_cnt_equal_2_cnt_rat double comment '近6个月单期计划中扣款失败次数_等于2次占比',
+m6_stg_pln_rep_apl_fal_cnt_mor_2_cnt_rat double comment '近6个月单期计划中扣款失败次数_大于2次占比',
+m6_stg_pln_rep_apl_fal_cnt_mor_4_cnt_rat double comment '近6个月单期计划中扣款失败次数_大于4次占比',
+m6_stg_pln_normal_batch_rep_apl_fal_cnt_equal_0_cnt_rat double comment '近6个月单期计划中常规批扣_扣款失败次数_等于0次占比',
+m6_stg_pln_normal_batch_rep_apl_fal_cnt_equal_1_cnt_rat double comment '近6个月单期计划中常规批扣_扣款失败次数_等于1次占比',
+m6_stg_pln_normal_batch_rep_apl_fal_cnt_equal_2_cnt_rat double comment '近6个月单期计划中常规批扣_扣款失败次数_等于2次占比',
+m6_stg_pln_normal_batch_rep_apl_fal_cnt_mor_2_cnt_rat double comment '近6个月单期计划中常规批扣_扣款失败次数_大于2次占比',
+m6_stg_pln_normal_batch_rep_apl_fal_cnt_mor_4_cnt_rat double comment '近6个月单期计划中常规批扣_扣款失败次数_大于4次占比',
+m6_stg_pln_d0_rep_apl_cnt_equal_1_cnt_rat double comment '近6个月D0还款分期计划_扣款次数_等于1次占比',
+m6_stg_pln_d0_rep_apl_cnt_equal_2_cnt_rat double comment '近6个月D0还款分期计划_扣款次数_等于2次占比',
+m6_stg_pln_d0_rep_apl_cnt_mor_2_cnt_rat double comment '近6个月D0还款分期计划_扣款次数_大于2次占比',
+m6_stg_pln_d0_rep_apl_cnt_mor_4_cnt_rat double comment '近3个月D0还款分期计划_扣款次数_大于4次占比',
+m6_stg_pln_d0_manual_rep_apl_cnt_mor_0_cnt_rat double comment '近6个月D0还款分期计划_用户主动还款_扣款次数_大于0次占比',
+m6_stg_pln_d0_normal_batch_rep_apl_cnt_mor_0_cnt_rat double comment '近3个月D0还款分期计划_常规批扣_扣款次数_大于0次占比',
+m6_stg_pln_d0_ao_offline_rep_apl_cnt_mor_0_cnt_rat double comment '近3个月D0还款分期计划_(数禾对公)线下还款_扣款次数_大于0次占比',
+m6_stg_pln_d0_manual_deduct_rep_apl_cnt_equal_1_cnt_rat double comment '近3个月D0还款分期计划_人工扣款_扣款次数_等于1次占比',
+m6_stg_pln_d0_normal_batch_rep_apl_cnt_equal_2_cnt_rat double comment '近6个月D0还款分期计划_常规批扣_扣款次数_等于2次占比',
+m6_stg_pln_d0_normal_batch_rep_apl_cnt_mor_2_cnt_rat double comment '近3个月D0还款分期计划_常规批扣_扣款次数_大于2次占比',
+m6_stg_pln_d0_normal_batch_rep_apl_cnt_mor_4_cnt_rat double comment '近3个月D0还款分期计划_常规批扣_扣款次数_大于4次占比',
+m6_stg_pln_d0_rep_apl_fal_cnt_equal_0_cnt_rat double comment '近6个月D0还款分期计划_扣款失败次数_等于0次占比',
+m6_stg_pln_d0_rep_apl_fal_cnt_equal_1_cnt_rat double comment '近6个月D0还款分期计划_扣款失败次数_等于1次占比',
+m6_stg_pln_d0_rep_apl_fal_cnt_equal_2_cnt_rat double comment '近6个月D0还款分期计划_扣款失败次数_等于2次占比',
+m6_stg_pln_d0_rep_apl_fal_cnt_mor_4_cnt_rat double comment '近3个月D0还款分期计划_扣款失败次数_大于4次占比',
+m6_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_0_cnt_rat double comment '近6个月D0还款分期计划_常规批扣_扣款失败次数_等于0次占比',
+m6_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_1_cnt_rat double comment '近6个月D0还款分期计划_常规批扣_扣款失败次数_等于1次占比',
+m6_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_2_cnt_rat double comment '近6个月D0还款分期计划_常规批扣_扣款失败次数_等于2次占比',
+m6_stg_pln_d0_normal_batch_rep_apl_fal_cnt_mor_4_cnt_rat double comment '近3个月D0还款分期计划_常规批扣_扣款失败次数_大于4次占比'
+)comment 'dwa_risk_dz_model_final_rep_apply_summary_4'
+partitioned by (ds string)
+;
+
+
+
+set odps.stage.mapper.split.size=20;
+-- 单次分期计划明细
+drop table if exists ${dwa_risk}.dwa_risk_dz_model_final_rep_apply_summary_4_tmp;
+create table ${dwa_risk}.dwa_risk_dz_model_final_rep_apply_summary_4_tmp as 
+select uid
+       ,mdl_dte
+       
+       ,stg_pln_no
+       ,rep_tim_type
+       ,schedule_total_amount
+
+       -- 时间标签
+       ,max(m1_flg) as m1_flg
+       ,max(m3_flg) as m3_flg
+       ,max(m6_flg) as m6_flg
+
+       -- 扣款记录 --
+       ,count(repay_apply_no) as stg_pln_rep_apl_cnt
+       ,count(case when rpy_desc = '(用户)主动还款' then repay_apply_no else NULL end) as stg_pln_manual_rep_apl_cnt
+       ,count(case when rpy_desc = '(数禾对公)线下还款' then repay_apply_no else NULL end) as stg_pln_ao_offline_rep_apl_cnt
+       ,count(case when rpy_desc = '人工扣款' then repay_apply_no else NULL end) as stg_pln_manual_deduct_rep_apl_cnt
+       ,count(case when rpy_desc = '常规批扣' then repay_apply_no else NULL end) as stg_pln_normal_batch_rep_apl_cnt
+       ,count(case when rpy_desc = '逾期批扣' then repay_apply_no else NULL end) as stg_pln_add_bathch_rep_apl_cnt
+       -- 成功扣款
+       ,count(case when repay_status like '%SUCCESS%' then repay_apply_no else NULL end) as stg_pln_rep_apl_suc_cnt
+       ,count(case when rpy_desc = '(用户)主动还款' and repay_status like '%SUCCESS%' then repay_apply_no else NULL end) as stg_pln_manual_rep_apl_suc_cnt
+       ,count(case when rpy_desc = '(数禾对公)线下还款' and repay_status like '%SUCCESS%' then repay_apply_no else NULL end) as stg_pln_ao_offline_rep_apl_suc_cnt
+       ,count(case when rpy_desc = '人工扣款' and repay_status like '%SUCCESS%' then repay_apply_no else NULL end) as stg_pln_manual_deduct_rep_apl_suc_cnt
+       ,count(case when rpy_desc = '常规批扣' and repay_status like '%SUCCESS%' then repay_apply_no else NULL end) as stg_pln_normal_batch_rep_apl_suc_cnt
+       ,count(case when rpy_desc = '逾期批扣' and repay_status like '%SUCCESS%' then repay_apply_no else NULL end) as stg_pln_add_bathch_rep_apl_suc_cnt
+
+       -- 失败扣款
+       ,count(case when repay_status = 'FAILURE' then repay_apply_no else NULL end) as stg_pln_rep_apl_fal_cnt
+       ,count(case when rpy_desc = '(用户)主动还款' and repay_status = 'FAILURE' then repay_apply_no else NULL end) as stg_pln_manual_rep_apl_fal_cnt
+       ,count(case when rpy_desc = '(数禾对公)线下还款' and repay_status = 'FAILURE' then repay_apply_no else NULL end) as stg_pln_ao_offline_rep_apl_fal_cnt
+       ,count(case when rpy_desc = '人工扣款' and repay_status = 'FAILURE' then repay_apply_no else NULL end) as stg_pln_manual_deduct_rep_apl_fal_cnt
+       ,count(case when rpy_desc = '常规批扣' and repay_status = 'FAILURE' then repay_apply_no else NULL end) as stg_pln_normal_batch_rep_apl_fal_cnt
+       ,count(case when rpy_desc = '逾期批扣' and repay_status = 'FAILURE' then repay_apply_no else NULL end) as stg_pln_add_bathch_rep_apl_fal_cnt 
+
+       -- 金额 --
+       ,max(case when repay_status like '%SUCCESS%' then rep_amt else 0 end) as stg_pln_rep_apl_amt 
+from 
+(
+    select uid,mdl_dte,stg_pln_no,rep_tim_type,schedule_total_amount
+           ,m1_flg,m3_flg,m6_flg,repay_apply_no,rpy_desc,rep_amt,repay_status,crt_tim_typ2        
+    from ${dwa_risk}.dwa_risk_f_repay_apply_stage_plan_detail
+    where repay_type = 'STAGE'
+    group by uid,mdl_dte,stg_pln_no,rep_tim_type,schedule_total_amount
+           ,m1_flg,m3_flg,m6_flg,repay_apply_no,rpy_desc,rep_amt,repay_status,crt_tim_typ2  
+) as a
+group by uid
+         ,mdl_dte       
+         ,stg_pln_no
+         ,rep_tim_type
+         ,schedule_total_amount
+;
+
+
+
+
+set odps.stage.mapper.split.size=20;
+-- 单期扣款衍生
+drop table if exists ${dwa_risk}.dwa_risk_dz_model_final_rep_apply_summary_4_tmp1;
+create table ${dwa_risk}.dwa_risk_dz_model_final_rep_apply_summary_4_tmp1 as
+select uid
+       ,mdl_dte
+       -- 单期扣款-扣款记录 --
+       ,max(case when m1_flg = 1 then stg_pln_rep_apl_cnt else NULL end) as m1_stg_pln_rep_apl_cnt_max
+       ,min(case when m1_flg = 1 then stg_pln_rep_apl_cnt else NULL end) as m1_stg_pln_rep_apl_cnt_min
+       ,avg(case when m1_flg = 1 then stg_pln_rep_apl_cnt else NULL end) as m1_stg_pln_rep_apl_cnt_avg
+       ,sum(case when m1_flg = 1 then stg_pln_rep_apl_cnt else NULL end) as m1_stg_pln_rep_apl_cnt_sum
+       ,max(case when m1_flg = 1 then stg_pln_manual_rep_apl_cnt else NULL end) as m1_stg_pln_manual_rep_apl_cnt_max
+       ,min(case when m1_flg = 1 then stg_pln_manual_rep_apl_cnt else NULL end) as m1_stg_pln_manual_rep_apl_cnt_min
+       ,avg(case when m1_flg = 1 then stg_pln_manual_rep_apl_cnt else NULL end) as m1_stg_pln_manual_rep_apl_cnt_avg
+       ,sum(case when m1_flg = 1 then stg_pln_manual_rep_apl_cnt else NULL end) as m1_stg_pln_manual_rep_apl_cnt_sum       
+       ,max(case when m1_flg = 1 then stg_pln_ao_offline_rep_apl_cnt else NULL end) as m1_stg_pln_ao_offline_rep_apl_cnt_max
+       ,min(case when m1_flg = 1 then stg_pln_ao_offline_rep_apl_cnt else NULL end) as m1_stg_pln_ao_offline_rep_apl_cnt_min
+       ,avg(case when m1_flg = 1 then stg_pln_ao_offline_rep_apl_cnt else NULL end) as m1_stg_pln_ao_offline_rep_apl_cnt_avg
+       ,sum(case when m1_flg = 1 then stg_pln_ao_offline_rep_apl_cnt else NULL end) as m1_stg_pln_ao_offline_rep_apl_cnt_sum
+       ,max(case when m1_flg = 1 then stg_pln_manual_deduct_rep_apl_cnt else NULL end) as m1_stg_pln_manual_deduct_rep_apl_cnt_max
+       ,min(case when m1_flg = 1 then stg_pln_manual_deduct_rep_apl_cnt else NULL end) as m1_stg_pln_manual_deduct_rep_apl_cnt_min
+       ,avg(case when m1_flg = 1 then stg_pln_manual_deduct_rep_apl_cnt else NULL end) as m1_stg_pln_manual_deduct_rep_apl_cnt_avg
+       ,sum(case when m1_flg = 1 then stg_pln_manual_deduct_rep_apl_cnt else NULL end) as m1_stg_pln_manual_deduct_rep_apl_cnt_sum
+       ,max(case when m1_flg = 1 then stg_pln_normal_batch_rep_apl_cnt else NULL end) as m1_stg_pln_normal_batch_rep_apl_cnt_max
+       ,min(case when m1_flg = 1 then stg_pln_normal_batch_rep_apl_cnt else NULL end) as m1_stg_pln_normal_batch_rep_apl_cnt_min
+       ,avg(case when m1_flg = 1 then stg_pln_normal_batch_rep_apl_cnt else NULL end) as m1_stg_pln_normal_batch_rep_apl_cnt_avg
+       ,sum(case when m1_flg = 1 then stg_pln_normal_batch_rep_apl_cnt else NULL end) as m1_stg_pln_normal_batch_rep_apl_cnt_sum       
+       ,max(case when m1_flg = 1 then stg_pln_add_bathch_rep_apl_cnt else NULL end) as m1_stg_pln_add_bathch_rep_apl_cnt_max
+       ,min(case when m1_flg = 1 then stg_pln_add_bathch_rep_apl_cnt else NULL end) as m1_stg_pln_add_bathch_rep_apl_cnt_min
+       ,avg(case when m1_flg = 1 then stg_pln_add_bathch_rep_apl_cnt else NULL end) as m1_stg_pln_add_bathch_rep_apl_cnt_avg
+       ,sum(case when m1_flg = 1 then stg_pln_add_bathch_rep_apl_cnt else NULL end) as m1_stg_pln_add_bathch_rep_apl_cnt_sum       
+       -- 成功扣款
+       ,max(case when m1_flg = 1 then stg_pln_rep_apl_suc_cnt else NULL end) as m1_stg_pln_rep_apl_suc_cnt_max
+       ,min(case when m1_flg = 1 then stg_pln_rep_apl_suc_cnt else NULL end) as m1_stg_pln_rep_apl_suc_cnt_min
+       ,avg(case when m1_flg = 1 then stg_pln_rep_apl_suc_cnt else NULL end) as m1_stg_pln_rep_apl_suc_cnt_avg
+       ,sum(case when m1_flg = 1 then stg_pln_rep_apl_suc_cnt else NULL end) as m1_stg_pln_rep_apl_suc_cnt_sum
+       ,max(case when m1_flg = 1 then stg_pln_manual_rep_apl_suc_cnt else NULL end) as m1_stg_pln_manual_rep_apl_suc_cnt_max
+       ,min(case when m1_flg = 1 then stg_pln_manual_rep_apl_suc_cnt else NULL end) as m1_stg_pln_manual_rep_apl_suc_cnt_min
+       ,avg(case when m1_flg = 1 then stg_pln_manual_rep_apl_suc_cnt else NULL end) as m1_stg_pln_manual_rep_apl_suc_cnt_avg
+       ,sum(case when m1_flg = 1 then stg_pln_manual_rep_apl_suc_cnt else NULL end) as m1_stg_pln_manual_rep_apl_suc_cnt_sum       
+       ,max(case when m1_flg = 1 then stg_pln_ao_offline_rep_apl_suc_cnt else NULL end) as m1_stg_pln_ao_offline_rep_apl_suc_cnt_max
+       ,min(case when m1_flg = 1 then stg_pln_ao_offline_rep_apl_suc_cnt else NULL end) as m1_stg_pln_ao_offline_rep_apl_suc_cnt_min
+       ,avg(case when m1_flg = 1 then stg_pln_ao_offline_rep_apl_suc_cnt else NULL end) as m1_stg_pln_ao_offline_rep_apl_suc_cnt_avg
+       ,sum(case when m1_flg = 1 then stg_pln_ao_offline_rep_apl_suc_cnt else NULL end) as m1_stg_pln_ao_offline_rep_apl_suc_cnt_sum
+       ,max(case when m1_flg = 1 then stg_pln_manual_deduct_rep_apl_suc_cnt else NULL end) as m1_stg_pln_manual_deduct_rep_apl_suc_cnt_max
+       ,min(case when m1_flg = 1 then stg_pln_manual_deduct_rep_apl_suc_cnt else NULL end) as m1_stg_pln_manual_deduct_rep_apl_suc_cnt_min
+       ,avg(case when m1_flg = 1 then stg_pln_manual_deduct_rep_apl_suc_cnt else NULL end) as m1_stg_pln_manual_deduct_rep_apl_suc_cnt_avg
+       ,sum(case when m1_flg = 1 then stg_pln_manual_deduct_rep_apl_suc_cnt else NULL end) as m1_stg_pln_manual_deduct_rep_apl_suc_cnt_sum
+       ,max(case when m1_flg = 1 then stg_pln_normal_batch_rep_apl_suc_cnt else NULL end) as m1_stg_pln_normal_batch_rep_apl_suc_cnt_max
+       ,min(case when m1_flg = 1 then stg_pln_normal_batch_rep_apl_suc_cnt else NULL end) as m1_stg_pln_normal_batch_rep_apl_suc_cnt_min
+       ,avg(case when m1_flg = 1 then stg_pln_normal_batch_rep_apl_suc_cnt else NULL end) as m1_stg_pln_normal_batch_rep_apl_suc_cnt_avg
+       ,sum(case when m1_flg = 1 then stg_pln_normal_batch_rep_apl_suc_cnt else NULL end) as m1_stg_pln_normal_batch_rep_apl_suc_cnt_sum       
+       ,max(case when m1_flg = 1 then stg_pln_add_bathch_rep_apl_suc_cnt else NULL end) as m1_stg_pln_add_bathch_rep_apl_suc_cnt_max
+       ,min(case when m1_flg = 1 then stg_pln_add_bathch_rep_apl_suc_cnt else NULL end) as m1_stg_pln_add_bathch_rep_apl_suc_cnt_min
+       ,avg(case when m1_flg = 1 then stg_pln_add_bathch_rep_apl_suc_cnt else NULL end) as m1_stg_pln_add_bathch_rep_apl_suc_cnt_avg
+       ,sum(case when m1_flg = 1 then stg_pln_add_bathch_rep_apl_suc_cnt else NULL end) as m1_stg_pln_add_bathch_rep_apl_suc_cnt_sum 
+       -- 失败扣款
+       ,max(case when m1_flg = 1 then stg_pln_rep_apl_fal_cnt else NULL end) as m1_stg_pln_rep_apl_fal_cnt_max
+       ,min(case when m1_flg = 1 then stg_pln_rep_apl_fal_cnt else NULL end) as m1_stg_pln_rep_apl_fal_cnt_min
+       ,avg(case when m1_flg = 1 then stg_pln_rep_apl_fal_cnt else NULL end) as m1_stg_pln_rep_apl_fal_cnt_avg
+       ,sum(case when m1_flg = 1 then stg_pln_rep_apl_fal_cnt else NULL end) as m1_stg_pln_rep_apl_fal_cnt_sum
+       ,max(case when m1_flg = 1 then stg_pln_manual_rep_apl_fal_cnt else NULL end) as m1_stg_pln_manual_rep_apl_fal_cnt_max
+       ,min(case when m1_flg = 1 then stg_pln_manual_rep_apl_fal_cnt else NULL end) as m1_stg_pln_manual_rep_apl_fal_cnt_min
+       ,avg(case when m1_flg = 1 then stg_pln_manual_rep_apl_fal_cnt else NULL end) as m1_stg_pln_manual_rep_apl_fal_cnt_avg
+       ,sum(case when m1_flg = 1 then stg_pln_manual_rep_apl_fal_cnt else NULL end) as m1_stg_pln_manual_rep_apl_fal_cnt_sum       
+       ,max(case when m1_flg = 1 then stg_pln_ao_offline_rep_apl_fal_cnt else NULL end) as m1_stg_pln_ao_offline_rep_apl_fal_cnt_max
+       ,min(case when m1_flg = 1 then stg_pln_ao_offline_rep_apl_fal_cnt else NULL end) as m1_stg_pln_ao_offline_rep_apl_fal_cnt_min
+       ,avg(case when m1_flg = 1 then stg_pln_ao_offline_rep_apl_fal_cnt else NULL end) as m1_stg_pln_ao_offline_rep_apl_fal_cnt_avg
+       ,sum(case when m1_flg = 1 then stg_pln_ao_offline_rep_apl_fal_cnt else NULL end) as m1_stg_pln_ao_offline_rep_apl_fal_cnt_sum
+       ,max(case when m1_flg = 1 then stg_pln_manual_deduct_rep_apl_fal_cnt else NULL end) as m1_stg_pln_manual_deduct_rep_apl_fal_cnt_max
+       ,min(case when m1_flg = 1 then stg_pln_manual_deduct_rep_apl_fal_cnt else NULL end) as m1_stg_pln_manual_deduct_rep_apl_fal_cnt_min
+       ,avg(case when m1_flg = 1 then stg_pln_manual_deduct_rep_apl_fal_cnt else NULL end) as m1_stg_pln_manual_deduct_rep_apl_fal_cnt_avg
+       ,sum(case when m1_flg = 1 then stg_pln_manual_deduct_rep_apl_fal_cnt else NULL end) as m1_stg_pln_manual_deduct_rep_apl_fal_cnt_sum
+       ,max(case when m1_flg = 1 then stg_pln_normal_batch_rep_apl_fal_cnt else NULL end) as m1_stg_pln_normal_batch_rep_apl_fal_cnt_max
+       ,min(case when m1_flg = 1 then stg_pln_normal_batch_rep_apl_fal_cnt else NULL end) as m1_stg_pln_normal_batch_rep_apl_fal_cnt_min
+       ,avg(case when m1_flg = 1 then stg_pln_normal_batch_rep_apl_fal_cnt else NULL end) as m1_stg_pln_normal_batch_rep_apl_fal_cnt_avg
+       ,sum(case when m1_flg = 1 then stg_pln_normal_batch_rep_apl_fal_cnt else NULL end) as m1_stg_pln_normal_batch_rep_apl_fal_cnt_sum       
+       ,max(case when m1_flg = 1 then stg_pln_add_bathch_rep_apl_fal_cnt else NULL end) as m1_stg_pln_add_bathch_rep_apl_fal_cnt_max
+       ,min(case when m1_flg = 1 then stg_pln_add_bathch_rep_apl_fal_cnt else NULL end) as m1_stg_pln_add_bathch_rep_apl_fal_cnt_min
+       ,avg(case when m1_flg = 1 then stg_pln_add_bathch_rep_apl_fal_cnt else NULL end) as m1_stg_pln_add_bathch_rep_apl_fal_cnt_avg
+       ,sum(case when m1_flg = 1 then stg_pln_add_bathch_rep_apl_fal_cnt else NULL end) as m1_stg_pln_add_bathch_rep_apl_fal_cnt_sum   
+       -- 还款时间类型
+       ,max(case when m1_flg = 1 and rep_tim_type = 'D0还款' then stg_pln_rep_apl_cnt else NULL end) as m1_stg_pln_rep_apl_cnt_d0_max  
+       ,min(case when m1_flg = 1 and rep_tim_type = 'D0还款' then stg_pln_rep_apl_cnt else NULL end) as m1_stg_pln_rep_apl_cnt_d0_min
+       ,avg(case when m1_flg = 1 and rep_tim_type = 'D0还款' then stg_pln_rep_apl_cnt else NULL end) as m1_stg_pln_rep_apl_cnt_d0_avg 
+       ,sum(case when m1_flg = 1 and rep_tim_type = 'D0还款' then stg_pln_rep_apl_cnt else NULL end) as m1_stg_pln_rep_apl_cnt_d0_sum
+       ,max(case when m1_flg = 1 and rep_tim_type = '提前还款' then stg_pln_rep_apl_cnt else NULL end) as m1_stg_pln_rep_apl_cnt_adv_max  
+       ,min(case when m1_flg = 1 and rep_tim_type = '提前还款' then stg_pln_rep_apl_cnt else NULL end) as m1_stg_pln_rep_apl_cnt_adv_min
+       ,avg(case when m1_flg = 1 and rep_tim_type = '提前还款' then stg_pln_rep_apl_cnt else NULL end) as m1_stg_pln_rep_apl_cnt_adv_avg 
+       ,sum(case when m1_flg = 1 and rep_tim_type = '提前还款' then stg_pln_rep_apl_cnt else NULL end) as m1_stg_pln_rep_apl_cnt_adv_sum
+       ,max(case when m1_flg = 1 and rep_tim_type = '历史逾期1-3天' then stg_pln_rep_apl_cnt else NULL end) as m1_stg_pln_rep_apl_cnt_ovd_1d_3d_max  
+       ,min(case when m1_flg = 1 and rep_tim_type = '历史逾期1-3天' then stg_pln_rep_apl_cnt else NULL end) as m1_stg_pln_rep_apl_cnt_ovd_1d_3d_min
+       ,avg(case when m1_flg = 1 and rep_tim_type = '历史逾期1-3天' then stg_pln_rep_apl_cnt else NULL end) as m1_stg_pln_rep_apl_cnt_ovd_1d_3d_avg 
+       ,sum(case when m1_flg = 1 and rep_tim_type = '历史逾期1-3天' then stg_pln_rep_apl_cnt else NULL end) as m1_stg_pln_rep_apl_cnt_ovd_1d_3d_sum       
+       ,max(case when m1_flg = 1 and rep_tim_type like '%历史逾期%' then stg_pln_rep_apl_cnt else NULL end) as m1_stg_pln_rep_apl_cnt_his_ovd_max  
+       ,min(case when m1_flg = 1 and rep_tim_type like '%历史逾期%' then stg_pln_rep_apl_cnt else NULL end) as m1_stg_pln_rep_apl_cnt_his_ovd_min
+       ,avg(case when m1_flg = 1 and rep_tim_type like '%历史逾期%' then stg_pln_rep_apl_cnt else NULL end) as m1_stg_pln_rep_apl_cnt_his_ovd_avg 
+       ,sum(case when m1_flg = 1 and rep_tim_type like '%历史逾期%' then stg_pln_rep_apl_cnt else NULL end) as m1_stg_pln_rep_apl_cnt_his_ovd_sum     
+       -- 用户主动还款意愿
+       ,count(case when m1_flg = 1 and stg_pln_rep_apl_cnt = 1 and stg_pln_manual_rep_apl_suc_cnt = 1 then stg_pln_no else NULL end) as m1_stg_pln_rep_apl_cnt_equal_1_manual_cnt
+       ,count(case when m1_flg = 1 and stg_pln_rep_apl_cnt = 1 and stg_pln_normal_batch_rep_apl_suc_cnt = 1 then stg_pln_no else NULL end) as m1_stg_pln_rep_apl_cnt_equal_1_normal_batch_cnt
+       ,count(case when m1_flg = 1 and stg_pln_rep_apl_cnt = 1 and stg_pln_ao_offline_rep_apl_suc_cnt = 1 then stg_pln_no else NULL end) as m1_stg_pln_rep_apl_cnt_equal_1_ao_offline_cnt
+       ,count(case when m1_flg = 1 and stg_pln_rep_apl_cnt = 1 and stg_pln_manual_deduct_rep_apl_suc_cnt = 1 then stg_pln_no else NULL end) as m1_stg_pln_rep_apl_cnt_equal_1_manual_deduct_cnt
+       ,count(case when m1_flg = 1 and stg_pln_rep_apl_cnt = 1 and rep_tim_type = 'D0还款' then stg_pln_no else NULL end) as m1_stg_pln_rep_apl_cnt_equal_1_d0_cnt
+       ,count(case when m1_flg = 1 and stg_pln_rep_apl_cnt = 1 and rep_tim_type = '提前还款' then stg_pln_no else NULL end) as m1_stg_pln_rep_apl_cnt_equal_1_adv_cnt
+       ,count(case when m1_flg = 1 and stg_pln_rep_apl_cnt < 4 then stg_pln_no else NULL end) as m1_stg_pln_rep_apl_cnt_less_4_cnt
+
+       -- 单期扣款-计划还款金额 -- 
+       ,max(case when m1_flg = 1 and stg_pln_rep_apl_cnt = 1 then schedule_total_amount else NULL end) as m1_stg_pln_rep_apl_cnt_equal_1_stg_amt_max
+       ,min(case when m1_flg = 1 and stg_pln_rep_apl_cnt = 1 then schedule_total_amount else NULL end) as m1_stg_pln_rep_apl_cnt_equal_1_stg_amt_min
+       ,avg(case when m1_flg = 1 and stg_pln_rep_apl_cnt = 1 then schedule_total_amount else NULL end) as m1_stg_pln_rep_apl_cnt_equal_1_stg_amt_avg
+       ,sum(case when m1_flg = 1 and stg_pln_rep_apl_cnt = 1 then schedule_total_amount else NULL end) as m1_stg_pln_rep_apl_cnt_equal_1_stg_amt_sum                 
+       ,max(case when m1_flg = 1 and stg_pln_rep_apl_cnt < 4 then schedule_total_amount else NULL end) as m1_stg_pln_rep_apl_cnt_less_4_stg_amt_max
+       ,min(case when m1_flg = 1 and stg_pln_rep_apl_cnt < 4 then schedule_total_amount else NULL end) as m1_stg_pln_rep_apl_cnt_less_4_stg_amt_min
+       ,avg(case when m1_flg = 1 and stg_pln_rep_apl_cnt < 4 then schedule_total_amount else NULL end) as m1_stg_pln_rep_apl_cnt_less_4_stg_amt_avg
+       ,sum(case when m1_flg = 1 and stg_pln_rep_apl_cnt < 4 then schedule_total_amount else NULL end) as m1_stg_pln_rep_apl_cnt_less_4_stg_amt_sum                
+       ,max(case when m1_flg = 1 and stg_pln_rep_apl_cnt >= 4 then schedule_total_amount else NULL end) as m1_stg_pln_rep_apl_cnt_mor_4_stg_amt_max
+       ,min(case when m1_flg = 1 and stg_pln_rep_apl_cnt >= 4 then schedule_total_amount else NULL end) as m1_stg_pln_rep_apl_cnt_mor_4_stg_amt_min
+       ,avg(case when m1_flg = 1 and stg_pln_rep_apl_cnt >= 4 then schedule_total_amount else NULL end) as m1_stg_pln_rep_apl_cnt_mor_4_stg_amt_avg
+       ,sum(case when m1_flg = 1 and stg_pln_rep_apl_cnt >= 4 then schedule_total_amount else NULL end) as m1_stg_pln_rep_apl_cnt_mor_4_stg_amt_sum    
+       -- 常规批扣
+       ,max(case when m1_flg = 1 and stg_pln_normal_batch_rep_apl_cnt <= 2 then schedule_total_amount else NULL end) as m1_stg_pln_normal_batch_rep_apl_cnt_less_2_stg_amt_max
+       ,min(case when m1_flg = 1 and stg_pln_normal_batch_rep_apl_cnt <= 2 then schedule_total_amount else NULL end) as m1_stg_pln_normal_batch_rep_apl_cnt_less_2_stg_amt_min
+       ,avg(case when m1_flg = 1 and stg_pln_normal_batch_rep_apl_cnt <= 2 then schedule_total_amount else NULL end) as m1_stg_pln_normal_batch_rep_apl_cnt_less_2_stg_amt_avg
+       ,sum(case when m1_flg = 1 and stg_pln_normal_batch_rep_apl_cnt <= 2 then schedule_total_amount else NULL end) as m1_stg_pln_normal_batch_rep_apl_cnt_less_2_stg_amt_sum 
+       ,max(case when m1_flg = 1 and stg_pln_normal_batch_rep_apl_cnt > 2 then schedule_total_amount else NULL end) as m1_stg_pln_normal_batch_rep_apl_cnt_mor_2_stg_amt_max
+       ,min(case when m1_flg = 1 and stg_pln_normal_batch_rep_apl_cnt > 2 then schedule_total_amount else NULL end) as m1_stg_pln_normal_batch_rep_apl_cnt_mor_2_stg_amt_min
+       ,avg(case when m1_flg = 1 and stg_pln_normal_batch_rep_apl_cnt > 2 then schedule_total_amount else NULL end) as m1_stg_pln_normal_batch_rep_apl_cnt_mor_2_stg_amt_avg
+       ,sum(case when m1_flg = 1 and stg_pln_normal_batch_rep_apl_cnt > 2 then schedule_total_amount else NULL end) as m1_stg_pln_normal_batch_rep_apl_cnt_mor_2_stg_amt_sum                           
+       -- 主动还款                           
+       ,max(case when m1_flg = 1 and stg_pln_rep_apl_cnt = 1 and stg_pln_manual_rep_apl_suc_cnt = 1 then stg_pln_rep_apl_amt else NULL end) as m1_stg_pln_rep_apl_cnt_equal_1_manual_rep_apl_amt_max
+       ,min(case when m1_flg = 1 and stg_pln_rep_apl_cnt = 1 and stg_pln_manual_rep_apl_suc_cnt = 1 then stg_pln_rep_apl_amt else NULL end) as m1_stg_pln_rep_apl_cnt_equal_1_manual_rep_apl_amt_min
+       ,avg(case when m1_flg = 1 and stg_pln_rep_apl_cnt = 1 and stg_pln_manual_rep_apl_suc_cnt = 1 then stg_pln_rep_apl_amt else NULL end) as m1_stg_pln_rep_apl_cnt_equal_1_manual_rep_apl_amt_avg
+       ,sum(case when m1_flg = 1 and stg_pln_rep_apl_cnt = 1 and stg_pln_manual_rep_apl_suc_cnt = 1 then stg_pln_rep_apl_amt else NULL end) as m1_stg_pln_rep_apl_cnt_equal_1_manual_rep_apl_amt_sum       
+       -- 单期扣款-扣款金额 -- 
+       -- 还款类型
+       ,max(case when m1_flg = 1 and stg_pln_rep_apl_fal_cnt > 1 then stg_pln_rep_apl_amt else NULL end) as m1_stg_pln_rep_apl_fal_cnt_mor_1_rep_apl_amt_max
+       ,min(case when m1_flg = 1 and stg_pln_rep_apl_fal_cnt > 1 then stg_pln_rep_apl_amt else NULL end) as m1_stg_pln_rep_apl_fal_cnt_mor_1_rep_apl_amt_min
+       ,avg(case when m1_flg = 1 and stg_pln_rep_apl_fal_cnt > 1 then stg_pln_rep_apl_amt else NULL end) as m1_stg_pln_rep_apl_fal_cnt_mor_1_rep_apl_amt_avg
+       ,sum(case when m1_flg = 1 and stg_pln_rep_apl_fal_cnt > 1 then stg_pln_rep_apl_amt else NULL end) as m1_stg_pln_rep_apl_fal_cnt_mor_1_rep_apl_amt_sum   
+       ,max(case when m1_flg = 1 and stg_pln_rep_apl_fal_cnt > 3 then stg_pln_rep_apl_amt else NULL end) as m1_stg_pln_rep_apl_fal_cnt_mor_3_rep_apl_amt_max
+       ,min(case when m1_flg = 1 and stg_pln_rep_apl_fal_cnt > 3 then stg_pln_rep_apl_amt else NULL end) as m1_stg_pln_rep_apl_fal_cnt_mor_3_rep_apl_amt_min
+       ,avg(case when m1_flg = 1 and stg_pln_rep_apl_fal_cnt > 3 then stg_pln_rep_apl_amt else NULL end) as m1_stg_pln_rep_apl_fal_cnt_mor_3_rep_apl_amt_avg
+       ,sum(case when m1_flg = 1 and stg_pln_rep_apl_fal_cnt > 3 then stg_pln_rep_apl_amt else NULL end) as m1_stg_pln_rep_apl_fal_cnt_mor_3_rep_apl_amt_sum 
+          
+       ,max(case when m1_flg = 1 and rep_tim_type = 'D0还款' then stg_pln_rep_apl_amt else NULL end) as m1_stg_pln_rep_apl_amt_d0_max  
+       ,min(case when m1_flg = 1 and rep_tim_type = 'D0还款' then stg_pln_rep_apl_amt else NULL end) as m1_stg_pln_rep_apl_amt_d0_min
+       ,avg(case when m1_flg = 1 and rep_tim_type = 'D0还款' then stg_pln_rep_apl_amt else NULL end) as m1_stg_pln_rep_apl_amt_d0_avg 
+       ,sum(case when m1_flg = 1 and rep_tim_type = 'D0还款' then stg_pln_rep_apl_amt else NULL end) as m1_stg_pln_rep_apl_amt_d0_sum
+       ,max(case when m1_flg = 1 and rep_tim_type = '提前还款' then stg_pln_rep_apl_amt else NULL end) as m1_stg_pln_rep_apl_amt_adv_max  
+       ,min(case when m1_flg = 1 and rep_tim_type = '提前还款' then stg_pln_rep_apl_amt else NULL end) as m1_stg_pln_rep_apl_amt_adv_min
+       ,avg(case when m1_flg = 1 and rep_tim_type = '提前还款' then stg_pln_rep_apl_amt else NULL end) as m1_stg_pln_rep_apl_amt_adv_avg 
+       ,sum(case when m1_flg = 1 and rep_tim_type = '提前还款' then stg_pln_rep_apl_amt else NULL end) as m1_stg_pln_rep_apl_amt_adv_sum
+       ,max(case when m1_flg = 1 and rep_tim_type = '历史逾期1-3天' then stg_pln_rep_apl_amt else NULL end) as m1_stg_pln_rep_apl_amt_ovd_1d_3d_max  
+       ,min(case when m1_flg = 1 and rep_tim_type = '历史逾期1-3天' then stg_pln_rep_apl_amt else NULL end) as m1_stg_pln_rep_apl_amt_ovd_1d_3d_min
+       ,avg(case when m1_flg = 1 and rep_tim_type = '历史逾期1-3天' then stg_pln_rep_apl_amt else NULL end) as m1_stg_pln_rep_apl_amt_ovd_1d_3d_avg 
+       ,sum(case when m1_flg = 1 and rep_tim_type = '历史逾期1-3天' then stg_pln_rep_apl_amt else NULL end) as m1_stg_pln_rep_apl_amt_ovd_1d_3d_sum       
+       ,max(case when m1_flg = 1 and rep_tim_type like '%历史逾期%' then stg_pln_rep_apl_amt else NULL end) as m1_stg_pln_rep_apl_amt_his_ovd_max  
+       ,min(case when m1_flg = 1 and rep_tim_type like '%历史逾期%' then stg_pln_rep_apl_amt else NULL end) as m1_stg_pln_rep_apl_amt_his_ovd_min
+       ,avg(case when m1_flg = 1 and rep_tim_type like '%历史逾期%' then stg_pln_rep_apl_amt else NULL end) as m1_stg_pln_rep_apl_amt_his_ovd_avg 
+       ,sum(case when m1_flg = 1 and rep_tim_type like '%历史逾期%' then stg_pln_rep_apl_amt else NULL end) as m1_stg_pln_rep_apl_amt_his_ovd_sum 
+
+    --    ,count(case when m3_flg = 1 then stg_pln_no else NULL end) as m3_stg_pln_cnt
+       -- 单期扣款-扣款记录 --
+       ,max(case when m3_flg = 1 then stg_pln_rep_apl_cnt else NULL end) as m3_stg_pln_rep_apl_cnt_max
+       ,min(case when m3_flg = 1 then stg_pln_rep_apl_cnt else NULL end) as m3_stg_pln_rep_apl_cnt_min
+       ,avg(case when m3_flg = 1 then stg_pln_rep_apl_cnt else NULL end) as m3_stg_pln_rep_apl_cnt_avg
+       ,sum(case when m3_flg = 1 then stg_pln_rep_apl_cnt else NULL end) as m3_stg_pln_rep_apl_cnt_sum
+       ,max(case when m3_flg = 1 then stg_pln_manual_rep_apl_cnt else NULL end) as m3_stg_pln_manual_rep_apl_cnt_max
+       ,min(case when m3_flg = 1 then stg_pln_manual_rep_apl_cnt else NULL end) as m3_stg_pln_manual_rep_apl_cnt_min
+       ,avg(case when m3_flg = 1 then stg_pln_manual_rep_apl_cnt else NULL end) as m3_stg_pln_manual_rep_apl_cnt_avg
+       ,sum(case when m3_flg = 1 then stg_pln_manual_rep_apl_cnt else NULL end) as m3_stg_pln_manual_rep_apl_cnt_sum       
+       ,max(case when m3_flg = 1 then stg_pln_ao_offline_rep_apl_cnt else NULL end) as m3_stg_pln_ao_offline_rep_apl_cnt_max
+       ,min(case when m3_flg = 1 then stg_pln_ao_offline_rep_apl_cnt else NULL end) as m3_stg_pln_ao_offline_rep_apl_cnt_min
+       ,avg(case when m3_flg = 1 then stg_pln_ao_offline_rep_apl_cnt else NULL end) as m3_stg_pln_ao_offline_rep_apl_cnt_avg
+       ,sum(case when m3_flg = 1 then stg_pln_ao_offline_rep_apl_cnt else NULL end) as m3_stg_pln_ao_offline_rep_apl_cnt_sum
+       ,max(case when m3_flg = 1 then stg_pln_manual_deduct_rep_apl_cnt else NULL end) as m3_stg_pln_manual_deduct_rep_apl_cnt_max
+       ,min(case when m3_flg = 1 then stg_pln_manual_deduct_rep_apl_cnt else NULL end) as m3_stg_pln_manual_deduct_rep_apl_cnt_min
+       ,avg(case when m3_flg = 1 then stg_pln_manual_deduct_rep_apl_cnt else NULL end) as m3_stg_pln_manual_deduct_rep_apl_cnt_avg
+       ,sum(case when m3_flg = 1 then stg_pln_manual_deduct_rep_apl_cnt else NULL end) as m3_stg_pln_manual_deduct_rep_apl_cnt_sum
+       ,max(case when m3_flg = 1 then stg_pln_normal_batch_rep_apl_cnt else NULL end) as m3_stg_pln_normal_batch_rep_apl_cnt_max
+       ,min(case when m3_flg = 1 then stg_pln_normal_batch_rep_apl_cnt else NULL end) as m3_stg_pln_normal_batch_rep_apl_cnt_min
+       ,avg(case when m3_flg = 1 then stg_pln_normal_batch_rep_apl_cnt else NULL end) as m3_stg_pln_normal_batch_rep_apl_cnt_avg
+       ,sum(case when m3_flg = 1 then stg_pln_normal_batch_rep_apl_cnt else NULL end) as m3_stg_pln_normal_batch_rep_apl_cnt_sum       
+       ,max(case when m3_flg = 1 then stg_pln_add_bathch_rep_apl_cnt else NULL end) as m3_stg_pln_add_bathch_rep_apl_cnt_max
+       ,min(case when m3_flg = 1 then stg_pln_add_bathch_rep_apl_cnt else NULL end) as m3_stg_pln_add_bathch_rep_apl_cnt_min
+       ,avg(case when m3_flg = 1 then stg_pln_add_bathch_rep_apl_cnt else NULL end) as m3_stg_pln_add_bathch_rep_apl_cnt_avg
+       ,sum(case when m3_flg = 1 then stg_pln_add_bathch_rep_apl_cnt else NULL end) as m3_stg_pln_add_bathch_rep_apl_cnt_sum       
+       -- 成功扣款
+       ,max(case when m3_flg = 1 then stg_pln_rep_apl_suc_cnt else NULL end) as m3_stg_pln_rep_apl_suc_cnt_max
+       ,min(case when m3_flg = 1 then stg_pln_rep_apl_suc_cnt else NULL end) as m3_stg_pln_rep_apl_suc_cnt_min
+       ,avg(case when m3_flg = 1 then stg_pln_rep_apl_suc_cnt else NULL end) as m3_stg_pln_rep_apl_suc_cnt_avg
+       ,sum(case when m3_flg = 1 then stg_pln_rep_apl_suc_cnt else NULL end) as m3_stg_pln_rep_apl_suc_cnt_sum
+       ,max(case when m3_flg = 1 then stg_pln_manual_rep_apl_suc_cnt else NULL end) as m3_stg_pln_manual_rep_apl_suc_cnt_max
+       ,min(case when m3_flg = 1 then stg_pln_manual_rep_apl_suc_cnt else NULL end) as m3_stg_pln_manual_rep_apl_suc_cnt_min
+       ,avg(case when m3_flg = 1 then stg_pln_manual_rep_apl_suc_cnt else NULL end) as m3_stg_pln_manual_rep_apl_suc_cnt_avg
+       ,sum(case when m3_flg = 1 then stg_pln_manual_rep_apl_suc_cnt else NULL end) as m3_stg_pln_manual_rep_apl_suc_cnt_sum       
+       ,max(case when m3_flg = 1 then stg_pln_ao_offline_rep_apl_suc_cnt else NULL end) as m3_stg_pln_ao_offline_rep_apl_suc_cnt_max
+       ,min(case when m3_flg = 1 then stg_pln_ao_offline_rep_apl_suc_cnt else NULL end) as m3_stg_pln_ao_offline_rep_apl_suc_cnt_min
+       ,avg(case when m3_flg = 1 then stg_pln_ao_offline_rep_apl_suc_cnt else NULL end) as m3_stg_pln_ao_offline_rep_apl_suc_cnt_avg
+       ,sum(case when m3_flg = 1 then stg_pln_ao_offline_rep_apl_suc_cnt else NULL end) as m3_stg_pln_ao_offline_rep_apl_suc_cnt_sum
+       ,max(case when m3_flg = 1 then stg_pln_manual_deduct_rep_apl_suc_cnt else NULL end) as m3_stg_pln_manual_deduct_rep_apl_suc_cnt_max
+       ,min(case when m3_flg = 1 then stg_pln_manual_deduct_rep_apl_suc_cnt else NULL end) as m3_stg_pln_manual_deduct_rep_apl_suc_cnt_min
+       ,avg(case when m3_flg = 1 then stg_pln_manual_deduct_rep_apl_suc_cnt else NULL end) as m3_stg_pln_manual_deduct_rep_apl_suc_cnt_avg
+       ,sum(case when m3_flg = 1 then stg_pln_manual_deduct_rep_apl_suc_cnt else NULL end) as m3_stg_pln_manual_deduct_rep_apl_suc_cnt_sum
+       ,max(case when m3_flg = 1 then stg_pln_normal_batch_rep_apl_suc_cnt else NULL end) as m3_stg_pln_normal_batch_rep_apl_suc_cnt_max
+       ,min(case when m3_flg = 1 then stg_pln_normal_batch_rep_apl_suc_cnt else NULL end) as m3_stg_pln_normal_batch_rep_apl_suc_cnt_min
+       ,avg(case when m3_flg = 1 then stg_pln_normal_batch_rep_apl_suc_cnt else NULL end) as m3_stg_pln_normal_batch_rep_apl_suc_cnt_avg
+       ,sum(case when m3_flg = 1 then stg_pln_normal_batch_rep_apl_suc_cnt else NULL end) as m3_stg_pln_normal_batch_rep_apl_suc_cnt_sum       
+       ,max(case when m3_flg = 1 then stg_pln_add_bathch_rep_apl_suc_cnt else NULL end) as m3_stg_pln_add_bathch_rep_apl_suc_cnt_max
+       ,min(case when m3_flg = 1 then stg_pln_add_bathch_rep_apl_suc_cnt else NULL end) as m3_stg_pln_add_bathch_rep_apl_suc_cnt_min
+       ,avg(case when m3_flg = 1 then stg_pln_add_bathch_rep_apl_suc_cnt else NULL end) as m3_stg_pln_add_bathch_rep_apl_suc_cnt_avg
+       ,sum(case when m3_flg = 1 then stg_pln_add_bathch_rep_apl_suc_cnt else NULL end) as m3_stg_pln_add_bathch_rep_apl_suc_cnt_sum 
+       -- 失败扣款
+       ,max(case when m3_flg = 1 then stg_pln_rep_apl_fal_cnt else NULL end) as m3_stg_pln_rep_apl_fal_cnt_max
+       ,min(case when m3_flg = 1 then stg_pln_rep_apl_fal_cnt else NULL end) as m3_stg_pln_rep_apl_fal_cnt_min
+       ,avg(case when m3_flg = 1 then stg_pln_rep_apl_fal_cnt else NULL end) as m3_stg_pln_rep_apl_fal_cnt_avg
+       ,sum(case when m3_flg = 1 then stg_pln_rep_apl_fal_cnt else NULL end) as m3_stg_pln_rep_apl_fal_cnt_sum
+       ,max(case when m3_flg = 1 then stg_pln_manual_rep_apl_fal_cnt else NULL end) as m3_stg_pln_manual_rep_apl_fal_cnt_max
+       ,min(case when m3_flg = 1 then stg_pln_manual_rep_apl_fal_cnt else NULL end) as m3_stg_pln_manual_rep_apl_fal_cnt_min
+       ,avg(case when m3_flg = 1 then stg_pln_manual_rep_apl_fal_cnt else NULL end) as m3_stg_pln_manual_rep_apl_fal_cnt_avg
+       ,sum(case when m3_flg = 1 then stg_pln_manual_rep_apl_fal_cnt else NULL end) as m3_stg_pln_manual_rep_apl_fal_cnt_sum       
+       ,max(case when m3_flg = 1 then stg_pln_ao_offline_rep_apl_fal_cnt else NULL end) as m3_stg_pln_ao_offline_rep_apl_fal_cnt_max
+       ,min(case when m3_flg = 1 then stg_pln_ao_offline_rep_apl_fal_cnt else NULL end) as m3_stg_pln_ao_offline_rep_apl_fal_cnt_min
+       ,avg(case when m3_flg = 1 then stg_pln_ao_offline_rep_apl_fal_cnt else NULL end) as m3_stg_pln_ao_offline_rep_apl_fal_cnt_avg
+       ,sum(case when m3_flg = 1 then stg_pln_ao_offline_rep_apl_fal_cnt else NULL end) as m3_stg_pln_ao_offline_rep_apl_fal_cnt_sum
+       ,max(case when m3_flg = 1 then stg_pln_manual_deduct_rep_apl_fal_cnt else NULL end) as m3_stg_pln_manual_deduct_rep_apl_fal_cnt_max
+       ,min(case when m3_flg = 1 then stg_pln_manual_deduct_rep_apl_fal_cnt else NULL end) as m3_stg_pln_manual_deduct_rep_apl_fal_cnt_min
+       ,avg(case when m3_flg = 1 then stg_pln_manual_deduct_rep_apl_fal_cnt else NULL end) as m3_stg_pln_manual_deduct_rep_apl_fal_cnt_avg
+       ,sum(case when m3_flg = 1 then stg_pln_manual_deduct_rep_apl_fal_cnt else NULL end) as m3_stg_pln_manual_deduct_rep_apl_fal_cnt_sum
+       ,max(case when m3_flg = 1 then stg_pln_normal_batch_rep_apl_fal_cnt else NULL end) as m3_stg_pln_normal_batch_rep_apl_fal_cnt_max
+       ,min(case when m3_flg = 1 then stg_pln_normal_batch_rep_apl_fal_cnt else NULL end) as m3_stg_pln_normal_batch_rep_apl_fal_cnt_min
+       ,avg(case when m3_flg = 1 then stg_pln_normal_batch_rep_apl_fal_cnt else NULL end) as m3_stg_pln_normal_batch_rep_apl_fal_cnt_avg
+       ,sum(case when m3_flg = 1 then stg_pln_normal_batch_rep_apl_fal_cnt else NULL end) as m3_stg_pln_normal_batch_rep_apl_fal_cnt_sum       
+       ,max(case when m3_flg = 1 then stg_pln_add_bathch_rep_apl_fal_cnt else NULL end) as m3_stg_pln_add_bathch_rep_apl_fal_cnt_max
+       ,min(case when m3_flg = 1 then stg_pln_add_bathch_rep_apl_fal_cnt else NULL end) as m3_stg_pln_add_bathch_rep_apl_fal_cnt_min
+       ,avg(case when m3_flg = 1 then stg_pln_add_bathch_rep_apl_fal_cnt else NULL end) as m3_stg_pln_add_bathch_rep_apl_fal_cnt_avg
+       ,sum(case when m3_flg = 1 then stg_pln_add_bathch_rep_apl_fal_cnt else NULL end) as m3_stg_pln_add_bathch_rep_apl_fal_cnt_sum   
+       -- 还款时间类型
+       ,max(case when m3_flg = 1 and rep_tim_type = 'D0还款' then stg_pln_rep_apl_cnt else NULL end) as m3_stg_pln_rep_apl_cnt_d0_max  
+       ,min(case when m3_flg = 1 and rep_tim_type = 'D0还款' then stg_pln_rep_apl_cnt else NULL end) as m3_stg_pln_rep_apl_cnt_d0_min
+       ,avg(case when m3_flg = 1 and rep_tim_type = 'D0还款' then stg_pln_rep_apl_cnt else NULL end) as m3_stg_pln_rep_apl_cnt_d0_avg 
+       ,sum(case when m3_flg = 1 and rep_tim_type = 'D0还款' then stg_pln_rep_apl_cnt else NULL end) as m3_stg_pln_rep_apl_cnt_d0_sum
+       ,max(case when m3_flg = 1 and rep_tim_type = '提前还款' then stg_pln_rep_apl_cnt else NULL end) as m3_stg_pln_rep_apl_cnt_adv_max  
+       ,min(case when m3_flg = 1 and rep_tim_type = '提前还款' then stg_pln_rep_apl_cnt else NULL end) as m3_stg_pln_rep_apl_cnt_adv_min
+       ,avg(case when m3_flg = 1 and rep_tim_type = '提前还款' then stg_pln_rep_apl_cnt else NULL end) as m3_stg_pln_rep_apl_cnt_adv_avg 
+       ,sum(case when m3_flg = 1 and rep_tim_type = '提前还款' then stg_pln_rep_apl_cnt else NULL end) as m3_stg_pln_rep_apl_cnt_adv_sum
+       ,max(case when m3_flg = 1 and rep_tim_type = '历史逾期1-3天' then stg_pln_rep_apl_cnt else NULL end) as m3_stg_pln_rep_apl_cnt_ovd_1d_3d_max  
+       ,min(case when m3_flg = 1 and rep_tim_type = '历史逾期1-3天' then stg_pln_rep_apl_cnt else NULL end) as m3_stg_pln_rep_apl_cnt_ovd_1d_3d_min
+       ,avg(case when m3_flg = 1 and rep_tim_type = '历史逾期1-3天' then stg_pln_rep_apl_cnt else NULL end) as m3_stg_pln_rep_apl_cnt_ovd_1d_3d_avg 
+       ,sum(case when m3_flg = 1 and rep_tim_type = '历史逾期1-3天' then stg_pln_rep_apl_cnt else NULL end) as m3_stg_pln_rep_apl_cnt_ovd_1d_3d_sum       
+       ,max(case when m3_flg = 1 and rep_tim_type like '%历史逾期%' then stg_pln_rep_apl_cnt else NULL end) as m3_stg_pln_rep_apl_cnt_his_ovd_max  
+       ,min(case when m3_flg = 1 and rep_tim_type like '%历史逾期%' then stg_pln_rep_apl_cnt else NULL end) as m3_stg_pln_rep_apl_cnt_his_ovd_min
+       ,avg(case when m3_flg = 1 and rep_tim_type like '%历史逾期%' then stg_pln_rep_apl_cnt else NULL end) as m3_stg_pln_rep_apl_cnt_his_ovd_avg 
+       ,sum(case when m3_flg = 1 and rep_tim_type like '%历史逾期%' then stg_pln_rep_apl_cnt else NULL end) as m3_stg_pln_rep_apl_cnt_his_ovd_sum     
+       -- 用户主动还款意愿
+    --    ,count(case when m3_flg = 1 and stg_pln_rep_apl_cnt = 1 then stg_pln_no else NULL end) as m3_stg_pln_rep_apl_cnt_equal_1_cnt
+       ,count(case when m3_flg = 1 and stg_pln_rep_apl_cnt = 1 and stg_pln_manual_rep_apl_suc_cnt = 1 then stg_pln_no else NULL end) as m3_stg_pln_rep_apl_cnt_equal_1_manual_cnt
+       ,count(case when m3_flg = 1 and stg_pln_rep_apl_cnt = 1 and stg_pln_normal_batch_rep_apl_suc_cnt = 1 then stg_pln_no else NULL end) as m3_stg_pln_rep_apl_cnt_equal_1_normal_batch_cnt
+       ,count(case when m3_flg = 1 and stg_pln_rep_apl_cnt = 1 and stg_pln_ao_offline_rep_apl_suc_cnt = 1 then stg_pln_no else NULL end) as m3_stg_pln_rep_apl_cnt_equal_1_ao_offline_cnt
+       ,count(case when m3_flg = 1 and stg_pln_rep_apl_cnt = 1 and stg_pln_manual_deduct_rep_apl_suc_cnt = 1 then stg_pln_no else NULL end) as m3_stg_pln_rep_apl_cnt_equal_1_manual_deduct_cnt
+       ,count(case when m3_flg = 1 and stg_pln_rep_apl_cnt = 1 and rep_tim_type = 'D0还款' then stg_pln_no else NULL end) as m3_stg_pln_rep_apl_cnt_equal_1_d0_cnt
+       ,count(case when m3_flg = 1 and stg_pln_rep_apl_cnt = 1 and rep_tim_type = '提前还款' then stg_pln_no else NULL end) as m3_stg_pln_rep_apl_cnt_equal_1_adv_cnt
+       ,count(case when m3_flg = 1 and stg_pln_rep_apl_cnt < 4 then stg_pln_no else NULL end) as m3_stg_pln_rep_apl_cnt_less_4_cnt
+
+       -- 单期扣款-计划还款金额 -- 
+       ,max(case when m3_flg = 1 and stg_pln_rep_apl_cnt = 1 then schedule_total_amount else NULL end) as m3_stg_pln_rep_apl_cnt_equal_1_stg_amt_max
+       ,min(case when m3_flg = 1 and stg_pln_rep_apl_cnt = 1 then schedule_total_amount else NULL end) as m3_stg_pln_rep_apl_cnt_equal_1_stg_amt_min
+       ,avg(case when m3_flg = 1 and stg_pln_rep_apl_cnt = 1 then schedule_total_amount else NULL end) as m3_stg_pln_rep_apl_cnt_equal_1_stg_amt_avg
+       ,sum(case when m3_flg = 1 and stg_pln_rep_apl_cnt = 1 then schedule_total_amount else NULL end) as m3_stg_pln_rep_apl_cnt_equal_1_stg_amt_sum                 
+       ,max(case when m3_flg = 1 and stg_pln_rep_apl_cnt < 4 then schedule_total_amount else NULL end) as m3_stg_pln_rep_apl_cnt_less_4_stg_amt_max
+       ,min(case when m3_flg = 1 and stg_pln_rep_apl_cnt < 4 then schedule_total_amount else NULL end) as m3_stg_pln_rep_apl_cnt_less_4_stg_amt_min
+       ,avg(case when m3_flg = 1 and stg_pln_rep_apl_cnt < 4 then schedule_total_amount else NULL end) as m3_stg_pln_rep_apl_cnt_less_4_stg_amt_avg
+       ,sum(case when m3_flg = 1 and stg_pln_rep_apl_cnt < 4 then schedule_total_amount else NULL end) as m3_stg_pln_rep_apl_cnt_less_4_stg_amt_sum                
+       ,max(case when m3_flg = 1 and stg_pln_rep_apl_cnt >= 4 then schedule_total_amount else NULL end) as m3_stg_pln_rep_apl_cnt_mor_4_stg_amt_max
+       ,min(case when m3_flg = 1 and stg_pln_rep_apl_cnt >= 4 then schedule_total_amount else NULL end) as m3_stg_pln_rep_apl_cnt_mor_4_stg_amt_min
+       ,avg(case when m3_flg = 1 and stg_pln_rep_apl_cnt >= 4 then schedule_total_amount else NULL end) as m3_stg_pln_rep_apl_cnt_mor_4_stg_amt_avg
+       ,sum(case when m3_flg = 1 and stg_pln_rep_apl_cnt >= 4 then schedule_total_amount else NULL end) as m3_stg_pln_rep_apl_cnt_mor_4_stg_amt_sum    
+       -- 常规批扣
+       ,max(case when m3_flg = 1 and stg_pln_normal_batch_rep_apl_cnt <= 2 then schedule_total_amount else NULL end) as m3_stg_pln_normal_batch_rep_apl_cnt_less_2_stg_amt_max
+       ,min(case when m3_flg = 1 and stg_pln_normal_batch_rep_apl_cnt <= 2 then schedule_total_amount else NULL end) as m3_stg_pln_normal_batch_rep_apl_cnt_less_2_stg_amt_min
+       ,avg(case when m3_flg = 1 and stg_pln_normal_batch_rep_apl_cnt <= 2 then schedule_total_amount else NULL end) as m3_stg_pln_normal_batch_rep_apl_cnt_less_2_stg_amt_avg
+       ,sum(case when m3_flg = 1 and stg_pln_normal_batch_rep_apl_cnt <= 2 then schedule_total_amount else NULL end) as m3_stg_pln_normal_batch_rep_apl_cnt_less_2_stg_amt_sum 
+       ,max(case when m3_flg = 1 and stg_pln_normal_batch_rep_apl_cnt > 2 then schedule_total_amount else NULL end) as m3_stg_pln_normal_batch_rep_apl_cnt_mor_2_stg_amt_max
+       ,min(case when m3_flg = 1 and stg_pln_normal_batch_rep_apl_cnt > 2 then schedule_total_amount else NULL end) as m3_stg_pln_normal_batch_rep_apl_cnt_mor_2_stg_amt_min
+       ,avg(case when m3_flg = 1 and stg_pln_normal_batch_rep_apl_cnt > 2 then schedule_total_amount else NULL end) as m3_stg_pln_normal_batch_rep_apl_cnt_mor_2_stg_amt_avg
+       ,sum(case when m3_flg = 1 and stg_pln_normal_batch_rep_apl_cnt > 2 then schedule_total_amount else NULL end) as m3_stg_pln_normal_batch_rep_apl_cnt_mor_2_stg_amt_sum                           
+       -- 主动还款                           
+       ,max(case when m3_flg = 1 and stg_pln_rep_apl_cnt = 1 and stg_pln_manual_rep_apl_suc_cnt = 1 then stg_pln_rep_apl_amt else NULL end) as m3_stg_pln_rep_apl_cnt_equal_1_manual_rep_apl_amt_max
+       ,min(case when m3_flg = 1 and stg_pln_rep_apl_cnt = 1 and stg_pln_manual_rep_apl_suc_cnt = 1 then stg_pln_rep_apl_amt else NULL end) as m3_stg_pln_rep_apl_cnt_equal_1_manual_rep_apl_amt_min
+       ,avg(case when m3_flg = 1 and stg_pln_rep_apl_cnt = 1 and stg_pln_manual_rep_apl_suc_cnt = 1 then stg_pln_rep_apl_amt else NULL end) as m3_stg_pln_rep_apl_cnt_equal_1_manual_rep_apl_amt_avg
+       ,sum(case when m3_flg = 1 and stg_pln_rep_apl_cnt = 1 and stg_pln_manual_rep_apl_suc_cnt = 1 then stg_pln_rep_apl_amt else NULL end) as m3_stg_pln_rep_apl_cnt_equal_1_manual_rep_apl_amt_sum       
+       -- 单期扣款-扣款金额 -- 
+       -- 还款类型
+       ,max(case when m3_flg = 1 and stg_pln_rep_apl_fal_cnt > 1 then stg_pln_rep_apl_amt else NULL end) as m3_stg_pln_rep_apl_fal_cnt_mor_1_rep_apl_amt_max
+       ,min(case when m3_flg = 1 and stg_pln_rep_apl_fal_cnt > 1 then stg_pln_rep_apl_amt else NULL end) as m3_stg_pln_rep_apl_fal_cnt_mor_1_rep_apl_amt_min
+       ,avg(case when m3_flg = 1 and stg_pln_rep_apl_fal_cnt > 1 then stg_pln_rep_apl_amt else NULL end) as m3_stg_pln_rep_apl_fal_cnt_mor_1_rep_apl_amt_avg
+       ,sum(case when m3_flg = 1 and stg_pln_rep_apl_fal_cnt > 1 then stg_pln_rep_apl_amt else NULL end) as m3_stg_pln_rep_apl_fal_cnt_mor_1_rep_apl_amt_sum   
+       ,max(case when m3_flg = 1 and stg_pln_rep_apl_fal_cnt > 3 then stg_pln_rep_apl_amt else NULL end) as m3_stg_pln_rep_apl_fal_cnt_mor_3_rep_apl_amt_max
+       ,min(case when m3_flg = 1 and stg_pln_rep_apl_fal_cnt > 3 then stg_pln_rep_apl_amt else NULL end) as m3_stg_pln_rep_apl_fal_cnt_mor_3_rep_apl_amt_min
+       ,avg(case when m3_flg = 1 and stg_pln_rep_apl_fal_cnt > 3 then stg_pln_rep_apl_amt else NULL end) as m3_stg_pln_rep_apl_fal_cnt_mor_3_rep_apl_amt_avg
+       ,sum(case when m3_flg = 1 and stg_pln_rep_apl_fal_cnt > 3 then stg_pln_rep_apl_amt else NULL end) as m3_stg_pln_rep_apl_fal_cnt_mor_3_rep_apl_amt_sum 
+          
+       ,max(case when m3_flg = 1 and rep_tim_type = 'D0还款' then stg_pln_rep_apl_amt else NULL end) as m3_stg_pln_rep_apl_amt_d0_max  
+       ,min(case when m3_flg = 1 and rep_tim_type = 'D0还款' then stg_pln_rep_apl_amt else NULL end) as m3_stg_pln_rep_apl_amt_d0_min
+       ,avg(case when m3_flg = 1 and rep_tim_type = 'D0还款' then stg_pln_rep_apl_amt else NULL end) as m3_stg_pln_rep_apl_amt_d0_avg 
+       ,sum(case when m3_flg = 1 and rep_tim_type = 'D0还款' then stg_pln_rep_apl_amt else NULL end) as m3_stg_pln_rep_apl_amt_d0_sum
+       ,max(case when m3_flg = 1 and rep_tim_type = '提前还款' then stg_pln_rep_apl_amt else NULL end) as m3_stg_pln_rep_apl_amt_adv_max  
+       ,min(case when m3_flg = 1 and rep_tim_type = '提前还款' then stg_pln_rep_apl_amt else NULL end) as m3_stg_pln_rep_apl_amt_adv_min
+       ,avg(case when m3_flg = 1 and rep_tim_type = '提前还款' then stg_pln_rep_apl_amt else NULL end) as m3_stg_pln_rep_apl_amt_adv_avg 
+       ,sum(case when m3_flg = 1 and rep_tim_type = '提前还款' then stg_pln_rep_apl_amt else NULL end) as m3_stg_pln_rep_apl_amt_adv_sum
+       ,max(case when m3_flg = 1 and rep_tim_type = '历史逾期1-3天' then stg_pln_rep_apl_amt else NULL end) as m3_stg_pln_rep_apl_amt_ovd_1d_3d_max  
+       ,min(case when m3_flg = 1 and rep_tim_type = '历史逾期1-3天' then stg_pln_rep_apl_amt else NULL end) as m3_stg_pln_rep_apl_amt_ovd_1d_3d_min
+       ,avg(case when m3_flg = 1 and rep_tim_type = '历史逾期1-3天' then stg_pln_rep_apl_amt else NULL end) as m3_stg_pln_rep_apl_amt_ovd_1d_3d_avg 
+       ,sum(case when m3_flg = 1 and rep_tim_type = '历史逾期1-3天' then stg_pln_rep_apl_amt else NULL end) as m3_stg_pln_rep_apl_amt_ovd_1d_3d_sum       
+       ,max(case when m3_flg = 1 and rep_tim_type like '%历史逾期%' then stg_pln_rep_apl_amt else NULL end) as m3_stg_pln_rep_apl_amt_his_ovd_max  
+       ,min(case when m3_flg = 1 and rep_tim_type like '%历史逾期%' then stg_pln_rep_apl_amt else NULL end) as m3_stg_pln_rep_apl_amt_his_ovd_min
+       ,avg(case when m3_flg = 1 and rep_tim_type like '%历史逾期%' then stg_pln_rep_apl_amt else NULL end) as m3_stg_pln_rep_apl_amt_his_ovd_avg 
+       ,sum(case when m3_flg = 1 and rep_tim_type like '%历史逾期%' then stg_pln_rep_apl_amt else NULL end) as m3_stg_pln_rep_apl_amt_his_ovd_sum
+
+       -- 单期扣款-扣款记录 --
+       ,max(case when m6_flg = 1 then stg_pln_rep_apl_cnt else NULL end) as m6_stg_pln_rep_apl_cnt_max
+       ,min(case when m6_flg = 1 then stg_pln_rep_apl_cnt else NULL end) as m6_stg_pln_rep_apl_cnt_min
+       ,avg(case when m6_flg = 1 then stg_pln_rep_apl_cnt else NULL end) as m6_stg_pln_rep_apl_cnt_avg
+       ,sum(case when m6_flg = 1 then stg_pln_rep_apl_cnt else NULL end) as m6_stg_pln_rep_apl_cnt_sum
+       ,max(case when m6_flg = 1 then stg_pln_manual_rep_apl_cnt else NULL end) as m6_stg_pln_manual_rep_apl_cnt_max
+       ,min(case when m6_flg = 1 then stg_pln_manual_rep_apl_cnt else NULL end) as m6_stg_pln_manual_rep_apl_cnt_min
+       ,avg(case when m6_flg = 1 then stg_pln_manual_rep_apl_cnt else NULL end) as m6_stg_pln_manual_rep_apl_cnt_avg
+       ,sum(case when m6_flg = 1 then stg_pln_manual_rep_apl_cnt else NULL end) as m6_stg_pln_manual_rep_apl_cnt_sum       
+       ,max(case when m6_flg = 1 then stg_pln_ao_offline_rep_apl_cnt else NULL end) as m6_stg_pln_ao_offline_rep_apl_cnt_max
+       ,min(case when m6_flg = 1 then stg_pln_ao_offline_rep_apl_cnt else NULL end) as m6_stg_pln_ao_offline_rep_apl_cnt_min
+       ,avg(case when m6_flg = 1 then stg_pln_ao_offline_rep_apl_cnt else NULL end) as m6_stg_pln_ao_offline_rep_apl_cnt_avg
+       ,sum(case when m6_flg = 1 then stg_pln_ao_offline_rep_apl_cnt else NULL end) as m6_stg_pln_ao_offline_rep_apl_cnt_sum
+       ,max(case when m6_flg = 1 then stg_pln_manual_deduct_rep_apl_cnt else NULL end) as m6_stg_pln_manual_deduct_rep_apl_cnt_max
+       ,min(case when m6_flg = 1 then stg_pln_manual_deduct_rep_apl_cnt else NULL end) as m6_stg_pln_manual_deduct_rep_apl_cnt_min
+       ,avg(case when m6_flg = 1 then stg_pln_manual_deduct_rep_apl_cnt else NULL end) as m6_stg_pln_manual_deduct_rep_apl_cnt_avg
+       ,sum(case when m6_flg = 1 then stg_pln_manual_deduct_rep_apl_cnt else NULL end) as m6_stg_pln_manual_deduct_rep_apl_cnt_sum
+       ,max(case when m6_flg = 1 then stg_pln_normal_batch_rep_apl_cnt else NULL end) as m6_stg_pln_normal_batch_rep_apl_cnt_max
+       ,min(case when m6_flg = 1 then stg_pln_normal_batch_rep_apl_cnt else NULL end) as m6_stg_pln_normal_batch_rep_apl_cnt_min
+       ,avg(case when m6_flg = 1 then stg_pln_normal_batch_rep_apl_cnt else NULL end) as m6_stg_pln_normal_batch_rep_apl_cnt_avg
+       ,sum(case when m6_flg = 1 then stg_pln_normal_batch_rep_apl_cnt else NULL end) as m6_stg_pln_normal_batch_rep_apl_cnt_sum       
+       ,max(case when m6_flg = 1 then stg_pln_add_bathch_rep_apl_cnt else NULL end) as m6_stg_pln_add_bathch_rep_apl_cnt_max
+       ,min(case when m6_flg = 1 then stg_pln_add_bathch_rep_apl_cnt else NULL end) as m6_stg_pln_add_bathch_rep_apl_cnt_min
+       ,avg(case when m6_flg = 1 then stg_pln_add_bathch_rep_apl_cnt else NULL end) as m6_stg_pln_add_bathch_rep_apl_cnt_avg
+       ,sum(case when m6_flg = 1 then stg_pln_add_bathch_rep_apl_cnt else NULL end) as m6_stg_pln_add_bathch_rep_apl_cnt_sum       
+       -- 成功扣款
+       ,max(case when m6_flg = 1 then stg_pln_rep_apl_suc_cnt else NULL end) as m6_stg_pln_rep_apl_suc_cnt_max
+       ,min(case when m6_flg = 1 then stg_pln_rep_apl_suc_cnt else NULL end) as m6_stg_pln_rep_apl_suc_cnt_min
+       ,avg(case when m6_flg = 1 then stg_pln_rep_apl_suc_cnt else NULL end) as m6_stg_pln_rep_apl_suc_cnt_avg
+       ,sum(case when m6_flg = 1 then stg_pln_rep_apl_suc_cnt else NULL end) as m6_stg_pln_rep_apl_suc_cnt_sum
+       ,max(case when m6_flg = 1 then stg_pln_manual_rep_apl_suc_cnt else NULL end) as m6_stg_pln_manual_rep_apl_suc_cnt_max
+       ,min(case when m6_flg = 1 then stg_pln_manual_rep_apl_suc_cnt else NULL end) as m6_stg_pln_manual_rep_apl_suc_cnt_min
+       ,avg(case when m6_flg = 1 then stg_pln_manual_rep_apl_suc_cnt else NULL end) as m6_stg_pln_manual_rep_apl_suc_cnt_avg
+       ,sum(case when m6_flg = 1 then stg_pln_manual_rep_apl_suc_cnt else NULL end) as m6_stg_pln_manual_rep_apl_suc_cnt_sum       
+       ,max(case when m6_flg = 1 then stg_pln_ao_offline_rep_apl_suc_cnt else NULL end) as m6_stg_pln_ao_offline_rep_apl_suc_cnt_max
+       ,min(case when m6_flg = 1 then stg_pln_ao_offline_rep_apl_suc_cnt else NULL end) as m6_stg_pln_ao_offline_rep_apl_suc_cnt_min
+       ,avg(case when m6_flg = 1 then stg_pln_ao_offline_rep_apl_suc_cnt else NULL end) as m6_stg_pln_ao_offline_rep_apl_suc_cnt_avg
+       ,sum(case when m6_flg = 1 then stg_pln_ao_offline_rep_apl_suc_cnt else NULL end) as m6_stg_pln_ao_offline_rep_apl_suc_cnt_sum
+       ,max(case when m6_flg = 1 then stg_pln_manual_deduct_rep_apl_suc_cnt else NULL end) as m6_stg_pln_manual_deduct_rep_apl_suc_cnt_max
+       ,min(case when m6_flg = 1 then stg_pln_manual_deduct_rep_apl_suc_cnt else NULL end) as m6_stg_pln_manual_deduct_rep_apl_suc_cnt_min
+       ,avg(case when m6_flg = 1 then stg_pln_manual_deduct_rep_apl_suc_cnt else NULL end) as m6_stg_pln_manual_deduct_rep_apl_suc_cnt_avg
+       ,sum(case when m6_flg = 1 then stg_pln_manual_deduct_rep_apl_suc_cnt else NULL end) as m6_stg_pln_manual_deduct_rep_apl_suc_cnt_sum
+       ,max(case when m6_flg = 1 then stg_pln_normal_batch_rep_apl_suc_cnt else NULL end) as m6_stg_pln_normal_batch_rep_apl_suc_cnt_max
+       ,min(case when m6_flg = 1 then stg_pln_normal_batch_rep_apl_suc_cnt else NULL end) as m6_stg_pln_normal_batch_rep_apl_suc_cnt_min
+       ,avg(case when m6_flg = 1 then stg_pln_normal_batch_rep_apl_suc_cnt else NULL end) as m6_stg_pln_normal_batch_rep_apl_suc_cnt_avg
+       ,sum(case when m6_flg = 1 then stg_pln_normal_batch_rep_apl_suc_cnt else NULL end) as m6_stg_pln_normal_batch_rep_apl_suc_cnt_sum       
+       ,max(case when m6_flg = 1 then stg_pln_add_bathch_rep_apl_suc_cnt else NULL end) as m6_stg_pln_add_bathch_rep_apl_suc_cnt_max
+       ,min(case when m6_flg = 1 then stg_pln_add_bathch_rep_apl_suc_cnt else NULL end) as m6_stg_pln_add_bathch_rep_apl_suc_cnt_min
+       ,avg(case when m6_flg = 1 then stg_pln_add_bathch_rep_apl_suc_cnt else NULL end) as m6_stg_pln_add_bathch_rep_apl_suc_cnt_avg
+       ,sum(case when m6_flg = 1 then stg_pln_add_bathch_rep_apl_suc_cnt else NULL end) as m6_stg_pln_add_bathch_rep_apl_suc_cnt_sum 
+       -- 失败扣款
+       ,max(case when m6_flg = 1 then stg_pln_rep_apl_fal_cnt else NULL end) as m6_stg_pln_rep_apl_fal_cnt_max
+       ,min(case when m6_flg = 1 then stg_pln_rep_apl_fal_cnt else NULL end) as m6_stg_pln_rep_apl_fal_cnt_min
+       ,avg(case when m6_flg = 1 then stg_pln_rep_apl_fal_cnt else NULL end) as m6_stg_pln_rep_apl_fal_cnt_avg
+       ,sum(case when m6_flg = 1 then stg_pln_rep_apl_fal_cnt else NULL end) as m6_stg_pln_rep_apl_fal_cnt_sum
+       ,max(case when m6_flg = 1 then stg_pln_manual_rep_apl_fal_cnt else NULL end) as m6_stg_pln_manual_rep_apl_fal_cnt_max
+       ,min(case when m6_flg = 1 then stg_pln_manual_rep_apl_fal_cnt else NULL end) as m6_stg_pln_manual_rep_apl_fal_cnt_min
+       ,avg(case when m6_flg = 1 then stg_pln_manual_rep_apl_fal_cnt else NULL end) as m6_stg_pln_manual_rep_apl_fal_cnt_avg
+       ,sum(case when m6_flg = 1 then stg_pln_manual_rep_apl_fal_cnt else NULL end) as m6_stg_pln_manual_rep_apl_fal_cnt_sum       
+       ,max(case when m6_flg = 1 then stg_pln_ao_offline_rep_apl_fal_cnt else NULL end) as m6_stg_pln_ao_offline_rep_apl_fal_cnt_max
+       ,min(case when m6_flg = 1 then stg_pln_ao_offline_rep_apl_fal_cnt else NULL end) as m6_stg_pln_ao_offline_rep_apl_fal_cnt_min
+       ,avg(case when m6_flg = 1 then stg_pln_ao_offline_rep_apl_fal_cnt else NULL end) as m6_stg_pln_ao_offline_rep_apl_fal_cnt_avg
+       ,sum(case when m6_flg = 1 then stg_pln_ao_offline_rep_apl_fal_cnt else NULL end) as m6_stg_pln_ao_offline_rep_apl_fal_cnt_sum
+       ,max(case when m6_flg = 1 then stg_pln_manual_deduct_rep_apl_fal_cnt else NULL end) as m6_stg_pln_manual_deduct_rep_apl_fal_cnt_max
+       ,min(case when m6_flg = 1 then stg_pln_manual_deduct_rep_apl_fal_cnt else NULL end) as m6_stg_pln_manual_deduct_rep_apl_fal_cnt_min
+       ,avg(case when m6_flg = 1 then stg_pln_manual_deduct_rep_apl_fal_cnt else NULL end) as m6_stg_pln_manual_deduct_rep_apl_fal_cnt_avg
+       ,sum(case when m6_flg = 1 then stg_pln_manual_deduct_rep_apl_fal_cnt else NULL end) as m6_stg_pln_manual_deduct_rep_apl_fal_cnt_sum
+       ,max(case when m6_flg = 1 then stg_pln_normal_batch_rep_apl_fal_cnt else NULL end) as m6_stg_pln_normal_batch_rep_apl_fal_cnt_max
+       ,min(case when m6_flg = 1 then stg_pln_normal_batch_rep_apl_fal_cnt else NULL end) as m6_stg_pln_normal_batch_rep_apl_fal_cnt_min
+       ,avg(case when m6_flg = 1 then stg_pln_normal_batch_rep_apl_fal_cnt else NULL end) as m6_stg_pln_normal_batch_rep_apl_fal_cnt_avg
+       ,sum(case when m6_flg = 1 then stg_pln_normal_batch_rep_apl_fal_cnt else NULL end) as m6_stg_pln_normal_batch_rep_apl_fal_cnt_sum       
+       ,max(case when m6_flg = 1 then stg_pln_add_bathch_rep_apl_fal_cnt else NULL end) as m6_stg_pln_add_bathch_rep_apl_fal_cnt_max
+       ,min(case when m6_flg = 1 then stg_pln_add_bathch_rep_apl_fal_cnt else NULL end) as m6_stg_pln_add_bathch_rep_apl_fal_cnt_min
+       ,avg(case when m6_flg = 1 then stg_pln_add_bathch_rep_apl_fal_cnt else NULL end) as m6_stg_pln_add_bathch_rep_apl_fal_cnt_avg
+       ,sum(case when m6_flg = 1 then stg_pln_add_bathch_rep_apl_fal_cnt else NULL end) as m6_stg_pln_add_bathch_rep_apl_fal_cnt_sum   
+       -- 还款时间类型
+       ,max(case when m6_flg = 1 and rep_tim_type = 'D0还款' then stg_pln_rep_apl_cnt else NULL end) as m6_stg_pln_rep_apl_cnt_d0_max  
+       ,min(case when m6_flg = 1 and rep_tim_type = 'D0还款' then stg_pln_rep_apl_cnt else NULL end) as m6_stg_pln_rep_apl_cnt_d0_min
+       ,avg(case when m6_flg = 1 and rep_tim_type = 'D0还款' then stg_pln_rep_apl_cnt else NULL end) as m6_stg_pln_rep_apl_cnt_d0_avg 
+       ,sum(case when m6_flg = 1 and rep_tim_type = 'D0还款' then stg_pln_rep_apl_cnt else NULL end) as m6_stg_pln_rep_apl_cnt_d0_sum
+       ,max(case when m6_flg = 1 and rep_tim_type = '提前还款' then stg_pln_rep_apl_cnt else NULL end) as m6_stg_pln_rep_apl_cnt_adv_max  
+       ,min(case when m6_flg = 1 and rep_tim_type = '提前还款' then stg_pln_rep_apl_cnt else NULL end) as m6_stg_pln_rep_apl_cnt_adv_min
+       ,avg(case when m6_flg = 1 and rep_tim_type = '提前还款' then stg_pln_rep_apl_cnt else NULL end) as m6_stg_pln_rep_apl_cnt_adv_avg 
+       ,sum(case when m6_flg = 1 and rep_tim_type = '提前还款' then stg_pln_rep_apl_cnt else NULL end) as m6_stg_pln_rep_apl_cnt_adv_sum
+       ,max(case when m6_flg = 1 and rep_tim_type = '历史逾期1-3天' then stg_pln_rep_apl_cnt else NULL end) as m6_stg_pln_rep_apl_cnt_ovd_1d_3d_max  
+       ,min(case when m6_flg = 1 and rep_tim_type = '历史逾期1-3天' then stg_pln_rep_apl_cnt else NULL end) as m6_stg_pln_rep_apl_cnt_ovd_1d_3d_min
+       ,avg(case when m6_flg = 1 and rep_tim_type = '历史逾期1-3天' then stg_pln_rep_apl_cnt else NULL end) as m6_stg_pln_rep_apl_cnt_ovd_1d_3d_avg 
+       ,sum(case when m6_flg = 1 and rep_tim_type = '历史逾期1-3天' then stg_pln_rep_apl_cnt else NULL end) as m6_stg_pln_rep_apl_cnt_ovd_1d_3d_sum       
+       ,max(case when m6_flg = 1 and rep_tim_type like '%历史逾期%' then stg_pln_rep_apl_cnt else NULL end) as m6_stg_pln_rep_apl_cnt_his_ovd_max  
+       ,min(case when m6_flg = 1 and rep_tim_type like '%历史逾期%' then stg_pln_rep_apl_cnt else NULL end) as m6_stg_pln_rep_apl_cnt_his_ovd_min
+       ,avg(case when m6_flg = 1 and rep_tim_type like '%历史逾期%' then stg_pln_rep_apl_cnt else NULL end) as m6_stg_pln_rep_apl_cnt_his_ovd_avg 
+       ,sum(case when m6_flg = 1 and rep_tim_type like '%历史逾期%' then stg_pln_rep_apl_cnt else NULL end) as m6_stg_pln_rep_apl_cnt_his_ovd_sum     
+       -- 用户主动还款意愿
+    --    ,count(case when m6_flg = 1 and stg_pln_rep_apl_cnt = 1 then stg_pln_no else NULL end) as m6_stg_pln_rep_apl_cnt_equal_1_cnt
+       ,count(case when m6_flg = 1 and stg_pln_rep_apl_cnt = 1 and stg_pln_manual_rep_apl_suc_cnt = 1 then stg_pln_no else NULL end) as m6_stg_pln_rep_apl_cnt_equal_1_manual_cnt
+       ,count(case when m6_flg = 1 and stg_pln_rep_apl_cnt = 1 and stg_pln_normal_batch_rep_apl_suc_cnt = 1 then stg_pln_no else NULL end) as m6_stg_pln_rep_apl_cnt_equal_1_normal_batch_cnt
+       ,count(case when m6_flg = 1 and stg_pln_rep_apl_cnt = 1 and stg_pln_ao_offline_rep_apl_suc_cnt = 1 then stg_pln_no else NULL end) as m6_stg_pln_rep_apl_cnt_equal_1_ao_offline_cnt
+       ,count(case when m6_flg = 1 and stg_pln_rep_apl_cnt = 1 and stg_pln_manual_deduct_rep_apl_suc_cnt = 1 then stg_pln_no else NULL end) as m6_stg_pln_rep_apl_cnt_equal_1_manual_deduct_cnt
+       ,count(case when m6_flg = 1 and stg_pln_rep_apl_cnt = 1 and rep_tim_type = 'D0还款' then stg_pln_no else NULL end) as m6_stg_pln_rep_apl_cnt_equal_1_d0_cnt
+       ,count(case when m6_flg = 1 and stg_pln_rep_apl_cnt = 1 and rep_tim_type = '提前还款' then stg_pln_no else NULL end) as m6_stg_pln_rep_apl_cnt_equal_1_adv_cnt
+       ,count(case when m6_flg = 1 and stg_pln_rep_apl_cnt < 4 then stg_pln_no else NULL end) as m6_stg_pln_rep_apl_cnt_less_4_cnt
+    --    ,count(case when m6_flg = 1 and stg_pln_rep_apl_cnt >= 4 then stg_pln_no else NULL end) as m6_stg_pln_rep_apl_cnt_mor_4_cnt 
+
+       -- 单期扣款-计划还款金额 -- 
+       ,max(case when m6_flg = 1 and stg_pln_rep_apl_cnt = 1 then schedule_total_amount else NULL end) as m6_stg_pln_rep_apl_cnt_equal_1_stg_amt_max
+       ,min(case when m6_flg = 1 and stg_pln_rep_apl_cnt = 1 then schedule_total_amount else NULL end) as m6_stg_pln_rep_apl_cnt_equal_1_stg_amt_min
+       ,avg(case when m6_flg = 1 and stg_pln_rep_apl_cnt = 1 then schedule_total_amount else NULL end) as m6_stg_pln_rep_apl_cnt_equal_1_stg_amt_avg
+       ,sum(case when m6_flg = 1 and stg_pln_rep_apl_cnt = 1 then schedule_total_amount else NULL end) as m6_stg_pln_rep_apl_cnt_equal_1_stg_amt_sum                 
+       ,max(case when m6_flg = 1 and stg_pln_rep_apl_cnt < 4 then schedule_total_amount else NULL end) as m6_stg_pln_rep_apl_cnt_less_4_stg_amt_max
+       ,min(case when m6_flg = 1 and stg_pln_rep_apl_cnt < 4 then schedule_total_amount else NULL end) as m6_stg_pln_rep_apl_cnt_less_4_stg_amt_min
+       ,avg(case when m6_flg = 1 and stg_pln_rep_apl_cnt < 4 then schedule_total_amount else NULL end) as m6_stg_pln_rep_apl_cnt_less_4_stg_amt_avg
+       ,sum(case when m6_flg = 1 and stg_pln_rep_apl_cnt < 4 then schedule_total_amount else NULL end) as m6_stg_pln_rep_apl_cnt_less_4_stg_amt_sum                
+       ,max(case when m6_flg = 1 and stg_pln_rep_apl_cnt >= 4 then schedule_total_amount else NULL end) as m6_stg_pln_rep_apl_cnt_mor_4_stg_amt_max
+       ,min(case when m6_flg = 1 and stg_pln_rep_apl_cnt >= 4 then schedule_total_amount else NULL end) as m6_stg_pln_rep_apl_cnt_mor_4_stg_amt_min
+       ,avg(case when m6_flg = 1 and stg_pln_rep_apl_cnt >= 4 then schedule_total_amount else NULL end) as m6_stg_pln_rep_apl_cnt_mor_4_stg_amt_avg
+       ,sum(case when m6_flg = 1 and stg_pln_rep_apl_cnt >= 4 then schedule_total_amount else NULL end) as m6_stg_pln_rep_apl_cnt_mor_4_stg_amt_sum    
+       -- 常规批扣
+       ,max(case when m6_flg = 1 and stg_pln_normal_batch_rep_apl_cnt <= 2 then schedule_total_amount else NULL end) as m6_stg_pln_normal_batch_rep_apl_cnt_less_2_stg_amt_max
+       ,min(case when m6_flg = 1 and stg_pln_normal_batch_rep_apl_cnt <= 2 then schedule_total_amount else NULL end) as m6_stg_pln_normal_batch_rep_apl_cnt_less_2_stg_amt_min
+       ,avg(case when m6_flg = 1 and stg_pln_normal_batch_rep_apl_cnt <= 2 then schedule_total_amount else NULL end) as m6_stg_pln_normal_batch_rep_apl_cnt_less_2_stg_amt_avg
+       ,sum(case when m6_flg = 1 and stg_pln_normal_batch_rep_apl_cnt <= 2 then schedule_total_amount else NULL end) as m6_stg_pln_normal_batch_rep_apl_cnt_less_2_stg_amt_sum 
+       ,max(case when m6_flg = 1 and stg_pln_normal_batch_rep_apl_cnt > 2 then schedule_total_amount else NULL end) as m6_stg_pln_normal_batch_rep_apl_cnt_mor_2_stg_amt_max
+       ,min(case when m6_flg = 1 and stg_pln_normal_batch_rep_apl_cnt > 2 then schedule_total_amount else NULL end) as m6_stg_pln_normal_batch_rep_apl_cnt_mor_2_stg_amt_min
+       ,avg(case when m6_flg = 1 and stg_pln_normal_batch_rep_apl_cnt > 2 then schedule_total_amount else NULL end) as m6_stg_pln_normal_batch_rep_apl_cnt_mor_2_stg_amt_avg
+       ,sum(case when m6_flg = 1 and stg_pln_normal_batch_rep_apl_cnt > 2 then schedule_total_amount else NULL end) as m6_stg_pln_normal_batch_rep_apl_cnt_mor_2_stg_amt_sum                           
+       -- 主动还款                           
+       ,max(case when m6_flg = 1 and stg_pln_rep_apl_cnt = 1 and stg_pln_manual_rep_apl_suc_cnt = 1 then stg_pln_rep_apl_amt else NULL end) as m6_stg_pln_rep_apl_cnt_equal_1_manual_rep_apl_amt_max
+       ,min(case when m6_flg = 1 and stg_pln_rep_apl_cnt = 1 and stg_pln_manual_rep_apl_suc_cnt = 1 then stg_pln_rep_apl_amt else NULL end) as m6_stg_pln_rep_apl_cnt_equal_1_manual_rep_apl_amt_min
+       ,avg(case when m6_flg = 1 and stg_pln_rep_apl_cnt = 1 and stg_pln_manual_rep_apl_suc_cnt = 1 then stg_pln_rep_apl_amt else NULL end) as m6_stg_pln_rep_apl_cnt_equal_1_manual_rep_apl_amt_avg
+       ,sum(case when m6_flg = 1 and stg_pln_rep_apl_cnt = 1 and stg_pln_manual_rep_apl_suc_cnt = 1 then stg_pln_rep_apl_amt else NULL end) as m6_stg_pln_rep_apl_cnt_equal_1_manual_rep_apl_amt_sum       
+       -- 单期扣款-扣款金额 -- 
+       -- 还款类型
+       ,max(case when m6_flg = 1 and stg_pln_rep_apl_fal_cnt > 1 then stg_pln_rep_apl_amt else NULL end) as m6_stg_pln_rep_apl_fal_cnt_mor_1_rep_apl_amt_max
+       ,min(case when m6_flg = 1 and stg_pln_rep_apl_fal_cnt > 1 then stg_pln_rep_apl_amt else NULL end) as m6_stg_pln_rep_apl_fal_cnt_mor_1_rep_apl_amt_min
+       ,avg(case when m6_flg = 1 and stg_pln_rep_apl_fal_cnt > 1 then stg_pln_rep_apl_amt else NULL end) as m6_stg_pln_rep_apl_fal_cnt_mor_1_rep_apl_amt_avg
+       ,sum(case when m6_flg = 1 and stg_pln_rep_apl_fal_cnt > 1 then stg_pln_rep_apl_amt else NULL end) as m6_stg_pln_rep_apl_fal_cnt_mor_1_rep_apl_amt_sum   
+       ,max(case when m6_flg = 1 and stg_pln_rep_apl_fal_cnt > 3 then stg_pln_rep_apl_amt else NULL end) as m6_stg_pln_rep_apl_fal_cnt_mor_3_rep_apl_amt_max
+       ,min(case when m6_flg = 1 and stg_pln_rep_apl_fal_cnt > 3 then stg_pln_rep_apl_amt else NULL end) as m6_stg_pln_rep_apl_fal_cnt_mor_3_rep_apl_amt_min
+       ,avg(case when m6_flg = 1 and stg_pln_rep_apl_fal_cnt > 3 then stg_pln_rep_apl_amt else NULL end) as m6_stg_pln_rep_apl_fal_cnt_mor_3_rep_apl_amt_avg
+       ,sum(case when m6_flg = 1 and stg_pln_rep_apl_fal_cnt > 3 then stg_pln_rep_apl_amt else NULL end) as m6_stg_pln_rep_apl_fal_cnt_mor_3_rep_apl_amt_sum 
+          
+       ,max(case when m6_flg = 1 and rep_tim_type = 'D0还款' then stg_pln_rep_apl_amt else NULL end) as m6_stg_pln_rep_apl_amt_d0_max  
+       ,min(case when m6_flg = 1 and rep_tim_type = 'D0还款' then stg_pln_rep_apl_amt else NULL end) as m6_stg_pln_rep_apl_amt_d0_min
+       ,avg(case when m6_flg = 1 and rep_tim_type = 'D0还款' then stg_pln_rep_apl_amt else NULL end) as m6_stg_pln_rep_apl_amt_d0_avg 
+       ,sum(case when m6_flg = 1 and rep_tim_type = 'D0还款' then stg_pln_rep_apl_amt else NULL end) as m6_stg_pln_rep_apl_amt_d0_sum
+       ,max(case when m6_flg = 1 and rep_tim_type = '提前还款' then stg_pln_rep_apl_amt else NULL end) as m6_stg_pln_rep_apl_amt_adv_max  
+       ,min(case when m6_flg = 1 and rep_tim_type = '提前还款' then stg_pln_rep_apl_amt else NULL end) as m6_stg_pln_rep_apl_amt_adv_min
+       ,avg(case when m6_flg = 1 and rep_tim_type = '提前还款' then stg_pln_rep_apl_amt else NULL end) as m6_stg_pln_rep_apl_amt_adv_avg 
+       ,sum(case when m6_flg = 1 and rep_tim_type = '提前还款' then stg_pln_rep_apl_amt else NULL end) as m6_stg_pln_rep_apl_amt_adv_sum
+       ,max(case when m6_flg = 1 and rep_tim_type = '历史逾期1-3天' then stg_pln_rep_apl_amt else NULL end) as m6_stg_pln_rep_apl_amt_ovd_1d_3d_max  
+       ,min(case when m6_flg = 1 and rep_tim_type = '历史逾期1-3天' then stg_pln_rep_apl_amt else NULL end) as m6_stg_pln_rep_apl_amt_ovd_1d_3d_min
+       ,avg(case when m6_flg = 1 and rep_tim_type = '历史逾期1-3天' then stg_pln_rep_apl_amt else NULL end) as m6_stg_pln_rep_apl_amt_ovd_1d_3d_avg 
+       ,sum(case when m6_flg = 1 and rep_tim_type = '历史逾期1-3天' then stg_pln_rep_apl_amt else NULL end) as m6_stg_pln_rep_apl_amt_ovd_1d_3d_sum       
+       ,max(case when m6_flg = 1 and rep_tim_type like '%历史逾期%' then stg_pln_rep_apl_amt else NULL end) as m6_stg_pln_rep_apl_amt_his_ovd_max  
+       ,min(case when m6_flg = 1 and rep_tim_type like '%历史逾期%' then stg_pln_rep_apl_amt else NULL end) as m6_stg_pln_rep_apl_amt_his_ovd_min
+       ,avg(case when m6_flg = 1 and rep_tim_type like '%历史逾期%' then stg_pln_rep_apl_amt else NULL end) as m6_stg_pln_rep_apl_amt_his_ovd_avg 
+       ,sum(case when m6_flg = 1 and rep_tim_type like '%历史逾期%' then stg_pln_rep_apl_amt else NULL end) as m6_stg_pln_rep_apl_amt_his_ovd_sum      
+from ${dwa_risk}.dwa_risk_dz_model_final_rep_apply_summary_4_tmp
+group by uid
+         ,mdl_dte       
+;
+
+
+set odps.stage.mapper.split.size=20;
+-- 单期扣款衍生
+drop table if exists ${dwa_risk}.dwa_risk_dz_model_final_rep_apply_summary_4_tmp2;
+create table ${dwa_risk}.dwa_risk_dz_model_final_rep_apply_summary_4_tmp2 as
+select uid
+       ,mdl_dte
+       
+       ,count(case when m1_flg = 1 then stg_pln_no else NULL end) as m1_stg_pln_cnt
+       ,count(case when m3_flg = 1 then stg_pln_no else NULL end) as m3_stg_pln_cnt
+       ,count(case when m6_flg = 1 then stg_pln_no else NULL end) as m6_stg_pln_cnt
+       -- 单期扣款次数 --
+       ,count(case when m1_flg = 1 and stg_pln_rep_apl_cnt = 1 then stg_pln_no else NULL end) as m1_stg_pln_rep_apl_cnt_equal_1_cnt
+       ,count(case when m1_flg = 1 and stg_pln_rep_apl_cnt = 2 then stg_pln_no else NULL end) as m1_stg_pln_rep_apl_cnt_equal_2_cnt
+       ,count(case when m1_flg = 1 and stg_pln_rep_apl_cnt > 2 then stg_pln_no else NULL end) as m1_stg_pln_rep_apl_cnt_mor_2_cnt
+       ,count(case when m1_flg = 1 and stg_pln_rep_apl_cnt > 4 then stg_pln_no else NULL end) as m1_stg_pln_rep_apl_cnt_mor_4_cnt
+       ,count(case when m1_flg = 1 and stg_pln_manual_rep_apl_cnt > 0 then stg_pln_no else NULL end) as m1_stg_pln_manual_rep_apl_cnt_mor_0_cnt
+       ,count(case when m1_flg = 1 and stg_pln_normal_batch_rep_apl_cnt > 0 then stg_pln_no else NULL end) as m1_stg_pln_normal_batch_rep_apl_cnt_mor_0_cnt
+       ,count(case when m1_flg = 1 and stg_pln_ao_offline_rep_apl_cnt > 0 then stg_pln_no else NULL end) as m1_stg_pln_ao_offline_rep_apl_cnt_mor_0_cnt
+       ,count(case when m1_flg = 1 and stg_pln_manual_deduct_rep_apl_cnt = 1 then stg_pln_no else NULL end) as m1_stg_pln_manual_deduct_rep_apl_cnt_equal_1_cnt       
+       ,count(case when m1_flg = 1 and stg_pln_normal_batch_rep_apl_cnt = 2 then stg_pln_no else NULL end) as m1_stg_pln_normal_batch_rep_apl_cnt_equal_2_cnt
+       ,count(case when m1_flg = 1 and stg_pln_normal_batch_rep_apl_cnt > 2 then stg_pln_no else NULL end) as m1_stg_pln_normal_batch_rep_apl_cnt_mor_2_cnt
+       ,count(case when m1_flg = 1 and stg_pln_normal_batch_rep_apl_cnt > 4 then stg_pln_no else NULL end) as m1_stg_pln_normal_batch_rep_apl_cnt_mor_4_cnt
+
+       ,count(case when m1_flg = 1 and stg_pln_rep_apl_fal_cnt = 0 then stg_pln_no else NULL end) as m1_stg_pln_rep_apl_fal_cnt_equal_0_cnt
+       ,count(case when m1_flg = 1 and stg_pln_rep_apl_fal_cnt = 1 then stg_pln_no else NULL end) as m1_stg_pln_rep_apl_fal_cnt_equal_1_cnt
+       ,count(case when m1_flg = 1 and stg_pln_rep_apl_fal_cnt = 2 then stg_pln_no else NULL end) as m1_stg_pln_rep_apl_fal_cnt_equal_2_cnt
+       ,count(case when m1_flg = 1 and stg_pln_rep_apl_fal_cnt > 2 then stg_pln_no else NULL end) as m1_stg_pln_rep_apl_fal_cnt_mor_2_cnt
+       ,count(case when m1_flg = 1 and stg_pln_rep_apl_fal_cnt > 4 then stg_pln_no else NULL end) as m1_stg_pln_rep_apl_fal_cnt_mor_4_cnt  
+       ,count(case when m1_flg = 1 and stg_pln_normal_batch_rep_apl_fal_cnt = 0 then stg_pln_no else NULL end) as m1_stg_pln_normal_batch_rep_apl_fal_cnt_equal_0_cnt
+       ,count(case when m1_flg = 1 and stg_pln_normal_batch_rep_apl_fal_cnt = 1 then stg_pln_no else NULL end) as m1_stg_pln_normal_batch_rep_apl_fal_cnt_equal_1_cnt
+       ,count(case when m1_flg = 1 and stg_pln_normal_batch_rep_apl_fal_cnt = 2 then stg_pln_no else NULL end) as m1_stg_pln_normal_batch_rep_apl_fal_cnt_equal_2_cnt
+       ,count(case when m1_flg = 1 and stg_pln_normal_batch_rep_apl_fal_cnt > 2 then stg_pln_no else NULL end) as m1_stg_pln_normal_batch_rep_apl_fal_cnt_mor_2_cnt
+       ,count(case when m1_flg = 1 and stg_pln_normal_batch_rep_apl_fal_cnt > 4 then stg_pln_no else NULL end) as m1_stg_pln_normal_batch_rep_apl_fal_cnt_mor_4_cnt 
+
+        -- 还款时间类型 -- 
+       ,count(case when m1_flg = 1 and rep_tim_type = 'D0还款' then stg_pln_no else NULL end) as m1_stg_pln_d0_rep_apl_cnt
+       ,count(case when m1_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_rep_apl_cnt = 1 then stg_pln_no else NULL end) as m1_stg_pln_d0_rep_apl_cnt_equal_1_cnt
+       ,count(case when m1_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_rep_apl_cnt = 2 then stg_pln_no else NULL end) as m1_stg_pln_d0_rep_apl_cnt_equal_2_cnt
+       ,count(case when m1_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_rep_apl_cnt > 2 then stg_pln_no else NULL end) as m1_stg_pln_d0_rep_apl_cnt_mor_2_cnt
+       ,count(case when m1_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_rep_apl_cnt > 4 then stg_pln_no else NULL end) as m1_stg_pln_d0_rep_apl_cnt_mor_4_cnt
+       ,count(case when m1_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_manual_rep_apl_cnt > 0 then stg_pln_no else NULL end) as m1_stg_pln_d0_manual_rep_apl_cnt_mor_0_cnt
+       ,count(case when m1_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_normal_batch_rep_apl_cnt > 0 then stg_pln_no else NULL end) as m1_stg_pln_d0_normal_batch_rep_apl_cnt_mor_0_cnt
+       ,count(case when m1_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_ao_offline_rep_apl_cnt > 0 then stg_pln_no else NULL end) as m1_stg_pln_d0_ao_offline_rep_apl_cnt_mor_0_cnt
+       ,count(case when m1_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_manual_deduct_rep_apl_cnt = 1 then stg_pln_no else NULL end) as m1_stg_pln_d0_manual_deduct_rep_apl_cnt_equal_1_cnt       
+       ,count(case when m1_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_normal_batch_rep_apl_cnt = 2 then stg_pln_no else NULL end) as m1_stg_pln_d0_normal_batch_rep_apl_cnt_equal_2_cnt
+       ,count(case when m1_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_normal_batch_rep_apl_cnt > 2 then stg_pln_no else NULL end) as m1_stg_pln_d0_normal_batch_rep_apl_cnt_mor_2_cnt
+       ,count(case when m1_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_normal_batch_rep_apl_cnt > 4 then stg_pln_no else NULL end) as m1_stg_pln_d0_normal_batch_rep_apl_cnt_mor_4_cnt
+       ,count(case when m1_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_rep_apl_fal_cnt = 0 then stg_pln_no else NULL end) as m1_stg_pln_d0_rep_apl_fal_cnt_equal_0_cnt
+       ,count(case when m1_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_rep_apl_fal_cnt = 1 then stg_pln_no else NULL end) as m1_stg_pln_d0_rep_apl_fal_cnt_equal_1_cnt
+       ,count(case when m1_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_rep_apl_fal_cnt = 2 then stg_pln_no else NULL end) as m1_stg_pln_d0_rep_apl_fal_cnt_equal_2_cnt
+       ,count(case when m1_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_rep_apl_fal_cnt > 4 then stg_pln_no else NULL end) as m1_stg_pln_d0_rep_apl_fal_cnt_mor_4_cnt  
+       ,count(case when m1_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_normal_batch_rep_apl_fal_cnt = 0 then stg_pln_no else NULL end) as m1_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_0_cnt
+       ,count(case when m1_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_normal_batch_rep_apl_fal_cnt = 1 then stg_pln_no else NULL end) as m1_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_1_cnt
+       ,count(case when m1_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_normal_batch_rep_apl_fal_cnt = 2 then stg_pln_no else NULL end) as m1_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_2_cnt
+       ,count(case when m1_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_normal_batch_rep_apl_fal_cnt > 4 then stg_pln_no else NULL end) as m1_stg_pln_d0_normal_batch_rep_apl_fal_cnt_mor_4_cnt 
+
+       -- 单期扣款次数 --
+       ,count(case when m3_flg = 1 and stg_pln_rep_apl_cnt = 1 then stg_pln_no else NULL end) as m3_stg_pln_rep_apl_cnt_equal_1_cnt
+       ,count(case when m3_flg = 1 and stg_pln_rep_apl_cnt = 2 then stg_pln_no else NULL end) as m3_stg_pln_rep_apl_cnt_equal_2_cnt
+       ,count(case when m3_flg = 1 and stg_pln_rep_apl_cnt > 2 then stg_pln_no else NULL end) as m3_stg_pln_rep_apl_cnt_mor_2_cnt
+       ,count(case when m3_flg = 1 and stg_pln_rep_apl_cnt > 4 then stg_pln_no else NULL end) as m3_stg_pln_rep_apl_cnt_mor_4_cnt
+       ,count(case when m3_flg = 1 and stg_pln_manual_rep_apl_cnt > 0 then stg_pln_no else NULL end) as m3_stg_pln_manual_rep_apl_cnt_mor_0_cnt
+       ,count(case when m3_flg = 1 and stg_pln_normal_batch_rep_apl_cnt > 0 then stg_pln_no else NULL end) as m3_stg_pln_normal_batch_rep_apl_cnt_mor_0_cnt
+       ,count(case when m3_flg = 1 and stg_pln_ao_offline_rep_apl_cnt > 0 then stg_pln_no else NULL end) as m3_stg_pln_ao_offline_rep_apl_cnt_mor_0_cnt
+       ,count(case when m3_flg = 1 and stg_pln_manual_deduct_rep_apl_cnt = 1 then stg_pln_no else NULL end) as m3_stg_pln_manual_deduct_rep_apl_cnt_equal_1_cnt       
+       ,count(case when m3_flg = 1 and stg_pln_normal_batch_rep_apl_cnt = 2 then stg_pln_no else NULL end) as m3_stg_pln_normal_batch_rep_apl_cnt_equal_2_cnt
+       ,count(case when m3_flg = 1 and stg_pln_normal_batch_rep_apl_cnt > 2 then stg_pln_no else NULL end) as m3_stg_pln_normal_batch_rep_apl_cnt_mor_2_cnt
+       ,count(case when m3_flg = 1 and stg_pln_normal_batch_rep_apl_cnt > 4 then stg_pln_no else NULL end) as m3_stg_pln_normal_batch_rep_apl_cnt_mor_4_cnt
+
+       ,count(case when m3_flg = 1 and stg_pln_rep_apl_fal_cnt = 0 then stg_pln_no else NULL end) as m3_stg_pln_rep_apl_fal_cnt_equal_0_cnt
+       ,count(case when m3_flg = 1 and stg_pln_rep_apl_fal_cnt = 1 then stg_pln_no else NULL end) as m3_stg_pln_rep_apl_fal_cnt_equal_1_cnt
+       ,count(case when m3_flg = 1 and stg_pln_rep_apl_fal_cnt = 2 then stg_pln_no else NULL end) as m3_stg_pln_rep_apl_fal_cnt_equal_2_cnt
+       ,count(case when m3_flg = 1 and stg_pln_rep_apl_fal_cnt > 2 then stg_pln_no else NULL end) as m3_stg_pln_rep_apl_fal_cnt_mor_2_cnt
+       ,count(case when m3_flg = 1 and stg_pln_rep_apl_fal_cnt > 4 then stg_pln_no else NULL end) as m3_stg_pln_rep_apl_fal_cnt_mor_4_cnt  
+       ,count(case when m3_flg = 1 and stg_pln_normal_batch_rep_apl_fal_cnt = 0 then stg_pln_no else NULL end) as m3_stg_pln_normal_batch_rep_apl_fal_cnt_equal_0_cnt
+       ,count(case when m3_flg = 1 and stg_pln_normal_batch_rep_apl_fal_cnt = 1 then stg_pln_no else NULL end) as m3_stg_pln_normal_batch_rep_apl_fal_cnt_equal_1_cnt
+       ,count(case when m3_flg = 1 and stg_pln_normal_batch_rep_apl_fal_cnt = 2 then stg_pln_no else NULL end) as m3_stg_pln_normal_batch_rep_apl_fal_cnt_equal_2_cnt
+       ,count(case when m3_flg = 1 and stg_pln_normal_batch_rep_apl_fal_cnt > 2 then stg_pln_no else NULL end) as m3_stg_pln_normal_batch_rep_apl_fal_cnt_mor_2_cnt
+       ,count(case when m3_flg = 1 and stg_pln_normal_batch_rep_apl_fal_cnt > 4 then stg_pln_no else NULL end) as m3_stg_pln_normal_batch_rep_apl_fal_cnt_mor_4_cnt 
+
+        -- 还款时间类型 -- 
+       ,count(case when m3_flg = 1 and rep_tim_type = 'D0还款' then stg_pln_no else NULL end) as m3_stg_pln_d0_rep_apl_cnt
+       ,count(case when m3_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_rep_apl_cnt = 1 then stg_pln_no else NULL end) as m3_stg_pln_d0_rep_apl_cnt_equal_1_cnt
+       ,count(case when m3_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_rep_apl_cnt = 2 then stg_pln_no else NULL end) as m3_stg_pln_d0_rep_apl_cnt_equal_2_cnt
+       ,count(case when m3_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_rep_apl_cnt > 2 then stg_pln_no else NULL end) as m3_stg_pln_d0_rep_apl_cnt_mor_2_cnt
+       ,count(case when m3_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_rep_apl_cnt > 4 then stg_pln_no else NULL end) as m3_stg_pln_d0_rep_apl_cnt_mor_4_cnt
+       ,count(case when m3_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_manual_rep_apl_cnt > 0 then stg_pln_no else NULL end) as m3_stg_pln_d0_manual_rep_apl_cnt_mor_0_cnt
+       ,count(case when m3_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_normal_batch_rep_apl_cnt > 0 then stg_pln_no else NULL end) as m3_stg_pln_d0_normal_batch_rep_apl_cnt_mor_0_cnt
+       ,count(case when m3_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_ao_offline_rep_apl_cnt > 0 then stg_pln_no else NULL end) as m3_stg_pln_d0_ao_offline_rep_apl_cnt_mor_0_cnt
+       ,count(case when m3_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_manual_deduct_rep_apl_cnt = 1 then stg_pln_no else NULL end) as m3_stg_pln_d0_manual_deduct_rep_apl_cnt_equal_1_cnt       
+       ,count(case when m3_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_normal_batch_rep_apl_cnt = 2 then stg_pln_no else NULL end) as m3_stg_pln_d0_normal_batch_rep_apl_cnt_equal_2_cnt
+       ,count(case when m3_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_normal_batch_rep_apl_cnt > 2 then stg_pln_no else NULL end) as m3_stg_pln_d0_normal_batch_rep_apl_cnt_mor_2_cnt
+       ,count(case when m3_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_normal_batch_rep_apl_cnt > 4 then stg_pln_no else NULL end) as m3_stg_pln_d0_normal_batch_rep_apl_cnt_mor_4_cnt
+       ,count(case when m3_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_rep_apl_fal_cnt = 0 then stg_pln_no else NULL end) as m3_stg_pln_d0_rep_apl_fal_cnt_equal_0_cnt
+       ,count(case when m3_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_rep_apl_fal_cnt = 1 then stg_pln_no else NULL end) as m3_stg_pln_d0_rep_apl_fal_cnt_equal_1_cnt
+       ,count(case when m3_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_rep_apl_fal_cnt = 2 then stg_pln_no else NULL end) as m3_stg_pln_d0_rep_apl_fal_cnt_equal_2_cnt
+       ,count(case when m3_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_rep_apl_fal_cnt > 4 then stg_pln_no else NULL end) as m3_stg_pln_d0_rep_apl_fal_cnt_mor_4_cnt  
+       ,count(case when m3_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_normal_batch_rep_apl_fal_cnt = 0 then stg_pln_no else NULL end) as m3_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_0_cnt
+       ,count(case when m3_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_normal_batch_rep_apl_fal_cnt = 1 then stg_pln_no else NULL end) as m3_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_1_cnt
+       ,count(case when m3_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_normal_batch_rep_apl_fal_cnt = 2 then stg_pln_no else NULL end) as m3_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_2_cnt
+       ,count(case when m3_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_normal_batch_rep_apl_fal_cnt > 4 then stg_pln_no else NULL end) as m3_stg_pln_d0_normal_batch_rep_apl_fal_cnt_mor_4_cnt 
+
+       -- 单期扣款次数 --
+       ,count(case when m6_flg = 1 and stg_pln_rep_apl_cnt = 1 then stg_pln_no else NULL end) as m6_stg_pln_rep_apl_cnt_equal_1_cnt
+       ,count(case when m6_flg = 1 and stg_pln_rep_apl_cnt = 2 then stg_pln_no else NULL end) as m6_stg_pln_rep_apl_cnt_equal_2_cnt
+       ,count(case when m6_flg = 1 and stg_pln_rep_apl_cnt > 2 then stg_pln_no else NULL end) as m6_stg_pln_rep_apl_cnt_mor_2_cnt
+       ,count(case when m6_flg = 1 and stg_pln_rep_apl_cnt > 4 then stg_pln_no else NULL end) as m6_stg_pln_rep_apl_cnt_mor_4_cnt
+       ,count(case when m6_flg = 1 and stg_pln_manual_rep_apl_cnt > 0 then stg_pln_no else NULL end) as m6_stg_pln_manual_rep_apl_cnt_mor_0_cnt
+       ,count(case when m6_flg = 1 and stg_pln_normal_batch_rep_apl_cnt > 0 then stg_pln_no else NULL end) as m6_stg_pln_normal_batch_rep_apl_cnt_mor_0_cnt
+       ,count(case when m6_flg = 1 and stg_pln_ao_offline_rep_apl_cnt > 0 then stg_pln_no else NULL end) as m6_stg_pln_ao_offline_rep_apl_cnt_mor_0_cnt
+       ,count(case when m6_flg = 1 and stg_pln_manual_deduct_rep_apl_cnt = 1 then stg_pln_no else NULL end) as m6_stg_pln_manual_deduct_rep_apl_cnt_equal_1_cnt       
+       ,count(case when m6_flg = 1 and stg_pln_normal_batch_rep_apl_cnt = 2 then stg_pln_no else NULL end) as m6_stg_pln_normal_batch_rep_apl_cnt_equal_2_cnt
+       ,count(case when m6_flg = 1 and stg_pln_normal_batch_rep_apl_cnt > 2 then stg_pln_no else NULL end) as m6_stg_pln_normal_batch_rep_apl_cnt_mor_2_cnt
+       ,count(case when m6_flg = 1 and stg_pln_normal_batch_rep_apl_cnt > 4 then stg_pln_no else NULL end) as m6_stg_pln_normal_batch_rep_apl_cnt_mor_4_cnt
+
+       ,count(case when m6_flg = 1 and stg_pln_rep_apl_fal_cnt = 0 then stg_pln_no else NULL end) as m6_stg_pln_rep_apl_fal_cnt_equal_0_cnt
+       ,count(case when m6_flg = 1 and stg_pln_rep_apl_fal_cnt = 1 then stg_pln_no else NULL end) as m6_stg_pln_rep_apl_fal_cnt_equal_1_cnt
+       ,count(case when m6_flg = 1 and stg_pln_rep_apl_fal_cnt = 2 then stg_pln_no else NULL end) as m6_stg_pln_rep_apl_fal_cnt_equal_2_cnt
+       ,count(case when m6_flg = 1 and stg_pln_rep_apl_fal_cnt > 2 then stg_pln_no else NULL end) as m6_stg_pln_rep_apl_fal_cnt_mor_2_cnt
+       ,count(case when m6_flg = 1 and stg_pln_rep_apl_fal_cnt > 4 then stg_pln_no else NULL end) as m6_stg_pln_rep_apl_fal_cnt_mor_4_cnt  
+       ,count(case when m6_flg = 1 and stg_pln_normal_batch_rep_apl_fal_cnt = 0 then stg_pln_no else NULL end) as m6_stg_pln_normal_batch_rep_apl_fal_cnt_equal_0_cnt
+       ,count(case when m6_flg = 1 and stg_pln_normal_batch_rep_apl_fal_cnt = 1 then stg_pln_no else NULL end) as m6_stg_pln_normal_batch_rep_apl_fal_cnt_equal_1_cnt
+       ,count(case when m6_flg = 1 and stg_pln_normal_batch_rep_apl_fal_cnt = 2 then stg_pln_no else NULL end) as m6_stg_pln_normal_batch_rep_apl_fal_cnt_equal_2_cnt
+       ,count(case when m6_flg = 1 and stg_pln_normal_batch_rep_apl_fal_cnt > 2 then stg_pln_no else NULL end) as m6_stg_pln_normal_batch_rep_apl_fal_cnt_mor_2_cnt
+       ,count(case when m6_flg = 1 and stg_pln_normal_batch_rep_apl_fal_cnt > 4 then stg_pln_no else NULL end) as m6_stg_pln_normal_batch_rep_apl_fal_cnt_mor_4_cnt 
+
+        -- 还款时间类型 -- 
+       ,count(case when m6_flg = 1 and rep_tim_type = 'D0还款' then stg_pln_no else NULL end) as m6_stg_pln_d0_rep_apl_cnt
+       ,count(case when m6_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_rep_apl_cnt = 1 then stg_pln_no else NULL end) as m6_stg_pln_d0_rep_apl_cnt_equal_1_cnt
+       ,count(case when m6_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_rep_apl_cnt = 2 then stg_pln_no else NULL end) as m6_stg_pln_d0_rep_apl_cnt_equal_2_cnt
+       ,count(case when m6_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_rep_apl_cnt > 2 then stg_pln_no else NULL end) as m6_stg_pln_d0_rep_apl_cnt_mor_2_cnt
+       ,count(case when m6_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_rep_apl_cnt > 4 then stg_pln_no else NULL end) as m6_stg_pln_d0_rep_apl_cnt_mor_4_cnt
+       ,count(case when m6_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_manual_rep_apl_cnt > 0 then stg_pln_no else NULL end) as m6_stg_pln_d0_manual_rep_apl_cnt_mor_0_cnt
+       ,count(case when m6_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_normal_batch_rep_apl_cnt > 0 then stg_pln_no else NULL end) as m6_stg_pln_d0_normal_batch_rep_apl_cnt_mor_0_cnt
+       ,count(case when m6_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_ao_offline_rep_apl_cnt > 0 then stg_pln_no else NULL end) as m6_stg_pln_d0_ao_offline_rep_apl_cnt_mor_0_cnt
+       ,count(case when m6_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_manual_deduct_rep_apl_cnt = 1 then stg_pln_no else NULL end) as m6_stg_pln_d0_manual_deduct_rep_apl_cnt_equal_1_cnt       
+       ,count(case when m6_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_normal_batch_rep_apl_cnt = 2 then stg_pln_no else NULL end) as m6_stg_pln_d0_normal_batch_rep_apl_cnt_equal_2_cnt
+       ,count(case when m6_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_normal_batch_rep_apl_cnt > 2 then stg_pln_no else NULL end) as m6_stg_pln_d0_normal_batch_rep_apl_cnt_mor_2_cnt
+       ,count(case when m6_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_normal_batch_rep_apl_cnt > 4 then stg_pln_no else NULL end) as m6_stg_pln_d0_normal_batch_rep_apl_cnt_mor_4_cnt
+       ,count(case when m6_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_rep_apl_fal_cnt = 0 then stg_pln_no else NULL end) as m6_stg_pln_d0_rep_apl_fal_cnt_equal_0_cnt
+       ,count(case when m6_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_rep_apl_fal_cnt = 1 then stg_pln_no else NULL end) as m6_stg_pln_d0_rep_apl_fal_cnt_equal_1_cnt
+       ,count(case when m6_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_rep_apl_fal_cnt = 2 then stg_pln_no else NULL end) as m6_stg_pln_d0_rep_apl_fal_cnt_equal_2_cnt
+       ,count(case when m6_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_rep_apl_fal_cnt > 4 then stg_pln_no else NULL end) as m6_stg_pln_d0_rep_apl_fal_cnt_mor_4_cnt  
+       ,count(case when m6_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_normal_batch_rep_apl_fal_cnt = 0 then stg_pln_no else NULL end) as m6_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_0_cnt
+       ,count(case when m6_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_normal_batch_rep_apl_fal_cnt = 1 then stg_pln_no else NULL end) as m6_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_1_cnt
+       ,count(case when m6_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_normal_batch_rep_apl_fal_cnt = 2 then stg_pln_no else NULL end) as m6_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_2_cnt
+       ,count(case when m6_flg = 1 and rep_tim_type = 'D0还款' and stg_pln_normal_batch_rep_apl_fal_cnt > 4 then stg_pln_no else NULL end) as m6_stg_pln_d0_normal_batch_rep_apl_fal_cnt_mor_4_cnt             
+from ${dwa_risk}.dwa_risk_dz_model_final_rep_apply_summary_4_tmp
+group by uid
+         ,mdl_dte
+         
+;
+
+
+set odps.stage.mapper.split.size=20;
+drop table if exists ${dwa_risk}.dwa_risk_dz_model_final_rep_apply_summary_4_tmp3;
+create table ${dwa_risk}.dwa_risk_dz_model_final_rep_apply_summary_4_tmp3 as
+select a.*
+       ,case when m1_stg_pln_cnt>0 then m1_stg_pln_rep_apl_cnt_equal_1_cnt/m1_stg_pln_cnt else null end as m1_stg_pln_rep_apl_cnt_equal_1_cnt_rat
+       ,case when m1_stg_pln_cnt>0 then m1_stg_pln_rep_apl_cnt_equal_2_cnt/m1_stg_pln_cnt else null end as m1_stg_pln_rep_apl_cnt_equal_2_cnt_rat       
+       ,case when m1_stg_pln_cnt>0 then m1_stg_pln_rep_apl_cnt_mor_2_cnt/m1_stg_pln_cnt else null end as m1_stg_pln_rep_apl_cnt_mor_2_cnt_rat
+       ,case when m1_stg_pln_cnt>0 then m1_stg_pln_rep_apl_cnt_mor_4_cnt/m1_stg_pln_cnt else null end as m1_stg_pln_rep_apl_cnt_mor_4_cnt_rat
+       ,case when m1_stg_pln_cnt>0 then m1_stg_pln_manual_rep_apl_cnt_mor_0_cnt/m1_stg_pln_cnt else null end as m1_stg_pln_manual_rep_apl_cnt_mor_0_cnt_rat
+       ,case when m1_stg_pln_cnt>0 then m1_stg_pln_normal_batch_rep_apl_cnt_mor_0_cnt/m1_stg_pln_cnt else null end as m1_stg_pln_normal_batch_rep_apl_cnt_mor_0_cnt_rat
+       ,case when m1_stg_pln_cnt>0 then m1_stg_pln_ao_offline_rep_apl_cnt_mor_0_cnt/m1_stg_pln_cnt else null end as m1_stg_pln_ao_offline_rep_apl_cnt_mor_0_cnt_rat
+       ,case when m1_stg_pln_cnt>0 then m1_stg_pln_manual_deduct_rep_apl_cnt_equal_1_cnt/m1_stg_pln_cnt else null end as m1_stg_pln_manual_deduct_rep_apl_cnt_equal_1_cnt_rat       
+       ,case when m1_stg_pln_cnt>0 then m1_stg_pln_normal_batch_rep_apl_cnt_equal_2_cnt/m1_stg_pln_cnt else null end as m1_stg_pln_normal_batch_rep_apl_cnt_equal_2_cnt_rat
+       ,case when m1_stg_pln_cnt>0 then m1_stg_pln_normal_batch_rep_apl_cnt_mor_2_cnt/m1_stg_pln_cnt else null end as m1_stg_pln_normal_batch_rep_apl_cnt_mor_2_cnt_rat
+       ,case when m1_stg_pln_cnt>0 then m1_stg_pln_normal_batch_rep_apl_cnt_mor_4_cnt/m1_stg_pln_cnt else null end as m1_stg_pln_normal_batch_rep_apl_cnt_mor_4_cnt_rat
+
+       ,case when m1_stg_pln_cnt>0 then m1_stg_pln_rep_apl_fal_cnt_equal_0_cnt/m1_stg_pln_cnt else null end as m1_stg_pln_rep_apl_fal_cnt_equal_0_cnt_rat
+       ,case when m1_stg_pln_cnt>0 then m1_stg_pln_rep_apl_fal_cnt_equal_1_cnt/m1_stg_pln_cnt else null end as m1_stg_pln_rep_apl_fal_cnt_equal_1_cnt_rat
+       ,case when m1_stg_pln_cnt>0 then m1_stg_pln_rep_apl_fal_cnt_equal_2_cnt/m1_stg_pln_cnt else null end as m1_stg_pln_rep_apl_fal_cnt_equal_2_cnt_rat
+       ,case when m1_stg_pln_cnt>0 then m1_stg_pln_rep_apl_fal_cnt_mor_2_cnt/m1_stg_pln_cnt else null end as m1_stg_pln_rep_apl_fal_cnt_mor_2_cnt_rat
+       ,case when m1_stg_pln_cnt>0 then m1_stg_pln_rep_apl_fal_cnt_mor_4_cnt/m1_stg_pln_cnt else null end as m1_stg_pln_rep_apl_fal_cnt_mor_4_cnt_rat
+       ,case when m1_stg_pln_cnt>0 then m1_stg_pln_normal_batch_rep_apl_fal_cnt_equal_0_cnt/m1_stg_pln_cnt else null end as m1_stg_pln_normal_batch_rep_apl_fal_cnt_equal_0_cnt_rat
+       ,case when m1_stg_pln_cnt>0 then m1_stg_pln_normal_batch_rep_apl_fal_cnt_equal_1_cnt/m1_stg_pln_cnt else null end as m1_stg_pln_normal_batch_rep_apl_fal_cnt_equal_1_cnt_rat
+       ,case when m1_stg_pln_cnt>0 then m1_stg_pln_normal_batch_rep_apl_fal_cnt_equal_2_cnt/m1_stg_pln_cnt else null end as m1_stg_pln_normal_batch_rep_apl_fal_cnt_equal_2_cnt_rat
+       ,case when m1_stg_pln_cnt>0 then m1_stg_pln_normal_batch_rep_apl_fal_cnt_mor_2_cnt/m1_stg_pln_cnt else null end as m1_stg_pln_normal_batch_rep_apl_fal_cnt_mor_2_cnt_rat
+       ,case when m1_stg_pln_cnt>0 then m1_stg_pln_normal_batch_rep_apl_fal_cnt_mor_4_cnt/m1_stg_pln_cnt else null end as m1_stg_pln_normal_batch_rep_apl_fal_cnt_mor_4_cnt_rat
+
+       ,case when m1_stg_pln_d0_rep_apl_cnt>0 then m1_stg_pln_d0_rep_apl_cnt_equal_1_cnt/m1_stg_pln_d0_rep_apl_cnt else null end as m1_stg_pln_d0_rep_apl_cnt_equal_1_cnt_rat
+       ,case when m1_stg_pln_d0_rep_apl_cnt>0 then m1_stg_pln_d0_rep_apl_cnt_equal_2_cnt/m1_stg_pln_d0_rep_apl_cnt else null end as m1_stg_pln_d0_rep_apl_cnt_equal_2_cnt_rat
+       ,case when m1_stg_pln_d0_rep_apl_cnt>0 then m1_stg_pln_d0_rep_apl_cnt_mor_2_cnt/m1_stg_pln_d0_rep_apl_cnt else null end as m1_stg_pln_d0_rep_apl_cnt_mor_2_cnt_rat
+       ,case when m1_stg_pln_d0_rep_apl_cnt>0 then m1_stg_pln_d0_rep_apl_cnt_mor_4_cnt/m1_stg_pln_d0_rep_apl_cnt else null end as m1_stg_pln_d0_rep_apl_cnt_mor_4_cnt_rat
+       ,case when m1_stg_pln_d0_rep_apl_cnt>0 then m1_stg_pln_d0_manual_rep_apl_cnt_mor_0_cnt/m1_stg_pln_d0_rep_apl_cnt else null end as m1_stg_pln_d0_manual_rep_apl_cnt_mor_0_cnt_rat
+       ,case when m1_stg_pln_d0_rep_apl_cnt>0 then m1_stg_pln_d0_normal_batch_rep_apl_cnt_mor_0_cnt/m1_stg_pln_d0_rep_apl_cnt else null end as m1_stg_pln_d0_normal_batch_rep_apl_cnt_mor_0_cnt_rat
+       ,case when m1_stg_pln_d0_rep_apl_cnt>0 then m1_stg_pln_d0_ao_offline_rep_apl_cnt_mor_0_cnt/m1_stg_pln_d0_rep_apl_cnt else null end as m1_stg_pln_d0_ao_offline_rep_apl_cnt_mor_0_cnt_rat
+       ,case when m1_stg_pln_d0_rep_apl_cnt>0 then m1_stg_pln_d0_manual_deduct_rep_apl_cnt_equal_1_cnt/m1_stg_pln_d0_rep_apl_cnt else null end as m1_stg_pln_d0_manual_deduct_rep_apl_cnt_equal_1_cnt_rat
+       ,case when m1_stg_pln_d0_rep_apl_cnt>0 then m1_stg_pln_d0_normal_batch_rep_apl_cnt_equal_2_cnt/m1_stg_pln_d0_rep_apl_cnt else null end as m1_stg_pln_d0_normal_batch_rep_apl_cnt_equal_2_cnt_rat
+       ,case when m1_stg_pln_d0_rep_apl_cnt>0 then m1_stg_pln_d0_normal_batch_rep_apl_cnt_mor_2_cnt/m1_stg_pln_d0_rep_apl_cnt else null end as m1_stg_pln_d0_normal_batch_rep_apl_cnt_mor_2_cnt_rat
+       ,case when m1_stg_pln_d0_rep_apl_cnt>0 then m1_stg_pln_d0_normal_batch_rep_apl_cnt_mor_4_cnt/m1_stg_pln_d0_rep_apl_cnt else null end as m1_stg_pln_d0_normal_batch_rep_apl_cnt_mor_4_cnt_rat
+       ,case when m1_stg_pln_d0_rep_apl_cnt>0 then m1_stg_pln_d0_rep_apl_fal_cnt_equal_0_cnt/m1_stg_pln_d0_rep_apl_cnt else null end as m1_stg_pln_d0_rep_apl_fal_cnt_equal_0_cnt_rat
+       ,case when m1_stg_pln_d0_rep_apl_cnt>0 then m1_stg_pln_d0_rep_apl_fal_cnt_equal_1_cnt/m1_stg_pln_d0_rep_apl_cnt else null end as m1_stg_pln_d0_rep_apl_fal_cnt_equal_1_cnt_rat
+       ,case when m1_stg_pln_d0_rep_apl_cnt>0 then m1_stg_pln_d0_rep_apl_fal_cnt_equal_2_cnt/m1_stg_pln_d0_rep_apl_cnt else null end as m1_stg_pln_d0_rep_apl_fal_cnt_equal_2_cnt_rat
+       ,case when m1_stg_pln_d0_rep_apl_cnt>0 then m1_stg_pln_d0_rep_apl_fal_cnt_mor_4_cnt/m1_stg_pln_d0_rep_apl_cnt else null end as m1_stg_pln_d0_rep_apl_fal_cnt_mor_4_cnt_rat
+       ,case when m1_stg_pln_d0_rep_apl_cnt>0 then m1_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_0_cnt/m1_stg_pln_d0_rep_apl_cnt else null end as m1_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_0_cnt_rat
+       ,case when m1_stg_pln_d0_rep_apl_cnt>0 then m1_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_1_cnt/m1_stg_pln_d0_rep_apl_cnt else null end as m1_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_1_cnt_rat
+       ,case when m1_stg_pln_d0_rep_apl_cnt>0 then m1_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_2_cnt/m1_stg_pln_d0_rep_apl_cnt else null end as m1_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_2_cnt_rat
+       ,case when m1_stg_pln_d0_rep_apl_cnt>0 then m1_stg_pln_d0_normal_batch_rep_apl_fal_cnt_mor_4_cnt/m1_stg_pln_d0_rep_apl_cnt else null end as m1_stg_pln_d0_normal_batch_rep_apl_fal_cnt_mor_4_cnt_rat
+
+       ,case when m3_stg_pln_cnt>0 then m3_stg_pln_rep_apl_cnt_equal_1_cnt/m3_stg_pln_cnt else null end as m3_stg_pln_rep_apl_cnt_equal_1_cnt_rat
+       ,case when m3_stg_pln_cnt>0 then m3_stg_pln_rep_apl_cnt_equal_2_cnt/m3_stg_pln_cnt else null end as m3_stg_pln_rep_apl_cnt_equal_2_cnt_rat       
+       ,case when m3_stg_pln_cnt>0 then m3_stg_pln_rep_apl_cnt_mor_2_cnt/m3_stg_pln_cnt else null end as m3_stg_pln_rep_apl_cnt_mor_2_cnt_rat
+       ,case when m3_stg_pln_cnt>0 then m3_stg_pln_rep_apl_cnt_mor_4_cnt/m3_stg_pln_cnt else null end as m3_stg_pln_rep_apl_cnt_mor_4_cnt_rat
+       ,case when m3_stg_pln_cnt>0 then m3_stg_pln_manual_rep_apl_cnt_mor_0_cnt/m3_stg_pln_cnt else null end as m3_stg_pln_manual_rep_apl_cnt_mor_0_cnt_rat
+       ,case when m3_stg_pln_cnt>0 then m3_stg_pln_normal_batch_rep_apl_cnt_mor_0_cnt/m3_stg_pln_cnt else null end as m3_stg_pln_normal_batch_rep_apl_cnt_mor_0_cnt_rat
+       ,case when m3_stg_pln_cnt>0 then m3_stg_pln_ao_offline_rep_apl_cnt_mor_0_cnt/m3_stg_pln_cnt else null end as m3_stg_pln_ao_offline_rep_apl_cnt_mor_0_cnt_rat
+       ,case when m3_stg_pln_cnt>0 then m3_stg_pln_manual_deduct_rep_apl_cnt_equal_1_cnt/m3_stg_pln_cnt else null end as m3_stg_pln_manual_deduct_rep_apl_cnt_equal_1_cnt_rat       
+       ,case when m3_stg_pln_cnt>0 then m3_stg_pln_normal_batch_rep_apl_cnt_equal_2_cnt/m3_stg_pln_cnt else null end as m3_stg_pln_normal_batch_rep_apl_cnt_equal_2_cnt_rat
+       ,case when m3_stg_pln_cnt>0 then m3_stg_pln_normal_batch_rep_apl_cnt_mor_2_cnt/m3_stg_pln_cnt else null end as m3_stg_pln_normal_batch_rep_apl_cnt_mor_2_cnt_rat
+       ,case when m3_stg_pln_cnt>0 then m3_stg_pln_normal_batch_rep_apl_cnt_mor_4_cnt/m3_stg_pln_cnt else null end as m3_stg_pln_normal_batch_rep_apl_cnt_mor_4_cnt_rat
+
+       ,case when m3_stg_pln_cnt>0 then m3_stg_pln_rep_apl_fal_cnt_equal_0_cnt/m3_stg_pln_cnt else null end as m3_stg_pln_rep_apl_fal_cnt_equal_0_cnt_rat
+       ,case when m3_stg_pln_cnt>0 then m3_stg_pln_rep_apl_fal_cnt_equal_1_cnt/m3_stg_pln_cnt else null end as m3_stg_pln_rep_apl_fal_cnt_equal_1_cnt_rat
+       ,case when m3_stg_pln_cnt>0 then m3_stg_pln_rep_apl_fal_cnt_equal_2_cnt/m3_stg_pln_cnt else null end as m3_stg_pln_rep_apl_fal_cnt_equal_2_cnt_rat
+       ,case when m3_stg_pln_cnt>0 then m3_stg_pln_rep_apl_fal_cnt_mor_2_cnt/m3_stg_pln_cnt else null end as m3_stg_pln_rep_apl_fal_cnt_mor_2_cnt_rat
+       ,case when m3_stg_pln_cnt>0 then m3_stg_pln_rep_apl_fal_cnt_mor_4_cnt/m3_stg_pln_cnt else null end as m3_stg_pln_rep_apl_fal_cnt_mor_4_cnt_rat
+       ,case when m3_stg_pln_cnt>0 then m3_stg_pln_normal_batch_rep_apl_fal_cnt_equal_0_cnt/m3_stg_pln_cnt else null end as m3_stg_pln_normal_batch_rep_apl_fal_cnt_equal_0_cnt_rat
+       ,case when m3_stg_pln_cnt>0 then m3_stg_pln_normal_batch_rep_apl_fal_cnt_equal_1_cnt/m3_stg_pln_cnt else null end as m3_stg_pln_normal_batch_rep_apl_fal_cnt_equal_1_cnt_rat
+       ,case when m3_stg_pln_cnt>0 then m3_stg_pln_normal_batch_rep_apl_fal_cnt_equal_2_cnt/m3_stg_pln_cnt else null end as m3_stg_pln_normal_batch_rep_apl_fal_cnt_equal_2_cnt_rat
+       ,case when m3_stg_pln_cnt>0 then m3_stg_pln_normal_batch_rep_apl_fal_cnt_mor_2_cnt/m3_stg_pln_cnt else null end as m3_stg_pln_normal_batch_rep_apl_fal_cnt_mor_2_cnt_rat
+       ,case when m3_stg_pln_cnt>0 then m3_stg_pln_normal_batch_rep_apl_fal_cnt_mor_4_cnt/m3_stg_pln_cnt else null end as m3_stg_pln_normal_batch_rep_apl_fal_cnt_mor_4_cnt_rat
+
+       ,case when m3_stg_pln_d0_rep_apl_cnt>0 then m3_stg_pln_d0_rep_apl_cnt_equal_1_cnt/m3_stg_pln_d0_rep_apl_cnt else null end as m3_stg_pln_d0_rep_apl_cnt_equal_1_cnt_rat
+       ,case when m3_stg_pln_d0_rep_apl_cnt>0 then m3_stg_pln_d0_rep_apl_cnt_equal_2_cnt/m3_stg_pln_d0_rep_apl_cnt else null end as m3_stg_pln_d0_rep_apl_cnt_equal_2_cnt_rat
+       ,case when m3_stg_pln_d0_rep_apl_cnt>0 then m3_stg_pln_d0_rep_apl_cnt_mor_2_cnt/m3_stg_pln_d0_rep_apl_cnt else null end as m3_stg_pln_d0_rep_apl_cnt_mor_2_cnt_rat
+       ,case when m3_stg_pln_d0_rep_apl_cnt>0 then m3_stg_pln_d0_rep_apl_cnt_mor_4_cnt/m3_stg_pln_d0_rep_apl_cnt else null end as m3_stg_pln_d0_rep_apl_cnt_mor_4_cnt_rat
+       ,case when m3_stg_pln_d0_rep_apl_cnt>0 then m3_stg_pln_d0_manual_rep_apl_cnt_mor_0_cnt/m3_stg_pln_d0_rep_apl_cnt else null end as m3_stg_pln_d0_manual_rep_apl_cnt_mor_0_cnt_rat
+       ,case when m3_stg_pln_d0_rep_apl_cnt>0 then m3_stg_pln_d0_normal_batch_rep_apl_cnt_mor_0_cnt/m3_stg_pln_d0_rep_apl_cnt else null end as m3_stg_pln_d0_normal_batch_rep_apl_cnt_mor_0_cnt_rat
+       ,case when m3_stg_pln_d0_rep_apl_cnt>0 then m3_stg_pln_d0_ao_offline_rep_apl_cnt_mor_0_cnt/m3_stg_pln_d0_rep_apl_cnt else null end as m3_stg_pln_d0_ao_offline_rep_apl_cnt_mor_0_cnt_rat
+       ,case when m3_stg_pln_d0_rep_apl_cnt>0 then m3_stg_pln_d0_manual_deduct_rep_apl_cnt_equal_1_cnt/m3_stg_pln_d0_rep_apl_cnt else null end as m3_stg_pln_d0_manual_deduct_rep_apl_cnt_equal_1_cnt_rat
+       ,case when m3_stg_pln_d0_rep_apl_cnt>0 then m3_stg_pln_d0_normal_batch_rep_apl_cnt_equal_2_cnt/m3_stg_pln_d0_rep_apl_cnt else null end as m3_stg_pln_d0_normal_batch_rep_apl_cnt_equal_2_cnt_rat
+       ,case when m3_stg_pln_d0_rep_apl_cnt>0 then m3_stg_pln_d0_normal_batch_rep_apl_cnt_mor_2_cnt/m3_stg_pln_d0_rep_apl_cnt else null end as m3_stg_pln_d0_normal_batch_rep_apl_cnt_mor_2_cnt_rat
+       ,case when m3_stg_pln_d0_rep_apl_cnt>0 then m3_stg_pln_d0_normal_batch_rep_apl_cnt_mor_4_cnt/m3_stg_pln_d0_rep_apl_cnt else null end as m3_stg_pln_d0_normal_batch_rep_apl_cnt_mor_4_cnt_rat
+       ,case when m3_stg_pln_d0_rep_apl_cnt>0 then m3_stg_pln_d0_rep_apl_fal_cnt_equal_0_cnt/m3_stg_pln_d0_rep_apl_cnt else null end as m3_stg_pln_d0_rep_apl_fal_cnt_equal_0_cnt_rat
+       ,case when m3_stg_pln_d0_rep_apl_cnt>0 then m3_stg_pln_d0_rep_apl_fal_cnt_equal_1_cnt/m3_stg_pln_d0_rep_apl_cnt else null end as m3_stg_pln_d0_rep_apl_fal_cnt_equal_1_cnt_rat
+       ,case when m3_stg_pln_d0_rep_apl_cnt>0 then m3_stg_pln_d0_rep_apl_fal_cnt_equal_2_cnt/m3_stg_pln_d0_rep_apl_cnt else null end as m3_stg_pln_d0_rep_apl_fal_cnt_equal_2_cnt_rat
+       ,case when m3_stg_pln_d0_rep_apl_cnt>0 then m3_stg_pln_d0_rep_apl_fal_cnt_mor_4_cnt/m3_stg_pln_d0_rep_apl_cnt else null end as m3_stg_pln_d0_rep_apl_fal_cnt_mor_4_cnt_rat
+       ,case when m3_stg_pln_d0_rep_apl_cnt>0 then m3_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_0_cnt/m3_stg_pln_d0_rep_apl_cnt else null end as m3_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_0_cnt_rat
+       ,case when m3_stg_pln_d0_rep_apl_cnt>0 then m3_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_1_cnt/m3_stg_pln_d0_rep_apl_cnt else null end as m3_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_1_cnt_rat
+       ,case when m3_stg_pln_d0_rep_apl_cnt>0 then m3_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_2_cnt/m3_stg_pln_d0_rep_apl_cnt else null end as m3_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_2_cnt_rat
+       ,case when m3_stg_pln_d0_rep_apl_cnt>0 then m3_stg_pln_d0_normal_batch_rep_apl_fal_cnt_mor_4_cnt/m3_stg_pln_d0_rep_apl_cnt else null end as m3_stg_pln_d0_normal_batch_rep_apl_fal_cnt_mor_4_cnt_rat
+
+       ,case when m6_stg_pln_cnt>0 then m6_stg_pln_rep_apl_cnt_equal_1_cnt/m6_stg_pln_cnt else null end as m6_stg_pln_rep_apl_cnt_equal_1_cnt_rat
+       ,case when m6_stg_pln_cnt>0 then m6_stg_pln_rep_apl_cnt_equal_2_cnt/m6_stg_pln_cnt else null end as m6_stg_pln_rep_apl_cnt_equal_2_cnt_rat       
+       ,case when m6_stg_pln_cnt>0 then m6_stg_pln_rep_apl_cnt_mor_2_cnt/m6_stg_pln_cnt else null end as m6_stg_pln_rep_apl_cnt_mor_2_cnt_rat
+       ,case when m6_stg_pln_cnt>0 then m6_stg_pln_rep_apl_cnt_mor_4_cnt/m6_stg_pln_cnt else null end as m6_stg_pln_rep_apl_cnt_mor_4_cnt_rat
+       ,case when m6_stg_pln_cnt>0 then m6_stg_pln_manual_rep_apl_cnt_mor_0_cnt/m6_stg_pln_cnt else null end as m6_stg_pln_manual_rep_apl_cnt_mor_0_cnt_rat
+       ,case when m6_stg_pln_cnt>0 then m6_stg_pln_normal_batch_rep_apl_cnt_mor_0_cnt/m6_stg_pln_cnt else null end as m6_stg_pln_normal_batch_rep_apl_cnt_mor_0_cnt_rat
+       ,case when m6_stg_pln_cnt>0 then m6_stg_pln_ao_offline_rep_apl_cnt_mor_0_cnt/m6_stg_pln_cnt else null end as m6_stg_pln_ao_offline_rep_apl_cnt_mor_0_cnt_rat
+       ,case when m6_stg_pln_cnt>0 then m6_stg_pln_manual_deduct_rep_apl_cnt_equal_1_cnt/m6_stg_pln_cnt else null end as m6_stg_pln_manual_deduct_rep_apl_cnt_equal_1_cnt_rat       
+       ,case when m6_stg_pln_cnt>0 then m6_stg_pln_normal_batch_rep_apl_cnt_equal_2_cnt/m6_stg_pln_cnt else null end as m6_stg_pln_normal_batch_rep_apl_cnt_equal_2_cnt_rat
+       ,case when m6_stg_pln_cnt>0 then m6_stg_pln_normal_batch_rep_apl_cnt_mor_2_cnt/m6_stg_pln_cnt else null end as m6_stg_pln_normal_batch_rep_apl_cnt_mor_2_cnt_rat
+       ,case when m6_stg_pln_cnt>0 then m6_stg_pln_normal_batch_rep_apl_cnt_mor_4_cnt/m6_stg_pln_cnt else null end as m6_stg_pln_normal_batch_rep_apl_cnt_mor_4_cnt_rat
+
+       ,case when m6_stg_pln_cnt>0 then m6_stg_pln_rep_apl_fal_cnt_equal_0_cnt/m6_stg_pln_cnt else null end as m6_stg_pln_rep_apl_fal_cnt_equal_0_cnt_rat
+       ,case when m6_stg_pln_cnt>0 then m6_stg_pln_rep_apl_fal_cnt_equal_1_cnt/m6_stg_pln_cnt else null end as m6_stg_pln_rep_apl_fal_cnt_equal_1_cnt_rat
+       ,case when m6_stg_pln_cnt>0 then m6_stg_pln_rep_apl_fal_cnt_equal_2_cnt/m6_stg_pln_cnt else null end as m6_stg_pln_rep_apl_fal_cnt_equal_2_cnt_rat
+       ,case when m6_stg_pln_cnt>0 then m6_stg_pln_rep_apl_fal_cnt_mor_2_cnt/m6_stg_pln_cnt else null end as m6_stg_pln_rep_apl_fal_cnt_mor_2_cnt_rat
+       ,case when m6_stg_pln_cnt>0 then m6_stg_pln_rep_apl_fal_cnt_mor_4_cnt/m6_stg_pln_cnt else null end as m6_stg_pln_rep_apl_fal_cnt_mor_4_cnt_rat
+       ,case when m6_stg_pln_cnt>0 then m6_stg_pln_normal_batch_rep_apl_fal_cnt_equal_0_cnt/m6_stg_pln_cnt else null end as m6_stg_pln_normal_batch_rep_apl_fal_cnt_equal_0_cnt_rat
+       ,case when m6_stg_pln_cnt>0 then m6_stg_pln_normal_batch_rep_apl_fal_cnt_equal_1_cnt/m6_stg_pln_cnt else null end as m6_stg_pln_normal_batch_rep_apl_fal_cnt_equal_1_cnt_rat
+       ,case when m6_stg_pln_cnt>0 then m6_stg_pln_normal_batch_rep_apl_fal_cnt_equal_2_cnt/m6_stg_pln_cnt else null end as m6_stg_pln_normal_batch_rep_apl_fal_cnt_equal_2_cnt_rat
+       ,case when m6_stg_pln_cnt>0 then m6_stg_pln_normal_batch_rep_apl_fal_cnt_mor_2_cnt/m6_stg_pln_cnt else null end as m6_stg_pln_normal_batch_rep_apl_fal_cnt_mor_2_cnt_rat
+       ,case when m6_stg_pln_cnt>0 then m6_stg_pln_normal_batch_rep_apl_fal_cnt_mor_4_cnt/m6_stg_pln_cnt else null end as m6_stg_pln_normal_batch_rep_apl_fal_cnt_mor_4_cnt_rat
+
+       ,case when m6_stg_pln_d0_rep_apl_cnt>0 then m6_stg_pln_d0_rep_apl_cnt_equal_1_cnt/m6_stg_pln_d0_rep_apl_cnt else null end as m6_stg_pln_d0_rep_apl_cnt_equal_1_cnt_rat
+       ,case when m6_stg_pln_d0_rep_apl_cnt>0 then m6_stg_pln_d0_rep_apl_cnt_equal_2_cnt/m6_stg_pln_d0_rep_apl_cnt else null end as m6_stg_pln_d0_rep_apl_cnt_equal_2_cnt_rat
+       ,case when m6_stg_pln_d0_rep_apl_cnt>0 then m6_stg_pln_d0_rep_apl_cnt_mor_2_cnt/m6_stg_pln_d0_rep_apl_cnt else null end as m6_stg_pln_d0_rep_apl_cnt_mor_2_cnt_rat
+       ,case when m6_stg_pln_d0_rep_apl_cnt>0 then m6_stg_pln_d0_rep_apl_cnt_mor_4_cnt/m6_stg_pln_d0_rep_apl_cnt else null end as m6_stg_pln_d0_rep_apl_cnt_mor_4_cnt_rat
+       ,case when m6_stg_pln_d0_rep_apl_cnt>0 then m6_stg_pln_d0_manual_rep_apl_cnt_mor_0_cnt/m6_stg_pln_d0_rep_apl_cnt else null end as m6_stg_pln_d0_manual_rep_apl_cnt_mor_0_cnt_rat
+       ,case when m6_stg_pln_d0_rep_apl_cnt>0 then m6_stg_pln_d0_normal_batch_rep_apl_cnt_mor_0_cnt/m6_stg_pln_d0_rep_apl_cnt else null end as m6_stg_pln_d0_normal_batch_rep_apl_cnt_mor_0_cnt_rat
+       ,case when m6_stg_pln_d0_rep_apl_cnt>0 then m6_stg_pln_d0_ao_offline_rep_apl_cnt_mor_0_cnt/m6_stg_pln_d0_rep_apl_cnt else null end as m6_stg_pln_d0_ao_offline_rep_apl_cnt_mor_0_cnt_rat
+       ,case when m6_stg_pln_d0_rep_apl_cnt>0 then m6_stg_pln_d0_manual_deduct_rep_apl_cnt_equal_1_cnt/m6_stg_pln_d0_rep_apl_cnt else null end as m6_stg_pln_d0_manual_deduct_rep_apl_cnt_equal_1_cnt_rat
+       ,case when m6_stg_pln_d0_rep_apl_cnt>0 then m6_stg_pln_d0_normal_batch_rep_apl_cnt_equal_2_cnt/m6_stg_pln_d0_rep_apl_cnt else null end as m6_stg_pln_d0_normal_batch_rep_apl_cnt_equal_2_cnt_rat
+       ,case when m6_stg_pln_d0_rep_apl_cnt>0 then m6_stg_pln_d0_normal_batch_rep_apl_cnt_mor_2_cnt/m6_stg_pln_d0_rep_apl_cnt else null end as m6_stg_pln_d0_normal_batch_rep_apl_cnt_mor_2_cnt_rat
+       ,case when m6_stg_pln_d0_rep_apl_cnt>0 then m6_stg_pln_d0_normal_batch_rep_apl_cnt_mor_4_cnt/m6_stg_pln_d0_rep_apl_cnt else null end as m6_stg_pln_d0_normal_batch_rep_apl_cnt_mor_4_cnt_rat
+       ,case when m6_stg_pln_d0_rep_apl_cnt>0 then m6_stg_pln_d0_rep_apl_fal_cnt_equal_0_cnt/m6_stg_pln_d0_rep_apl_cnt else null end as m6_stg_pln_d0_rep_apl_fal_cnt_equal_0_cnt_rat
+       ,case when m6_stg_pln_d0_rep_apl_cnt>0 then m6_stg_pln_d0_rep_apl_fal_cnt_equal_1_cnt/m6_stg_pln_d0_rep_apl_cnt else null end as m6_stg_pln_d0_rep_apl_fal_cnt_equal_1_cnt_rat
+       ,case when m6_stg_pln_d0_rep_apl_cnt>0 then m6_stg_pln_d0_rep_apl_fal_cnt_equal_2_cnt/m6_stg_pln_d0_rep_apl_cnt else null end as m6_stg_pln_d0_rep_apl_fal_cnt_equal_2_cnt_rat
+       ,case when m6_stg_pln_d0_rep_apl_cnt>0 then m6_stg_pln_d0_rep_apl_fal_cnt_mor_4_cnt/m6_stg_pln_d0_rep_apl_cnt else null end as m6_stg_pln_d0_rep_apl_fal_cnt_mor_4_cnt_rat
+       ,case when m6_stg_pln_d0_rep_apl_cnt>0 then m6_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_0_cnt/m6_stg_pln_d0_rep_apl_cnt else null end as m6_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_0_cnt_rat
+       ,case when m6_stg_pln_d0_rep_apl_cnt>0 then m6_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_1_cnt/m6_stg_pln_d0_rep_apl_cnt else null end as m6_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_1_cnt_rat
+       ,case when m6_stg_pln_d0_rep_apl_cnt>0 then m6_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_2_cnt/m6_stg_pln_d0_rep_apl_cnt else null end as m6_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_2_cnt_rat
+       ,case when m6_stg_pln_d0_rep_apl_cnt>0 then m6_stg_pln_d0_normal_batch_rep_apl_fal_cnt_mor_4_cnt/m6_stg_pln_d0_rep_apl_cnt else null end as m6_stg_pln_d0_normal_batch_rep_apl_fal_cnt_mor_4_cnt_rat       
+from ${dwa_risk}.dwa_risk_dz_model_final_rep_apply_summary_4_tmp2 as a
+;
+
+
+-- 合并
+insert overwrite table ${dwa_risk}.dwa_risk_dz_model_final_rep_apply_summary_4 partition(ds = '${bizdate}')
+select 
+    a.uid
+    ,a.mdl_dte
+    ,m1_stg_pln_rep_apl_cnt_max
+    ,m1_stg_pln_rep_apl_cnt_min
+    ,m1_stg_pln_rep_apl_cnt_avg
+    ,m1_stg_pln_rep_apl_cnt_sum
+    ,m1_stg_pln_manual_rep_apl_cnt_max
+    ,m1_stg_pln_manual_rep_apl_cnt_min
+    ,m1_stg_pln_manual_rep_apl_cnt_avg
+    ,m1_stg_pln_manual_rep_apl_cnt_sum
+    ,m1_stg_pln_ao_offline_rep_apl_cnt_max
+    ,m1_stg_pln_ao_offline_rep_apl_cnt_min
+    ,m1_stg_pln_ao_offline_rep_apl_cnt_avg
+    ,m1_stg_pln_ao_offline_rep_apl_cnt_sum
+    ,m1_stg_pln_manual_deduct_rep_apl_cnt_max
+    ,m1_stg_pln_manual_deduct_rep_apl_cnt_min
+    ,m1_stg_pln_manual_deduct_rep_apl_cnt_avg
+    ,m1_stg_pln_manual_deduct_rep_apl_cnt_sum
+    ,m1_stg_pln_normal_batch_rep_apl_cnt_max
+    ,m1_stg_pln_normal_batch_rep_apl_cnt_min
+    ,m1_stg_pln_normal_batch_rep_apl_cnt_avg
+    ,m1_stg_pln_normal_batch_rep_apl_cnt_sum
+    ,m1_stg_pln_add_bathch_rep_apl_cnt_max
+    ,m1_stg_pln_add_bathch_rep_apl_cnt_min
+    ,m1_stg_pln_add_bathch_rep_apl_cnt_avg
+    ,m1_stg_pln_add_bathch_rep_apl_cnt_sum
+    ,m1_stg_pln_rep_apl_suc_cnt_max
+    ,m1_stg_pln_rep_apl_suc_cnt_min
+    ,m1_stg_pln_rep_apl_suc_cnt_avg
+    ,m1_stg_pln_rep_apl_suc_cnt_sum
+    ,m1_stg_pln_manual_rep_apl_suc_cnt_max
+    ,m1_stg_pln_manual_rep_apl_suc_cnt_min
+    ,m1_stg_pln_manual_rep_apl_suc_cnt_avg
+    ,m1_stg_pln_manual_rep_apl_suc_cnt_sum
+    ,m1_stg_pln_ao_offline_rep_apl_suc_cnt_max
+    ,m1_stg_pln_ao_offline_rep_apl_suc_cnt_min
+    ,m1_stg_pln_ao_offline_rep_apl_suc_cnt_avg
+    ,m1_stg_pln_ao_offline_rep_apl_suc_cnt_sum
+    ,m1_stg_pln_manual_deduct_rep_apl_suc_cnt_max
+    ,m1_stg_pln_manual_deduct_rep_apl_suc_cnt_min
+    ,m1_stg_pln_manual_deduct_rep_apl_suc_cnt_avg
+    ,m1_stg_pln_manual_deduct_rep_apl_suc_cnt_sum
+    ,m1_stg_pln_normal_batch_rep_apl_suc_cnt_max
+    ,m1_stg_pln_normal_batch_rep_apl_suc_cnt_min
+    ,m1_stg_pln_normal_batch_rep_apl_suc_cnt_avg
+    ,m1_stg_pln_normal_batch_rep_apl_suc_cnt_sum
+    ,m1_stg_pln_add_bathch_rep_apl_suc_cnt_max
+    ,m1_stg_pln_add_bathch_rep_apl_suc_cnt_min
+    ,m1_stg_pln_add_bathch_rep_apl_suc_cnt_avg
+    ,m1_stg_pln_add_bathch_rep_apl_suc_cnt_sum
+    ,m1_stg_pln_rep_apl_fal_cnt_max
+    ,m1_stg_pln_rep_apl_fal_cnt_min
+    ,m1_stg_pln_rep_apl_fal_cnt_avg
+    ,m1_stg_pln_rep_apl_fal_cnt_sum
+    ,m1_stg_pln_manual_rep_apl_fal_cnt_max
+    ,m1_stg_pln_manual_rep_apl_fal_cnt_min
+    ,m1_stg_pln_manual_rep_apl_fal_cnt_avg
+    ,m1_stg_pln_manual_rep_apl_fal_cnt_sum
+    ,m1_stg_pln_ao_offline_rep_apl_fal_cnt_max
+    ,m1_stg_pln_ao_offline_rep_apl_fal_cnt_min
+    ,m1_stg_pln_ao_offline_rep_apl_fal_cnt_avg
+    ,m1_stg_pln_ao_offline_rep_apl_fal_cnt_sum
+    ,m1_stg_pln_manual_deduct_rep_apl_fal_cnt_max
+    ,m1_stg_pln_manual_deduct_rep_apl_fal_cnt_min
+    ,m1_stg_pln_manual_deduct_rep_apl_fal_cnt_avg
+    ,m1_stg_pln_manual_deduct_rep_apl_fal_cnt_sum
+    ,m1_stg_pln_normal_batch_rep_apl_fal_cnt_max
+    ,m1_stg_pln_normal_batch_rep_apl_fal_cnt_min
+    ,m1_stg_pln_normal_batch_rep_apl_fal_cnt_avg
+    ,m1_stg_pln_normal_batch_rep_apl_fal_cnt_sum
+    ,m1_stg_pln_add_bathch_rep_apl_fal_cnt_max
+    ,m1_stg_pln_add_bathch_rep_apl_fal_cnt_min
+    ,m1_stg_pln_add_bathch_rep_apl_fal_cnt_avg
+    ,m1_stg_pln_add_bathch_rep_apl_fal_cnt_sum
+    ,m1_stg_pln_rep_apl_cnt_d0_max
+    ,m1_stg_pln_rep_apl_cnt_d0_min
+    ,m1_stg_pln_rep_apl_cnt_d0_avg
+    ,m1_stg_pln_rep_apl_cnt_d0_sum
+    ,m1_stg_pln_rep_apl_cnt_adv_max
+    ,m1_stg_pln_rep_apl_cnt_adv_min
+    ,m1_stg_pln_rep_apl_cnt_adv_avg
+    ,m1_stg_pln_rep_apl_cnt_adv_sum
+    ,m1_stg_pln_rep_apl_cnt_ovd_1d_3d_max
+    ,m1_stg_pln_rep_apl_cnt_ovd_1d_3d_min
+    ,m1_stg_pln_rep_apl_cnt_ovd_1d_3d_avg
+    ,m1_stg_pln_rep_apl_cnt_ovd_1d_3d_sum
+    ,m1_stg_pln_rep_apl_cnt_his_ovd_max
+    ,m1_stg_pln_rep_apl_cnt_his_ovd_min
+    ,m1_stg_pln_rep_apl_cnt_his_ovd_avg
+    ,m1_stg_pln_rep_apl_cnt_his_ovd_sum
+    ,m1_stg_pln_rep_apl_cnt_equal_1_manual_cnt
+    ,m1_stg_pln_rep_apl_cnt_equal_1_normal_batch_cnt
+    ,m1_stg_pln_rep_apl_cnt_equal_1_ao_offline_cnt
+    ,m1_stg_pln_rep_apl_cnt_equal_1_manual_deduct_cnt
+    ,m1_stg_pln_rep_apl_cnt_equal_1_d0_cnt
+    ,m1_stg_pln_rep_apl_cnt_equal_1_adv_cnt
+    ,m1_stg_pln_rep_apl_cnt_less_4_cnt
+    ,m1_stg_pln_rep_apl_cnt_equal_1_stg_amt_max
+    ,m1_stg_pln_rep_apl_cnt_equal_1_stg_amt_min
+    ,m1_stg_pln_rep_apl_cnt_equal_1_stg_amt_avg
+    ,m1_stg_pln_rep_apl_cnt_equal_1_stg_amt_sum
+    ,m1_stg_pln_rep_apl_cnt_less_4_stg_amt_max
+    ,m1_stg_pln_rep_apl_cnt_less_4_stg_amt_min
+    ,m1_stg_pln_rep_apl_cnt_less_4_stg_amt_avg
+    ,m1_stg_pln_rep_apl_cnt_less_4_stg_amt_sum
+    ,m1_stg_pln_rep_apl_cnt_mor_4_stg_amt_max
+    ,m1_stg_pln_rep_apl_cnt_mor_4_stg_amt_min
+    ,m1_stg_pln_rep_apl_cnt_mor_4_stg_amt_avg
+    ,m1_stg_pln_rep_apl_cnt_mor_4_stg_amt_sum
+    ,m1_stg_pln_normal_batch_rep_apl_cnt_less_2_stg_amt_max
+    ,m1_stg_pln_normal_batch_rep_apl_cnt_less_2_stg_amt_min
+    ,m1_stg_pln_normal_batch_rep_apl_cnt_less_2_stg_amt_avg
+    ,m1_stg_pln_normal_batch_rep_apl_cnt_less_2_stg_amt_sum
+    ,m1_stg_pln_normal_batch_rep_apl_cnt_mor_2_stg_amt_max
+    ,m1_stg_pln_normal_batch_rep_apl_cnt_mor_2_stg_amt_min
+    ,m1_stg_pln_normal_batch_rep_apl_cnt_mor_2_stg_amt_avg
+    ,m1_stg_pln_normal_batch_rep_apl_cnt_mor_2_stg_amt_sum
+    ,m1_stg_pln_rep_apl_cnt_equal_1_manual_rep_apl_amt_max
+    ,m1_stg_pln_rep_apl_cnt_equal_1_manual_rep_apl_amt_min
+    ,m1_stg_pln_rep_apl_cnt_equal_1_manual_rep_apl_amt_avg
+    ,m1_stg_pln_rep_apl_cnt_equal_1_manual_rep_apl_amt_sum
+    ,m1_stg_pln_rep_apl_fal_cnt_mor_1_rep_apl_amt_max
+    ,m1_stg_pln_rep_apl_fal_cnt_mor_1_rep_apl_amt_min
+    ,m1_stg_pln_rep_apl_fal_cnt_mor_1_rep_apl_amt_avg
+    ,m1_stg_pln_rep_apl_fal_cnt_mor_1_rep_apl_amt_sum
+    ,m1_stg_pln_rep_apl_fal_cnt_mor_3_rep_apl_amt_max
+    ,m1_stg_pln_rep_apl_fal_cnt_mor_3_rep_apl_amt_min
+    ,m1_stg_pln_rep_apl_fal_cnt_mor_3_rep_apl_amt_avg
+    ,m1_stg_pln_rep_apl_fal_cnt_mor_3_rep_apl_amt_sum
+    ,m1_stg_pln_rep_apl_amt_d0_max
+    ,m1_stg_pln_rep_apl_amt_d0_min
+    ,m1_stg_pln_rep_apl_amt_d0_avg
+    ,m1_stg_pln_rep_apl_amt_d0_sum
+    ,m1_stg_pln_rep_apl_amt_adv_max
+    ,m1_stg_pln_rep_apl_amt_adv_min
+    ,m1_stg_pln_rep_apl_amt_adv_avg
+    ,m1_stg_pln_rep_apl_amt_adv_sum
+    ,m1_stg_pln_rep_apl_amt_ovd_1d_3d_max
+    ,m1_stg_pln_rep_apl_amt_ovd_1d_3d_min
+    ,m1_stg_pln_rep_apl_amt_ovd_1d_3d_avg
+    ,m1_stg_pln_rep_apl_amt_ovd_1d_3d_sum
+    ,m1_stg_pln_rep_apl_amt_his_ovd_max
+    ,m1_stg_pln_rep_apl_amt_his_ovd_min
+    ,m1_stg_pln_rep_apl_amt_his_ovd_avg
+    ,m1_stg_pln_rep_apl_amt_his_ovd_sum
+    ,m3_stg_pln_rep_apl_cnt_max
+    ,m3_stg_pln_rep_apl_cnt_min
+    ,m3_stg_pln_rep_apl_cnt_avg
+    ,m3_stg_pln_rep_apl_cnt_sum
+    ,m3_stg_pln_manual_rep_apl_cnt_max
+    ,m3_stg_pln_manual_rep_apl_cnt_min
+    ,m3_stg_pln_manual_rep_apl_cnt_avg
+    ,m3_stg_pln_manual_rep_apl_cnt_sum
+    ,m3_stg_pln_ao_offline_rep_apl_cnt_max
+    ,m3_stg_pln_ao_offline_rep_apl_cnt_min
+    ,m3_stg_pln_ao_offline_rep_apl_cnt_avg
+    ,m3_stg_pln_ao_offline_rep_apl_cnt_sum
+    ,m3_stg_pln_manual_deduct_rep_apl_cnt_max
+    ,m3_stg_pln_manual_deduct_rep_apl_cnt_min
+    ,m3_stg_pln_manual_deduct_rep_apl_cnt_avg
+    ,m3_stg_pln_manual_deduct_rep_apl_cnt_sum
+    ,m3_stg_pln_normal_batch_rep_apl_cnt_max
+    ,m3_stg_pln_normal_batch_rep_apl_cnt_min
+    ,m3_stg_pln_normal_batch_rep_apl_cnt_avg
+    ,m3_stg_pln_normal_batch_rep_apl_cnt_sum
+    ,m3_stg_pln_add_bathch_rep_apl_cnt_max
+    ,m3_stg_pln_add_bathch_rep_apl_cnt_min
+    ,m3_stg_pln_add_bathch_rep_apl_cnt_avg
+    ,m3_stg_pln_add_bathch_rep_apl_cnt_sum
+    ,m3_stg_pln_rep_apl_suc_cnt_max
+    ,m3_stg_pln_rep_apl_suc_cnt_min
+    ,m3_stg_pln_rep_apl_suc_cnt_avg
+    ,m3_stg_pln_rep_apl_suc_cnt_sum
+    ,m3_stg_pln_manual_rep_apl_suc_cnt_max
+    ,m3_stg_pln_manual_rep_apl_suc_cnt_min
+    ,m3_stg_pln_manual_rep_apl_suc_cnt_avg
+    ,m3_stg_pln_manual_rep_apl_suc_cnt_sum
+    ,m3_stg_pln_ao_offline_rep_apl_suc_cnt_max
+    ,m3_stg_pln_ao_offline_rep_apl_suc_cnt_min
+    ,m3_stg_pln_ao_offline_rep_apl_suc_cnt_avg
+    ,m3_stg_pln_ao_offline_rep_apl_suc_cnt_sum
+    ,m3_stg_pln_manual_deduct_rep_apl_suc_cnt_max
+    ,m3_stg_pln_manual_deduct_rep_apl_suc_cnt_min
+    ,m3_stg_pln_manual_deduct_rep_apl_suc_cnt_avg
+    ,m3_stg_pln_manual_deduct_rep_apl_suc_cnt_sum
+    ,m3_stg_pln_normal_batch_rep_apl_suc_cnt_max
+    ,m3_stg_pln_normal_batch_rep_apl_suc_cnt_min
+    ,m3_stg_pln_normal_batch_rep_apl_suc_cnt_avg
+    ,m3_stg_pln_normal_batch_rep_apl_suc_cnt_sum
+    ,m3_stg_pln_add_bathch_rep_apl_suc_cnt_max
+    ,m3_stg_pln_add_bathch_rep_apl_suc_cnt_min
+    ,m3_stg_pln_add_bathch_rep_apl_suc_cnt_avg
+    ,m3_stg_pln_add_bathch_rep_apl_suc_cnt_sum
+    ,m3_stg_pln_rep_apl_fal_cnt_max
+    ,m3_stg_pln_rep_apl_fal_cnt_min
+    ,m3_stg_pln_rep_apl_fal_cnt_avg
+    ,m3_stg_pln_rep_apl_fal_cnt_sum
+    ,m3_stg_pln_manual_rep_apl_fal_cnt_max
+    ,m3_stg_pln_manual_rep_apl_fal_cnt_min
+    ,m3_stg_pln_manual_rep_apl_fal_cnt_avg
+    ,m3_stg_pln_manual_rep_apl_fal_cnt_sum
+    ,m3_stg_pln_ao_offline_rep_apl_fal_cnt_max
+    ,m3_stg_pln_ao_offline_rep_apl_fal_cnt_min
+    ,m3_stg_pln_ao_offline_rep_apl_fal_cnt_avg
+    ,m3_stg_pln_ao_offline_rep_apl_fal_cnt_sum
+    ,m3_stg_pln_manual_deduct_rep_apl_fal_cnt_max
+    ,m3_stg_pln_manual_deduct_rep_apl_fal_cnt_min
+    ,m3_stg_pln_manual_deduct_rep_apl_fal_cnt_avg
+    ,m3_stg_pln_manual_deduct_rep_apl_fal_cnt_sum
+    ,m3_stg_pln_normal_batch_rep_apl_fal_cnt_max
+    ,m3_stg_pln_normal_batch_rep_apl_fal_cnt_min
+    ,m3_stg_pln_normal_batch_rep_apl_fal_cnt_avg
+    ,m3_stg_pln_normal_batch_rep_apl_fal_cnt_sum
+    ,m3_stg_pln_add_bathch_rep_apl_fal_cnt_max
+    ,m3_stg_pln_add_bathch_rep_apl_fal_cnt_min
+    ,m3_stg_pln_add_bathch_rep_apl_fal_cnt_avg
+    ,m3_stg_pln_add_bathch_rep_apl_fal_cnt_sum
+    ,m3_stg_pln_rep_apl_cnt_d0_max
+    ,m3_stg_pln_rep_apl_cnt_d0_min
+    ,m3_stg_pln_rep_apl_cnt_d0_avg
+    ,m3_stg_pln_rep_apl_cnt_d0_sum
+    ,m3_stg_pln_rep_apl_cnt_adv_max
+    ,m3_stg_pln_rep_apl_cnt_adv_min
+    ,m3_stg_pln_rep_apl_cnt_adv_avg
+    ,m3_stg_pln_rep_apl_cnt_adv_sum
+    ,m3_stg_pln_rep_apl_cnt_ovd_1d_3d_max
+    ,m3_stg_pln_rep_apl_cnt_ovd_1d_3d_min
+    ,m3_stg_pln_rep_apl_cnt_ovd_1d_3d_avg
+    ,m3_stg_pln_rep_apl_cnt_ovd_1d_3d_sum
+    ,m3_stg_pln_rep_apl_cnt_his_ovd_max
+    ,m3_stg_pln_rep_apl_cnt_his_ovd_min
+    ,m3_stg_pln_rep_apl_cnt_his_ovd_avg
+    ,m3_stg_pln_rep_apl_cnt_his_ovd_sum
+    ,m3_stg_pln_rep_apl_cnt_equal_1_manual_cnt
+    ,m3_stg_pln_rep_apl_cnt_equal_1_normal_batch_cnt
+    ,m3_stg_pln_rep_apl_cnt_equal_1_ao_offline_cnt
+    ,m3_stg_pln_rep_apl_cnt_equal_1_manual_deduct_cnt
+    ,m3_stg_pln_rep_apl_cnt_equal_1_d0_cnt
+    ,m3_stg_pln_rep_apl_cnt_equal_1_adv_cnt
+    ,m3_stg_pln_rep_apl_cnt_less_4_cnt
+    ,m3_stg_pln_rep_apl_cnt_equal_1_stg_amt_max
+    ,m3_stg_pln_rep_apl_cnt_equal_1_stg_amt_min
+    ,m3_stg_pln_rep_apl_cnt_equal_1_stg_amt_avg
+    ,m3_stg_pln_rep_apl_cnt_equal_1_stg_amt_sum
+    ,m3_stg_pln_rep_apl_cnt_less_4_stg_amt_max
+    ,m3_stg_pln_rep_apl_cnt_less_4_stg_amt_min
+    ,m3_stg_pln_rep_apl_cnt_less_4_stg_amt_avg
+    ,m3_stg_pln_rep_apl_cnt_less_4_stg_amt_sum
+    ,m3_stg_pln_rep_apl_cnt_mor_4_stg_amt_max
+    ,m3_stg_pln_rep_apl_cnt_mor_4_stg_amt_min
+    ,m3_stg_pln_rep_apl_cnt_mor_4_stg_amt_avg
+    ,m3_stg_pln_rep_apl_cnt_mor_4_stg_amt_sum
+    ,m3_stg_pln_normal_batch_rep_apl_cnt_less_2_stg_amt_max
+    ,m3_stg_pln_normal_batch_rep_apl_cnt_less_2_stg_amt_min
+    ,m3_stg_pln_normal_batch_rep_apl_cnt_less_2_stg_amt_avg
+    ,m3_stg_pln_normal_batch_rep_apl_cnt_less_2_stg_amt_sum
+    ,m3_stg_pln_normal_batch_rep_apl_cnt_mor_2_stg_amt_max
+    ,m3_stg_pln_normal_batch_rep_apl_cnt_mor_2_stg_amt_min
+    ,m3_stg_pln_normal_batch_rep_apl_cnt_mor_2_stg_amt_avg
+    ,m3_stg_pln_normal_batch_rep_apl_cnt_mor_2_stg_amt_sum
+    ,m3_stg_pln_rep_apl_cnt_equal_1_manual_rep_apl_amt_max
+    ,m3_stg_pln_rep_apl_cnt_equal_1_manual_rep_apl_amt_min
+    ,m3_stg_pln_rep_apl_cnt_equal_1_manual_rep_apl_amt_avg
+    ,m3_stg_pln_rep_apl_cnt_equal_1_manual_rep_apl_amt_sum
+    ,m3_stg_pln_rep_apl_fal_cnt_mor_1_rep_apl_amt_max
+    ,m3_stg_pln_rep_apl_fal_cnt_mor_1_rep_apl_amt_min
+    ,m3_stg_pln_rep_apl_fal_cnt_mor_1_rep_apl_amt_avg
+    ,m3_stg_pln_rep_apl_fal_cnt_mor_1_rep_apl_amt_sum
+    ,m3_stg_pln_rep_apl_fal_cnt_mor_3_rep_apl_amt_max
+    ,m3_stg_pln_rep_apl_fal_cnt_mor_3_rep_apl_amt_min
+    ,m3_stg_pln_rep_apl_fal_cnt_mor_3_rep_apl_amt_avg
+    ,m3_stg_pln_rep_apl_fal_cnt_mor_3_rep_apl_amt_sum
+    ,m3_stg_pln_rep_apl_amt_d0_max
+    ,m3_stg_pln_rep_apl_amt_d0_min
+    ,m3_stg_pln_rep_apl_amt_d0_avg
+    ,m3_stg_pln_rep_apl_amt_d0_sum
+    ,m3_stg_pln_rep_apl_amt_adv_max
+    ,m3_stg_pln_rep_apl_amt_adv_min
+    ,m3_stg_pln_rep_apl_amt_adv_avg
+    ,m3_stg_pln_rep_apl_amt_adv_sum
+    ,m3_stg_pln_rep_apl_amt_ovd_1d_3d_max
+    ,m3_stg_pln_rep_apl_amt_ovd_1d_3d_min
+    ,m3_stg_pln_rep_apl_amt_ovd_1d_3d_avg
+    ,m3_stg_pln_rep_apl_amt_ovd_1d_3d_sum
+    ,m3_stg_pln_rep_apl_amt_his_ovd_max
+    ,m3_stg_pln_rep_apl_amt_his_ovd_min
+    ,m3_stg_pln_rep_apl_amt_his_ovd_avg
+    ,m3_stg_pln_rep_apl_amt_his_ovd_sum
+    ,m6_stg_pln_rep_apl_cnt_max
+    ,m6_stg_pln_rep_apl_cnt_min
+    ,m6_stg_pln_rep_apl_cnt_avg
+    ,m6_stg_pln_rep_apl_cnt_sum
+    ,m6_stg_pln_manual_rep_apl_cnt_max
+    ,m6_stg_pln_manual_rep_apl_cnt_min
+    ,m6_stg_pln_manual_rep_apl_cnt_avg
+    ,m6_stg_pln_manual_rep_apl_cnt_sum
+    ,m6_stg_pln_ao_offline_rep_apl_cnt_max
+    ,m6_stg_pln_ao_offline_rep_apl_cnt_min
+    ,m6_stg_pln_ao_offline_rep_apl_cnt_avg
+    ,m6_stg_pln_ao_offline_rep_apl_cnt_sum
+    ,m6_stg_pln_manual_deduct_rep_apl_cnt_max
+    ,m6_stg_pln_manual_deduct_rep_apl_cnt_min
+    ,m6_stg_pln_manual_deduct_rep_apl_cnt_avg
+    ,m6_stg_pln_manual_deduct_rep_apl_cnt_sum
+    ,m6_stg_pln_normal_batch_rep_apl_cnt_max
+    ,m6_stg_pln_normal_batch_rep_apl_cnt_min
+    ,m6_stg_pln_normal_batch_rep_apl_cnt_avg
+    ,m6_stg_pln_normal_batch_rep_apl_cnt_sum
+    ,m6_stg_pln_add_bathch_rep_apl_cnt_max
+    ,m6_stg_pln_add_bathch_rep_apl_cnt_min
+    ,m6_stg_pln_add_bathch_rep_apl_cnt_avg
+    ,m6_stg_pln_add_bathch_rep_apl_cnt_sum
+    ,m6_stg_pln_rep_apl_suc_cnt_max
+    ,m6_stg_pln_rep_apl_suc_cnt_min
+    ,m6_stg_pln_rep_apl_suc_cnt_avg
+    ,m6_stg_pln_rep_apl_suc_cnt_sum
+    ,m6_stg_pln_manual_rep_apl_suc_cnt_max
+    ,m6_stg_pln_manual_rep_apl_suc_cnt_min
+    ,m6_stg_pln_manual_rep_apl_suc_cnt_avg
+    ,m6_stg_pln_manual_rep_apl_suc_cnt_sum
+    ,m6_stg_pln_ao_offline_rep_apl_suc_cnt_max
+    ,m6_stg_pln_ao_offline_rep_apl_suc_cnt_min
+    ,m6_stg_pln_ao_offline_rep_apl_suc_cnt_avg
+    ,m6_stg_pln_ao_offline_rep_apl_suc_cnt_sum
+    ,m6_stg_pln_manual_deduct_rep_apl_suc_cnt_max
+    ,m6_stg_pln_manual_deduct_rep_apl_suc_cnt_min
+    ,m6_stg_pln_manual_deduct_rep_apl_suc_cnt_avg
+    ,m6_stg_pln_manual_deduct_rep_apl_suc_cnt_sum
+    ,m6_stg_pln_normal_batch_rep_apl_suc_cnt_max
+    ,m6_stg_pln_normal_batch_rep_apl_suc_cnt_min
+    ,m6_stg_pln_normal_batch_rep_apl_suc_cnt_avg
+    ,m6_stg_pln_normal_batch_rep_apl_suc_cnt_sum
+    ,m6_stg_pln_add_bathch_rep_apl_suc_cnt_max
+    ,m6_stg_pln_add_bathch_rep_apl_suc_cnt_min
+    ,m6_stg_pln_add_bathch_rep_apl_suc_cnt_avg
+    ,m6_stg_pln_add_bathch_rep_apl_suc_cnt_sum
+    ,m6_stg_pln_rep_apl_fal_cnt_max
+    ,m6_stg_pln_rep_apl_fal_cnt_min
+    ,m6_stg_pln_rep_apl_fal_cnt_avg
+    ,m6_stg_pln_rep_apl_fal_cnt_sum
+    ,m6_stg_pln_manual_rep_apl_fal_cnt_max
+    ,m6_stg_pln_manual_rep_apl_fal_cnt_min
+    ,m6_stg_pln_manual_rep_apl_fal_cnt_avg
+    ,m6_stg_pln_manual_rep_apl_fal_cnt_sum
+    ,m6_stg_pln_ao_offline_rep_apl_fal_cnt_max
+    ,m6_stg_pln_ao_offline_rep_apl_fal_cnt_min
+    ,m6_stg_pln_ao_offline_rep_apl_fal_cnt_avg
+    ,m6_stg_pln_ao_offline_rep_apl_fal_cnt_sum
+    ,m6_stg_pln_manual_deduct_rep_apl_fal_cnt_max
+    ,m6_stg_pln_manual_deduct_rep_apl_fal_cnt_min
+    ,m6_stg_pln_manual_deduct_rep_apl_fal_cnt_avg
+    ,m6_stg_pln_manual_deduct_rep_apl_fal_cnt_sum
+    ,m6_stg_pln_normal_batch_rep_apl_fal_cnt_max
+    ,m6_stg_pln_normal_batch_rep_apl_fal_cnt_min
+    ,m6_stg_pln_normal_batch_rep_apl_fal_cnt_avg
+    ,m6_stg_pln_normal_batch_rep_apl_fal_cnt_sum
+    ,m6_stg_pln_add_bathch_rep_apl_fal_cnt_max
+    ,m6_stg_pln_add_bathch_rep_apl_fal_cnt_min
+    ,m6_stg_pln_add_bathch_rep_apl_fal_cnt_avg
+    ,m6_stg_pln_add_bathch_rep_apl_fal_cnt_sum
+    ,m6_stg_pln_rep_apl_cnt_d0_max
+    ,m6_stg_pln_rep_apl_cnt_d0_min
+    ,m6_stg_pln_rep_apl_cnt_d0_avg
+    ,m6_stg_pln_rep_apl_cnt_d0_sum
+    ,m6_stg_pln_rep_apl_cnt_adv_max
+    ,m6_stg_pln_rep_apl_cnt_adv_min
+    ,m6_stg_pln_rep_apl_cnt_adv_avg
+    ,m6_stg_pln_rep_apl_cnt_adv_sum
+    ,m6_stg_pln_rep_apl_cnt_ovd_1d_3d_max
+    ,m6_stg_pln_rep_apl_cnt_ovd_1d_3d_min
+    ,m6_stg_pln_rep_apl_cnt_ovd_1d_3d_avg
+    ,m6_stg_pln_rep_apl_cnt_ovd_1d_3d_sum
+    ,m6_stg_pln_rep_apl_cnt_his_ovd_max
+    ,m6_stg_pln_rep_apl_cnt_his_ovd_min
+    ,m6_stg_pln_rep_apl_cnt_his_ovd_avg
+    ,m6_stg_pln_rep_apl_cnt_his_ovd_sum
+    ,m6_stg_pln_rep_apl_cnt_equal_1_manual_cnt
+    ,m6_stg_pln_rep_apl_cnt_equal_1_normal_batch_cnt
+    ,m6_stg_pln_rep_apl_cnt_equal_1_ao_offline_cnt
+    ,m6_stg_pln_rep_apl_cnt_equal_1_manual_deduct_cnt
+    ,m6_stg_pln_rep_apl_cnt_equal_1_d0_cnt
+    ,m6_stg_pln_rep_apl_cnt_equal_1_adv_cnt
+    ,m6_stg_pln_rep_apl_cnt_less_4_cnt
+    ,m6_stg_pln_rep_apl_cnt_equal_1_stg_amt_max
+    ,m6_stg_pln_rep_apl_cnt_equal_1_stg_amt_min
+    ,m6_stg_pln_rep_apl_cnt_equal_1_stg_amt_avg
+    ,m6_stg_pln_rep_apl_cnt_equal_1_stg_amt_sum
+    ,m6_stg_pln_rep_apl_cnt_less_4_stg_amt_max
+    ,m6_stg_pln_rep_apl_cnt_less_4_stg_amt_min
+    ,m6_stg_pln_rep_apl_cnt_less_4_stg_amt_avg
+    ,m6_stg_pln_rep_apl_cnt_less_4_stg_amt_sum
+    ,m6_stg_pln_rep_apl_cnt_mor_4_stg_amt_max
+    ,m6_stg_pln_rep_apl_cnt_mor_4_stg_amt_min
+    ,m6_stg_pln_rep_apl_cnt_mor_4_stg_amt_avg
+    ,m6_stg_pln_rep_apl_cnt_mor_4_stg_amt_sum
+    ,m6_stg_pln_normal_batch_rep_apl_cnt_less_2_stg_amt_max
+    ,m6_stg_pln_normal_batch_rep_apl_cnt_less_2_stg_amt_min
+    ,m6_stg_pln_normal_batch_rep_apl_cnt_less_2_stg_amt_avg
+    ,m6_stg_pln_normal_batch_rep_apl_cnt_less_2_stg_amt_sum
+    ,m6_stg_pln_normal_batch_rep_apl_cnt_mor_2_stg_amt_max
+    ,m6_stg_pln_normal_batch_rep_apl_cnt_mor_2_stg_amt_min
+    ,m6_stg_pln_normal_batch_rep_apl_cnt_mor_2_stg_amt_avg
+    ,m6_stg_pln_normal_batch_rep_apl_cnt_mor_2_stg_amt_sum
+    ,m6_stg_pln_rep_apl_cnt_equal_1_manual_rep_apl_amt_max
+    ,m6_stg_pln_rep_apl_cnt_equal_1_manual_rep_apl_amt_min
+    ,m6_stg_pln_rep_apl_cnt_equal_1_manual_rep_apl_amt_avg
+    ,m6_stg_pln_rep_apl_cnt_equal_1_manual_rep_apl_amt_sum
+    ,m6_stg_pln_rep_apl_fal_cnt_mor_1_rep_apl_amt_max
+    ,m6_stg_pln_rep_apl_fal_cnt_mor_1_rep_apl_amt_min
+    ,m6_stg_pln_rep_apl_fal_cnt_mor_1_rep_apl_amt_avg
+    ,m6_stg_pln_rep_apl_fal_cnt_mor_1_rep_apl_amt_sum
+    ,m6_stg_pln_rep_apl_fal_cnt_mor_3_rep_apl_amt_max
+    ,m6_stg_pln_rep_apl_fal_cnt_mor_3_rep_apl_amt_min
+    ,m6_stg_pln_rep_apl_fal_cnt_mor_3_rep_apl_amt_avg
+    ,m6_stg_pln_rep_apl_fal_cnt_mor_3_rep_apl_amt_sum
+    ,m6_stg_pln_rep_apl_amt_d0_max
+    ,m6_stg_pln_rep_apl_amt_d0_min
+    ,m6_stg_pln_rep_apl_amt_d0_avg
+    ,m6_stg_pln_rep_apl_amt_d0_sum
+    ,m6_stg_pln_rep_apl_amt_adv_max
+    ,m6_stg_pln_rep_apl_amt_adv_min
+    ,m6_stg_pln_rep_apl_amt_adv_avg
+    ,m6_stg_pln_rep_apl_amt_adv_sum
+    ,m6_stg_pln_rep_apl_amt_ovd_1d_3d_max
+    ,m6_stg_pln_rep_apl_amt_ovd_1d_3d_min
+    ,m6_stg_pln_rep_apl_amt_ovd_1d_3d_avg
+    ,m6_stg_pln_rep_apl_amt_ovd_1d_3d_sum
+    ,m6_stg_pln_rep_apl_amt_his_ovd_max
+    ,m6_stg_pln_rep_apl_amt_his_ovd_min
+    ,m6_stg_pln_rep_apl_amt_his_ovd_avg
+    ,m6_stg_pln_rep_apl_amt_his_ovd_sum
+    ,m1_stg_pln_rep_apl_cnt_equal_1_cnt
+    ,m1_stg_pln_rep_apl_cnt_equal_2_cnt
+    ,m1_stg_pln_rep_apl_cnt_mor_2_cnt
+    ,m1_stg_pln_rep_apl_cnt_mor_4_cnt
+    ,m1_stg_pln_manual_rep_apl_cnt_mor_0_cnt
+    ,m1_stg_pln_normal_batch_rep_apl_cnt_mor_0_cnt
+    ,m1_stg_pln_ao_offline_rep_apl_cnt_mor_0_cnt
+    ,m1_stg_pln_manual_deduct_rep_apl_cnt_equal_1_cnt
+    ,m1_stg_pln_normal_batch_rep_apl_cnt_equal_2_cnt
+    ,m1_stg_pln_normal_batch_rep_apl_cnt_mor_2_cnt
+    ,m1_stg_pln_normal_batch_rep_apl_cnt_mor_4_cnt
+    ,m1_stg_pln_rep_apl_fal_cnt_equal_0_cnt
+    ,m1_stg_pln_rep_apl_fal_cnt_equal_1_cnt
+    ,m1_stg_pln_rep_apl_fal_cnt_equal_2_cnt
+    ,m1_stg_pln_rep_apl_fal_cnt_mor_2_cnt
+    ,m1_stg_pln_rep_apl_fal_cnt_mor_4_cnt
+    ,m1_stg_pln_normal_batch_rep_apl_fal_cnt_equal_0_cnt
+    ,m1_stg_pln_normal_batch_rep_apl_fal_cnt_equal_1_cnt
+    ,m1_stg_pln_normal_batch_rep_apl_fal_cnt_equal_2_cnt
+    ,m1_stg_pln_normal_batch_rep_apl_fal_cnt_mor_2_cnt
+    ,m1_stg_pln_normal_batch_rep_apl_fal_cnt_mor_4_cnt
+    --    ,m1_stg_pln_d0_rep_apl_cnt
+    ,m1_stg_pln_d0_rep_apl_cnt_equal_1_cnt
+    ,m1_stg_pln_d0_rep_apl_cnt_equal_2_cnt
+    ,m1_stg_pln_d0_rep_apl_cnt_mor_2_cnt
+    ,m1_stg_pln_d0_rep_apl_cnt_mor_4_cnt
+    ,m1_stg_pln_d0_manual_rep_apl_cnt_mor_0_cnt
+    ,m1_stg_pln_d0_normal_batch_rep_apl_cnt_mor_0_cnt
+    ,m1_stg_pln_d0_ao_offline_rep_apl_cnt_mor_0_cnt
+    ,m1_stg_pln_d0_manual_deduct_rep_apl_cnt_equal_1_cnt
+    ,m1_stg_pln_d0_normal_batch_rep_apl_cnt_equal_2_cnt
+    ,m1_stg_pln_d0_normal_batch_rep_apl_cnt_mor_2_cnt
+    ,m1_stg_pln_d0_normal_batch_rep_apl_cnt_mor_4_cnt
+    ,m1_stg_pln_d0_rep_apl_fal_cnt_equal_0_cnt
+    ,m1_stg_pln_d0_rep_apl_fal_cnt_equal_1_cnt
+    ,m1_stg_pln_d0_rep_apl_fal_cnt_equal_2_cnt
+    ,m1_stg_pln_d0_rep_apl_fal_cnt_mor_4_cnt
+    ,m1_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_0_cnt
+    ,m1_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_1_cnt
+    ,m1_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_2_cnt
+    ,m1_stg_pln_d0_normal_batch_rep_apl_fal_cnt_mor_4_cnt
+    ,m3_stg_pln_rep_apl_cnt_equal_1_cnt
+    ,m3_stg_pln_rep_apl_cnt_equal_2_cnt
+    ,m3_stg_pln_rep_apl_cnt_mor_2_cnt
+    ,m3_stg_pln_rep_apl_cnt_mor_4_cnt
+    ,m3_stg_pln_manual_rep_apl_cnt_mor_0_cnt
+    ,m3_stg_pln_normal_batch_rep_apl_cnt_mor_0_cnt
+    ,m3_stg_pln_ao_offline_rep_apl_cnt_mor_0_cnt
+    ,m3_stg_pln_manual_deduct_rep_apl_cnt_equal_1_cnt
+    ,m3_stg_pln_normal_batch_rep_apl_cnt_equal_2_cnt
+    ,m3_stg_pln_normal_batch_rep_apl_cnt_mor_2_cnt
+    ,m3_stg_pln_normal_batch_rep_apl_cnt_mor_4_cnt
+    ,m3_stg_pln_rep_apl_fal_cnt_equal_0_cnt
+    ,m3_stg_pln_rep_apl_fal_cnt_equal_1_cnt
+    ,m3_stg_pln_rep_apl_fal_cnt_equal_2_cnt
+    ,m3_stg_pln_rep_apl_fal_cnt_mor_2_cnt
+    ,m3_stg_pln_rep_apl_fal_cnt_mor_4_cnt
+    ,m3_stg_pln_normal_batch_rep_apl_fal_cnt_equal_0_cnt
+    ,m3_stg_pln_normal_batch_rep_apl_fal_cnt_equal_1_cnt
+    ,m3_stg_pln_normal_batch_rep_apl_fal_cnt_equal_2_cnt
+    ,m3_stg_pln_normal_batch_rep_apl_fal_cnt_mor_2_cnt
+    ,m3_stg_pln_normal_batch_rep_apl_fal_cnt_mor_4_cnt
+    --    ,m3_stg_pln_d0_rep_apl_cnt
+    ,m3_stg_pln_d0_rep_apl_cnt_equal_1_cnt
+    ,m3_stg_pln_d0_rep_apl_cnt_equal_2_cnt
+    ,m3_stg_pln_d0_rep_apl_cnt_mor_2_cnt
+    ,m3_stg_pln_d0_rep_apl_cnt_mor_4_cnt
+    ,m3_stg_pln_d0_manual_rep_apl_cnt_mor_0_cnt
+    ,m3_stg_pln_d0_normal_batch_rep_apl_cnt_mor_0_cnt
+    ,m3_stg_pln_d0_ao_offline_rep_apl_cnt_mor_0_cnt
+    ,m3_stg_pln_d0_manual_deduct_rep_apl_cnt_equal_1_cnt
+    ,m3_stg_pln_d0_normal_batch_rep_apl_cnt_equal_2_cnt
+    ,m3_stg_pln_d0_normal_batch_rep_apl_cnt_mor_2_cnt
+    ,m3_stg_pln_d0_normal_batch_rep_apl_cnt_mor_4_cnt
+    ,m3_stg_pln_d0_rep_apl_fal_cnt_equal_0_cnt
+    ,m3_stg_pln_d0_rep_apl_fal_cnt_equal_1_cnt
+    ,m3_stg_pln_d0_rep_apl_fal_cnt_equal_2_cnt
+    ,m3_stg_pln_d0_rep_apl_fal_cnt_mor_4_cnt
+    ,m3_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_0_cnt
+    ,m3_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_1_cnt
+    ,m3_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_2_cnt
+    ,m3_stg_pln_d0_normal_batch_rep_apl_fal_cnt_mor_4_cnt
+    ,m6_stg_pln_rep_apl_cnt_equal_1_cnt
+    ,m6_stg_pln_rep_apl_cnt_equal_2_cnt
+    ,m6_stg_pln_rep_apl_cnt_mor_2_cnt
+    ,m6_stg_pln_rep_apl_cnt_mor_4_cnt
+    ,m6_stg_pln_manual_rep_apl_cnt_mor_0_cnt
+    ,m6_stg_pln_normal_batch_rep_apl_cnt_mor_0_cnt
+    ,m6_stg_pln_ao_offline_rep_apl_cnt_mor_0_cnt
+    ,m6_stg_pln_manual_deduct_rep_apl_cnt_equal_1_cnt
+    ,m6_stg_pln_normal_batch_rep_apl_cnt_equal_2_cnt
+    ,m6_stg_pln_normal_batch_rep_apl_cnt_mor_2_cnt
+    ,m6_stg_pln_normal_batch_rep_apl_cnt_mor_4_cnt
+    ,m6_stg_pln_rep_apl_fal_cnt_equal_0_cnt
+    ,m6_stg_pln_rep_apl_fal_cnt_equal_1_cnt
+    ,m6_stg_pln_rep_apl_fal_cnt_equal_2_cnt
+    ,m6_stg_pln_rep_apl_fal_cnt_mor_2_cnt
+    ,m6_stg_pln_rep_apl_fal_cnt_mor_4_cnt
+    ,m6_stg_pln_normal_batch_rep_apl_fal_cnt_equal_0_cnt
+    ,m6_stg_pln_normal_batch_rep_apl_fal_cnt_equal_1_cnt
+    ,m6_stg_pln_normal_batch_rep_apl_fal_cnt_equal_2_cnt
+    ,m6_stg_pln_normal_batch_rep_apl_fal_cnt_mor_2_cnt
+    ,m6_stg_pln_normal_batch_rep_apl_fal_cnt_mor_4_cnt
+    --    ,m6_stg_pln_d0_rep_apl_cnt
+    ,m6_stg_pln_d0_rep_apl_cnt_equal_1_cnt
+    ,m6_stg_pln_d0_rep_apl_cnt_equal_2_cnt
+    ,m6_stg_pln_d0_rep_apl_cnt_mor_2_cnt
+    ,m6_stg_pln_d0_rep_apl_cnt_mor_4_cnt
+    ,m6_stg_pln_d0_manual_rep_apl_cnt_mor_0_cnt
+    ,m6_stg_pln_d0_normal_batch_rep_apl_cnt_mor_0_cnt
+    ,m6_stg_pln_d0_ao_offline_rep_apl_cnt_mor_0_cnt
+    ,m6_stg_pln_d0_manual_deduct_rep_apl_cnt_equal_1_cnt
+    ,m6_stg_pln_d0_normal_batch_rep_apl_cnt_equal_2_cnt
+    ,m6_stg_pln_d0_normal_batch_rep_apl_cnt_mor_2_cnt
+    ,m6_stg_pln_d0_normal_batch_rep_apl_cnt_mor_4_cnt
+    ,m6_stg_pln_d0_rep_apl_fal_cnt_equal_0_cnt
+    ,m6_stg_pln_d0_rep_apl_fal_cnt_equal_1_cnt
+    ,m6_stg_pln_d0_rep_apl_fal_cnt_equal_2_cnt
+    ,m6_stg_pln_d0_rep_apl_fal_cnt_mor_4_cnt
+    ,m6_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_0_cnt
+    ,m6_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_1_cnt
+    ,m6_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_2_cnt
+    ,m6_stg_pln_d0_normal_batch_rep_apl_fal_cnt_mor_4_cnt
+    ,m1_stg_pln_rep_apl_cnt_equal_1_cnt_rat
+    ,m1_stg_pln_rep_apl_cnt_equal_2_cnt_rat
+    ,m1_stg_pln_rep_apl_cnt_mor_2_cnt_rat
+    ,m1_stg_pln_rep_apl_cnt_mor_4_cnt_rat
+    ,m1_stg_pln_manual_rep_apl_cnt_mor_0_cnt_rat
+    ,m1_stg_pln_normal_batch_rep_apl_cnt_mor_0_cnt_rat
+    ,m1_stg_pln_ao_offline_rep_apl_cnt_mor_0_cnt_rat
+    ,m1_stg_pln_manual_deduct_rep_apl_cnt_equal_1_cnt_rat
+    ,m1_stg_pln_normal_batch_rep_apl_cnt_equal_2_cnt_rat
+    ,m1_stg_pln_normal_batch_rep_apl_cnt_mor_2_cnt_rat
+    ,m1_stg_pln_normal_batch_rep_apl_cnt_mor_4_cnt_rat
+    ,m1_stg_pln_rep_apl_fal_cnt_equal_0_cnt_rat
+    ,m1_stg_pln_rep_apl_fal_cnt_equal_1_cnt_rat
+    ,m1_stg_pln_rep_apl_fal_cnt_equal_2_cnt_rat
+    ,m1_stg_pln_rep_apl_fal_cnt_mor_2_cnt_rat
+    ,m1_stg_pln_rep_apl_fal_cnt_mor_4_cnt_rat
+    ,m1_stg_pln_normal_batch_rep_apl_fal_cnt_equal_0_cnt_rat
+    ,m1_stg_pln_normal_batch_rep_apl_fal_cnt_equal_1_cnt_rat
+    ,m1_stg_pln_normal_batch_rep_apl_fal_cnt_equal_2_cnt_rat
+    ,m1_stg_pln_normal_batch_rep_apl_fal_cnt_mor_2_cnt_rat
+    ,m1_stg_pln_normal_batch_rep_apl_fal_cnt_mor_4_cnt_rat
+    ,m1_stg_pln_d0_rep_apl_cnt_equal_1_cnt_rat
+    ,m1_stg_pln_d0_rep_apl_cnt_equal_2_cnt_rat
+    ,m1_stg_pln_d0_rep_apl_cnt_mor_2_cnt_rat
+    ,m1_stg_pln_d0_rep_apl_cnt_mor_4_cnt_rat
+    ,m1_stg_pln_d0_manual_rep_apl_cnt_mor_0_cnt_rat
+    ,m1_stg_pln_d0_normal_batch_rep_apl_cnt_mor_0_cnt_rat
+    ,m1_stg_pln_d0_ao_offline_rep_apl_cnt_mor_0_cnt_rat
+    ,m1_stg_pln_d0_manual_deduct_rep_apl_cnt_equal_1_cnt_rat
+    ,m1_stg_pln_d0_normal_batch_rep_apl_cnt_equal_2_cnt_rat
+    ,m1_stg_pln_d0_normal_batch_rep_apl_cnt_mor_2_cnt_rat
+    ,m1_stg_pln_d0_normal_batch_rep_apl_cnt_mor_4_cnt_rat
+    ,m1_stg_pln_d0_rep_apl_fal_cnt_equal_0_cnt_rat
+    ,m1_stg_pln_d0_rep_apl_fal_cnt_equal_1_cnt_rat
+    ,m1_stg_pln_d0_rep_apl_fal_cnt_equal_2_cnt_rat
+    ,m1_stg_pln_d0_rep_apl_fal_cnt_mor_4_cnt_rat
+    ,m1_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_0_cnt_rat
+    ,m1_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_1_cnt_rat
+    ,m1_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_2_cnt_rat
+    ,m1_stg_pln_d0_normal_batch_rep_apl_fal_cnt_mor_4_cnt_rat
+    ,m3_stg_pln_rep_apl_cnt_equal_1_cnt_rat
+    ,m3_stg_pln_rep_apl_cnt_equal_2_cnt_rat
+    ,m3_stg_pln_rep_apl_cnt_mor_2_cnt_rat
+    ,m3_stg_pln_rep_apl_cnt_mor_4_cnt_rat
+    ,m3_stg_pln_manual_rep_apl_cnt_mor_0_cnt_rat
+    ,m3_stg_pln_normal_batch_rep_apl_cnt_mor_0_cnt_rat
+    ,m3_stg_pln_ao_offline_rep_apl_cnt_mor_0_cnt_rat
+    ,m3_stg_pln_manual_deduct_rep_apl_cnt_equal_1_cnt_rat
+    ,m3_stg_pln_normal_batch_rep_apl_cnt_equal_2_cnt_rat
+    ,m3_stg_pln_normal_batch_rep_apl_cnt_mor_2_cnt_rat
+    ,m3_stg_pln_normal_batch_rep_apl_cnt_mor_4_cnt_rat
+    ,m3_stg_pln_rep_apl_fal_cnt_equal_0_cnt_rat
+    ,m3_stg_pln_rep_apl_fal_cnt_equal_1_cnt_rat
+    ,m3_stg_pln_rep_apl_fal_cnt_equal_2_cnt_rat
+    ,m3_stg_pln_rep_apl_fal_cnt_mor_2_cnt_rat
+    ,m3_stg_pln_rep_apl_fal_cnt_mor_4_cnt_rat
+    ,m3_stg_pln_normal_batch_rep_apl_fal_cnt_equal_0_cnt_rat
+    ,m3_stg_pln_normal_batch_rep_apl_fal_cnt_equal_1_cnt_rat
+    ,m3_stg_pln_normal_batch_rep_apl_fal_cnt_equal_2_cnt_rat
+    ,m3_stg_pln_normal_batch_rep_apl_fal_cnt_mor_2_cnt_rat
+    ,m3_stg_pln_normal_batch_rep_apl_fal_cnt_mor_4_cnt_rat
+    ,m3_stg_pln_d0_rep_apl_cnt_equal_1_cnt_rat
+    ,m3_stg_pln_d0_rep_apl_cnt_equal_2_cnt_rat
+    ,m3_stg_pln_d0_rep_apl_cnt_mor_2_cnt_rat
+    ,m3_stg_pln_d0_rep_apl_cnt_mor_4_cnt_rat
+    ,m3_stg_pln_d0_manual_rep_apl_cnt_mor_0_cnt_rat
+    ,m3_stg_pln_d0_normal_batch_rep_apl_cnt_mor_0_cnt_rat
+    ,m3_stg_pln_d0_ao_offline_rep_apl_cnt_mor_0_cnt_rat
+    ,m3_stg_pln_d0_manual_deduct_rep_apl_cnt_equal_1_cnt_rat
+    ,m3_stg_pln_d0_normal_batch_rep_apl_cnt_equal_2_cnt_rat
+    ,m3_stg_pln_d0_normal_batch_rep_apl_cnt_mor_2_cnt_rat
+    ,m3_stg_pln_d0_normal_batch_rep_apl_cnt_mor_4_cnt_rat
+    ,m3_stg_pln_d0_rep_apl_fal_cnt_equal_0_cnt_rat
+    ,m3_stg_pln_d0_rep_apl_fal_cnt_equal_1_cnt_rat
+    ,m3_stg_pln_d0_rep_apl_fal_cnt_equal_2_cnt_rat
+    ,m3_stg_pln_d0_rep_apl_fal_cnt_mor_4_cnt_rat
+    ,m3_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_0_cnt_rat
+    ,m3_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_1_cnt_rat
+    ,m3_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_2_cnt_rat
+    ,m3_stg_pln_d0_normal_batch_rep_apl_fal_cnt_mor_4_cnt_rat
+    ,m6_stg_pln_rep_apl_cnt_equal_1_cnt_rat
+    ,m6_stg_pln_rep_apl_cnt_equal_2_cnt_rat
+    ,m6_stg_pln_rep_apl_cnt_mor_2_cnt_rat
+    ,m6_stg_pln_rep_apl_cnt_mor_4_cnt_rat
+    ,m6_stg_pln_manual_rep_apl_cnt_mor_0_cnt_rat
+    ,m6_stg_pln_normal_batch_rep_apl_cnt_mor_0_cnt_rat
+    ,m6_stg_pln_ao_offline_rep_apl_cnt_mor_0_cnt_rat
+    ,m6_stg_pln_manual_deduct_rep_apl_cnt_equal_1_cnt_rat
+    ,m6_stg_pln_normal_batch_rep_apl_cnt_equal_2_cnt_rat
+    ,m6_stg_pln_normal_batch_rep_apl_cnt_mor_2_cnt_rat
+    ,m6_stg_pln_normal_batch_rep_apl_cnt_mor_4_cnt_rat
+    ,m6_stg_pln_rep_apl_fal_cnt_equal_0_cnt_rat
+    ,m6_stg_pln_rep_apl_fal_cnt_equal_1_cnt_rat
+    ,m6_stg_pln_rep_apl_fal_cnt_equal_2_cnt_rat
+    ,m6_stg_pln_rep_apl_fal_cnt_mor_2_cnt_rat
+    ,m6_stg_pln_rep_apl_fal_cnt_mor_4_cnt_rat
+    ,m6_stg_pln_normal_batch_rep_apl_fal_cnt_equal_0_cnt_rat
+    ,m6_stg_pln_normal_batch_rep_apl_fal_cnt_equal_1_cnt_rat
+    ,m6_stg_pln_normal_batch_rep_apl_fal_cnt_equal_2_cnt_rat
+    ,m6_stg_pln_normal_batch_rep_apl_fal_cnt_mor_2_cnt_rat
+    ,m6_stg_pln_normal_batch_rep_apl_fal_cnt_mor_4_cnt_rat
+    ,m6_stg_pln_d0_rep_apl_cnt_equal_1_cnt_rat
+    ,m6_stg_pln_d0_rep_apl_cnt_equal_2_cnt_rat
+    ,m6_stg_pln_d0_rep_apl_cnt_mor_2_cnt_rat
+    ,m6_stg_pln_d0_rep_apl_cnt_mor_4_cnt_rat
+    ,m6_stg_pln_d0_manual_rep_apl_cnt_mor_0_cnt_rat
+    ,m6_stg_pln_d0_normal_batch_rep_apl_cnt_mor_0_cnt_rat
+    ,m6_stg_pln_d0_ao_offline_rep_apl_cnt_mor_0_cnt_rat
+    ,m6_stg_pln_d0_manual_deduct_rep_apl_cnt_equal_1_cnt_rat
+    ,m6_stg_pln_d0_normal_batch_rep_apl_cnt_equal_2_cnt_rat
+    ,m6_stg_pln_d0_normal_batch_rep_apl_cnt_mor_2_cnt_rat
+    ,m6_stg_pln_d0_normal_batch_rep_apl_cnt_mor_4_cnt_rat
+    ,m6_stg_pln_d0_rep_apl_fal_cnt_equal_0_cnt_rat
+    ,m6_stg_pln_d0_rep_apl_fal_cnt_equal_1_cnt_rat
+    ,m6_stg_pln_d0_rep_apl_fal_cnt_equal_2_cnt_rat
+    ,m6_stg_pln_d0_rep_apl_fal_cnt_mor_4_cnt_rat
+    ,m6_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_0_cnt_rat
+    ,m6_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_1_cnt_rat
+    ,m6_stg_pln_d0_normal_batch_rep_apl_fal_cnt_equal_2_cnt_rat
+    ,m6_stg_pln_d0_normal_batch_rep_apl_fal_cnt_mor_4_cnt_rat
+from ${dwa_risk}.dwa_risk_dz_model_final_rep_apply_summary_4_tmp1 as a
+left join ${dwa_risk}.dwa_risk_dz_model_final_rep_apply_summary_4_tmp3 as b
+on a.uid = b.uid and a.mdl_dte = b.mdl_dte
+;
+-- feature-copilot:node-end ordinal=0

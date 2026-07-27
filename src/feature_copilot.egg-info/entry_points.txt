@@ -1,0 +1,3 @@
+[console_scripts]
+feature-copilot = feature_copilot.cli:main
+feature-copilot-web = feature_copilot_web:main

@@ -1,0 +1,6 @@
+record_id,feature_id,feature_name,scene,population,product,available_from,available_to,observation_timing,availability_status,restriction,evidence_ref,updated_at
+av_1,feat_income_avg_v2,fixture_income_avg_30d,fixture_credit,fixture_customer,fixture_loan,2026-01-01,,pre_decision,available,,fixture_only,2026-07-15
+av_2,feat_payment_cnt,fixture_payment_count_30d,fixture_credit,fixture_customer,fixture_loan,2026-01-01,,pre_decision,conditional,requires fixture event feed,fixture_only,2026-07-15
+av_3,feat_pboc_util,fixture_pboc_utilization_ratio,fixture_credit,fixture_customer,fixture_loan,2026-01-01,,pre_decision,conditional,requires permitted fixture report pull,fixture_only,2026-07-15
+av_4,feat_old_flag,fixture_retired_flag,fixture_credit,fixture_customer,fixture_loan,2025-01-01,2025-12-31,pre_decision,unavailable,feature retired,fixture_only,2026-07-15
+av_5,feat_device_change,fixture_device_change_count_7d,fixture_marketing,fixture_customer,fixture_campaign,2026-01-01,,post_event,available,,fixture_only,2026-07-15

@@ -1,0 +1,2402 @@
+[
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_12m_dif_6m",
+    "featureColumnName": "tnd_rsk_itm_12m_dif_6m",
+    "featureName": "tnd_rsk_itm_12m_dif_6m",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_1m_dif_7d",
+    "featureColumnName": "tnd_rsk_itm_1m_dif_7d",
+    "featureName": "tnd_rsk_itm_1m_dif_7d",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_1m_div_12m",
+    "featureColumnName": "tnd_rsk_itm_1m_div_12m",
+    "featureName": "tnd_rsk_itm_1m_div_12m",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_1m_div_3m",
+    "featureColumnName": "tnd_rsk_itm_1m_div_3m",
+    "featureName": "tnd_rsk_itm_1m_div_3m",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_1m_div_6m",
+    "featureColumnName": "tnd_rsk_itm_1m_div_6m",
+    "featureName": "tnd_rsk_itm_1m_div_6m",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_3m_dif_1m",
+    "featureColumnName": "tnd_rsk_itm_3m_dif_1m",
+    "featureName": "tnd_rsk_itm_3m_dif_1m",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_3m_div_12m",
+    "featureColumnName": "tnd_rsk_itm_3m_div_12m",
+    "featureName": "tnd_rsk_itm_3m_div_12m",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_3m_div_6m",
+    "featureColumnName": "tnd_rsk_itm_3m_div_6m",
+    "featureName": "tnd_rsk_itm_3m_div_6m",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_6m_dif_3m",
+    "featureColumnName": "tnd_rsk_itm_6m_dif_3m",
+    "featureName": "tnd_rsk_itm_6m_dif_3m",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_6m_div_12m",
+    "featureColumnName": "tnd_rsk_itm_6m_div_12m",
+    "featureName": "tnd_rsk_itm_6m_div_12m",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_7d_div_12m",
+    "featureColumnName": "tnd_rsk_itm_7d_div_12m",
+    "featureName": "tnd_rsk_itm_7d_div_12m",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_7d_div_1m",
+    "featureColumnName": "tnd_rsk_itm_7d_div_1m",
+    "featureName": "tnd_rsk_itm_7d_div_1m",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_7d_div_3m",
+    "featureColumnName": "tnd_rsk_itm_7d_div_3m",
+    "featureName": "tnd_rsk_itm_7d_div_3m",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_7d_div_6m",
+    "featureColumnName": "tnd_rsk_itm_7d_div_6m",
+    "featureName": "tnd_rsk_itm_7d_div_6m",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_big_csm_fin_cmp",
+    "featureColumnName": "tnd_rsk_itm_d7_big_csm_fin_cmp",
+    "featureName": "tnd_rsk_itm_d7_big_csm_fin_cmp",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_bnk",
+    "featureColumnName": "tnd_rsk_itm_d7_bnk",
+    "featureName": "tnd_rsk_itm_d7_bnk",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_bnk_rat",
+    "featureColumnName": "tnd_rsk_itm_d7_bnk_rat",
+    "featureName": "tnd_rsk_itm_d7_bnk_rat",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_bnk_sml_lon",
+    "featureColumnName": "tnd_rsk_itm_d7_bnk_sml_lon",
+    "featureName": "tnd_rsk_itm_d7_bnk_sml_lon",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_car_les",
+    "featureColumnName": "tnd_rsk_itm_d7_car_les",
+    "featureName": "tnd_rsk_itm_d7_car_les",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_car_mnu_fin",
+    "featureColumnName": "tnd_rsk_itm_d7_car_mnu_fin",
+    "featureName": "tnd_rsk_itm_d7_car_mnu_fin",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_car_rat",
+    "featureColumnName": "tnd_rsk_itm_d7_car_rat",
+    "featureName": "tnd_rsk_itm_d7_car_rat",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_com_ecm_ptf",
+    "featureColumnName": "tnd_rsk_itm_d7_com_ecm_ptf",
+    "featureName": "tnd_rsk_itm_d7_com_ecm_ptf",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_crd_ctr",
+    "featureColumnName": "tnd_rsk_itm_d7_crd_ctr",
+    "featureName": "tnd_rsk_itm_d7_crd_ctr",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_csm",
+    "featureColumnName": "tnd_rsk_itm_d7_csm",
+    "featureName": "tnd_rsk_itm_d7_csm",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_csm_rat",
+    "featureColumnName": "tnd_rsk_itm_d7_csm_rat",
+    "featureName": "tnd_rsk_itm_d7_csm_rat",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_drt_sel_bnk",
+    "featureColumnName": "tnd_rsk_itm_d7_drt_sel_bnk",
+    "featureName": "tnd_rsk_itm_d7_drt_sel_bnk",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 1,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_ecm_ptf",
+    "featureColumnName": "tnd_rsk_itm_d7_ecm_ptf",
+    "featureName": "tnd_rsk_itm_d7_ecm_ptf",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_ecm_ptf_rat",
+    "featureColumnName": "tnd_rsk_itm_d7_ecm_ptf_rat",
+    "featureName": "tnd_rsk_itm_d7_ecm_ptf_rat",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_eqp_les",
+    "featureColumnName": "tnd_rsk_itm_d7_eqp_les",
+    "featureName": "tnd_rsk_itm_d7_eqp_les",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 1,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_fin_itt",
+    "featureColumnName": "tnd_rsk_itm_d7_fin_itt",
+    "featureName": "tnd_rsk_itm_d7_fin_itt",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_fin_les",
+    "featureColumnName": "tnd_rsk_itm_d7_fin_les",
+    "featureName": "tnd_rsk_itm_d7_fin_les",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_fin_net",
+    "featureColumnName": "tnd_rsk_itm_d7_fin_net",
+    "featureName": "tnd_rsk_itm_d7_fin_net",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 1,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_grt",
+    "featureColumnName": "tnd_rsk_itm_d7_grt",
+    "featureName": "tnd_rsk_itm_d7_grt",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_hse_les",
+    "featureColumnName": "tnd_rsk_itm_d7_hse_les",
+    "featureName": "tnd_rsk_itm_d7_hse_les",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_inf_agt",
+    "featureColumnName": "tnd_rsk_itm_d7_inf_agt",
+    "featureName": "tnd_rsk_itm_d7_inf_agt",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_les",
+    "featureColumnName": "tnd_rsk_itm_d7_les",
+    "featureName": "tnd_rsk_itm_d7_les",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_les_rat",
+    "featureColumnName": "tnd_rsk_itm_d7_les_rat",
+    "featureName": "tnd_rsk_itm_d7_les_rat",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_o2o",
+    "featureColumnName": "tnd_rsk_itm_d7_o2o",
+    "featureName": "tnd_rsk_itm_d7_o2o",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_onl_bnk",
+    "featureColumnName": "tnd_rsk_itm_d7_onl_bnk",
+    "featureName": "tnd_rsk_itm_d7_onl_bnk",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_oth",
+    "featureColumnName": "tnd_rsk_itm_d7_oth",
+    "featureName": "tnd_rsk_itm_d7_oth",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_oth_rat",
+    "featureColumnName": "tnd_rsk_itm_d7_oth_rat",
+    "featureName": "tnd_rsk_itm_d7_oth_rat",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_p2p",
+    "featureColumnName": "tnd_rsk_itm_d7_p2p",
+    "featureName": "tnd_rsk_itm_d7_p2p",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_ppt_ins",
+    "featureColumnName": "tnd_rsk_itm_d7_ppt_ins",
+    "featureName": "tnd_rsk_itm_d7_ppt_ins",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_psn_bnk",
+    "featureColumnName": "tnd_rsk_itm_d7_psn_bnk",
+    "featureName": "tnd_rsk_itm_d7_psn_bnk",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_ptt_lon",
+    "featureColumnName": "tnd_rsk_itm_d7_ptt_lon",
+    "featureName": "tnd_rsk_itm_d7_ptt_lon",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_ptt_lon_cmp",
+    "featureColumnName": "tnd_rsk_itm_d7_ptt_lon_cmp",
+    "featureName": "tnd_rsk_itm_d7_ptt_lon_cmp",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_ptt_lon_rat",
+    "featureColumnName": "tnd_rsk_itm_d7_ptt_lon_rat",
+    "featureName": "tnd_rsk_itm_d7_ptt_lon_rat",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_rel_est_fin",
+    "featureColumnName": "tnd_rsk_itm_d7_rel_est_fin",
+    "featureName": "tnd_rsk_itm_d7_rel_est_fin",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_rtl_bnk",
+    "featureColumnName": "tnd_rsk_itm_d7_rtl_bnk",
+    "featureName": "tnd_rsk_itm_d7_rtl_bnk",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_thd_pty_pay",
+    "featureColumnName": "tnd_rsk_itm_d7_thd_pty_pay",
+    "featureName": "tnd_rsk_itm_d7_thd_pty_pay",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 1,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_thd_pty_svc_pvd",
+    "featureColumnName": "tnd_rsk_itm_d7_thd_pty_svc_pvd",
+    "featureName": "tnd_rsk_itm_d7_thd_pty_svc_pvd",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_trp_les",
+    "featureColumnName": "tnd_rsk_itm_d7_trp_les",
+    "featureName": "tnd_rsk_itm_d7_trp_les",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_typ",
+    "featureColumnName": "tnd_rsk_itm_d7_typ",
+    "featureName": "tnd_rsk_itm_d7_typ",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_vtc_ecm_ptf",
+    "featureColumnName": "tnd_rsk_itm_d7_vtc_ecm_ptf",
+    "featureName": "tnd_rsk_itm_d7_vtc_ecm_ptf",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 1,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_big_csm_fin_cmp",
+    "featureColumnName": "tnd_rsk_itm_m12_big_csm_fin_cmp",
+    "featureName": "tnd_rsk_itm_m12_big_csm_fin_cmp",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_big_dat_fin",
+    "featureColumnName": "tnd_rsk_itm_m12_big_dat_fin",
+    "featureName": "tnd_rsk_itm_m12_big_dat_fin",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_bnk",
+    "featureColumnName": "tnd_rsk_itm_m12_bnk",
+    "featureName": "tnd_rsk_itm_m12_bnk",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_bnk_rat",
+    "featureColumnName": "tnd_rsk_itm_m12_bnk_rat",
+    "featureName": "tnd_rsk_itm_m12_bnk_rat",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_bnk_sml_lon",
+    "featureColumnName": "tnd_rsk_itm_m12_bnk_sml_lon",
+    "featureName": "tnd_rsk_itm_m12_bnk_sml_lon",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_car_les",
+    "featureColumnName": "tnd_rsk_itm_m12_car_les",
+    "featureName": "tnd_rsk_itm_m12_car_les",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_car_mnu_fin",
+    "featureColumnName": "tnd_rsk_itm_m12_car_mnu_fin",
+    "featureName": "tnd_rsk_itm_m12_car_mnu_fin",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_car_rat",
+    "featureColumnName": "tnd_rsk_itm_m12_car_rat",
+    "featureName": "tnd_rsk_itm_m12_car_rat",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 1,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_com_ecm_ptf",
+    "featureColumnName": "tnd_rsk_itm_m12_com_ecm_ptf",
+    "featureName": "tnd_rsk_itm_m12_com_ecm_ptf",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_crd_ctr",
+    "featureColumnName": "tnd_rsk_itm_m12_crd_ctr",
+    "featureName": "tnd_rsk_itm_m12_crd_ctr",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_csm",
+    "featureColumnName": "tnd_rsk_itm_m12_csm",
+    "featureName": "tnd_rsk_itm_m12_csm",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_csm_rat",
+    "featureColumnName": "tnd_rsk_itm_m12_csm_rat",
+    "featureName": "tnd_rsk_itm_m12_csm_rat",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_drt_sel_bnk",
+    "featureColumnName": "tnd_rsk_itm_m12_drt_sel_bnk",
+    "featureName": "tnd_rsk_itm_m12_drt_sel_bnk",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_ecm_ptf",
+    "featureColumnName": "tnd_rsk_itm_m12_ecm_ptf",
+    "featureName": "tnd_rsk_itm_m12_ecm_ptf",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_ecm_ptf_rat",
+    "featureColumnName": "tnd_rsk_itm_m12_ecm_ptf_rat",
+    "featureName": "tnd_rsk_itm_m12_ecm_ptf_rat",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 1,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_eqp_les",
+    "featureColumnName": "tnd_rsk_itm_m12_eqp_les",
+    "featureName": "tnd_rsk_itm_m12_eqp_les",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_fin_itt",
+    "featureColumnName": "tnd_rsk_itm_m12_fin_itt",
+    "featureName": "tnd_rsk_itm_m12_fin_itt",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_fin_les",
+    "featureColumnName": "tnd_rsk_itm_m12_fin_les",
+    "featureName": "tnd_rsk_itm_m12_fin_les",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_fin_net",
+    "featureColumnName": "tnd_rsk_itm_m12_fin_net",
+    "featureName": "tnd_rsk_itm_m12_fin_net",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_gen_ist_ptf",
+    "featureColumnName": "tnd_rsk_itm_m12_gen_ist_ptf",
+    "featureName": "tnd_rsk_itm_m12_gen_ist_ptf",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_grt",
+    "featureColumnName": "tnd_rsk_itm_m12_grt",
+    "featureName": "tnd_rsk_itm_m12_grt",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_hse_les",
+    "featureColumnName": "tnd_rsk_itm_m12_hse_les",
+    "featureName": "tnd_rsk_itm_m12_hse_les",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_inf_agt",
+    "featureColumnName": "tnd_rsk_itm_m12_inf_agt",
+    "featureName": "tnd_rsk_itm_m12_inf_agt",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_les",
+    "featureColumnName": "tnd_rsk_itm_m12_les",
+    "featureName": "tnd_rsk_itm_m12_les",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_les_rat",
+    "featureColumnName": "tnd_rsk_itm_m12_les_rat",
+    "featureName": "tnd_rsk_itm_m12_les_rat",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 1,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_o2o",
+    "featureColumnName": "tnd_rsk_itm_m12_o2o",
+    "featureName": "tnd_rsk_itm_m12_o2o",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_onl_bnk",
+    "featureColumnName": "tnd_rsk_itm_m12_onl_bnk",
+    "featureName": "tnd_rsk_itm_m12_onl_bnk",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_oth",
+    "featureColumnName": "tnd_rsk_itm_m12_oth",
+    "featureName": "tnd_rsk_itm_m12_oth",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_oth_rat",
+    "featureColumnName": "tnd_rsk_itm_m12_oth_rat",
+    "featureName": "tnd_rsk_itm_m12_oth_rat",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_p2p",
+    "featureColumnName": "tnd_rsk_itm_m12_p2p",
+    "featureName": "tnd_rsk_itm_m12_p2p",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_ppt_ins",
+    "featureColumnName": "tnd_rsk_itm_m12_ppt_ins",
+    "featureName": "tnd_rsk_itm_m12_ppt_ins",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_psn_bnk",
+    "featureColumnName": "tnd_rsk_itm_m12_psn_bnk",
+    "featureName": "tnd_rsk_itm_m12_psn_bnk",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_ptt_lon",
+    "featureColumnName": "tnd_rsk_itm_m12_ptt_lon",
+    "featureName": "tnd_rsk_itm_m12_ptt_lon",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_ptt_lon_cmp",
+    "featureColumnName": "tnd_rsk_itm_m12_ptt_lon_cmp",
+    "featureName": "tnd_rsk_itm_m12_ptt_lon_cmp",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_ptt_lon_rat",
+    "featureColumnName": "tnd_rsk_itm_m12_ptt_lon_rat",
+    "featureName": "tnd_rsk_itm_m12_ptt_lon_rat",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_rel_est_fin",
+    "featureColumnName": "tnd_rsk_itm_m12_rel_est_fin",
+    "featureName": "tnd_rsk_itm_m12_rel_est_fin",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_rtl_bnk",
+    "featureColumnName": "tnd_rsk_itm_m12_rtl_bnk",
+    "featureName": "tnd_rsk_itm_m12_rtl_bnk",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_thd_pty_pay",
+    "featureColumnName": "tnd_rsk_itm_m12_thd_pty_pay",
+    "featureName": "tnd_rsk_itm_m12_thd_pty_pay",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_thd_pty_svc_pvd",
+    "featureColumnName": "tnd_rsk_itm_m12_thd_pty_svc_pvd",
+    "featureName": "tnd_rsk_itm_m12_thd_pty_svc_pvd",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_trp_les",
+    "featureColumnName": "tnd_rsk_itm_m12_trp_les",
+    "featureName": "tnd_rsk_itm_m12_trp_les",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_typ",
+    "featureColumnName": "tnd_rsk_itm_m12_typ",
+    "featureName": "tnd_rsk_itm_m12_typ",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m12_vtc_ecm_ptf",
+    "featureColumnName": "tnd_rsk_itm_m12_vtc_ecm_ptf",
+    "featureName": "tnd_rsk_itm_m12_vtc_ecm_ptf",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_big_csm_fin_cmp",
+    "featureColumnName": "tnd_rsk_itm_m1_big_csm_fin_cmp",
+    "featureName": "tnd_rsk_itm_m1_big_csm_fin_cmp",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_big_dat_fin",
+    "featureColumnName": "tnd_rsk_itm_m1_big_dat_fin",
+    "featureName": "tnd_rsk_itm_m1_big_dat_fin",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 1,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_bnk",
+    "featureColumnName": "tnd_rsk_itm_m1_bnk",
+    "featureName": "tnd_rsk_itm_m1_bnk",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_bnk_rat",
+    "featureColumnName": "tnd_rsk_itm_m1_bnk_rat",
+    "featureName": "tnd_rsk_itm_m1_bnk_rat",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_bnk_sml_lon",
+    "featureColumnName": "tnd_rsk_itm_m1_bnk_sml_lon",
+    "featureName": "tnd_rsk_itm_m1_bnk_sml_lon",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_car_les",
+    "featureColumnName": "tnd_rsk_itm_m1_car_les",
+    "featureName": "tnd_rsk_itm_m1_car_les",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_car_mnu_fin",
+    "featureColumnName": "tnd_rsk_itm_m1_car_mnu_fin",
+    "featureName": "tnd_rsk_itm_m1_car_mnu_fin",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 1,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_car_rat",
+    "featureColumnName": "tnd_rsk_itm_m1_car_rat",
+    "featureName": "tnd_rsk_itm_m1_car_rat",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_com_ecm_ptf",
+    "featureColumnName": "tnd_rsk_itm_m1_com_ecm_ptf",
+    "featureName": "tnd_rsk_itm_m1_com_ecm_ptf",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 1,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_crd_ctr",
+    "featureColumnName": "tnd_rsk_itm_m1_crd_ctr",
+    "featureName": "tnd_rsk_itm_m1_crd_ctr",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 1,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_csm",
+    "featureColumnName": "tnd_rsk_itm_m1_csm",
+    "featureName": "tnd_rsk_itm_m1_csm",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_csm_rat",
+    "featureColumnName": "tnd_rsk_itm_m1_csm_rat",
+    "featureName": "tnd_rsk_itm_m1_csm_rat",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_drt_sel_bnk",
+    "featureColumnName": "tnd_rsk_itm_m1_drt_sel_bnk",
+    "featureName": "tnd_rsk_itm_m1_drt_sel_bnk",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_ecm_ptf",
+    "featureColumnName": "tnd_rsk_itm_m1_ecm_ptf",
+    "featureName": "tnd_rsk_itm_m1_ecm_ptf",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_ecm_ptf_rat",
+    "featureColumnName": "tnd_rsk_itm_m1_ecm_ptf_rat",
+    "featureName": "tnd_rsk_itm_m1_ecm_ptf_rat",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_eqp_les",
+    "featureColumnName": "tnd_rsk_itm_m1_eqp_les",
+    "featureName": "tnd_rsk_itm_m1_eqp_les",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_fin_itt",
+    "featureColumnName": "tnd_rsk_itm_m1_fin_itt",
+    "featureName": "tnd_rsk_itm_m1_fin_itt",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 1,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_fin_les",
+    "featureColumnName": "tnd_rsk_itm_m1_fin_les",
+    "featureName": "tnd_rsk_itm_m1_fin_les",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_fin_net",
+    "featureColumnName": "tnd_rsk_itm_m1_fin_net",
+    "featureName": "tnd_rsk_itm_m1_fin_net",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_gen_ist_ptf",
+    "featureColumnName": "tnd_rsk_itm_m1_gen_ist_ptf",
+    "featureName": "tnd_rsk_itm_m1_gen_ist_ptf",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 1,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_inf_agt",
+    "featureColumnName": "tnd_rsk_itm_m1_inf_agt",
+    "featureName": "tnd_rsk_itm_m1_inf_agt",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_les",
+    "featureColumnName": "tnd_rsk_itm_m1_les",
+    "featureName": "tnd_rsk_itm_m1_les",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_les_rat",
+    "featureColumnName": "tnd_rsk_itm_m1_les_rat",
+    "featureName": "tnd_rsk_itm_m1_les_rat",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_onl_bnk",
+    "featureColumnName": "tnd_rsk_itm_m1_onl_bnk",
+    "featureName": "tnd_rsk_itm_m1_onl_bnk",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_oth",
+    "featureColumnName": "tnd_rsk_itm_m1_oth",
+    "featureName": "tnd_rsk_itm_m1_oth",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_oth_rat",
+    "featureColumnName": "tnd_rsk_itm_m1_oth_rat",
+    "featureName": "tnd_rsk_itm_m1_oth_rat",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_p2p",
+    "featureColumnName": "tnd_rsk_itm_m1_p2p",
+    "featureName": "tnd_rsk_itm_m1_p2p",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 1,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_ppt_ins",
+    "featureColumnName": "tnd_rsk_itm_m1_ppt_ins",
+    "featureName": "tnd_rsk_itm_m1_ppt_ins",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_psn_bnk",
+    "featureColumnName": "tnd_rsk_itm_m1_psn_bnk",
+    "featureName": "tnd_rsk_itm_m1_psn_bnk",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_ptt_lon",
+    "featureColumnName": "tnd_rsk_itm_m1_ptt_lon",
+    "featureName": "tnd_rsk_itm_m1_ptt_lon",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_ptt_lon_cmp",
+    "featureColumnName": "tnd_rsk_itm_m1_ptt_lon_cmp",
+    "featureName": "tnd_rsk_itm_m1_ptt_lon_cmp",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_ptt_lon_rat",
+    "featureColumnName": "tnd_rsk_itm_m1_ptt_lon_rat",
+    "featureName": "tnd_rsk_itm_m1_ptt_lon_rat",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_rel_est_fin",
+    "featureColumnName": "tnd_rsk_itm_m1_rel_est_fin",
+    "featureName": "tnd_rsk_itm_m1_rel_est_fin",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_rtl_bnk",
+    "featureColumnName": "tnd_rsk_itm_m1_rtl_bnk",
+    "featureName": "tnd_rsk_itm_m1_rtl_bnk",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 1,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_thd_pty_pay",
+    "featureColumnName": "tnd_rsk_itm_m1_thd_pty_pay",
+    "featureName": "tnd_rsk_itm_m1_thd_pty_pay",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 1,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_thd_pty_svc_pvd",
+    "featureColumnName": "tnd_rsk_itm_m1_thd_pty_svc_pvd",
+    "featureName": "tnd_rsk_itm_m1_thd_pty_svc_pvd",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_trp_les",
+    "featureColumnName": "tnd_rsk_itm_m1_trp_les",
+    "featureName": "tnd_rsk_itm_m1_trp_les",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_typ",
+    "featureColumnName": "tnd_rsk_itm_m1_typ",
+    "featureName": "tnd_rsk_itm_m1_typ",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_vtc_ecm_ptf",
+    "featureColumnName": "tnd_rsk_itm_m1_vtc_ecm_ptf",
+    "featureName": "tnd_rsk_itm_m1_vtc_ecm_ptf",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_big_csm_fin_cmp",
+    "featureColumnName": "tnd_rsk_itm_m3_big_csm_fin_cmp",
+    "featureName": "tnd_rsk_itm_m3_big_csm_fin_cmp",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_bnk",
+    "featureColumnName": "tnd_rsk_itm_m3_bnk",
+    "featureName": "tnd_rsk_itm_m3_bnk",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_bnk_rat",
+    "featureColumnName": "tnd_rsk_itm_m3_bnk_rat",
+    "featureName": "tnd_rsk_itm_m3_bnk_rat",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_bnk_sml_lon",
+    "featureColumnName": "tnd_rsk_itm_m3_bnk_sml_lon",
+    "featureName": "tnd_rsk_itm_m3_bnk_sml_lon",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_car_les",
+    "featureColumnName": "tnd_rsk_itm_m3_car_les",
+    "featureName": "tnd_rsk_itm_m3_car_les",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 1,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_car_rat",
+    "featureColumnName": "tnd_rsk_itm_m3_car_rat",
+    "featureName": "tnd_rsk_itm_m3_car_rat",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_com_ecm_ptf",
+    "featureColumnName": "tnd_rsk_itm_m3_com_ecm_ptf",
+    "featureName": "tnd_rsk_itm_m3_com_ecm_ptf",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 1,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_crd_ctr",
+    "featureColumnName": "tnd_rsk_itm_m3_crd_ctr",
+    "featureName": "tnd_rsk_itm_m3_crd_ctr",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_csm",
+    "featureColumnName": "tnd_rsk_itm_m3_csm",
+    "featureName": "tnd_rsk_itm_m3_csm",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_csm_rat",
+    "featureColumnName": "tnd_rsk_itm_m3_csm_rat",
+    "featureName": "tnd_rsk_itm_m3_csm_rat",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_drt_sel_bnk",
+    "featureColumnName": "tnd_rsk_itm_m3_drt_sel_bnk",
+    "featureName": "tnd_rsk_itm_m3_drt_sel_bnk",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_ecm_ptf",
+    "featureColumnName": "tnd_rsk_itm_m3_ecm_ptf",
+    "featureName": "tnd_rsk_itm_m3_ecm_ptf",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_ecm_ptf_rat",
+    "featureColumnName": "tnd_rsk_itm_m3_ecm_ptf_rat",
+    "featureName": "tnd_rsk_itm_m3_ecm_ptf_rat",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_eqp_les",
+    "featureColumnName": "tnd_rsk_itm_m3_eqp_les",
+    "featureName": "tnd_rsk_itm_m3_eqp_les",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_fin_itt",
+    "featureColumnName": "tnd_rsk_itm_m3_fin_itt",
+    "featureName": "tnd_rsk_itm_m3_fin_itt",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_fin_les",
+    "featureColumnName": "tnd_rsk_itm_m3_fin_les",
+    "featureName": "tnd_rsk_itm_m3_fin_les",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_fin_net",
+    "featureColumnName": "tnd_rsk_itm_m3_fin_net",
+    "featureName": "tnd_rsk_itm_m3_fin_net",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_gen_ist_ptf",
+    "featureColumnName": "tnd_rsk_itm_m3_gen_ist_ptf",
+    "featureName": "tnd_rsk_itm_m3_gen_ist_ptf",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 1,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_grt",
+    "featureColumnName": "tnd_rsk_itm_m3_grt",
+    "featureName": "tnd_rsk_itm_m3_grt",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_hse_les",
+    "featureColumnName": "tnd_rsk_itm_m3_hse_les",
+    "featureName": "tnd_rsk_itm_m3_hse_les",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_inf_agt",
+    "featureColumnName": "tnd_rsk_itm_m3_inf_agt",
+    "featureName": "tnd_rsk_itm_m3_inf_agt",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_les",
+    "featureColumnName": "tnd_rsk_itm_m3_les",
+    "featureName": "tnd_rsk_itm_m3_les",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_les_rat",
+    "featureColumnName": "tnd_rsk_itm_m3_les_rat",
+    "featureName": "tnd_rsk_itm_m3_les_rat",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_o2o",
+    "featureColumnName": "tnd_rsk_itm_m3_o2o",
+    "featureName": "tnd_rsk_itm_m3_o2o",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_onl_bnk",
+    "featureColumnName": "tnd_rsk_itm_m3_onl_bnk",
+    "featureName": "tnd_rsk_itm_m3_onl_bnk",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_oth",
+    "featureColumnName": "tnd_rsk_itm_m3_oth",
+    "featureName": "tnd_rsk_itm_m3_oth",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_oth_rat",
+    "featureColumnName": "tnd_rsk_itm_m3_oth_rat",
+    "featureName": "tnd_rsk_itm_m3_oth_rat",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_p2p",
+    "featureColumnName": "tnd_rsk_itm_m3_p2p",
+    "featureName": "tnd_rsk_itm_m3_p2p",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_ppt_ins",
+    "featureColumnName": "tnd_rsk_itm_m3_ppt_ins",
+    "featureName": "tnd_rsk_itm_m3_ppt_ins",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_psn_bnk",
+    "featureColumnName": "tnd_rsk_itm_m3_psn_bnk",
+    "featureName": "tnd_rsk_itm_m3_psn_bnk",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_ptt_lon",
+    "featureColumnName": "tnd_rsk_itm_m3_ptt_lon",
+    "featureName": "tnd_rsk_itm_m3_ptt_lon",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_ptt_lon_cmp",
+    "featureColumnName": "tnd_rsk_itm_m3_ptt_lon_cmp",
+    "featureName": "tnd_rsk_itm_m3_ptt_lon_cmp",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_ptt_lon_rat",
+    "featureColumnName": "tnd_rsk_itm_m3_ptt_lon_rat",
+    "featureName": "tnd_rsk_itm_m3_ptt_lon_rat",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 1,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_rel_est_fin",
+    "featureColumnName": "tnd_rsk_itm_m3_rel_est_fin",
+    "featureName": "tnd_rsk_itm_m3_rel_est_fin",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_rtl_bnk",
+    "featureColumnName": "tnd_rsk_itm_m3_rtl_bnk",
+    "featureName": "tnd_rsk_itm_m3_rtl_bnk",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_thd_pty_pay",
+    "featureColumnName": "tnd_rsk_itm_m3_thd_pty_pay",
+    "featureName": "tnd_rsk_itm_m3_thd_pty_pay",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 1,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_thd_pty_svc_pvd",
+    "featureColumnName": "tnd_rsk_itm_m3_thd_pty_svc_pvd",
+    "featureName": "tnd_rsk_itm_m3_thd_pty_svc_pvd",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_trp_les",
+    "featureColumnName": "tnd_rsk_itm_m3_trp_les",
+    "featureName": "tnd_rsk_itm_m3_trp_les",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_typ",
+    "featureColumnName": "tnd_rsk_itm_m3_typ",
+    "featureName": "tnd_rsk_itm_m3_typ",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_vtc_ecm_ptf",
+    "featureColumnName": "tnd_rsk_itm_m3_vtc_ecm_ptf",
+    "featureName": "tnd_rsk_itm_m3_vtc_ecm_ptf",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_big_csm_fin_cmp",
+    "featureColumnName": "tnd_rsk_itm_m6_big_csm_fin_cmp",
+    "featureName": "tnd_rsk_itm_m6_big_csm_fin_cmp",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_big_dat_fin",
+    "featureColumnName": "tnd_rsk_itm_m6_big_dat_fin",
+    "featureName": "tnd_rsk_itm_m6_big_dat_fin",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 1,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_bnk",
+    "featureColumnName": "tnd_rsk_itm_m6_bnk",
+    "featureName": "tnd_rsk_itm_m6_bnk",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_bnk_rat",
+    "featureColumnName": "tnd_rsk_itm_m6_bnk_rat",
+    "featureName": "tnd_rsk_itm_m6_bnk_rat",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 1,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_bnk_sml_lon",
+    "featureColumnName": "tnd_rsk_itm_m6_bnk_sml_lon",
+    "featureName": "tnd_rsk_itm_m6_bnk_sml_lon",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_car_les",
+    "featureColumnName": "tnd_rsk_itm_m6_car_les",
+    "featureName": "tnd_rsk_itm_m6_car_les",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_car_mnu_fin",
+    "featureColumnName": "tnd_rsk_itm_m6_car_mnu_fin",
+    "featureName": "tnd_rsk_itm_m6_car_mnu_fin",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_com_ecm_ptf",
+    "featureColumnName": "tnd_rsk_itm_m6_com_ecm_ptf",
+    "featureName": "tnd_rsk_itm_m6_com_ecm_ptf",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 1,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_crd_ctr",
+    "featureColumnName": "tnd_rsk_itm_m6_crd_ctr",
+    "featureName": "tnd_rsk_itm_m6_crd_ctr",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_csm",
+    "featureColumnName": "tnd_rsk_itm_m6_csm",
+    "featureName": "tnd_rsk_itm_m6_csm",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_drt_sel_bnk",
+    "featureColumnName": "tnd_rsk_itm_m6_drt_sel_bnk",
+    "featureName": "tnd_rsk_itm_m6_drt_sel_bnk",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_ecm_ptf",
+    "featureColumnName": "tnd_rsk_itm_m6_ecm_ptf",
+    "featureName": "tnd_rsk_itm_m6_ecm_ptf",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_ecm_ptf_rat",
+    "featureColumnName": "tnd_rsk_itm_m6_ecm_ptf_rat",
+    "featureName": "tnd_rsk_itm_m6_ecm_ptf_rat",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 1,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_eqp_les",
+    "featureColumnName": "tnd_rsk_itm_m6_eqp_les",
+    "featureName": "tnd_rsk_itm_m6_eqp_les",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_fin_itt",
+    "featureColumnName": "tnd_rsk_itm_m6_fin_itt",
+    "featureName": "tnd_rsk_itm_m6_fin_itt",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_fin_les",
+    "featureColumnName": "tnd_rsk_itm_m6_fin_les",
+    "featureName": "tnd_rsk_itm_m6_fin_les",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_fin_net",
+    "featureColumnName": "tnd_rsk_itm_m6_fin_net",
+    "featureName": "tnd_rsk_itm_m6_fin_net",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_gen_ist_ptf",
+    "featureColumnName": "tnd_rsk_itm_m6_gen_ist_ptf",
+    "featureName": "tnd_rsk_itm_m6_gen_ist_ptf",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 1,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_grt",
+    "featureColumnName": "tnd_rsk_itm_m6_grt",
+    "featureName": "tnd_rsk_itm_m6_grt",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_hse_les",
+    "featureColumnName": "tnd_rsk_itm_m6_hse_les",
+    "featureName": "tnd_rsk_itm_m6_hse_les",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_inf_agt",
+    "featureColumnName": "tnd_rsk_itm_m6_inf_agt",
+    "featureName": "tnd_rsk_itm_m6_inf_agt",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_les",
+    "featureColumnName": "tnd_rsk_itm_m6_les",
+    "featureName": "tnd_rsk_itm_m6_les",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_les_rat",
+    "featureColumnName": "tnd_rsk_itm_m6_les_rat",
+    "featureName": "tnd_rsk_itm_m6_les_rat",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_o2o",
+    "featureColumnName": "tnd_rsk_itm_m6_o2o",
+    "featureName": "tnd_rsk_itm_m6_o2o",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_onl_bnk",
+    "featureColumnName": "tnd_rsk_itm_m6_onl_bnk",
+    "featureName": "tnd_rsk_itm_m6_onl_bnk",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_oth",
+    "featureColumnName": "tnd_rsk_itm_m6_oth",
+    "featureName": "tnd_rsk_itm_m6_oth",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_oth_rat",
+    "featureColumnName": "tnd_rsk_itm_m6_oth_rat",
+    "featureName": "tnd_rsk_itm_m6_oth_rat",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_p2p",
+    "featureColumnName": "tnd_rsk_itm_m6_p2p",
+    "featureName": "tnd_rsk_itm_m6_p2p",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_ppt_ins",
+    "featureColumnName": "tnd_rsk_itm_m6_ppt_ins",
+    "featureName": "tnd_rsk_itm_m6_ppt_ins",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_psn_bnk",
+    "featureColumnName": "tnd_rsk_itm_m6_psn_bnk",
+    "featureName": "tnd_rsk_itm_m6_psn_bnk",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_ptt_lon",
+    "featureColumnName": "tnd_rsk_itm_m6_ptt_lon",
+    "featureName": "tnd_rsk_itm_m6_ptt_lon",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_ptt_lon_cmp",
+    "featureColumnName": "tnd_rsk_itm_m6_ptt_lon_cmp",
+    "featureName": "tnd_rsk_itm_m6_ptt_lon_cmp",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_ptt_lon_rat",
+    "featureColumnName": "tnd_rsk_itm_m6_ptt_lon_rat",
+    "featureName": "tnd_rsk_itm_m6_ptt_lon_rat",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 1,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_rel_est_fin",
+    "featureColumnName": "tnd_rsk_itm_m6_rel_est_fin",
+    "featureName": "tnd_rsk_itm_m6_rel_est_fin",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_rtl_bnk",
+    "featureColumnName": "tnd_rsk_itm_m6_rtl_bnk",
+    "featureName": "tnd_rsk_itm_m6_rtl_bnk",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_thd_pty_pay",
+    "featureColumnName": "tnd_rsk_itm_m6_thd_pty_pay",
+    "featureName": "tnd_rsk_itm_m6_thd_pty_pay",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_thd_pty_svc_pvd",
+    "featureColumnName": "tnd_rsk_itm_m6_thd_pty_svc_pvd",
+    "featureName": "tnd_rsk_itm_m6_thd_pty_svc_pvd",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_trp_les",
+    "featureColumnName": "tnd_rsk_itm_m6_trp_les",
+    "featureName": "tnd_rsk_itm_m6_trp_les",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_typ",
+    "featureColumnName": "tnd_rsk_itm_m6_typ",
+    "featureName": "tnd_rsk_itm_m6_typ",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_vtc_ecm_ptf",
+    "featureColumnName": "tnd_rsk_itm_m6_vtc_ecm_ptf",
+    "featureName": "tnd_rsk_itm_m6_vtc_ecm_ptf",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_max_ptf_cnt",
+    "featureColumnName": "tnd_rsk_itm_max_ptf_cnt",
+    "featureName": "tnd_rsk_itm_max_ptf_cnt",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_one_mth_ptf_apl",
+    "featureColumnName": "tnd_rsk_itm_one_mth_ptf_apl",
+    "featureName": "tnd_rsk_itm_one_mth_ptf_apl",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_one_wek_ptf_apl",
+    "featureColumnName": "tnd_rsk_itm_one_wek_ptf_apl",
+    "featureName": "tnd_rsk_itm_one_wek_ptf_apl",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_one_yer_ptf_apl",
+    "featureColumnName": "tnd_rsk_itm_one_yer_ptf_apl",
+    "featureName": "tnd_rsk_itm_one_yer_ptf_apl",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_six_mth_ptf_apl",
+    "featureColumnName": "tnd_rsk_itm_six_mth_ptf_apl",
+    "featureName": "tnd_rsk_itm_six_mth_ptf_apl",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_thr_mth_ptf_apl",
+    "featureColumnName": "tnd_rsk_itm_thr_mth_ptf_apl",
+    "featureName": "tnd_rsk_itm_thr_mth_ptf_apl",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 1,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_typ_7d_div_m12",
+    "featureColumnName": "tnd_rsk_itm_typ_7d_div_m12",
+    "featureName": "tnd_rsk_itm_typ_7d_div_m12",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 1,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_typ_d7_div_m1",
+    "featureColumnName": "tnd_rsk_itm_typ_d7_div_m1",
+    "featureName": "tnd_rsk_itm_typ_d7_div_m1",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_typ_d7_div_m3",
+    "featureColumnName": "tnd_rsk_itm_typ_d7_div_m3",
+    "featureName": "tnd_rsk_itm_typ_d7_div_m3",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_typ_d7_div_m6",
+    "featureColumnName": "tnd_rsk_itm_typ_d7_div_m6",
+    "featureName": "tnd_rsk_itm_typ_d7_div_m6",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_typ_m1_div_m12",
+    "featureColumnName": "tnd_rsk_itm_typ_m1_div_m12",
+    "featureName": "tnd_rsk_itm_typ_m1_div_m12",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 1,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_typ_m1_div_m3",
+    "featureColumnName": "tnd_rsk_itm_typ_m1_div_m3",
+    "featureName": "tnd_rsk_itm_typ_m1_div_m3",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_typ_m1_div_m6",
+    "featureColumnName": "tnd_rsk_itm_typ_m1_div_m6",
+    "featureName": "tnd_rsk_itm_typ_m1_div_m6",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_typ_m3_div_m12",
+    "featureColumnName": "tnd_rsk_itm_typ_m3_div_m12",
+    "featureName": "tnd_rsk_itm_typ_m3_div_m12",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_typ_m3_div_m6",
+    "featureColumnName": "tnd_rsk_itm_typ_m3_div_m6",
+    "featureName": "tnd_rsk_itm_typ_m3_div_m6",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_typ_m6_div_m12",
+    "featureColumnName": "tnd_rsk_itm_typ_m6_div_m12",
+    "featureName": "tnd_rsk_itm_typ_m6_div_m12",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.fg.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_big_dat_fin",
+    "featureColumnName": "tnd_rsk_itm_m3_big_dat_fin",
+    "featureName": "tnd_rsk_itm_m3_big_dat_fin",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.fg.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m3_car_mnu_fin",
+    "featureColumnName": "tnd_rsk_itm_m3_car_mnu_fin",
+    "featureName": "tnd_rsk_itm_m3_car_mnu_fin",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.fg.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_csm_rat",
+    "featureColumnName": "tnd_rsk_itm_m6_csm_rat",
+    "featureName": "tnd_rsk_itm_m6_csm_rat",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.fg.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m6_car_rat",
+    "featureColumnName": "tnd_rsk_itm_m6_car_rat",
+    "featureName": "tnd_rsk_itm_m6_car_rat",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.fg.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_gen_ist_ptf",
+    "featureColumnName": "tnd_rsk_itm_d7_gen_ist_ptf",
+    "featureName": "tnd_rsk_itm_d7_gen_ist_ptf",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.fg.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_d7_big_dat_fin",
+    "featureColumnName": "tnd_rsk_itm_d7_big_dat_fin",
+    "featureName": "tnd_rsk_itm_d7_big_dat_fin",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.fg.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_o2o",
+    "featureColumnName": "tnd_rsk_itm_m1_o2o",
+    "featureName": "tnd_rsk_itm_m1_o2o",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.fg.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_hse_les",
+    "featureColumnName": "tnd_rsk_itm_m1_hse_les",
+    "featureName": "tnd_rsk_itm_m1_hse_les",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  },
+  {
+    "featureCode": "ftr.off.usr.fg.off.usr.dwa_risk_tnd_feature_di.tnd_rsk_itm_m1_grt",
+    "featureColumnName": "tnd_rsk_itm_m1_grt",
+    "featureName": "tnd_rsk_itm_m1_grt",
+    "groupCode": "fg.off.usr.dwa_risk_tnd_feature_di",
+    "groupName": "贷中同盾保镖多头_特征表",
+    "domainCode": "UID",
+    "includeTodayFlag": 0,
+    "timeRange": 30
+  }
+]

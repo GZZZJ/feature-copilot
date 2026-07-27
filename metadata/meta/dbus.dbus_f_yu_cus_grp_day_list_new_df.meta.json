@@ -1,0 +1,1 @@
+{"columns":[{"comment":"","name":"uid","type":"string"},{"comment":"","name":"if_pip","type":"string"},{"comment":"","name":"grp","type":"string"},{"comment":"","name":"grp_new","type":"string"},{"comment":"","name":"ds","type":"string"}],"des":"","name":"dbus_f_yu_cus_grp_day_list_new_df","partitioned":false,"projectName":"dbus","tableType":"PHYSICAL_VIEW"}

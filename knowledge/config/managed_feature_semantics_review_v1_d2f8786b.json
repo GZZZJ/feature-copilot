@@ -1,0 +1,720 @@
+{
+  "schema_version": 1,
+  "pilot_code": "overdue-days-v1",
+  "snapshot_sha256": "d2f8786b13eb4aad39c99d689af7fd43e1e0bdc48d904d5f48ca88860d0ed604",
+  "policy": {
+    "low_confidence_review_rate": 1,
+    "conflict_review_rate": 1,
+    "high_confidence_sample_rate": 0.2,
+    "high_confidence_stratum": "primary_metric_tag",
+    "sampling_method": "proportional_sha256_v1"
+  },
+  "population": {
+    "low_confidence_feature_count": 0,
+    "conflict_feature_count": 0,
+    "high_confidence_feature_count": 250,
+    "high_confidence_sample_feature_count": 50
+  },
+  "items": [
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_12his_continue_ovd_days_df.max_ctn_ovd_day",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.continuous_overdue_days",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "approved",
+      "review_evidence_ref": "goal/package_7_02inner/7_02inner_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_12his_continue_ovd_days_df.max_ctn_ovd_day",
+      "notes": "原始名称明确为历史最大连续逾期天数；主指标、历史、最大值和连续统计标签匹配，置信度保守。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_derived_df.stg_pln_sum_rep_prc_12m_his_ovd_7d_pls_14d_zd_rto",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_amount",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "changes_required",
+      "review_evidence_ref": "goal/package_7_02inner/7_02inner_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_derived_df.stg_pln_sum_rep_prc_12m_his_ovd_7d_pls_14d_zd_rto",
+      "notes": "源名度量实还本金而非应还金额，metric.due_amount[related]误标；featureColumnName中的stg_pln还未体现为business.loan_order。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_derived_df.stg_pln_sum_rep_prc_12m_his_ovd_m2_pls_afn_pk_rto",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_amount",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "changes_required",
+      "review_evidence_ref": "goal/package_7_02inner/7_02inner_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_derived_df.stg_pln_sum_rep_prc_12m_his_ovd_m2_pls_afn_pk_rto",
+      "notes": "源名度量实还本金而非应还金额，metric.due_amount[related]误标；featureColumnName中的stg_pln还未体现为business.loan_order。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_derived_df.stg_pln_sum_rep_prc_6m_his_ovd_m2_pls_mrn_pk_rto",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_amount",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "changes_required",
+      "review_evidence_ref": "goal/package_7_02inner/7_02inner_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_derived_df.stg_pln_sum_rep_prc_6m_his_ovd_m2_pls_mrn_pk_rto",
+      "notes": "源名度量实还本金而非应还金额，metric.due_amount[related]误标；featureColumnName中的stg_pln还未体现为business.loan_order。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_df.stg_pln_sum_rep_prc_12m_his_ovd_0d_pls_3d_afn_pk",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_amount",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "changes_required",
+      "review_evidence_ref": "goal/package_7_02inner/7_02inner_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_df.stg_pln_sum_rep_prc_12m_his_ovd_0d_pls_3d_afn_pk",
+      "notes": "源名度量实还本金而非应还金额，metric.due_amount[related]误标；featureColumnName中的stg_pln还未体现为business.loan_order。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_df.stg_pln_sum_rep_prc_12m_his_ovd_3d_pls_7d_mrn_pk",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_amount",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "changes_required",
+      "review_evidence_ref": "goal/package_7_02inner/7_02inner_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_df.stg_pln_sum_rep_prc_12m_his_ovd_3d_pls_7d_mrn_pk",
+      "notes": "源名度量实还本金而非应还金额，metric.due_amount[related]误标；featureColumnName中的stg_pln还未体现为business.loan_order。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_df.stg_pln_sum_rep_prc_12m_his_ovd_7d_pls_14d_afn_pk",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_amount",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "changes_required",
+      "review_evidence_ref": "goal/package_7_02inner/7_02inner_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_df.stg_pln_sum_rep_prc_12m_his_ovd_7d_pls_14d_afn_pk",
+      "notes": "源名度量实还本金而非应还金额，metric.due_amount[related]误标；featureColumnName中的stg_pln还未体现为business.loan_order。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_df.stg_pln_sum_rep_prc_his_ovd_m2_pls_zd",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_amount",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "changes_required",
+      "review_evidence_ref": "goal/package_7_02inner/7_02inner_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_df.stg_pln_sum_rep_prc_his_ovd_m2_pls_zd",
+      "notes": "源名度量实还本金而非应还金额，metric.due_amount[related]误标；featureColumnName中的stg_pln还未体现为business.loan_order。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_v2_df.stg_pln_sum_rep_prc_1m_his_ovd_7d_pls_14d_zd_v2",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_amount",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "changes_required",
+      "review_evidence_ref": "goal/package_7_02inner/7_02inner_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_v2_df.stg_pln_sum_rep_prc_1m_his_ovd_7d_pls_14d_zd_v2",
+      "notes": "源名度量实还本金而非应还金额，metric.due_amount[related]误标；featureColumnName中的stg_pln还未体现为business.loan_order。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_v2_df.stg_pln_sum_rep_prc_6m_his_ovd_7d_pls_14d_afn_pk_v2",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_amount",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "changes_required",
+      "review_evidence_ref": "goal/package_7_02inner/7_02inner_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_12his_rep_ability_v2_df.stg_pln_sum_rep_prc_6m_his_ovd_7d_pls_14d_afn_pk_v2",
+      "notes": "源名度量实还本金而非应还金额，metric.due_amount[related]误标；featureColumnName中的stg_pln还未体现为business.loan_order。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_derived_df.stg_pln_avg_prc_amt_ovd_3d_pls_rep_3m",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_amount",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "approved",
+      "review_evidence_ref": "goal/package_7_02inner/7_02inner_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_derived_df.stg_pln_avg_prc_amt_ovd_3d_pls_rep_3m",
+      "notes": "原始名称明确给出逾期条件下的本金或扣款金额、窗口和聚合方式；业务、主辅指标、时间与衍生标签匹配。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_derived_df.stg_pln_avg_prc_amt_ovd_m3_pls",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_amount",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "changes_required",
+      "review_evidence_ref": "goal/package_7_02inner/7_02inner_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_derived_df.stg_pln_avg_prc_amt_ovd_m3_pls",
+      "notes": "featureColumnName以stg_pln开头，明确涉及分期计划，但缺少business.loan_order标签。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_derived_df.stg_pln_cnt_ovd_3d_pls_rep_3m_rto",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_installment_count",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "changes_required",
+      "review_evidence_ref": "goal/package_7_02inner/7_02inner_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_derived_df.stg_pln_cnt_ovd_3d_pls_rep_3m_rto",
+      "notes": "输出是逾期分期计划数占比，源名没有应还金额；metric.due_amount[related]将应还计划误作金额。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_derived_jqh_df.stg_pln_cnt_ovd_m4_pls_rep_bjq_12m_rto",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_installment_count",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "changes_required",
+      "review_evidence_ref": "goal/package_4_nuggets/4_nuggets_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_derived_jqh_df.stg_pln_cnt_ovd_m4_pls_rep_bjq_12m_rto",
+      "notes": "输出是逾期分期计划数占比，源名没有应还金额；metric.due_amount[related]将应还计划误作金额。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_derived_jqh_df.stg_pln_sum_prc_amt_ovd_m3_pls_rep_bjq_12m_rto",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_amount",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "approved",
+      "review_evidence_ref": "goal/package_4_nuggets/4_nuggets_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_derived_jqh_df.stg_pln_sum_prc_amt_ovd_m3_pls_rep_bjq_12m_rto",
+      "notes": "原始名称明确给出逾期条件下的本金或扣款金额、窗口和聚合方式；业务、主辅指标、时间与衍生标签匹配。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_ddf_mdl_rep_dte_ovd_1d_3d",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_interval_days",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "changes_required",
+      "review_evidence_ref": "goal/package_7_02inner/7_02inner_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_ddf_mdl_rep_dte_ovd_1d_3d",
+      "notes": "最近一次由最小日期差实现，featureColumnName明确含min；仅标derivation.latest而漏标derivation.min。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_ddf_mdl_rep_dte_ovd_3d_pls",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_interval_days",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "changes_required",
+      "review_evidence_ref": "goal/package_7_02inner/7_02inner_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_ddf_mdl_rep_dte_ovd_3d_pls",
+      "notes": "最近一次由最小日期差实现，featureColumnName明确含min；仅标derivation.latest而漏标derivation.min。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_ddf_rep_tim_dte_ovd_pls_fst_ord",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_days",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "approved",
+      "review_evidence_ref": "goal/package_7_02inner/7_02inner_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.min_ddf_rep_tim_dte_ovd_pls_fst_ord",
+      "notes": "原始名称明确给出首次成功动支订单的逾期天数、时间范围及最小或最大衍生，标签匹配。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.stg_pln_cnt_ovd_m3_pls_rep_12m",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_installment_count",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "changes_required",
+      "review_evidence_ref": "goal/package_7_02inner/7_02inner_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.stg_pln_cnt_ovd_m3_pls_rep_12m",
+      "notes": "输出是近12个月逾期分期计划数，源名没有金额；metric.due_amount[related]误把应还计划识别为应还金额。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.stg_pln_max_prc_amt_ovd_m4_pls",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_amount",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "changes_required",
+      "review_evidence_ref": "goal/package_7_02inner/7_02inner_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.stg_pln_max_prc_amt_ovd_m4_pls",
+      "notes": "featureColumnName以stg_pln开头，明确涉及分期计划，但缺少business.loan_order标签。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.stg_pln_min_prc_amt_ovd_14d_pls_rep_3m",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_amount",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "approved",
+      "review_evidence_ref": "goal/package_7_02inner/7_02inner_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.stg_pln_min_prc_amt_ovd_14d_pls_rep_3m",
+      "notes": "原始名称明确给出逾期条件下的本金或扣款金额、窗口和聚合方式；业务、主辅指标、时间与衍生标签匹配。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.stg_pln_min_prc_amt_ovd_1d_3d",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_amount",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "changes_required",
+      "review_evidence_ref": "goal/package_7_02inner/7_02inner_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.stg_pln_min_prc_amt_ovd_1d_3d",
+      "notes": "featureColumnName以stg_pln开头，明确涉及分期计划，但缺少business.loan_order标签。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.stg_pln_sum_prc_amt_ovd_1d_3d_rep_3m",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_amount",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "approved",
+      "review_evidence_ref": "goal/package_7_02inner/7_02inner_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.stg_pln_sum_prc_amt_ovd_1d_3d_rep_3m",
+      "notes": "原始名称明确给出逾期条件下的本金或扣款金额、窗口和聚合方式；业务、主辅指标、时间与衍生标签匹配。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.stg_pln_sum_prc_amt_ovd_m2_pls",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_amount",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "changes_required",
+      "review_evidence_ref": "goal/package_7_02inner/7_02inner_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.stg_pln_sum_prc_amt_ovd_m2_pls",
+      "notes": "featureColumnName以stg_pln开头，明确涉及分期计划，但缺少business.loan_order标签。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.stg_pln_sum_prc_amt_ovd_m2_pls_rep_12m",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_amount",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "approved",
+      "review_evidence_ref": "goal/package_7_02inner/7_02inner_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_df.stg_pln_sum_prc_amt_ovd_m2_pls_rep_12m",
+      "notes": "原始名称明确给出逾期条件下的本金或扣款金额、窗口和聚合方式；业务、主辅指标、时间与衍生标签匹配。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.max_ddf_rep_tim_dte_ovd_pls_fst_ord_bjq_12m",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_days",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "approved",
+      "review_evidence_ref": "goal/package_4_nuggets/4_nuggets_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.max_ddf_rep_tim_dte_ovd_pls_fst_ord_bjq_12m",
+      "notes": "原始名称明确给出首次成功动支订单的逾期天数、时间范围及最小或最大衍生，标签匹配。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.min_ddf_rep_tim_dte_ovd_pls_rep_bjq_12m",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_days",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "changes_required",
+      "review_evidence_ref": "goal/package_4_nuggets/4_nuggets_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.min_ddf_rep_tim_dte_ovd_pls_rep_bjq_12m",
+      "notes": "输出是应还分期计划的最小逾期天数，源名没有金额；metric.due_amount[related]误把应还计划识别为应还金额。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.min_fst_ddf_mdl_rep_dte_ovd_pls_bjq",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_interval_days",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "changes_required",
+      "review_evidence_ref": "goal/package_4_nuggets/4_nuggets_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.min_fst_ddf_mdl_rep_dte_ovd_pls_bjq",
+      "notes": "最近一次由最小日期差实现，featureColumnName明确含min；仅标derivation.latest而漏标derivation.min。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.stg_pln_cnt_ovd_m2_pls_rep_bjq_12m",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_installment_count",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "changes_required",
+      "review_evidence_ref": "goal/package_4_nuggets/4_nuggets_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.stg_pln_cnt_ovd_m2_pls_rep_bjq_12m",
+      "notes": "输出是结清前12个月逾期分期计划数，源名没有金额；metric.due_amount[related]误标。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.stg_pln_fst_cnt_ovd_3d_pls_rep_bjq_12m",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_installment_count",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "changes_required",
+      "review_evidence_ref": "goal/package_4_nuggets/4_nuggets_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.stg_pln_fst_cnt_ovd_3d_pls_rep_bjq_12m",
+      "notes": "输出是结清前12个月逾期分期计划数，源名没有金额；metric.due_amount[related]误标。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.stg_pln_max_prc_amt_ovd_m3_pls_rep_bjq_12m",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_amount",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "approved",
+      "review_evidence_ref": "goal/package_4_nuggets/4_nuggets_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.stg_pln_max_prc_amt_ovd_m3_pls_rep_bjq_12m",
+      "notes": "原始名称明确给出逾期条件下的本金或扣款金额、窗口和聚合方式；业务、主辅指标、时间与衍生标签匹配。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.stg_pln_sum_prc_amt_ovd_3d_pls_rep_bjq_12m",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_amount",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "approved",
+      "review_evidence_ref": "goal/package_4_nuggets/4_nuggets_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_12his_rep_will_pressure_jqh_df.stg_pln_sum_prc_amt_ovd_3d_pls_rep_bjq_12m",
+      "notes": "原始名称明确给出逾期条件下的本金或扣款金额、窗口和聚合方式；业务、主辅指标、时间与衍生标签匹配。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_ever_overdue_days_15_cnt_30d_60d",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_event_count",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "changes_required",
+      "review_evidence_ref": "goal/package_7_02inner/7_02inner_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_ever_overdue_days_15_cnt_30d_60d",
+      "notes": "摘要保留cnt和30d_60d技术串，未说明窗口关系；仅凭原始字段无法确认时间语义，medium置信度需降级或补证后改写。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_ever_overdue_days_30_cnt_30d_60d",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_event_count",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "changes_required",
+      "review_evidence_ref": "goal/package_7_02inner/7_02inner_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_ever_overdue_days_30_cnt_30d_60d",
+      "notes": "摘要保留cnt和30d_60d技术串，未说明窗口关系；仅凭原始字段无法确认时间语义，medium置信度需降级或补证后改写。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_stg_ever_max_overdue_days_30d",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_days",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "changes_required",
+      "review_evidence_ref": "goal/package_7_02inner/7_02inner_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.cnt_stg_ever_max_overdue_days_30d",
+      "notes": "输出是近30天最大逾期天数；derivation.count由cnt前缀误触发且缺time.recent_1_month。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.mdt_lst_30d_60d_stg_ever_avg_overdue_days_rte",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_days",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "changes_required",
+      "review_evidence_ref": "goal/package_7_02inner/7_02inner_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_22order_calculate_stage_order_info_df.mdt_lst_30d_60d_stg_ever_avg_overdue_days_rte",
+      "notes": "featureColumnName以rte结尾而摘要只写平均逾期天数；窗口比值含义未说明且缺derivation.ratio。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_25_cross_inner_behaviour_df.d180_ovd_1d3d_repay_amt_sum_divide_adv_3dminus_repay_amt_sum",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_amount",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "changes_required",
+      "review_evidence_ref": "goal/package_4_nuggets/4_nuggets_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_25_cross_inner_behaviour_df.d180_ovd_1d3d_repay_amt_sum_divide_adv_3dminus_repay_amt_sum",
+      "notes": "源名和字段均明确近180天，等价近6个月，但漏标time.recent_6_months。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_25_cross_inner_behaviour_df.d90_ovd_1d3d_repay_amt_sum_divide_adv_3dminus_repay_amt_sum",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_amount",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "changes_required",
+      "review_evidence_ref": "goal/package_4_nuggets/4_nuggets_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_25_cross_inner_behaviour_df.d90_ovd_1d3d_repay_amt_sum_divide_adv_3dminus_repay_amt_sum",
+      "notes": "源名和字段均明确近90天，等价近3个月，但漏标time.recent_3_months。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_25_cross_inner_behaviour_df.d90_ovd_4d14d_repay_amt_sum_divide_adv_15dminus_repay_amt_sum",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_amount",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "changes_required",
+      "review_evidence_ref": "goal/package_4_nuggets/4_nuggets_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_25_cross_inner_behaviour_df.d90_ovd_4d14d_repay_amt_sum_divide_adv_15dminus_repay_amt_sum",
+      "notes": "源名和字段均明确近90天，等价近3个月，但漏标time.recent_3_months。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_his_rep_trend_time_series_df.12thord_con_late_repay_max",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_event_count",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "approved",
+      "review_evidence_ref": "goal/package_4_nuggets/4_nuggets_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_his_rep_trend_time_series_df.12thord_con_late_repay_max",
+      "notes": "原始名称明确为近12笔订单连续逾期还款的最大次数；业务、主指标、时间与衍生标签匹配。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_rep_apply_summary_3.m1_stg_pln_ovd_1d_3d_rep_apl_cnt_rat",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_event_count",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "changes_required",
+      "review_evidence_ref": "goal/package_7_02inner/7_02inner_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_rep_apply_summary_3.m1_stg_pln_ovd_1d_3d_rep_apl_cnt_rat",
+      "notes": "最终输出是逾期计划中的扣款次数或其聚合，不是逾期事件次数；metric.overdue_event_count不应标为primary。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_rep_apply_summary_3.m3_stg_pln_ovd_1d_3d_ao_offline_rep_apl_suc_cnt",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_event_count",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "changes_required",
+      "review_evidence_ref": "goal/package_7_02inner/7_02inner_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_rep_apply_summary_3.m3_stg_pln_ovd_1d_3d_ao_offline_rep_apl_suc_cnt",
+      "notes": "最终输出是逾期计划中的扣款次数或其聚合，不是逾期事件次数；metric.overdue_event_count不应标为primary。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_rep_apply_summary_4.m1_stg_pln_rep_apl_cnt_ovd_1d_3d_sum",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_event_count",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "changes_required",
+      "review_evidence_ref": "goal/package_7_02inner/7_02inner_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_rep_apply_summary_4.m1_stg_pln_rep_apl_cnt_ovd_1d_3d_sum",
+      "notes": "最终输出是逾期计划中的扣款次数或其聚合，不是逾期事件次数；metric.overdue_event_count不应标为primary。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_rep_apply_summary_4.m6_stg_pln_rep_apl_amt_ovd_1d_3d_max",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_amount",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "approved",
+      "review_evidence_ref": "goal/package_7_02inner/7_02inner_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_rep_apply_summary_4.m6_stg_pln_rep_apl_amt_ovd_1d_3d_max",
+      "notes": "原始名称明确给出逾期条件下的本金或扣款金额、窗口和聚合方式；业务、主辅指标、时间与衍生标签匹配。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_final_rep_apply_summary_4.m6_stg_pln_rep_apl_cnt_ovd_1d_3d_min",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_event_count",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "changes_required",
+      "review_evidence_ref": "goal/package_7_02inner/7_02inner_all_features.json#ftr.off.usr.dwa_risk_dz_model_final_rep_apply_summary_4.m6_stg_pln_rep_apl_cnt_ovd_1d_3d_min",
+      "notes": "最终输出是逾期计划中的扣款次数或其聚合，不是逾期事件次数；metric.overdue_event_count不应标为primary。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_light_trans_inner_cross_behaviour_df.recent_12m_overdue_3d_month_cnt",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_month_count",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "approved",
+      "review_evidence_ref": "goal/package_4_nuggets/4_nuggets_all_features.json#ftr.off.usr.dwa_risk_dz_model_light_trans_inner_cross_behaviour_df.recent_12m_overdue_3d_month_cnt",
+      "notes": "原始名称明确给出逾期月份指标、月份窗口和聚合方式；主辅指标、时间与衍生标签匹配。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_light_trans_inner_cross_behaviour_df.recent_12m_overdue_3d_month_no_avg",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_month_index",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "approved",
+      "review_evidence_ref": "goal/package_4_nuggets/4_nuggets_all_features.json#ftr.off.usr.dwa_risk_dz_model_light_trans_inner_cross_behaviour_df.recent_12m_overdue_3d_month_no_avg",
+      "notes": "原始名称明确给出逾期月份指标、月份窗口和聚合方式；主辅指标、时间与衍生标签匹配。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_light_trans_inner_cross_behaviour_df.recent_24m_overdue_3d_month_rto",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_month_ratio",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "approved",
+      "review_evidence_ref": "goal/package_4_nuggets/4_nuggets_all_features.json#ftr.off.usr.dwa_risk_dz_model_light_trans_inner_cross_behaviour_df.recent_24m_overdue_3d_month_rto",
+      "notes": "原始名称明确给出逾期月份指标、月份窗口和聚合方式；主辅指标、时间与衍生标签匹配。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_light_trans_inner_cross_behaviour_df.recent_36m_overdue_3d_month_rto",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_month_ratio",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "approved",
+      "review_evidence_ref": "goal/package_4_nuggets/4_nuggets_all_features.json#ftr.off.usr.dwa_risk_dz_model_light_trans_inner_cross_behaviour_df.recent_36m_overdue_3d_month_rto",
+      "notes": "原始名称明确给出逾期月份指标、月份窗口和聚合方式；主辅指标、时间与衍生标签匹配。"
+    },
+    {
+      "feature_code": "ftr.off.usr.dwa_risk_dz_model_light_trans_inner_cross_behaviour_df.recent_6m_overdue_3d_month_no_avg",
+      "review_reasons": [
+        "high_confidence_stratified_sample"
+      ],
+      "stratum": "metric.overdue_month_index",
+      "conflict_reason": "",
+      "status": "completed",
+      "reviewer": "independent-model-review",
+      "reviewed_at": "2026-07-20T23:00:00+08:00",
+      "decision": "approved",
+      "review_evidence_ref": "goal/package_4_nuggets/4_nuggets_all_features.json#ftr.off.usr.dwa_risk_dz_model_light_trans_inner_cross_behaviour_df.recent_6m_overdue_3d_month_no_avg",
+      "notes": "原始名称明确给出逾期月份指标、月份窗口和聚合方式；主辅指标、时间与衍生标签匹配。"
+    }
+  ]
+}

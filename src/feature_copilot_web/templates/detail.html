@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>特征详情 · Feature Copilot</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <script defer src="{{ url_for('static', filename='app.js') }}"></script>
+</head>
+<body data-page="detail">
+  <a class="skip-link" href="#main-content">跳到主要内容</a>
+
+  <header class="app-header">
+    <a class="brand" href="/features" aria-label="Feature Copilot 特征目录首页">
+      <span class="brand-mark" aria-hidden="true">F</span>
+      <span class="brand-copy">
+        <strong>FEATURE COPILOT</strong>
+        <span>特征目录</span>
+      </span>
+    </a>
+    <div class="runtime-status" aria-label="运行环境">
+      <span class="status-light" aria-hidden="true"></span>
+      <span>本机 · 只读</span>
+    </div>
+  </header>
+
+  <div id="stale-banner" class="system-banner" role="status" hidden>
+    <span class="system-banner-icon" aria-hidden="true">!</span>
+    <span id="stale-banner-text">索引构建异常，当前展示最近一次可用数据。</span>
+  </div>
+
+  <main id="main-content" class="page-shell detail-shell" tabindex="-1">
+    <nav class="breadcrumb" aria-label="面包屑">
+      <a id="back-link" href="/features">特征目录</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">特征详情</span>
+    </nav>
+
+    <div id="detail-loading" class="state-block loading-state detail-state" role="status">
+      <span class="loader" aria-hidden="true"></span>
+      <div><strong>正在装载特征档案</strong><span>聚合元数据与三层加工血缘…</span></div>
+    </div>
+
+    <div id="detail-error" class="state-block error-state detail-state" role="alert" hidden>
+      <span class="state-symbol" aria-hidden="true">!</span>
+      <div><strong id="detail-error-title">详情加载失败</strong><span id="detail-error-message">暂时无法访问特征索引。</span></div>
+      <button id="detail-retry-button" class="button button-secondary" type="button">重新加载</button>
+    </div>
+
+    <article id="detail-content" hidden>
+      <header class="detail-hero">
+        <div class="detail-hero-main">
+          <div class="detail-kicker">
+            <span id="detail-record-type">MANAGED FEATURE</span>
+            <span id="logic-status-badge" class="status-badge">—</span>
+          </div>
+          <h1 id="detail-name">—</h1>
+          <div class="key-row">
+            <p id="detail-key" class="feature-key-large">—</p>
+            <button id="copy-key-btn" class="copy-btn" type="button" aria-label="复制特征 Key" title="复制特征 Key"></button>
+          </div>
+        </div>
+        <a id="hero-back-link" class="button button-secondary" href="/features">返回列表</a>
+      </header>
+
+      <section id="usage-governance-warning" class="usage-governance-warning" role="alert" hidden>
+        <span aria-hidden="true">!</span>
+        <div>
+          <strong id="usage-governance-title">不推荐使用</strong>
+          <p id="usage-governance-message"></p>
+          <small id="usage-governance-source"></small>
+        </div>
+      </section>
+
+      <section class="panel detail-panel" aria-labelledby="metadata-title">
+        <div class="panel-heading">
+          <div>
+            <span class="section-index" aria-hidden="true">01</span>
+            <h2 id="metadata-title">特征元数据</h2>
+          </div>
+          <p>受控事实源中的业务分类与原始登记信息</p>
+        </div>
+        <dl id="metadata-grid" class="metadata-grid"></dl>
+      </section>
+
+      <section class="panel detail-panel" aria-labelledby="logic-title">
+        <div class="panel-heading logic-heading">
+          <div>
+            <span class="section-index" aria-hidden="true">02</span>
+            <h2 id="logic-title">直接加工逻辑</h2>
+          </div>
+          <div id="coverage-badges" class="badge-row" aria-label="逻辑覆盖状态"></div>
+        </div>
+
+        <div id="logic-warning" class="inline-warning" role="status" hidden>
+          <span aria-hidden="true">!</span>
+          <div><strong>逻辑信息不完整</strong><p id="logic-warning-text"></p></div>
+        </div>
+
+        <dl id="logic-metadata" class="metadata-grid logic-metadata"></dl>
+
+        <div class="code-section">
+          <div class="code-heading">
+            <h3>字段解析与表达式</h3>
+            <span id="derivation-status" class="status-badge status-neutral">—</span>
+          </div>
+          <div class="code-panel">
+            <div class="code-panel-head">
+              <p class="code-label">EXPRESSION</p>
+              <button id="copy-expression-btn" class="copy-btn" type="button" aria-label="复制表达式" title="复制表达式"></button>
+            </div>
+            <pre id="derivation-expression" tabindex="0">未记录</pre>
+          </div>
+          <div class="code-panel">
+            <div class="code-panel-head">
+              <p class="code-label">DIRECT SQL EXCERPT</p>
+              <button id="copy-sql-btn" class="copy-btn" type="button" aria-label="复制 SQL" title="复制 SQL"></button>
+            </div>
+            <pre id="direct-sql" tabindex="0">未记录</pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel detail-panel" aria-labelledby="upstream-title">
+        <div class="panel-heading">
+          <div>
+            <span class="section-index" aria-hidden="true">03</span>
+            <h2 id="upstream-title">上游加工血缘</h2>
+          </div>
+          <p id="upstream-summary">最多展示三层有界 SQL 摘要</p>
+        </div>
+
+        <div id="diagnostics" class="diagnostics" aria-label="血缘诊断" hidden>
+          <h3>诊断信息</h3>
+          <ul id="diagnostic-list"></ul>
+        </div>
+
+        <div id="upstream-empty" class="state-block empty-state compact-state" hidden>
+          <span class="state-symbol" aria-hidden="true">—</span>
+          <div><strong>没有可展示的上游节点</strong><span>索引中未记录该特征的上游加工关系。</span></div>
+        </div>
+        <div id="upstream-layers" class="upstream-layers"></div>
+      </section>
+
+      <section class="panel evidence-panel" aria-labelledby="evidence-title">
+        <div class="panel-heading">
+          <div>
+            <span class="section-index" aria-hidden="true">04</span>
+            <h2 id="evidence-title">证据定位</h2>
+          </div>
+          <p>仅展示索引记录的来源，不推测缺失信息</p>
+        </div>
+        <dl id="evidence-grid" class="metadata-grid evidence-grid"></dl>
+      </section>
+    </article>
+  </main>
+
+  <footer class="app-footer">
+    <span>FEATURE COPILOT / CONTROL SURFACE</span>
+    <span>SQL 为有界摘要 · 不提供完整下载</span>
+  </footer>
+</body>
+</html>

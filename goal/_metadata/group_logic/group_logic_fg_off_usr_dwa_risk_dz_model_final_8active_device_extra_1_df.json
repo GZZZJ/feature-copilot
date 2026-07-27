@@ -1,0 +1,102 @@
+{
+  "code": 10000,
+  "data": {
+    "groupCode": "fg.off.usr.dwa_risk_dz_model_final_8active_device_extra_1_df",
+    "lastModifier": "刘诗涵",
+    "latest": true,
+    "logicContent": "SELECT\n    o.${s_topic_field} as uid,\n    o.${s_mdl_dte_field} as sample_mdl_dte,\n    o.uid,\n    o.prv_val,\n    o.os_typ,\n    o.mdl_dte,\n    o.lst_app_str_hr,\n    o.lng_tud,\n    o.lat_tud,\n    o.ds,\n    o.ddf_lst_app_str_tim_to_mdl_tim_sec,\n    o.cty_val,\n    o.alt_tud\nFROM (\n        SELECT\n            s.${s_topic_field},\n            s.${s_mdl_dte_field},\n            f.uid,\n            f.prv_val,\n            f.os_typ,\n            f.mdl_dte,\n            f.lst_app_str_hr,\n            f.lng_tud,\n            f.lat_tud,\n            f.ds,\n            f.ddf_lst_app_str_tim_to_mdl_tim_sec,\n            f.cty_val,\n            f.alt_tud,\n            row_number() over(partition by s.${s_topic_field} order by f.ds desc) as rn\n        FROM ${sample_table} s\n        LEFT JOIN (\n                    SELECT\n                        *\n                    FROM\n                        dwa_risk.dwa_risk_dz_model_final_8active_device_extra_1_df\n                    WHERE\n                        to_date(to_date(ds,'yyyyMMdd')) >= ${min_ds}\n                    AND\n                        ds <= ${max_ds}\n                    ) f\n        ON\n            s.${s_topic_field} = f.uid\n        AND\n            datediff(to_date(s.${s_mdl_dte_field}),to_date(f.ds ,'yyyyMMdd')) = 0\n    ) o  WHERE rn=1;\n",
+    "logicVersion": 4,
+    "modifyTime": 1733817615000,
+    "paramInfo": {
+      "sample_table": "sample_table_dev",
+      "max_ds": "max_ds_dev",
+      "s_mdl_dte_field": "s_mdl_dte_field_dev",
+      "min_ds": "min_ds_dev",
+      "s_topic_field": "s_topic_field_dev"
+    },
+    "resultList": [
+      [
+        "uid",
+        "mdl_dte",
+        "lat_tud",
+        "alt_tud",
+        "lng_tud",
+        "os_typ",
+        "prv_val",
+        "cty_val",
+        "ddf_lst_app_str_tim_to_mdl_tim_sec",
+        "lst_app_str_hr",
+        "ds"
+      ],
+      [
+        "0009f8b5-896c-4fa1-a9ce-7620e2296ae7",
+        "2025-06-09",
+        "39.86157416449653",
+        "44.93465103007136",
+        "116.3851359049479",
+        "i",
+        "北京市",
+        "\\N",
+        "11822",
+        "20",
+        "20250608"
+      ],
+      [
+        "000c55f6-b0ae-4215-ae9f-fc2887d8a8e1",
+        "2025-06-09",
+        "36.87552",
+        "0.0",
+        "115.208096",
+        "a",
+        "河北省",
+        "邢台市",
+        "18521",
+        "18",
+        "20250608"
+      ],
+      [
+        "001aebad-e3dc-4a70-b0c2-00d5c854b6a2",
+        "2025-06-09",
+        "22.701251",
+        "0.0",
+        "113.156971",
+        "a",
+        "广东省",
+        "佛山市",
+        "191824",
+        "18",
+        "20250608"
+      ],
+      [
+        "002efbef-e741-4050-ac9f-0ee097b542ee",
+        "2025-06-09",
+        "36.976971",
+        "0.0",
+        "117.195397",
+        "a",
+        "山东省",
+        "济南市",
+        "1408426",
+        "16",
+        "20250608"
+      ],
+      [
+        "004148a0-68a9-4288-a293-4fb8e2814140",
+        "2025-06-09",
+        "\\N",
+        "\\N",
+        "\\N",
+        "i",
+        "\\N",
+        "\\N",
+        "1638661",
+        "00",
+        "20250608"
+      ]
+    ],
+    "retainNodeTags": [],
+    "security": false
+  },
+  "message": "请求成功",
+  "success": true
+}

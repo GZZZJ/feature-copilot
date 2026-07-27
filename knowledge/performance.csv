@@ -1,0 +1,7 @@
+record_id,feature_id,feature_name,project,model_version,population,label_definition,observation_period,performance_period,eval_date,iv,importance,psi,auc_delta,ks_delta,tail_1pct_lift,tail_5pct_lift,tail_10pct_lift,conclusion,exclusion_reason,source_ref
+perf_1,feat_income_avg_v2,fixture_income_avg_30d,fixture_project_alpha,v1,fixture_customer,fixture_label,2026-01,2026-02,2026-03-01,0.12,0.23,0.04,0.01,0.02,1.8,1.4,1.2,retain,,fixture_only
+perf_2,feat_payment_cnt,fixture_payment_count_30d,fixture_project_alpha,v1,fixture_customer,fixture_label,2026-01,2026-02,2026-03-01,0.08,0.18,0.03,0.00,0.01,1.5,1.3,1.1,retain,,fixture_only
+perf_3,feat_balance_max,fixture_balance_max_90d,fixture_project_beta,v2,fixture_customer,fixture_label_b,2026-02,2026-03,2026-04-01,0.15,0.31,0.10,0.02,0.03,2.0,1.6,1.3,retain,,fixture_only
+perf_4,feat_old_flag,fixture_retired_flag,fixture_project_alpha,v1,fixture_customer,fixture_label,2026-01,2026-02,2026-03-01,0.01,0.01,0.35,-0.01,-0.02,0.8,0.9,1.0,exclude,unstable,fixture_only
+perf_5,feat_pboc_util,fixture_pboc_utilization_ratio,fixture_project_beta,v2,fixture_customer,fixture_label_b,2026-02,2026-03,2026-04-01,0.11,0.21,0.05,0.01,0.02,1.7,1.5,1.2,retain,,fixture_only
+perf_6,feat_payment_amt,fixture_payment_amount_sum_30d,fixture_project_beta,v3,fixture_customer,fixture_label_b,2026-03,2026-04,2026-05-01,0.06,0.11,0.02,0.00,0.01,1.2,1.1,1.0,review,,fixture_only

@@ -1,0 +1,24 @@
+{
+  "code": 10000,
+  "data": {
+    "groupCode": "fg.off.usr.pdm_risk_rh_big_table_repay_detail",
+    "lastModifier": "赵庆鹤",
+    "latest": true,
+    "logicContent": "SELECT\n    o.${s_topic_field} as uid,\n    o.${s_mdl_dte_field} as s_mdl_dte_field,\n    o.uid,\n    o.rpt_tim,\n    o.loan_vehicle_amount,\n    o.loan_repay_detail_his,\n    o.loan_repay_detail,\n    o.loan_house_fund_amount,\n    o.loan_house_biz_oth_amount,\n    o.loan_house_biz_amount,\n    o.loan_card_avg_6mon_repayment,\n    o.ds\nFROM (\n        SELECT\n            s.${s_topic_field},\n            s.${s_mdl_dte_field},\n            f.uid,\n            f.rpt_tim,\n            f.loan_vehicle_amount,\n            f.loan_repay_detail_his,\n            f.loan_repay_detail,\n            f.loan_house_fund_amount,\n            f.loan_house_biz_oth_amount,\n            f.loan_house_biz_amount,\n            f.loan_card_avg_6mon_repayment,\n            f.ds,\n        dense_rank() over(partition by s.${s_topic_field} order by f.ds desc) as rn\n        FROM  ${sample_table} s\n        LEFT JOIN (\n                    SELECT *\n                    FROM\n                        pdm_risk.pdm_risk_rh_big_table_repay_detail\n                    WHERE\n                        datediff(to_date(ds ,'yyyyMMdd'), date_sub(to_date(${min_ds} ,'yyyyMMdd') ,${back_days})) >= 0\n                    AND\n                        ds <= ${max_ds}\n                    ) f\n        ON\n            s.${s_topic_field}  = f.uid\n        AND\n        --- 数据回溯时，选择包含当天时，datediff 值大于等于0；否则仅大于0\n            datediff(to_date(s.${s_mdl_dte_field}),to_date(f.ds ,'yyyyMMdd')) >= 0\n        AND\n            datediff(date_sub(to_date(s.${s_mdl_dte_field}),${back_days}),to_date(f.ds ,'yyyyMMdd')) <= 0\n    ) o  WHERE rn = 1;\n",
+    "logicVersion": 4,
+    "modifyTime": 1733817938000,
+    "paramInfo": {
+      "sample_table": "sample_table_dev",
+      "back_days": "back_days_dev",
+      "max_ds": "max_ds_dev",
+      "s_mdl_dte_field": "s_mdl_dte_field_dev",
+      "min_ds": "min_ds_dev",
+      "s_topic_field": "s_topic_field_dev"
+    },
+    "resultList": [],
+    "retainNodeTags": [],
+    "security": false
+  },
+  "message": "请求成功",
+  "success": true
+}

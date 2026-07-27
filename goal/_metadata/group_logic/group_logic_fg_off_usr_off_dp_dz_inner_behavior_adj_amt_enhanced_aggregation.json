@@ -1,0 +1,72 @@
+{
+  "code": 10000,
+  "data": {
+    "groupCode": "fg.off.usr.off_dp_dz_inner_behavior_adj_amt_enhanced_aggregation",
+    "lastModifier": "陈枭2648",
+    "latest": true,
+    "logicContent": "SELECT\n    o.${s_topic_field} as uid,\n    o.${s_mdl_dte_field} as sample_mdl_dte,\n    o.uid,\n    o.his_lmt_rise_ddf_mdl_dte_min,\n    o.his_lmt_drp_ddf_mdl_dte_min,\n    o.his_lmt_con_rise_ddf_mdl_dte_min,\n    o.his_lmt_con_drp_ddf_mdl_dte_min,\n    o.ds\nFROM (\n        SELECT\n            s.${s_topic_field},\n            s.${s_mdl_dte_field},\n            f.uid,\n            f.his_lmt_rise_ddf_mdl_dte_min,\n            f.his_lmt_drp_ddf_mdl_dte_min,\n            f.his_lmt_con_rise_ddf_mdl_dte_min,\n            f.his_lmt_con_drp_ddf_mdl_dte_min,\n            f.ds,\n            row_number() over(partition by s.${s_topic_field} order by f.ds desc) as rn\n        FROM ${sample_table} s\n        LEFT JOIN (\n                    SELECT\n                        *\n                    FROM\n                        dwa_risk_model.off_dp_dz_inner_behavior_adj_amt_enhanced_aggregation\n                    WHERE\n                        to_date(to_date(ds,'yyyyMMdd')) >= ${min_ds}\n                    AND\n                        ds <= ${max_ds}\n                    ) f\n        ON\n            s.${s_topic_field} = f.uid\n        AND\n            datediff(to_date(s.${s_mdl_dte_field}),to_date(f.ds ,'yyyyMMdd')) = 0\n    ) o  WHERE rn=1;\n",
+    "logicVersion": 2,
+    "modifyTime": 1733818118000,
+    "paramInfo": {
+      "sample_table": "sample_table_dev",
+      "max_ds": "max_ds_dev",
+      "s_mdl_dte_field": "s_mdl_dte_field_dev",
+      "min_ds": "min_ds_dev",
+      "s_topic_field": "s_topic_field_dev"
+    },
+    "resultList": [
+      [
+        "uid",
+        "his_lmt_con_drp_ddf_mdl_dte_min",
+        "his_lmt_con_rise_ddf_mdl_dte_min",
+        "his_lmt_drp_ddf_mdl_dte_min",
+        "his_lmt_rise_ddf_mdl_dte_min",
+        "ds"
+      ],
+      [
+        "00003d4d-d69c-4b6d-8591-f147895d26d5",
+        "\\N",
+        "60",
+        "\\N",
+        "60",
+        "20250607"
+      ],
+      [
+        "000166df-0745-4721-8fbd-4da822c71667",
+        "\\N",
+        "\\N",
+        "\\N",
+        "\\N",
+        "20250607"
+      ],
+      [
+        "00034a30-1b15-4f96-b0f0-c012d18b7657",
+        "\\N",
+        "117",
+        "28",
+        "58",
+        "20250607"
+      ],
+      [
+        "0004e8f9-399f-4a24-80ff-535c0fa7d5db",
+        "\\N",
+        "904",
+        "759",
+        "904",
+        "20250607"
+      ],
+      [
+        "00055bdd-030e-48ce-b566-bf6b23b80b85",
+        "692",
+        "575",
+        "640",
+        "575",
+        "20250607"
+      ]
+    ],
+    "retainNodeTags": [],
+    "security": false
+  },
+  "message": "请求成功",
+  "success": true
+}
